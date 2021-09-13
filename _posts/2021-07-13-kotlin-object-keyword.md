@@ -4,8 +4,6 @@ title:  "[Kotlin] 코틀린의 object 키워드 잘 알고 사용하기(feat. co
 categories: [kotlin]
 ---
 
-![never](/img/never.jpg)
-
 > __참고 자료__  
 > [Kotlin Document - Object expressions and declarations](https://kotlinlang.org/docs/object-declarations.html)  
 > [Youtube Android Developers - Object - Kotlin Vocabulary](https://www.youtube.com/watch?v=KUk6k865Vgg)
