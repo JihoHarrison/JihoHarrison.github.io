@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="옵저버 패턴을 적용하여 구독자에게 변경사항을 알려주는 programming 기법.하나의 값 보다는 data stream을 반환한다.RxJava의 푸시 메커니즘과 풀 메커니즘 비교RxKotlin은 프로그램에서 사용되는 반복자 패턴(Iterator)의 풀 메커니즘 대신 푸시 메커니즘의...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[RxKotlin] RxKotlin 연산자 01 | JihoKevin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[RxKotlin] RxKotlin 연산자 01 | JihoKevin">
+  <meta name="twitter:description" content="옵저버 패턴을 적용하여 구독자에게 변경사항을 알려주는 programming 기법.하나의 값 보다는 data stream을 반환한다.RxJava의 푸시 메커니즘과 풀 메커니즘 비교RxKotlin은 프로그램에서 사용되는 반복자 패턴(Iterator)의 풀 메커니즘 대신 푸시 메커니즘의...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2021-09/rx-kotlin-01">
+  <meta property="og:title" content="[RxKotlin] RxKotlin 연산자 01 | JihoKevin">
+  <meta property="og:description" content="옵저버 패턴을 적용하여 구독자에게 변경사항을 알려주는 programming 기법.하나의 값 보다는 data stream을 반환한다.RxJava의 푸시 메커니즘과 풀 메커니즘 비교RxKotlin은 프로그램에서 사용되는 반복자 패턴(Iterator)의 풀 메커니즘 대신 푸시 메커니즘의...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[RxKotlin] RxKotlin 연산자 01 | JihoKevin</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2021-09/rx-kotlin-01">
+  <link rel="alternate" type="application/rss+xml" title="JihoKevin" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">신지호</a>
+  <span class="author_job">안드로이드 개발자가 되고싶은 소년</span>
+  <span class="author_bio mbm">방문해주셔서 갑사합니다!🙇🏻‍♂️</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('jhshin9250@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/jiho_925" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/JihoKevin" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[RxKotlin] RxKotlin 연산자 01">[RxKotlin] RxKotlin 연산자 01</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        13 SEP 2021
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    8 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <p>옵저버 패턴을 적용하여 구독자에게 변경사항을 알려주는 programming 기법.</p>
+
+<p>하나의 값 보다는 data stream을 반환한다.</p>
+
+<h1 id="rxjava의-푸시-메커니즘과-풀-메커니즘-비교">RxJava의 푸시 메커니즘과 풀 메커니즘 비교</h1>
+
+<p>RxKotlin은 프로그램에서 사용되는 반복자 패턴(Iterator)의 풀 메커니즘 대신 푸시 메커니즘의 데이터 / 이벤트 시스템으로 대표되는 옵저버블 패턴을 중심으로 작동한다.
+여기서 Iterator 패턴은 아래와 같은 로직을 의미한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// iterator 방식
+</span><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;){</span>
+    <span class="kd">var</span> <span class="py">list</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Any</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="s">"One"</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="s">"Three"</span><span class="p">,</span> <span class="s">"Four"</span><span class="p">,</span> <span class="m">4.5</span><span class="p">,</span> <span class="s">"Five"</span><span class="p">,</span> <span class="m">6.0f</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="py">iterator</span> <span class="p">=</span> <span class="n">list</span><span class="p">.</span><span class="n">iterator</span><span class="p">()</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">iterator</span><span class="p">.</span><span class="n">hasNext</span><span class="p">()){</span>
+        <span class="n">println</span><span class="p">(</span><span class="n">iterator</span><span class="p">.</span><span class="n">next</span><span class="p">())</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>알아두어야 할 점이 데이터가 사용 준비 될 때 까지 기존 스레드는 블로킹 상태가 된다.
+즉 네트워크 호출이나 데이터베이스 쿼리를 이용해서 데이터를 가져온다면 스레드가 얼마나 블로킹 돼있을지 생각 해 보자.
+위와 같은 방법은 그다지 효율적이지 않은 코드라고 할 수 있겠다.</p>
+
+<hr />
+<p><strong><em>observable 함수의 종류</em></strong></p>
+
+<p><code class="highlighter-rouge">onNext(item T)</code> : 값을 전달할 때 호출하여 값을 넘겨준다.</p>
+
+<p><code class="highlighter-rouge">onError(e: Throwable)</code> : 에러가 발생할 경우에 호출.</p>
+
+<p><code class="highlighter-rouge">onSubscribe(d: Disposable)</code> : 구독을 신청하면 호출해준다.</p>
+
+<p><code class="highlighter-rouge">onComplete()</code> : 가지고 있는 값을 모두 전달하면 호출한다.</p>
+
+<hr />
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">observer</span><span class="p">:</span> <span class="n">Observer</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;</span> <span class="p">=</span> <span class="kd">object</span> <span class="err">: </span><span class="nc">Observer</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;{</span>
+   <span class="k">override</span> <span class="k">fun</span> <span class="nf">onComplete</span><span class="p">()</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="s">"onComplete()"</span><span class="p">)</span> <span class="p">}</span>
+   <span class="k">override</span> <span class="k">fun</span> <span class="nf">onNext</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="s">"onNext() - $item"</span><span class="p">)</span> <span class="p">}</span>
+   <span class="k">override</span> <span class="k">fun</span> <span class="nf">onError</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Throwable</span><span class="p">)</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="s">"onError() - $e"</span><span class="p">)</span> <span class="p">}</span>
+   <span class="k">override</span> <span class="k">fun</span> <span class="nf">onSubscribe</span><span class="p">(</span><span class="n">d</span><span class="p">:</span> <span class="n">Disposable</span><span class="p">)</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="s">"onSubscribe() - $d"</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h1 id="1-observablecreate을-이용하여-observable을-생성하는-방법">1 Observable.create을 이용하여 Observable을 생성하는 방법</h1>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;){</span>
+    <span class="kd">val</span> <span class="py">observable1</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">create</span><span class="p">{</span>
+        <span class="n">it</span><span class="p">.</span><span class="n">onNext</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+        <span class="n">it</span><span class="p">.</span><span class="n">onNext</span><span class="p">(</span><span class="m">2</span><span class="p">)</span>
+        <span class="n">it</span><span class="p">.</span><span class="n">onComplete</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="kd">val</span> <span class="py">observable2</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">create</span><span class="p">{</span>
+        <span class="n">it</span><span class="p">.</span><span class="n">onNext</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+        <span class="n">it</span><span class="p">.</span><span class="n">onNext</span><span class="p">(</span><span class="m">2</span><span class="p">)</span>
+        <span class="n">it</span><span class="p">.</span><span class="n">onError</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="kd">val</span> <span class="py">observer</span><span class="p">:</span> <span class="n">Observer</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;</span> <span class="p">=</span> <span class="kd">object</span> <span class="err">: </span><span class="nc">Observer</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;{</span>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">onComplete</span><span class="p">()</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="s">"onComplete()"</span><span class="p">)</span> <span class="p">}</span>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">onNext</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="s">"onNext() - $item"</span><span class="p">)</span> <span class="p">}</span>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">onError</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Throwable</span><span class="p">)</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="s">"onError() - $e"</span><span class="p">)</span> <span class="p">}</span>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">onSubscribe</span><span class="p">(</span><span class="n">d</span><span class="p">:</span> <span class="n">Disposable</span><span class="p">)</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="s">"onSubscribe() - $d"</span><span class="p">)</span> <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">observable1</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">observer</span><span class="p">)</span>
+    <span class="n">observable2</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">observer</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="2-observablefrom을-이용하여-observable을-생성하는-방법">2 Observable.from~~~을 이용하여 Observable을 생성하는 방법</h1>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;){</span>
+
+    <span class="kd">val</span> <span class="py">list</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
+    <span class="kd">val</span> <span class="py">listOb</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">fromIterable</span><span class="p">(</span><span class="n">list</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">call</span> <span class="p">=</span> <span class="n">Callable</span><span class="p">&lt;</span><span class="n">int</span><span class="p">&gt;</span> <span class="p">{</span> <span class="m">4</span> <span class="p">}</span>
+    <span class="kd">val</span> <span class="py">callOb</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">fromCallable</span><span class="p">(</span><span class="n">call</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">future</span> <span class="p">=</span> <span class="k">object</span><span class="p">:</span> <span class="n">Future</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;{</span>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">get</span><span class="p">()</span> <span class="p">=</span> <span class="m">5</span>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">get</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="n">Long</span><span class="p">,</span> <span class="n">unit</span><span class="p">:</span> <span class="n">Timeout</span><span class="p">)</span> <span class="p">=</span> <span class="m">6</span>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">isDone</span><span class="p">()</span> <span class="p">=</span> <span class="k">true</span>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">isCancellable</span><span class="p">()</span> <span class="p">=</span> <span class="k">false</span>
+    <span class="p">}</span>
+
+    <span class="kd">val</span> <span class="py">futureOb</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">fromFuture</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+    
+    <span class="kd">val</span> <span class="py">observer</span><span class="p">:</span> <span class="n">Observer</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="kd">object</span> <span class="err">: </span><span class="nc">Observer</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">onComplete</span><span class="p">()</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="s">"onComplete()"</span><span class="p">)</span> <span class="p">}</span>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">onNext</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="s">"onNext() - $item"</span><span class="p">)</span> <span class="p">}</span>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">onError</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Throwable</span><span class="p">)</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="s">"onError() - $e"</span><span class="p">)</span> <span class="p">}</span>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">onSubscribe</span><span class="p">(</span><span class="n">d</span><span class="p">:</span> <span class="n">Disposable</span><span class="p">)</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="s">"onSubscribe() - $d"</span><span class="p">)</span> <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="n">listOb</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">observer</span><span class="p">)</span>
+    <span class="n">callOb</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">observer</span><span class="p">)</span>
+    <span class="n">futureOb</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">observer</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<hr />
+<p><strong><em>from 함수의 다양한 형태</em></strong></p>
+
+<p><code class="highlighter-rouge">fromIterable()</code> : list처럼 iterable을 지원하는 instance를 Observable 형태로 변환해준다.</p>
+<ul>
+  <li>각 개별 아이템이 하나씩 전달 됨.
+ <code class="highlighter-rouge">fromCallable()</code> : Callable 객체를 Observable 형태로 전달한다.</li>
+  <li>call() 함수의 return 값이 전달 된다.
+<code class="highlighter-rouge">fromFuture()</code> : Future 객체를 Observable 형태로 변환한다.</li>
+  <li>get() 함수의 return 값이 전달된다.
+<code class="highlighter-rouge">from()</code> : <code class="highlighter-rouge">Iterable</code> 또는 배열의 아이템을 순차적으로 발행하는 옵저버블을 생성한다. 예를들어 Observable.from(list) list 배열이 가지고 있는 요소들을 순차적으로 발행한다.</li>
+</ul>
+
+<hr />
+
+<h1 id="3-observablejust를-이용하여-observable을-생성하는-방법">3 Observable.just를 이용하여 Observable을 생성하는 방법</h1>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;){</span>
+    <span class="kd">val</span> <span class="py">list</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
+    <span class="kd">val</span> <span class="py">num</span> <span class="p">=</span> <span class="m">3</span>
+    <span class="kd">val</span> <span class="py">str</span> <span class="p">=</span> <span class="s">"wow!"</span>
+    <span class="kd">val</span> <span class="py">map</span> <span class="p">=</span> <span class="n">mapOf</span><span class="p">(</span><span class="m">1</span> <span class="n">to</span> <span class="s">"one"</span><span class="p">,</span> <span class="m">2</span> <span class="n">to</span> <span class="s">"two"</span><span class="p">)</span>
+    <span class="kd">val</span> <span class="py">justOb</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">just</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="n">str</span><span class="p">,</span> <span class="n">map</span><span class="p">)</span>
+    <span class="kd">val</span> <span class="py">observer</span><span class="p">:</span> <span class="n">Observer</span><span class="p">&lt;</span><span class="n">Any</span><span class="p">&gt;</span> <span class="p">=</span> <span class="kd">object</span> <span class="err">: </span><span class="nc">Observer</span><span class="p">&lt;</span><span class="n">Any</span><span class="p">&gt;{</span>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">onComplete</span><span class="p">()</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="s">"onComplete()"</span><span class="p">)</span> <span class="p">}</span>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">onNext</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="s">"onNext() - $item"</span><span class="p">)</span> <span class="p">}</span>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">onError</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Throwable</span><span class="p">)</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="s">"onError() - $e"</span><span class="p">)</span> <span class="p">}</span>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">onSubscribe</span><span class="p">(</span><span class="n">d</span><span class="p">:</span> <span class="n">Disposable</span><span class="p">)</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="s">"onSubscribe() - $d"</span><span class="p">)</span> <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">justOb</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">observer</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>just는 인자로 들어온 모든 타입의 요소들을 전부 한꺼번에 반환 해 준다.
+list처럼 각 인덱스 값이 따로따로 필요하다면 fromIterable()을 사용해야 한다.
+즉, List 타입의 요소를 사용하려면 fromIteravle()을 사용 하라는 것이다.</p>
+
+<h1 id="range">range</h1>
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">observer</span><span class="p">:</span> <span class="n">Observer</span><span class="p">&lt;</span><span class="n">Any</span><span class="p">&gt;</span> <span class="p">=</span> <span class="kd">object</span> <span class="err">: </span><span class="nc">Observer</span><span class="p">&lt;</span><span class="n">Any</span><span class="p">&gt;{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onComplete</span><span class="p">()</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="s">"onComplete()"</span><span class="p">)</span> <span class="p">}</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onNext</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="s">"onNext() - $item"</span><span class="p">)</span> <span class="p">}</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onError</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Throwable</span><span class="p">)</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="s">"onError() - $e"</span><span class="p">)</span> <span class="p">}</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onSubscribe</span><span class="p">(</span><span class="n">d</span><span class="p">:</span> <span class="n">Disposable</span><span class="p">)</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="s">"onSubscribe() - $d"</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">Observable</span><span class="p">.</span><span class="n">range</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">).</span><span class="n">subscribe</span><span class="p">(</span><span class="n">observer</span><span class="p">)</span>
+</code></pre></div></div>
+<p>위와 같이 range는 특정 범위 만큼 수를 생성하여 전달한다.</p>
+
+<h1 id="empty">empty</h1>
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">observer</span> <span class="p">=</span> <span class="kd">object</span> <span class="err">: </span><span class="nc">Observer</span><span class="p">{</span> <span class="o">..</span><span class="p">.</span> <span class="p">}</span>
+<span class="n">Observable</span><span class="p">.</span><span class="n">empty</span><span class="p">().</span><span class="n">subscribe</span><span class="p">(</span><span class="n">observer</span><span class="p">)</span>
+</code></pre></div></div>
+<p>empty는 어떠한 값을 전달하지는 않지만 onComplete()를 호출 해 준다. 아 물론 observer가 호출될 때 실행되는 onSubscribe() 함수가 먼저 실행된다.</p>
+
+<h1 id="interval">interval</h1>
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">observer</span> <span class="p">=</span> <span class="kd">object</span> <span class="err">: </span><span class="nc">Observer</span><span class="p">&lt;</span><span class="n">Long</span><span class="p">&gt;{</span> <span class="o">..</span><span class="p">.</span> <span class="p">}</span>
+<span class="n">Thread</span><span class="p">().</span><span class="n">start</span><span class="p">()</span> <span class="c1">// 여기부터 thread 시작
+</span><span class="kd">val</span> <span class="py">th1</span> <span class="p">=</span> <span class="n">Thread</span><span class="p">(){</span> <span class="n">Thread</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="m">300</span><span class="p">)</span> <span class="p">}</span>
+<span class="n">th1</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">th1</span><span class="p">.</span><span class="n">join</span><span class="p">()</span>
+</code></pre></div></div>
+<p>interval은 단어 뜻 그대로 시간차 간격을 두고 다음 로직을 처리하는 연산자이다.</p>
+
+<h1 id="never">never</h1>
+<p><img src="/articles/2021-09/img/never.png" alt="image" />
+아무런 아이템도 발행하지 않고, 완료도 발행하지 않는 옵저버블을 생성한다.
+결과 값으로는 onNest, onComplete, onSubscribe, onError 이 중에 아무것도 실행되지 않는다.</p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+        repo="JihoKevin/blog-comments"
+        issue-term="pathname"
+        label="comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 신지호. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

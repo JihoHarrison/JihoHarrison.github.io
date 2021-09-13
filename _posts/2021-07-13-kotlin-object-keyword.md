@@ -19,6 +19,7 @@ categories: [kotlin]
 > [7. companion object 더 알아보기](#7)
 
 
+![img](/Users/sinjiho/Desktop/KevinBlog/JihoKevin.github.io/Android/rx-kotlin-01/img/never.png)
 
 <br>
 

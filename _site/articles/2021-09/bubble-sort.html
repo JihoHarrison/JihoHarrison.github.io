@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="학부 시절 때 부터 정렬에 대한 문제들은 정말 많이 접해보았을 것이다.버블정렬과 이 버블 정렬의 시간 복잡도를 최대로 보완한 로직도 살펴보기로 하자.가장 기본적인 버블정렬 알고리즘에서 파생된 알고리즘이다.public static void bubbleSort(int[] a, int ...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[Algorithm] 개선된 Bubble Sort💧 | JihoKevin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[Algorithm] 개선된 Bubble Sort💧 | JihoKevin">
+  <meta name="twitter:description" content="학부 시절 때 부터 정렬에 대한 문제들은 정말 많이 접해보았을 것이다.버블정렬과 이 버블 정렬의 시간 복잡도를 최대로 보완한 로직도 살펴보기로 하자.가장 기본적인 버블정렬 알고리즘에서 파생된 알고리즘이다.public static void bubbleSort(int[] a, int ...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2021-09/bubble-sort">
+  <meta property="og:title" content="[Algorithm] 개선된 Bubble Sort💧 | JihoKevin">
+  <meta property="og:description" content="학부 시절 때 부터 정렬에 대한 문제들은 정말 많이 접해보았을 것이다.버블정렬과 이 버블 정렬의 시간 복잡도를 최대로 보완한 로직도 살펴보기로 하자.가장 기본적인 버블정렬 알고리즘에서 파생된 알고리즘이다.public static void bubbleSort(int[] a, int ...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[Algorithm] 개선된 Bubble Sort💧 | JihoKevin</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2021-09/bubble-sort">
+  <link rel="alternate" type="application/rss+xml" title="JihoKevin" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">신지호</a>
+  <span class="author_job">안드로이드 개발자가 되고싶은 소년</span>
+  <span class="author_bio mbm">방문해주셔서 갑사합니다!🙇🏻‍♂️</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('jhshin9250@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/jiho_925" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/JihoKevin" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[Algorithm] 개선된 Bubble Sort💧">[Algorithm] 개선된 Bubble Sort💧</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        13 SEP 2021
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    2 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <p>학부 시절 때 부터 정렬에 대한 문제들은 정말 많이 접해보았을 것이다.<br />
+버블정렬과 이 버블 정렬의 시간 복잡도를 최대로 보완한 로직도 살펴보기로 하자.<br />
+가장 기본적인 버블정렬 알고리즘에서 파생된 알고리즘이다.<br /></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">bubbleSort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// k를 0으로 초기화 해 주는 이유는 함수가 처음 실행될 때</span>
+    <span class="c1">// 전체를 훑으면서 마지막에 교환된 위치를 반환하여</span>
+    <span class="c1">// 범위를 좁혀줘야 하기 때문이다.</span>
+    <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="c1">//while : 처음 실행 한번 이후에는 k보다 큰 범위로 범위를 좁힌다.</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">k</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 마지막으로 교환된 위치를 저장하는 last</span>
+        <span class="kt">int</span> <span class="n">last</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="c1">// for문은 위치변경이 일어났을 때 </span>
+        <span class="c1">// 현재 위치변경이 일어난 우측 방향으로 k값을 정한다.</span>
+        <span class="c1">//while문의 범위를 좁혀준다.</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">k</span><span class="o">;</span> <span class="n">j</span><span class="o">--)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">a</span><span class="o">[</span><span class="n">j</span><span class="o">])</span> <span class="o">{</span>
+                <span class="n">swap</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">,</span> <span class="n">j</span><span class="o">);</span>
+                <span class="n">last</span> <span class="o">=</span> <span class="n">j</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">last</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>위 코드를 살펴보면 <code class="highlighter-rouge">k</code>를 0으로 초기화 해 주는 이유는 함수가 처음 실행될 때 전체를 훑으면서 마지막에 교환된 위치를 반환하여 범위를 좁혀줘야 하기 때문이다. <br />
+<code class="highlighter-rouge">while</code> 문에서는 맨 처음 한 번 실행된 이후에는 비교하고자 하는 인덱스를 <code class="highlighter-rouge">k</code>보다 큰 범위로 범위를 좁힌다.<br />
+마지막으로 교환된 위치를 저장하는 <code class="highlighter-rouge">last</code>는 k로 넘어가게 되어 <code class="highlighter-rouge">k</code>의 값을 증가시키는 역할을 하게 된다.<br />
+즉, for문은 <code class="highlighter-rouge">k</code>보다 큰 변수를 항상 <code class="highlighter-rouge">last</code>에 넣어주며 while문의 범위를 좁혀준다.<br />
+쉽게 말해, <code class="highlighter-rouge">k</code>의 값은 정렬이 될 때 마다 오른쪽으로 이동하게 된다는 것이다.<br />
+<br />
+기존에 for문 2개를 사용했을 때는 1개의 for문 요소들을 나머지 안쪽 1개의 for문에 계속해서 넣어줬다는 것을 알 수 있다.<br />
+<br />
+for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간 복잡도가 보완됐다는 것을 알 수 있다.<br /></p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+        repo="JihoKevin/blog-comments"
+        issue-term="pathname"
+        label="comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 신지호. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>
