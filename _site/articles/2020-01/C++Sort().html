@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="  동빈나 유튜브 영상을 참고하여 공부한 내용!💎 실전에서 정렬 알고리즘을 일일이 구현할 필요가 있을까?숫자 데이터를 정렬해주는 여러가지 알고리즘들이 있지만 ‘정렬’은 이미 컴퓨터 공학의 오래된 연구 분야이기 때문에 아주 훌륭한 정렬 관련 라이브러리가 존재한다.즉, 알고리즘 공부를...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[C++] 💎 C++ STL sort() 함수 사용하기 | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[C++] 💎 C++ STL sort() 함수 사용하기 | choheeis">
+  <meta name="twitter:description" content="  동빈나 유튜브 영상을 참고하여 공부한 내용!💎 실전에서 정렬 알고리즘을 일일이 구현할 필요가 있을까?숫자 데이터를 정렬해주는 여러가지 알고리즘들이 있지만 ‘정렬’은 이미 컴퓨터 공학의 오래된 연구 분야이기 때문에 아주 훌륭한 정렬 관련 라이브러리가 존재한다.즉, 알고리즘 공부를...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-01/C++Sort()">
+  <meta property="og:title" content="[C++] 💎 C++ STL sort() 함수 사용하기 | choheeis">
+  <meta property="og:description" content="  동빈나 유튜브 영상을 참고하여 공부한 내용!💎 실전에서 정렬 알고리즘을 일일이 구현할 필요가 있을까?숫자 데이터를 정렬해주는 여러가지 알고리즘들이 있지만 ‘정렬’은 이미 컴퓨터 공학의 오래된 연구 분야이기 때문에 아주 훌륭한 정렬 관련 라이브러리가 존재한다.즉, 알고리즘 공부를...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[C++] 💎 C++ STL sort() 함수 사용하기 | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-01/C++Sort()">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[C++] 💎 C++ STL sort() 함수 사용하기">[C++] 💎 C++ STL sort() 함수 사용하기</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        20 JAN 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    9 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <blockquote>
+  <p><a href="https://www.youtube.com/watch?v=YJ-OUnZu7nQ&amp;list=PLRx0vPvlEmdDHxCvAQS1_6XV4deOwfVrz&amp;index=9">동빈나 유튜브</a> 영상을 참고하여 공부한 내용!</p>
+</blockquote>
+
+<p><br /></p>
+
+<h2 id="-실전에서-정렬-알고리즘을-일일이-구현할-필요가-있을까">💎 실전에서 정렬 알고리즘을 일일이 구현할 필요가 있을까?</h2>
+<hr />
+
+<p>숫자 데이터를 정렬해주는 여러가지 알고리즘들이 있지만 ‘정렬’은 이미 컴퓨터 공학의 오래된 연구 분야이기 때문에 아주 훌륭한 정렬 관련 라이브러리가 존재한다.</p>
+
+<p>즉, 알고리즘 공부를 하며 정렬 관련 문제를 만났을 때 직접 정렬 알고리즘을 구현할 필요 없이 <strong>정렬 관련 라이브러리(빠른 시간복잡도를 가진 알고리즘으로 구현되어 있다.)</strong> 를 사용하면 쉽게 정렬 문제를 해결할 수 있다!!</p>
+
+<p>정렬 관련 라이브러리 중 대표적인 <strong>sort()</strong> 함수의 기본적인 사용법을 알아보자!</p>
+
+<p><br /></p>
+
+<h2 id="-sort-함수-기본-사용법">💎 sort() 함수 기본 사용법</h2>
+<hr />
+
+<p>sort() 함수는 c++ STL의 &lt;algorithm&gt; 헤더파일 안에 정의되어 있는 함수로, 지정해준 배열의 범위 내에 있는 원소를 <strong>오름차순</strong> 으로 자동 정렬해준다!</p>
+
+<blockquote>
+  <p>–&gt; <a href="http://www.cplusplus.com/reference/algorithm/">C++ algorithm 헤더파일에 관한 레퍼런스</a> 에서 여러 종류의 함수들을 볼 수 있다!</p>
+
+  <p>–&gt; <a href="http://www.cplusplus.com/reference/algorithm/sort/">C++ sort() 함수에 대한 레퍼런스</a></p>
+</blockquote>
+
+<p>따라서 sort() 함수를 사용할 때는 &lt;algorithm&gt; 헤더파일을 추가해줘야 한다.</p>
+
+<p>밑의 코드를 보면 sort() 함수의 사용법에 대해 바로 이해할 수 있을 것이다.</p>
+
+<p><br /></p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+	<span class="c1">// 배열의 크기가 10인 정렬되지 않은 배열 
+</span>	<span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">};</span>
+	
+	<span class="c1">// sort() 함수에 정렬할 배열의 범위를 지정 
+</span>	<span class="n">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">arr</span> <span class="o">+</span> <span class="mi">10</span><span class="p">);</span> 
+	<span class="c1">// --&gt; sort() 함수가 실행되고 나면 arr 배열의 정렬 완료!
+</span>	
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="sc">' '</span><span class="p">;</span>
+	<span class="p">}</span> 
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>위 코드의 출력 결과는</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/72705647-5891a400-3b9f-11ea-94d1-da61ad50d71b.PNG" alt="01" /></p>
+
+<p>이와 같다! 즉, sort() 함수를 사용하면 정렬 알고리즘 구현 없이 바로 정렬이 가능한 것이다!!</p>
+
+<p>여기서 주목할 점은 sort(arr, arr + 10)이다. sort() 함수의 인자에는 정렬할 배열의 범위를 넘겨주어야 한다. 즉, 배열 내의 어느 원소부터 어느 원소까지를 정렬해야 하는지 알려주는 것이고, 배열 내 원소의 주소값을 지정해줌으로써 범위를 나타낼 수 있다.</p>
+
+<p>그런데 배열 자체는 이미 메모리 주소를 의미하는 변수이기 때문에 정렬할 범위의 시작 원소를 나타내는 첫 번째 인자에 arr 변수 자체를 넣어주면 된다.</p>
+
+<p>또, 두 번째 인자에는 정렬할 배열 범위의 마지막 원소가 있는 메모리 주소를 넣어주면 된다. 이 때 주의할 부분이 있다!</p>
+
+<p><strong>sort() 함수가 다루는 배열의 범위는 [first, last) 이다. 즉, 범위에서 시작 인덱스는 포함하지만 마지막 인덱스는 포함하지 않는다.</strong></p>
+
+<p>따라서 위 코드상의 배열인 arr의 마지막 원소까지 범위에 포함하려면 arr + 9 가 아닌 arr + 10을 해야한다!</p>
+
+<blockquote>
+  <p>arr + 10은 <strong>arr + 정렬할 데이터의 개수</strong> 로 생각하면 쉽다!</p>
+</blockquote>
+
+<p>위 코드는 배열을 정렬하는 예시이기 때문에 sort(arr, arr + 10)을 하였지만 만약 vector를 정렬해야 한다면?</p>
+
+<p>이 때는 sort(vec.begin(), vec.end()) 라고 해야한다! 왜냐하면 vector는 iterator이라는 것으로 vector내 원소의 위치에 접근하기 때문이다!</p>
+
+<blockquote>
+  <p>begin()과 end()는 vector에서 사용되는 iterator 중 하나이다.</p>
+
+  <p>–&gt; <a href="https://choheeis.github.io/c++/2020/01/16/%EB%B2%A1%ED%84%B0%EC%8A%A4%ED%84%B0%EB%94%94.html">vector에 대한 포스팅</a> 참고
+<br /></p>
+</blockquote>
+
+<h2 id="-sort-함수를-이용해서-내림차순으로-정렬하기">💎 sort() 함수를 이용해서 내림차순으로 정렬하기</h2>
+<hr />
+
+<p>sort() 함수는 기본적으로 오름차순으로 정렬해주는 함수라고 위에서 언급했었다.</p>
+
+<p>그렇다면 내림차순으로는 정렬할 수 없을까?</p>
+
+<p><a href="http://www.cplusplus.com/reference/algorithm/sort/">sort() 함수 레퍼런스</a>를 보면 sort() 함수를 사용하는 2가지 방법이 있다는 것을 알 수 있다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/72706018-45330880-3ba0-11ea-840f-bee16f8aee07.PNG" alt="02" /></p>
+
+<p>다음과 같은 2가지 방법이 있는데 그 중 default 방법은 sort함수의 인자가 2개인 방법(위에서 언급한 기본 사용법과 같은 방법)이고, custom 방법은 인자가 3개인 방법이다.</p>
+
+<p>custom 방법을 보면 세 번째 인자인 comp가 추가되었는데 이 comp는 sort() 함수를 사용해서 정렬할 때 정렬할 기준을 가지고 있는 함수이다. (comp의 반환값은 bool 형이다.)</p>
+
+<p>아래 코드를 보면 쉽게 이해할 수 있을 것이다.</p>
+
+<p><br /></p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="cm">/* 두 수인 a와 b가 있을 때 a가 더 클 경우 true를 반환하는 함수 */</span>
+<span class="kt">bool</span> <span class="n">compare</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
+	<span class="k">return</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+	<span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">};</span>
+	
+	<span class="c1">// sort() 함수에 정렬 기준을 담은 함수 추가 
+</span>	<span class="n">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">arr</span> <span class="o">+</span> <span class="mi">10</span><span class="p">,</span> <span class="n">compare</span><span class="p">);</span> 
+	
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="sc">' '</span><span class="p">;</span>
+	<span class="p">}</span> 
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>위 코드의 실행 결과는</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/72706500-85df5180-3ba1-11ea-9da3-a3b53d92a81e.PNG" alt="03" /></p>
+
+<p>이와 같고, 내림차순으로 잘 정렬된 모습이다.</p>
+
+<p>위 코드에서는 인자 comp에 들어갈 함수인 compare 함수를 따로 지정해주었다.</p>
+
+<p>compare 함수는 두 수를 비교하는 함수인데 a가 b보다 더 클 경우 true를 반환하는 함수이다. 즉, 내림차순을 의미하는 함수인 것이다!</p>
+
+<p>따라서 sort() 함수의 세 번째 인자로 compare 함수를 써주었을 경우 내림차순으로 정렬이 되는 것이다.</p>
+
+<p>여기서 조금 더 나아가서 알아보자.</p>
+
+<p>sort() 함수가 기본적으로 오름차순으로 정렬해주는 이유가 있다. comp 인자를 지정해주지 않는다면 sort() 함수는 기본적으로 연산자 &lt; 를 comp 로 사용하기 때문이다.</p>
+
+<p>이 특징을 기억하고 다음 내용을 보면 더 심화적인 공부를 할 수 있을 것이다!</p>
+
+<p><br /></p>
+
+<p>이 compare를 활용하여 백준 문제를 풀어보면 compare 사용법을 더 자세히 알 수 있을 것이다.</p>
+
+<p>예를 들어, 백준 1181번 단어 정렬 문제를 다음과 같이 풀 수 있다.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;iostream&gt;
+#include&lt;vector&gt;
+#include&lt;string&gt;
+#include&lt;algorithm&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">bool</span> <span class="n">compare</span><span class="p">(</span><span class="n">string</span> <span class="n">a</span><span class="p">,</span> <span class="n">string</span> <span class="n">b</span><span class="p">){</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">length</span><span class="p">()){</span>
+		<span class="c1">// 길이가 짧은 경우 1순위로 정렬 
+</span>		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">.</span><span class="n">length</span><span class="p">()){</span>
+		<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+		<span class="c1">// 길이가 같은 경우  
+</span>		<span class="k">return</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+	<span class="kt">int</span> <span class="n">N</span><span class="p">;</span>
+	<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">N</span><span class="p">;</span>
+	<span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">string</span> <span class="n">tmp</span><span class="p">;</span>
+		<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">tmp</span><span class="p">;</span>
+		<span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
+	<span class="p">}</span>
+	
+	<span class="n">sort</span><span class="p">(</span><span class="n">vec</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">vec</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">compare</span><span class="p">);</span>
+	
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">vec</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">vec</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]){</span>
+			<span class="k">continue</span><span class="p">;</span>
+		<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+			<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">vec</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="sc">'\n'</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	
+<span class="p">}</span> 
+</code></pre></div></div>
+
+<blockquote>
+  <p>와우 compare로 정렬 기준 정해주는게 진짜 대박이구나</p>
+</blockquote>
+
+<p><br /></p>
+
+<p>또, 프로그래머스의 <a href="https://programmers.co.kr/learn/courses/30/lessons/12915">문자열 내 마음대로 정렬하기</a> 문제도 compare 함수를 정의해줌으로써 풀 수 있다!</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include&lt;algorithm&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="n">index</span><span class="p">;</span>
+
+<span class="kt">bool</span> <span class="n">compare</span><span class="p">(</span><span class="n">string</span> <span class="n">a</span><span class="p">,</span> <span class="n">string</span> <span class="n">b</span><span class="p">){</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">index</span><span class="p">)){</span>
+		<span class="k">return</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="p">;</span>
+	<span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">index</span><span class="p">)){</span>
+		<span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+	<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+		<span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">solution</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">strings</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">index</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+	<span class="n">sort</span><span class="p">(</span><span class="n">strings</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">strings</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">compare</span><span class="p">);</span>	
+    <span class="k">return</span> <span class="n">strings</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h2 id="-sort-함수를-클래스에서-사용해보기">💎 sort() 함수를 클래스에서 사용해보기</h2>
+<hr />
+
+<p>바로 코드를 보면서 어떤 방식으로 클래스에서 sort() 함수를 사용할 수 있는지 알아보자!</p>
+
+<p><br /></p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Student</span><span class="p">{</span>
+	<span class="k">public</span><span class="o">:</span>
+		<span class="c1">// 멤버 변수들 
+</span>		<span class="n">string</span> <span class="n">name</span><span class="p">;</span>
+		<span class="kt">int</span> <span class="n">score</span><span class="p">;</span>
+		
+		<span class="c1">// 생성자 함수
+</span>		<span class="n">Student</span><span class="p">(</span><span class="n">string</span> <span class="n">name</span><span class="p">,</span> <span class="kt">int</span> <span class="n">score</span><span class="p">){</span>
+			<span class="k">this</span> <span class="o">-&gt;</span> <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+			<span class="k">this</span> <span class="o">-&gt;</span> <span class="n">score</span> <span class="o">=</span> <span class="n">score</span><span class="p">;</span>
+		<span class="p">}</span>
+		
+		<span class="c1">// operator &lt; 를 목적에 맞게 변경
+</span>		<span class="c1">// 목적 : sort() 함수를 사용하여 점수가 작은 순서대로 정렬 
+</span>		<span class="kt">bool</span> <span class="k">operator</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">Student</span> <span class="o">&amp;</span><span class="n">student</span><span class="p">){</span>
+			<span class="k">return</span> <span class="k">this</span> <span class="o">-&gt;</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="n">student</span><span class="p">.</span><span class="n">score</span><span class="p">;</span>
+		<span class="p">}</span> 
+<span class="p">};</span> 
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+	<span class="n">Student</span> <span class="n">students</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="n">Student</span><span class="p">(</span><span class="s">"김초희"</span><span class="p">,</span> <span class="mi">80</span><span class="p">),</span>
+		<span class="n">Student</span><span class="p">(</span><span class="s">"김가희"</span><span class="p">,</span> <span class="mi">90</span><span class="p">),</span>
+		<span class="n">Student</span><span class="p">(</span><span class="s">"김나희"</span><span class="p">,</span> <span class="mi">85</span><span class="p">),</span>
+		<span class="n">Student</span><span class="p">(</span><span class="s">"김다희"</span><span class="p">,</span> <span class="mi">70</span><span class="p">),</span>
+		<span class="n">Student</span><span class="p">(</span><span class="s">"김라희"</span><span class="p">,</span> <span class="mi">75</span><span class="p">)</span> 
+	<span class="p">};</span>
+	
+	<span class="n">sort</span><span class="p">(</span><span class="n">students</span><span class="p">,</span> <span class="n">students</span> <span class="o">+</span> <span class="mi">5</span><span class="p">);</span>
+	
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">students</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">name</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span> 
+</code></pre></div></div>
+
+<p>위 코드의 실행 결과는</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/72707828-b379ca00-3ba4-11ea-81ab-d5bedf943dd2.PNG" alt="04" /></p>
+
+<p>이와 같다. 점수가 작은 순으로 학생 이름이 출력된 것을 확인할 수 있다.</p>
+
+<p>위 코드에서는 operator &lt;를 다시 정의했으므로 sort()의 세 번째 인자로 comp를 넣어줄 필요가 없다!</p>
+
+<p>왜냐하면 sort()는 연산자 &lt; 를 기준으로 정렬하기 때문이다.</p>
+
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

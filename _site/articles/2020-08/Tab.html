@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="1️⃣ 안드로이드에서 Tab이란?Material Design - Tabs 문서를 보고 안드로이드에서 Tab을 어떤 형태로 지원하는지 알아보자.안드로이드에서 Tab은 서로 다른 컨텐츠를 서로 다른 화면에 보여줄 때 사용되는 녀석이다.2️⃣ Tab은 다른 컴포넌트와 연결해서 사용할 수...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[안드로이드] 👆🏻 Tab 만드는 나만의 라이브러뤼~(feat.ViewPager) | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[안드로이드] 👆🏻 Tab 만드는 나만의 라이브러뤼~(feat.ViewPager) | choheeis">
+  <meta name="twitter:description" content="1️⃣ 안드로이드에서 Tab이란?Material Design - Tabs 문서를 보고 안드로이드에서 Tab을 어떤 형태로 지원하는지 알아보자.안드로이드에서 Tab은 서로 다른 컨텐츠를 서로 다른 화면에 보여줄 때 사용되는 녀석이다.2️⃣ Tab은 다른 컴포넌트와 연결해서 사용할 수...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-08/Tab">
+  <meta property="og:title" content="[안드로이드] 👆🏻 Tab 만드는 나만의 라이브러뤼~(feat.ViewPager) | choheeis">
+  <meta property="og:description" content="1️⃣ 안드로이드에서 Tab이란?Material Design - Tabs 문서를 보고 안드로이드에서 Tab을 어떤 형태로 지원하는지 알아보자.안드로이드에서 Tab은 서로 다른 컨텐츠를 서로 다른 화면에 보여줄 때 사용되는 녀석이다.2️⃣ Tab은 다른 컴포넌트와 연결해서 사용할 수...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[안드로이드] 👆🏻 Tab 만드는 나만의 라이브러뤼~(feat.ViewPager) | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-08/Tab">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[안드로이드] 👆🏻 Tab 만드는 나만의 라이브러뤼~(feat.ViewPager)">[안드로이드] 👆🏻 Tab 만드는 나만의 라이브러뤼~(feat.ViewPager)</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        17 AUG 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    7 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="1️⃣-안드로이드에서-tab이란">1️⃣ 안드로이드에서 Tab이란?</h2>
+
+<p><a href="https://material.io/components/tabs">Material Design - Tabs</a> 문서를 보고 안드로이드에서 Tab을 어떤 형태로 지원하는지 알아보자.</p>
+
+<p>안드로이드에서 Tab은 서로 다른 컨텐츠를 서로 다른 화면에 보여줄 때 사용되는 녀석이다.</p>
+
+<p><img width="476" alt="01" src="https://user-images.githubusercontent.com/31889335/90475297-2ca0c600-e162-11ea-9137-aa49b12db208.png" /></p>
+
+<p><br /></p>
+
+<h2 id="2️⃣-tab은-다른-컴포넌트와-연결해서-사용할-수-있다">2️⃣ Tab은 다른 컴포넌트와 연결해서 사용할 수 있다!</h2>
+
+<p>Tab은 Top AppBar 나 card, sheet, viewpager 등과 연결해서 사용할 수 있다.</p>
+
+<p>아래 영상들을 보고 Tab이 다른 컴포넌트들과 어떤식으로 연결되는지 알아보자!</p>
+
+<p>–&gt; <a href="https://kstatic.googleusercontent.com/files/fd2e3379930ac13fbb9c5674d32831860df87dfdb318869d1178a0a5f2f2f9edf03fa46fd729c11866629f6453d9bf8c7b370de894f4880352201c3789673d55">ViewPager와 연결된 Tab 작동 영상</a></p>
+
+<p>–&gt; <a href="https://kstatic.googleusercontent.com/files/b423ea951ced1369fe7ba8e81613e22c02508598f8bb6331101789024d5c6fa21806c6e7a434a02a6fcee02d3c85c1a64001b41a1d448c4a7ddc39c555d5744f">AppBar와 연결된 Tab 작동 영상</a></p>
+
+<p><br /></p>
+
+<h2 id="3️⃣-tab의-다양한-모습">3️⃣ Tab의 다양한 모습</h2>
+
+<p>위에서 언급하지 않은 부분들은 <a href="https://material.io/components/tabs">Material Design - Tabs</a> 문서를 보면 알 수 있고, 이를 통해 Tab을 다양한 모습으로 구현할 수 있다는 것을 알 수 있을 것이다!</p>
+
+<p>또한 권장하는 Tab의 모습과 권장하지 않는 Tab의 모습들, Tab이 지켜야할 원칙들도 문서를 보고 알아두자.</p>
+
+<p><br /></p>
+
+<h2 id="4️⃣-tab-구현하기">4️⃣ Tab 구현하기</h2>
+
+<p>위에서 알아본 Tab 기능을 <a href="https://material.io/develop/android/components/tabs">Material Design Tab - Android</a> 문서를 참고해 직접 구현해보자.</p>
+
+<p><br /></p>
+
+<ol>
+  <li>
+    <p><strong>프로젝트에 Material Design 라이브러리 종속성 추가하기</strong></p>
+
+    <p>Tab은 머티리얼 디자인에 속해있기 때문에 프로젝트에 머티리얼 디자인 종속성을 추가해야한다.</p>
+
+    <p>머티리얼 디자인 종속성을 추가하는 방법은 <a href="https://choheeis.github.io/newblog//articles/2020-04/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-%EB%A8%B8%ED%84%B0%EB%A6%AC%EC%96%BC-%EB%94%94%EC%9E%90%EC%9D%B81">머티리얼 디자인에 대한 이전 포스팅</a> 에서 알 수 있다.</p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p><strong>TabLayout 추가하기</strong></p>
+
+    <p>Tab을 구현하는 방법 중 가장 기본적인 방법은 Tab들을 감싸고 있는 TabLayout을 먼저 작성하는 것이다.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// activity_main.xml 에 작성한 내용
+</span> <span class="p">&lt;</span><span class="n">com</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">android</span><span class="p">.</span><span class="n">material</span><span class="p">.</span><span class="n">tabs</span><span class="p">.</span><span class="n">TabLayout</span>
+     <span class="n">android</span><span class="p">:</span><span class="n">id</span><span class="p">=</span><span class="s">"@+id/tab_layout"</span>
+     <span class="n">app</span><span class="p">:</span><span class="n">layout_constraintTop_toTopOf</span><span class="p">=</span><span class="s">"parent"</span>
+     <span class="n">app</span><span class="p">:</span><span class="n">layout_constraintStart_toStartOf</span><span class="p">=</span><span class="s">"parent"</span>
+     <span class="n">app</span><span class="p">:</span><span class="n">layout_constraintEnd_toEndOf</span><span class="p">=</span><span class="s">"parent"</span>
+     <span class="n">android</span><span class="p">:</span><span class="n">layout_width</span><span class="p">=</span><span class="s">"match_parent"</span>
+     <span class="n">android</span><span class="p">:</span><span class="n">layout_height</span><span class="p">=</span><span class="s">"wrap_content"</span><span class="p">/&gt;</span>
+</code></pre></div>    </div>
+
+    <p><a href="https://developer.android.com/reference/com/google/android/material/tabs/TabLayout">TabLayout에 대한 Android Platform 도큐먼트</a> 를 보면 TabLayout에 줄 수 있는 여러 속성들도 알 수 있을 것이다.</p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p><strong>실제 Tab인 Item들을 TabLayout의 자식뷰로 추가하기</strong></p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="p">&lt;</span><span class="n">com</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">android</span><span class="p">.</span><span class="n">material</span><span class="p">.</span><span class="n">tabs</span><span class="p">.</span><span class="n">TabLayout</span>
+     <span class="n">android</span><span class="p">:</span><span class="n">id</span><span class="p">=</span><span class="s">"@+id/tab_layout"</span>
+     <span class="n">app</span><span class="p">:</span><span class="n">layout_constraintTop_toTopOf</span><span class="p">=</span><span class="s">"parent"</span>
+     <span class="n">app</span><span class="p">:</span><span class="n">layout_constraintStart_toStartOf</span><span class="p">=</span><span class="s">"parent"</span>
+     <span class="n">app</span><span class="p">:</span><span class="n">layout_constraintEnd_toEndOf</span><span class="p">=</span><span class="s">"parent"</span>
+     <span class="n">android</span><span class="p">:</span><span class="n">layout_width</span><span class="p">=</span><span class="s">"match_parent"</span>
+     <span class="n">android</span><span class="p">:</span><span class="n">layout_height</span><span class="p">=</span><span class="s">"wrap_content"</span><span class="p">&gt;</span>
+     <span class="p">&lt;</span><span class="n">com</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">android</span><span class="p">.</span><span class="n">material</span><span class="p">.</span><span class="n">tabs</span><span class="p">.</span><span class="n">TabItem</span>
+         <span class="n">android</span><span class="p">:</span><span class="n">id</span><span class="p">=</span><span class="s">"@+id/tab_1"</span>
+         <span class="n">android</span><span class="p">:</span><span class="n">layout_width</span><span class="p">=</span><span class="s">"wrap_content"</span>
+         <span class="n">android</span><span class="p">:</span><span class="n">layout_height</span><span class="p">=</span><span class="s">"wrap_content"</span>
+         <span class="n">android</span><span class="p">:</span><span class="n">text</span><span class="p">=</span><span class="s">"탭1"</span><span class="p">/&gt;</span>
+     <span class="p">&lt;</span><span class="n">com</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">android</span><span class="p">.</span><span class="n">material</span><span class="p">.</span><span class="n">tabs</span><span class="p">.</span><span class="n">TabItem</span>
+         <span class="n">android</span><span class="p">:</span><span class="n">id</span><span class="p">=</span><span class="s">"@+id/tab_2"</span>
+         <span class="n">android</span><span class="p">:</span><span class="n">layout_width</span><span class="p">=</span><span class="s">"wrap_content"</span>
+         <span class="n">android</span><span class="p">:</span><span class="n">layout_height</span><span class="p">=</span><span class="s">"wrap_content"</span>
+         <span class="n">android</span><span class="p">:</span><span class="n">text</span><span class="p">=</span><span class="s">"탭2"</span><span class="p">/&gt;</span>
+     <span class="p">&lt;</span><span class="n">com</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">android</span><span class="p">.</span><span class="n">material</span><span class="p">.</span><span class="n">tabs</span><span class="p">.</span><span class="n">TabItem</span>
+         <span class="n">android</span><span class="p">:</span><span class="n">id</span><span class="p">=</span><span class="s">"@+id/tab_3"</span>
+         <span class="n">android</span><span class="p">:</span><span class="n">layout_width</span><span class="p">=</span><span class="s">"wrap_content"</span>
+         <span class="n">android</span><span class="p">:</span><span class="n">layout_height</span><span class="p">=</span><span class="s">"wrap_content"</span>
+         <span class="n">android</span><span class="p">:</span><span class="n">text</span><span class="p">=</span><span class="s">"탭3"</span><span class="p">/&gt;</span>
+ <span class="p">&lt;/</span><span class="n">com</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">android</span><span class="p">.</span><span class="n">material</span><span class="p">.</span><span class="n">tabs</span><span class="p">.</span><span class="n">TabLayout</span><span class="p">&gt;</span>
+</code></pre></div>    </div>
+
+    <p>이렇게 작성하면</p>
+
+    <p><img width="318" alt="02" src="https://user-images.githubusercontent.com/31889335/90478139-9ff90680-e167-11ea-9942-57113bd188c3.png" /></p>
+
+    <p>이러한 모습의 탭들이 생기게 된다!</p>
+
+    <p><a href="https://developer.android.com/reference/com/google/android/material/tabs/TabLayout">TabLayout에 대한 Android Platform 도큐먼트</a> 을 보면 xml 파일에서 Item을 추가하는 방법말고도 코드로 추가하는 방법도 있음을 알 수 있다.</p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p><strong>tab들의 눌림 변화를 관찰하기</strong></p>
+
+    <p>위와 같이 탭들을 만들었으면 이제 어떤 탭이 눌렸는지를 관찰하고 있어야 한다.</p>
+
+    <p>다음과 같은 코드로 탭들을 관찰하고 있어야 한다.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+         <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+         <span class="n">setContentView</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">activity_main</span><span class="p">)</span>
+
+         <span class="n">tab_layout</span><span class="p">.</span><span class="n">addOnTabSelectedListener</span><span class="p">(</span><span class="kd">object</span> <span class="err">: </span><span class="nc">TabLayout</span><span class="p">.</span><span class="n">OnTabSelectedListener</span><span class="p">{</span>
+             <span class="k">override</span> <span class="k">fun</span> <span class="nf">onTabReselected</span><span class="p">(</span><span class="n">tab</span><span class="p">:</span> <span class="n">TabLayout</span><span class="p">.</span><span class="n">Tab</span><span class="p">?)</span> <span class="p">{</span>
+                 <span class="c1">// handle tab reselect
+</span>             <span class="p">}</span>
+
+             <span class="k">override</span> <span class="k">fun</span> <span class="nf">onTabUnselected</span><span class="p">(</span><span class="n">tab</span><span class="p">:</span> <span class="n">TabLayout</span><span class="p">.</span><span class="n">Tab</span><span class="p">?)</span> <span class="p">{</span>
+                 <span class="c1">// handle tab unselect
+</span>             <span class="p">}</span>
+
+             <span class="k">override</span> <span class="k">fun</span> <span class="nf">onTabSelected</span><span class="p">(</span><span class="n">tab</span><span class="p">:</span> <span class="n">TabLayout</span><span class="p">.</span><span class="n">Tab</span><span class="p">?)</span> <span class="p">{</span>
+                 <span class="c1">// handle tab select
+</span>                 <span class="n">Toast</span><span class="p">.</span><span class="n">makeText</span><span class="p">(</span><span class="n">applicationContext</span><span class="p">,</span> <span class="s">"탭 눌림"</span><span class="p">,</span> <span class="n">Toast</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+             <span class="p">}</span>
+         <span class="p">})</span>
+     <span class="p">}</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>이렇게 하면 각각의 탭들을 눌렀을 때 작업할 수 있는 기반 코드가 완성된다!</p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/90479699-0aab4180-e16a-11ea-99b2-4d0b04a9979c.gif" alt="Tab" /></p>
+
+    <p><br /></p>
+  </li>
+</ol>
+
+<h2 id="5️⃣-viewpager와-tab-연결하기">5️⃣ ViewPager와 Tab 연결하기</h2>
+
+<p>✍🏻 <a href="https://developer.android.com/guide/navigation/navigation-swipe-view-2?hl=ko#add_tabs_using_a_tablayout">Android Developer 도큐먼트 - ViewPager2와 Tab을 함께 사용하기</a> 를 참고하여 작성합니다.</p>
+
+<p>Tab은 ViewPager와 연결되어 사용되는 경우가 많다.</p>
+
+<p>ViewPager와 Tab을 연결하기 위해서는 <a href="https://choheeis.github.io/newblog//articles/2020-08/ViewPager2">ViewPager에 대한 이전 포스팅</a>을 보고 Fragment가 3개인 ViewPager를 하나 만들어와야 한다.</p>
+
+<p>그리고 ViewPager와 위에서 만든 TabLayout을 아래와 같이 배치하자.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+    <span class="na">android:layout_height=</span><span class="s">"match_parent"</span>
+    <span class="na">android:orientation=</span><span class="s">"vertical"</span><span class="nt">&gt;</span>
+
+    <span class="c">&lt;!-- TabLayout과 ViewPager2가 동일선 상에 배치됨 --&gt;</span>
+    <span class="nt">&lt;com.google.android.material.tabs.TabLayout</span>
+        <span class="na">android:id=</span><span class="s">"@+id/tab_layout"</span>
+        <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+        <span class="na">android:layout_height=</span><span class="s">"wrap_content"</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;androidx.viewpager2.widget.ViewPager2</span>
+        <span class="na">android:id=</span><span class="s">"@+id/pager"</span>
+        <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+        <span class="na">android:layout_height=</span><span class="s">"0dp"</span>
+        <span class="na">android:layout_weight=</span><span class="s">"1"</span> <span class="nt">/&gt;</span>
+
+<span class="nt">&lt;/LinearLayout&gt;</span>
+</code></pre></div></div>
+
+<p>ViewPager와 Tab을 연결하기 위해서는 <strong><a href="https://developer.android.com/reference/com/google/android/material/tabs/TabLayoutMediator?hl=ko">TabLayoutMediator</a></strong> 라는 클래스를 사용해야 한다. 이 클래스가 Tab과 ViewPager를 하나처럼 연결시켜줄 것이다.</p>
+
+<p>TabLayoutMediator 클래스의 사용법은 아래와 같다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TabLayoutMediator</span><span class="p">(</span><span class="n">tabLayout</span><span class="p">,</span> <span class="n">viewPager2</span><span class="p">)</span> <span class="p">{</span> <span class="n">tab</span><span class="p">,</span> <span class="n">position</span> <span class="p">-&gt;</span>
+    <span class="k">when</span> <span class="p">(</span><span class="n">position</span><span class="p">)</span> <span class="p">{</span>
+        <span class="m">0</span> <span class="p">-&gt;</span> <span class="p">{</span>
+            <span class="n">tab</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">textLabel1</span>
+            <span class="n">tab</span><span class="p">.</span><span class="n">icon</span> <span class="p">=</span> <span class="n">drawable1</span>
+        <span class="p">}</span>
+        <span class="m">1</span> <span class="p">-&gt;</span> <span class="p">{</span>
+            <span class="n">tab</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">textLabel2</span>
+            <span class="n">tab</span><span class="p">.</span><span class="n">icon</span> <span class="p">=</span> <span class="n">drawable2</span>
+        <span class="p">}</span>
+        <span class="o">..</span><span class="p">.</span>
+    <span class="p">}</span>
+<span class="p">}.</span><span class="n">attach</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>조금 더 구체적인 이해를 위한 MainActivity 전체 코드는 다음과 같다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">com.example.tabwithviewpager</span>
+
+<span class="k">import</span> <span class="nn">androidx.appcompat.app.AppCompatActivity</span>
+<span class="k">import</span> <span class="nn">android.os.Bundle</span>
+<span class="k">import</span> <span class="nn">android.widget.Toast</span>
+<span class="k">import</span> <span class="nn">androidx.fragment.app.Fragment</span>
+<span class="k">import</span> <span class="nn">androidx.fragment.app.FragmentActivity</span>
+<span class="k">import</span> <span class="nn">androidx.viewpager2.adapter.FragmentStateAdapter</span>
+<span class="k">import</span> <span class="nn">androidx.viewpager2.widget.ViewPager2</span>
+<span class="k">import</span> <span class="nn">com.google.android.material.tabs.TabLayout</span>
+<span class="k">import</span> <span class="nn">com.google.android.material.tabs.TabLayoutMediator</span>
+<span class="k">import</span> <span class="nn">kotlinx.android.synthetic.main.activity_main.*</span>
+
+<span class="kd">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">private</span> <span class="k">lateinit</span> <span class="kd">var</span> <span class="py">viewPager</span><span class="p">:</span> <span class="n">ViewPager2</span>
+    <span class="c1">//1. tabLayout 뷰 객체 초기화 지연시키기
+</span>    <span class="k">private</span> <span class="k">lateinit</span> <span class="kd">var</span> <span class="py">tabLayout</span><span class="p">:</span> <span class="n">TabLayout</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+        <span class="n">setContentView</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">activity_main</span><span class="p">)</span>
+
+        <span class="n">viewPager</span> <span class="p">=</span> <span class="n">findViewById</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">view_pager</span><span class="p">)</span>
+        <span class="n">viewPager</span><span class="p">.</span><span class="n">adapter</span> <span class="p">=</span> <span class="n">ViewPagerAdapter</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+
+        <span class="c1">// 2. tablayout 뷰 객체 초기화하기
+</span>        <span class="n">tabLayout</span> <span class="p">=</span> <span class="n">findViewById</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">tab_layout</span><span class="p">)</span>
+
+        <span class="n">tab_layout</span><span class="p">.</span><span class="n">addOnTabSelectedListener</span><span class="p">(</span><span class="kd">object</span> <span class="err">: </span><span class="nc">TabLayout</span><span class="p">.</span><span class="n">OnTabSelectedListener</span><span class="p">{</span>
+            <span class="k">override</span> <span class="k">fun</span> <span class="nf">onTabReselected</span><span class="p">(</span><span class="n">tab</span><span class="p">:</span> <span class="n">TabLayout</span><span class="p">.</span><span class="n">Tab</span><span class="p">?)</span> <span class="p">{</span>
+                <span class="c1">// handle tab reselect
+</span>            <span class="p">}</span>
+
+            <span class="k">override</span> <span class="k">fun</span> <span class="nf">onTabUnselected</span><span class="p">(</span><span class="n">tab</span><span class="p">:</span> <span class="n">TabLayout</span><span class="p">.</span><span class="n">Tab</span><span class="p">?)</span> <span class="p">{</span>
+                <span class="c1">// handle tab unselect
+</span>            <span class="p">}</span>
+
+            <span class="k">override</span> <span class="k">fun</span> <span class="nf">onTabSelected</span><span class="p">(</span><span class="n">tab</span><span class="p">:</span> <span class="n">TabLayout</span><span class="p">.</span><span class="n">Tab</span><span class="p">?)</span> <span class="p">{</span>
+                <span class="c1">// handle tab select
+</span>                <span class="n">Toast</span><span class="p">.</span><span class="n">makeText</span><span class="p">(</span><span class="n">applicationContext</span><span class="p">,</span> <span class="s">"탭 눌림"</span><span class="p">,</span> <span class="n">Toast</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+
+        <span class="c1">// 3. Tab에 ViewPager 붙이기
+</span>        <span class="n">TabLayoutMediator</span><span class="p">(</span><span class="n">tabLayout</span><span class="p">,</span> <span class="n">viewPager</span><span class="p">)</span> <span class="p">{</span><span class="n">tab</span><span class="p">,</span> <span class="n">position</span> <span class="p">-&gt;</span>  
+            <span class="k">when</span><span class="p">(</span><span class="n">position</span><span class="p">)</span> <span class="p">{</span>
+                <span class="m">0</span> <span class="p">-&gt;</span> <span class="n">tab</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">"탭1"</span>
+                <span class="m">1</span> <span class="p">-&gt;</span> <span class="n">tab</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">"탭2"</span>
+                <span class="m">2</span> <span class="p">-&gt;</span> <span class="n">tab</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">"탭3"</span>
+            <span class="p">}</span>
+        <span class="p">}.</span><span class="n">attach</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="k">inner</span> <span class="kd">class</span> <span class="nc">ViewPagerAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">:</span> <span class="n">FragmentActivity</span><span class="p">)</span> <span class="p">:</span> <span class="n">FragmentStateAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">getItemCount</span><span class="p">():</span> <span class="n">Int</span> <span class="p">=</span> <span class="m">3</span>
+
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">createFragment</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">Fragment</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">position</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="n">Fragment1</span><span class="p">()</span>
+            <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">position</span> <span class="p">==</span> <span class="m">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="n">Fragment2</span><span class="p">()</span>
+            <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="n">Fragment3</span><span class="p">()</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/91006928-ada20680-e615-11ea-83de-4e77fcfa704a.gif" alt="TabWithViewPager" /></p>
+
+<h1 id="끝">끝!</h1>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

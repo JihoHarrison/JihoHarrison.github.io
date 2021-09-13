@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="🗂 안드로이드 프로젝트 중 res 폴더에 대한 고찰!안드로이드 프로젝트 구조를 보면 res 라고 이름 붙여져 있는 폴더가 있다.이 폴더의 역할과 기능에 대해서 알아보고 싶어서 Android App resource 에 대해서 알아보았다.링크가 걸려있는 문서를 보면 리소스라는 것에 대...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[안드로이드] 🗂 Resource 에 대해서 | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[안드로이드] 🗂 Resource 에 대해서 | choheeis">
+  <meta name="twitter:description" content="🗂 안드로이드 프로젝트 중 res 폴더에 대한 고찰!안드로이드 프로젝트 구조를 보면 res 라고 이름 붙여져 있는 폴더가 있다.이 폴더의 역할과 기능에 대해서 알아보고 싶어서 Android App resource 에 대해서 알아보았다.링크가 걸려있는 문서를 보면 리소스라는 것에 대...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-04/AppResource">
+  <meta property="og:title" content="[안드로이드] 🗂 Resource 에 대해서 | choheeis">
+  <meta property="og:description" content="🗂 안드로이드 프로젝트 중 res 폴더에 대한 고찰!안드로이드 프로젝트 구조를 보면 res 라고 이름 붙여져 있는 폴더가 있다.이 폴더의 역할과 기능에 대해서 알아보고 싶어서 Android App resource 에 대해서 알아보았다.링크가 걸려있는 문서를 보면 리소스라는 것에 대...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[안드로이드] 🗂 Resource 에 대해서 | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-04/AppResource">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[안드로이드] 🗂 Resource 에 대해서">[안드로이드] 🗂 Resource 에 대해서</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        16 APR 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    1 min read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="-안드로이드-프로젝트-중-res-폴더에-대한-고찰">🗂 안드로이드 프로젝트 중 res 폴더에 대한 고찰!</h2>
+<hr />
+
+<p><img src="https://user-images.githubusercontent.com/31889335/79442938-2532aa00-8014-11ea-9dd1-9f3d5b688010.PNG" alt="09" /></p>
+
+<p>안드로이드 프로젝트 구조를 보면 res 라고 이름 붙여져 있는 폴더가 있다.</p>
+
+<p>이 폴더의 역할과 기능에 대해서 알아보고 싶어서 <a href="https://developer.android.com/guide/topics/resources/providing-resources#AliasResources">Android App resource</a> 에 대해서 알아보았다.</p>
+
+<p>링크가 걸려있는 문서를 보면 리소스라는 것에 대한 설명이 있다.</p>
+
+<p>한 번 읽어보자!</p>
+
+<p><br /></p>
+
+<p>안드로이드 개발에 있어서 <strong>리소스(resource)</strong> 는 코드(자바 or 코틀린)에서 사용하는 <strong>“추가적인 파일”</strong> 이나 <strong>“정적인 콘텐츠”</strong> 를 의미한다.</p>
+
+<p>예를 들어 비트맵, 레이아웃, 사용자 인터페이스 문자열 등이 리소스에 해당한다.</p>
+
+<p><strong>그렇다면 왜 리소스 폴더가 따로 있는 걸까?</strong></p>
+
+<p>우리가 안드로이드 어플을 개발할 때 이미지나 문자열과 같은 리소스들은 항상 코드(자바 or 코틀린)에서 외부화(분리)해야 하기 때문이다.</p>
+
+<p>그래야 리소스들을 코드와 독립적으로 유지 및 관리를 할 수 있게 된다.</p>
+
+<p>이렇게 외부화된 리소스들은 <strong>클래스 R</strong> 이라는 클래스에서 발생하는 리소스 <strong>id</strong> 로 엑세스할 수 있다!</p>
+
+<p><br /></p>
+
+<h2 id="-리소스에는-여러가지-유형이-있다">🗂 리소스에는 여러가지 유형이 있다?</h2>
+<hr />
+
+<p>리소스(resource) 라는 것이 안드로이드 플랫폼에서 무슨 역할을 하는지 알게 되었을 것이다.</p>
+
+<p>그렇다면 이제 리소스에 해당하는 것들은 어떤 것들이 있는지 알아보자!</p>
+
+<p>다음은 간단한 프로젝트의 파일 계층이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/79452454-261f0800-8023-11ea-9cd7-0bf2210d4c48.PNG" alt="10" /></p>
+
+<p>여러개의 폴더 중, res 라는 폴더 하위에는 <strong>drawable</strong>, <strong>layout</strong>, <strong>mipmap</strong>, <strong>values</strong> 등의 또 다른 폴더가 있는 것을 알 수 있다.</p>
+
+<p>이 4가지 폴더는 각각 resource 유형이라고 볼 수 있다.</p>
+
+<p>drawable 폴더에 저장되는 resource 들은 png, jpg, gif, xml 등의 파일이고</p>
+
+<p>layout 폴더에 저장되는 resource 들은 사용자 인터페이스 레이아웃(UI 레이아웃) 을 정의하는 xml 파일이다.</p>
+
+<p>이와 같이 각 폴더에 저장될 수 있는 resource의 유형이 나뉘어져 있다!</p>
+
+<p>또한 이 4개의 폴더는 프로젝트를 생성했을 때 기본적으로 제공되는 폴더이고, 필요할 시에는 추가로 폴더를 생성할 수 있다.</p>
+
+<p>다만 추가로 폴더를 생성할 때는 폴더 이름이 중요하다. 왜냐하면 res 디렉토리 내부에서 지원되는 하위 디렉토리가 정해져 있기 때문이다.</p>
+
+<p>res 폴더 안에서 생성할 수 있는 폴더의 이름에는</p>
+
+<ul>
+  <li>
+    <p>animator</p>
+  </li>
+  <li>
+    <p>anim</p>
+  </li>
+  <li>
+    <p>color</p>
+  </li>
+  <li>
+    <p>drawable</p>
+  </li>
+  <li>
+    <p>mipmap</p>
+  </li>
+  <li>
+    <p>layout</p>
+  </li>
+  <li>
+    <p>menu</p>
+  </li>
+  <li>
+    <p>raw</p>
+  </li>
+  <li>
+    <p>values</p>
+  </li>
+  <li>
+    <p>xml</p>
+  </li>
+  <li>
+    <p>font</p>
+  </li>
+</ul>
+
+<p>가 있다.</p>
+
+<blockquote>
+  <p>각 폴더별 기능은 <a href="https://developer.android.com/guide/topics/resources/providing-resources#AliasResources">Android App resource</a> 의 표 1에서 확인할 수 있다.</p>
+</blockquote>
+
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

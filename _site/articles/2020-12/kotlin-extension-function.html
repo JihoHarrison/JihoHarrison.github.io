@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="  💁🏼‍♀️ 프롤로그  2019/07 ~ 2020/01 SOPT라는 IT 창업 대외 동아리 활동을 했었다.  세션에서 코틀린 확장함수에 대해 배우게 되었고, 인턴즈 라는 App을 개발할 때 사용했었다.  프로젝트들을 정리하면서 그 때 사용했던 ‘확장함수’에 대해 다시 직접 공부해...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[Kotlin] 코틀린의 확장 함수(Extension Function) | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[Kotlin] 코틀린의 확장 함수(Extension Function) | choheeis">
+  <meta name="twitter:description" content="  💁🏼‍♀️ 프롤로그  2019/07 ~ 2020/01 SOPT라는 IT 창업 대외 동아리 활동을 했었다.  세션에서 코틀린 확장함수에 대해 배우게 되었고, 인턴즈 라는 App을 개발할 때 사용했었다.  프로젝트들을 정리하면서 그 때 사용했던 ‘확장함수’에 대해 다시 직접 공부해...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-12/kotlin-extension-function">
+  <meta property="og:title" content="[Kotlin] 코틀린의 확장 함수(Extension Function) | choheeis">
+  <meta property="og:description" content="  💁🏼‍♀️ 프롤로그  2019/07 ~ 2020/01 SOPT라는 IT 창업 대외 동아리 활동을 했었다.  세션에서 코틀린 확장함수에 대해 배우게 되었고, 인턴즈 라는 App을 개발할 때 사용했었다.  프로젝트들을 정리하면서 그 때 사용했던 ‘확장함수’에 대해 다시 직접 공부해...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[Kotlin] 코틀린의 확장 함수(Extension Function) | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-12/kotlin-extension-function">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[Kotlin] 코틀린의 확장 함수(Extension Function)">[Kotlin] 코틀린의 확장 함수(Extension Function)</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        15 DEC 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    8 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <blockquote>
+  <p><strong>💁🏼‍♀️ 프롤로그</strong></p>
+
+  <p>2019/07 ~ 2020/01 SOPT라는 IT 창업 대외 동아리 활동을 했었다.</p>
+
+  <p>세션에서 코틀린 확장함수에 대해 배우게 되었고, <a href="https://github.com/INTENRZ/Android_INTERNZ">인턴즈</a> 라는 App을 개발할 때 사용했었다.</p>
+
+  <p>프로젝트들을 정리하면서 그 때 사용했던 ‘확장함수’에 대해 다시 직접 공부해봐야겠다는 생각이 들어 공부해보려고 한다!</p>
+
+  <p>✍🏻 <a href="https://kotlinlang.org/docs/reference/extensions.html">kotlin 도큐먼트 - Extenstions</a> 를 참고하여 작성합니다.</p>
+</blockquote>
+
+<h2 id="0️⃣-코틀린은-클래스를-확장할-수-있다">0️⃣ 코틀린은 클래스를 확장할 수 있다?</h2>
+
+<p>코틀린은 클래스를 확장해서 새로운 기능을 개발할 수 있도록 지원해준다.</p>
+
+<p>물론 코틀린이나 자바에서 ‘상속’을 통해 Super Class(부모 클래스)를 확장할 수도 있지만 코틀린에서 지원하는 클래스 확장 개념은 상속을 통한 확장과는 다른 방법으로 클래스를 확장한다.</p>
+
+<p>코틀린에서 제공하는 클래스 확장은 다른 클래스로부터 상속을 받지 않아도 되고, 어떠한 디자인 패턴을 이용해서 확장하는 것도 아니다.</p>
+
+<p>코틀린만의 특별한 방법이 있다.</p>
+
+<h2 id="1️⃣-그래서-클래스를-확장한다는게-뭔데-왜-확장하는-거야">1️⃣ 그래서, 클래스를 확장한다는게 뭔데! 왜 확장하는 거야?</h2>
+
+<p>‘클래스를 확장한다’라는 개념을 쉽게 이해하기 위해 한 가지 예시를 살펴보자.</p>
+
+<p>예를 들어서 앱 개발 시 <strong>외부 라이브러리(third-party library)를 사용하는데 이 라이브러리는 어떠한 변경도 안되는 라이브러리</strong> 라고 가정해보자.</p>
+
+<p>즉, 얼굴도 모르는 다른 개발자가 개발한 라이브러리를 사용하는 경우이다.</p>
+
+<p>이럴 경우에, 코틀린에서 제공하는 클래스 확장 개념을 사용하면 <strong>외부 라이브러리가 제공하는 자체 클래스는 변경할 수 없지만 이를 확장하여 개발자가 원하는 새로운 함수들을 만들 수 있게 된다.</strong></p>
+
+<p>또 클래스를 확장하면서 만든 <strong>새로운 함수들을 마치 외부 라이브러리의 클래스가 제공하는 원래 함수인 것 마냥</strong> 사용할 수도 있다.</p>
+
+<p>이렇게 클래스를 확장하면서 만든 새로운 함수를 <strong>확장 함수(extension function)</strong> 라고 부른다.</p>
+
+<p>코틀린이 제공하는 클래스 확장 개념을 사용하면 확장 함수 뿐 아니라 <strong>확장 프로퍼티(extension property)</strong> 라는 것도 만들 수 있다.</p>
+
+<p>확장 프로퍼티는 어떤 것도 변경할 수 없는 클래스에 새로운 프로퍼티를 추가할 수 있게 해준다.</p>
+
+<p>말 그대로, <strong>코틀린에서 클래스를 확장한다</strong> 라는 개념은 어떠한 클래스가 존재하는데 이 클래스를 직접 수정할 수 없을 때 <strong>기존 클래스는 그대로 두고 클래스 주변에 새로운 함수나 프로퍼티를 추가하여 클래스의 크기를 늘린다(확장한다)</strong> 라고 생각하면 된다.</p>
+
+<p><img width="566" alt="01" src="https://user-images.githubusercontent.com/31889335/102179222-20e3c700-3eea-11eb-9939-89c47ab447ec.png" /></p>
+
+<h2 id="2️⃣-확장-함수-만드는-방법">2️⃣ 확장 함수 만드는 방법</h2>
+
+<p>코틀린의 클래스 확장 개념을 통해 확장 함수를 선언하고 만들 수 있다는 것을 알게 되었다.</p>
+
+<p>이제 확장 함수를 어떻게 만드는지 알아보자.</p>
+
+<p>먼저 확장 함수를 만들기 위해 알아야 할 몇 가지 용어가 있다.</p>
+
+<ul>
+  <li>
+    <p><strong>receiver type(수취인 타입)</strong> : 확장 함수를 추가할 클래스를 말한다. 즉, 확장 대상이 될 클래스이다.</p>
+  </li>
+  <li>
+    <p><strong>receiver object(수취인 객체)</strong> : 확장 함수 내부를 구현할 때 <strong>this</strong> 키워드를 사용하여 receiver type이 가지고 있는 public 인스턴스에 접근할 수 있다. 이렇게 접근한 객체를 receiver object 라고 부른다.</p>
+  </li>
+</ul>
+
+<p>이제 확장 함수를 어떻게 정의하고 구현하는지 아래 코드를 통해 알아보자.</p>
+
+<p>아래 코드는 MutableList&lt;Int&gt; 라는 클래스를 확장하여 swap()이라는 확장 함수를 추가한 모습이다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* MutableList 안의 두 원소 위치를 바꿔주는 함수 */</span>
+<span class="k">fun</span> <span class="nf">MutableList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;.</span><span class="n">swap</span><span class="p">(</span><span class="n">index1</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">index2</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// this는 MutableList를 가리킨다.
+</span>    <span class="kd">val</span> <span class="py">tmp</span> <span class="p">=</span> <span class="k">this</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span>
+    <span class="k">this</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span> <span class="p">=</span> <span class="k">this</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span>
+    <span class="k">this</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span> <span class="p">=</span> <span class="n">tmp</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>먼저 확장 함수를 정의할 때는 receiver type에 <strong>.(점 연산자)</strong> 를 붙여서 새로운 함수를 만들어주면 된다.</p>
+
+<p>정의한 함수를 구현할 때는 <strong>this</strong> 키워드를 사용해서 receiver type에 속한 인스턴스에 접근할 수 있다.</p>
+
+<p>위 코드에서 this는 MutableList&lt;Int&gt; 클래스에 존재하는 리스트를 의미하게 된다.</p>
+
+<p>확장 함수로 만든 swap() 함수를 호출하려먼 아래와 같이 하면 된다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">testList</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
+
+    <span class="c1">// swap() 함수 호출
+</span>    <span class="n">testList</span><span class="p">.</span><span class="n">swap</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">testList</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="cm">/* MutableList 안의 두 원소 위치를 바꿔주는 함수 */</span>
+<span class="k">fun</span> <span class="nf">MutableList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;.</span><span class="n">swap</span><span class="p">(</span><span class="n">index1</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">index2</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">tmp</span> <span class="p">=</span> <span class="k">this</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span>
+    <span class="k">this</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span> <span class="p">=</span> <span class="k">this</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span>
+    <span class="k">this</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span> <span class="p">=</span> <span class="n">tmp</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>testList.swap(0, 2) 라는 코드를 보면 마치 MutableList&lt;Int&gt; 에 swap() 함수가 원래부터 내장되어 있는 것 마냥 사용하고 있다.</p>
+
+<p>위 코드의 출력 결과는</p>
+
+<p><img width="89" alt="02" src="https://user-images.githubusercontent.com/31889335/102185083-d8c9a200-3ef3-11eb-9600-dcd9f0041259.png" /></p>
+
+<p>위와 같다. Index 0 원소와 Index 2 원소가 잘 바뀌어 있다.</p>
+
+<p>위 코드에서 확장의 대상이 된 클래스(receiver type)는 MutableList&lt;Int&gt; 였지만 당연히 Generic 타입인 MutableList&lt;T&gt;에 관해서도 확장할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Generic 타입에 관해서도 확장이 가능하다.
+</span><span class="k">fun</span> <span class="err">&lt;</span><span class="nf">T</span><span class="p">&gt;</span> <span class="n">MutableList</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;.</span><span class="n">swap</span><span class="p">(</span><span class="n">index1</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">index2</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">tmp</span> <span class="p">=</span> <span class="k">this</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span>
+    <span class="k">this</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span> <span class="p">=</span> <span class="k">this</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span>
+    <span class="k">this</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span> <span class="p">=</span> <span class="n">tmp</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>위 코드처럼 확장하면 Int형 외의 다른 타입의 데이터를 저장하는 MutableList에도 swap() 확장 함수를 사용할 수 있다.</p>
+
+<h2 id="3️⃣-확장-함수가-갖는-특징">3️⃣ 확장 함수가 갖는 특징</h2>
+
+<p>코틀린의 클래스 확장 개념을 통해 만든 확장 함수는 몇 가지 특징을 갖는다.</p>
+
+<ol>
+  <li>
+    <p><strong>확장 함수는 정적 바인딩된다.</strong></p>
+
+    <p>확장 함수는 <strong>정적 바인딩</strong> 처리된다.</p>
+
+    <p><strong>정적 바인딩이란?</strong></p>
+
+    <p>함수를 만들어 컴파일하면 함수의 코드가 메모리 어딘가에 저장되고, 함수를 호출하는 부분에는 해당 함수의 코드가 저장된 메모리 주소 값이 저장된다. (이 작업을 함수 바인딩이라고 한다.)</p>
+
+    <p>따라서 프로세서는 함수 호출 부분에 저장된 메모리 주소를 보고 해당 메모리 주소에 있는 코드를 실행하게 된다.</p>
+
+    <p>함수 바인딩에는 정적 바인딩과 동적 바인딩이 있다.</p>
+
+    <ul>
+      <li>
+        <p><strong>정적 바인딩</strong> : 함수 호출 부분에 메모리 주소 값을 저장하는 작업이 <strong>컴파일 시간</strong> 에 행해지기 때문에 컴파일 이후로 이 값이 변경되지 않는다.</p>
+      </li>
+      <li>
+        <p><strong>동적 바인딩</strong> : 함수 호출 부분에 메모리 주소 값을 저장하는 작업이 컴파일 시간에는 보류되고, <strong>런타임</strong> 에 결정된다.</p>
+      </li>
+    </ul>
+
+    <p>이해를 돕기 위해 아래와 같은 코드를 봐보자.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">open</span> <span class="kd">class</span> <span class="nc">Shape</span>
+
+ <span class="c1">// Rectangle = Shape 클래스를 상속하는 SubClass
+</span> <span class="kd">class</span> <span class="nc">Rectangle</span><span class="p">:</span> <span class="n">Shape</span><span class="p">()</span>
+
+ <span class="c1">// Shape 클래스의 확장 함수
+</span> <span class="k">fun</span> <span class="nf">Shape</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span> <span class="p">=</span> <span class="s">"Shape"</span>
+
+ <span class="c1">// Rectangle 클래스의 확장 함수
+</span> <span class="k">fun</span> <span class="nf">Rectangle</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span> <span class="p">=</span> <span class="s">"Rectangle"</span>
+
+ <span class="k">fun</span> <span class="nf">printClassName</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="n">Shape</span><span class="p">)</span> <span class="p">{</span>
+     <span class="n">println</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">getName</span><span class="p">())</span>
+ <span class="p">}</span>    
+
+ <span class="c1">// 매개 변수의 타입이 Shape인 함수에 Rectangle 타입의 인스턴스를 전달함
+</span> <span class="n">printClassName</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">())</span>
+</code></pre></div>    </div>
+
+    <p>위 코드에서 주의 깊게 보아야 할 것은 가장 마지막 줄의 코드이다.</p>
+
+    <p>printClassName() 이라는 함수의 매개변수 타입은 Shape 인데, printClassName()을 호출할 때는 printClassName(Rectangle()) 이라고 호출하였다.</p>
+
+    <p>즉, Rectangle 타입의 인스턴스를 전달한 것이다.</p>
+
+    <p>하지만 확장 함수의 특징에 의해 확장 함수의 호출 부분에 저장되는 메모리 주소가 이미 컴파일 시간에 결정되어 버렸다.</p>
+
+    <p>즉,</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// 확장 함수를 호출하는 부분
+</span> <span class="k">fun</span> <span class="nf">printClassName</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="n">Shape</span><span class="p">)</span> <span class="p">{</span>
+     <span class="n">println</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">getName</span><span class="p">())</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>위 코드가 컴파일될 때, 확장 함수의 호출 부분인 s.getName() 부분에는 이미 Shape 클래스의 확장 함수인 getName() 함수가 저장된 메모리 주소가 저장되어 있는 것이다.</p>
+
+    <p>따라서 printClassName(Rectangle()) 이라고 호출해도 프로세서는 s.getName() 호출 부분에 저장되어 있는 메모리 주소(Shape 클래스의 확장 함수 위치)만을 알고 있기 때문에 그 위치에 있는 코드를 실행시키게 된다.</p>
+
+    <p>따라서 위 코드의 실행 결과는 “Rectangle”이 아니라 “Shape” 이 출력되게 된다.</p>
+  </li>
+  <li>
+    <p><strong>확장 함수와 이름 및 매개 변수 타입, 매개 변수 개수가 완벽히 같은 함수가 확장 대상 클래스의 멤버 함수로 존재하면 확장 함수는 무시된다.</strong></p>
+
+    <p>확장 대상 클래스에 이미 존재하는 멤버 함수와 이름도 똑같고, 매개변수도 똑같은 확장 함수를 만들면 확장 함수를 호출해도 멤버 함수가 호출된다.</p>
+
+    <p>즉, 확장 함수는 무시된다.</p>
+
+    <p>단, 이름은 같지만 매개 변수의 type이나 매개 변수 개수가 달라 확장 함수와 멤버 함수를 구분할 수 있다면 원하는 함수를 호출할 수 있다.</p>
+
+    <p>아래 코드를 보고 이해해보자.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+     <span class="n">Test</span><span class="p">().</span><span class="n">solution</span><span class="p">(</span><span class="sc">'c'</span><span class="p">)</span>
+     <span class="n">Test</span><span class="p">().</span><span class="n">solution</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+     <span class="n">Test</span><span class="p">().</span><span class="n">solution2</span><span class="p">(</span><span class="m">3</span><span class="p">)</span> <span class="c1">// 확장 함수가 호출되지 않고, 멤버 함수가 호출된다.
+</span> <span class="p">}</span>
+
+ <span class="kd">class</span> <span class="nc">Test</span> <span class="p">{</span>
+     <span class="k">fun</span> <span class="nf">solution</span><span class="p">(</span><span class="n">char</span><span class="p">:</span> <span class="n">Char</span><span class="p">)</span> <span class="p">{</span>
+         <span class="n">println</span><span class="p">(</span><span class="s">"안녕"</span><span class="p">)</span>
+     <span class="p">}</span>
+
+     <span class="k">fun</span> <span class="nf">solution2</span><span class="p">(</span><span class="n">int</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+         <span class="n">println</span><span class="p">(</span><span class="s">"반가워"</span><span class="p">)</span>
+     <span class="p">}</span>
+ <span class="p">}</span>
+
+ <span class="c1">// 확장 함수 - Test 클래스 안의 멤버 함수인 solution()과 이름은 같지만 매개 변수 타입이 달라 구분 가능한 함수
+</span> <span class="k">fun</span> <span class="nf">Test</span><span class="p">.</span><span class="n">solution</span><span class="p">(</span><span class="n">int</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+     <span class="n">println</span><span class="p">(</span><span class="s">"잘가"</span><span class="p">)</span>
+ <span class="p">}</span>
+
+ <span class="c1">// 확장 함수 - Test 클래스 안의 멤버 함수인 solution2()와 이름도 같고, 매개 변수 타입도 같아서 구분이 불가능한 함수
+</span> <span class="k">fun</span> <span class="nf">Test</span><span class="p">.</span><span class="n">solution2</span><span class="p">(</span><span class="n">int</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+     <span class="n">println</span><span class="p">(</span><span class="s">"또봐"</span><span class="p">)</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>위 코드의 출력 결과는 아래와 같다.</p>
+
+    <p><img width="54" alt="03" src="https://user-images.githubusercontent.com/31889335/102218181-f19c7c80-3f20-11eb-8020-879714afae03.png" /></p>
+
+    <p>확장 함수 중 멤버 함수와 함수 이름과 매개 변수까지 똑같은 함수는 호출되지 않음을 알 수 있을 것이다.</p>
+
+    <p>즉, <strong>확장 함수는 멤버 함수를 오버로딩(overloading)할 수는 있다.</strong></p>
+  </li>
+</ol>
+
+<h1 id="끝">끝!</h1>
+
+<p>코틀린이 지원하는 클래스 확장 개념에는 이 외에도 확장 프로퍼티, Nullable 확장 등 조금 더 공부해야할 것들이 존재한다.</p>
+
+<p>이것들은 필요할 때 <a href="https://kotlinlang.org/docs/reference/extensions.html">kotlin 도큐먼트 - Extenstions</a> 를 보고 추가로 공부한 후, 정리하자!</p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

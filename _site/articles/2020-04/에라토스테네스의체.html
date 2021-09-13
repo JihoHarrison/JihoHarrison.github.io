@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="  동빈나 유튜브 영상을 참고하여 공부한 내용!👨‍🦳 에라토스테네스의 체란?에라토스테네스의 체는 소수(Prime Number)를 판별해주는 알고리즘이다.소수 란?소수는 ‘양의 약수를 두 개만 가지는 자연수’ 를 의미하는데 이 때, 모든 수의 공통적으로 포함되는 양의 약수는 1이 존...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[알고리즘] 👨‍🦳 에라토스테네스의 체 | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[알고리즘] 👨‍🦳 에라토스테네스의 체 | choheeis">
+  <meta name="twitter:description" content="  동빈나 유튜브 영상을 참고하여 공부한 내용!👨‍🦳 에라토스테네스의 체란?에라토스테네스의 체는 소수(Prime Number)를 판별해주는 알고리즘이다.소수 란?소수는 ‘양의 약수를 두 개만 가지는 자연수’ 를 의미하는데 이 때, 모든 수의 공통적으로 포함되는 양의 약수는 1이 존...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-04/%EC%97%90%EB%9D%BC%ED%86%A0%EC%8A%A4%ED%85%8C%EB%84%A4%EC%8A%A4%EC%9D%98%EC%B2%B4">
+  <meta property="og:title" content="[알고리즘] 👨‍🦳 에라토스테네스의 체 | choheeis">
+  <meta property="og:description" content="  동빈나 유튜브 영상을 참고하여 공부한 내용!👨‍🦳 에라토스테네스의 체란?에라토스테네스의 체는 소수(Prime Number)를 판별해주는 알고리즘이다.소수 란?소수는 ‘양의 약수를 두 개만 가지는 자연수’ 를 의미하는데 이 때, 모든 수의 공통적으로 포함되는 양의 약수는 1이 존...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[알고리즘] 👨‍🦳 에라토스테네스의 체 | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-04/%EC%97%90%EB%9D%BC%ED%86%A0%EC%8A%A4%ED%85%8C%EB%84%A4%EC%8A%A4%EC%9D%98%EC%B2%B4">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[알고리즘] 👨‍🦳 에라토스테네스의 체">[알고리즘] 👨‍🦳 에라토스테네스의 체</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        3 APR 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    4 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <blockquote>
+  <p><a href="https://www.youtube.com/watch?v=5ypkoEgFdH8&amp;list=PLRx0vPvlEmdDHxCvAQS1_6XV4deOwfVrz&amp;index=24">동빈나 유튜브</a> 영상을 참고하여 공부한 내용!</p>
+</blockquote>
+
+<p><br /></p>
+
+<h1 id="-에라토스테네스의-체란">👨‍🦳 에라토스테네스의 체란?</h1>
+
+<p>에라토스테네스의 체는 소수(Prime Number)를 판별해주는 알고리즘이다.</p>
+
+<h2 id="소수-란"><strong>소수</strong> 란?</h2>
+
+<p>소수는 ‘양의 약수를 두 개만 가지는 자연수’ 를 의미하는데 이 때, 모든 수의 공통적으로 포함되는 양의 약수는 1이 존재하므로</p>
+
+<p>‘양의 약수를 두 개만 가지는 자연수’ 라는 말은 1과 자기 자신만을 약수로 갖는 수를 의미한다고 보면 된다!</p>
+
+<p>따라서 소수에는 2, 3, 5, 7, 11 … 등이 존재한다.</p>
+
+<h2 id="이러한-소수를-아주-많이-구해야하고-빠르게-구해야-할-때-사용되는-알고리즘이-에라토스테네스의-체-이다">이러한 소수를 아주 많이 구해야하고, 빠르게 구해야 할 때 사용되는 알고리즘이 <strong>에라토스테네스의 체</strong> 이다.</h2>
+
+<p>사실 소수를 찾는 알고리즘은 에라토스테네스의 체를 사용하지 않고도 아래와 같이 작성할 수 있다.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;iostream&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="c1">// 소수를 판별하는 함수 
+</span><span class="kt">bool</span> <span class="n">isPrimeNumber</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">){</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">a</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">a</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+			<span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>	
+	<span class="k">return</span> <span class="nb">true</span><span class="p">;</span>	<span class="c1">// 소수일경우  
+</span><span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+	<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+	<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="p">;</span>
+	
+	<span class="k">if</span><span class="p">(</span><span class="n">isPrimeNumber</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="nb">true</span><span class="p">){</span>
+		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"소수입니다"</span><span class="p">;</span>
+	<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"소수가 아닙니다"</span><span class="p">;</span> 
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이렇게 소수를 구할 수는 있지만 위 코드의 시간복잡도는 O(N) 이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/78375858-62f10500-7608-11ea-9fe5-5915694f84c6.PNG" alt="시간복잡도2" /></p>
+
+<p>모든 경우의 수를 다 돌면서 약수인지 아닌지를 판별하기 때문에 N의 크기가 커질수록 비효율적일 수 있다!</p>
+
+<p>위 코드의 시간 복잡도를 조금 더 빠르게 할 수 있는 방법들이 몇 가지 있는데 이에 대해서는 <a href="https://choheeis.github.io/newblog//articles/2020-10/%EC%86%8C%EC%88%98">또 다른 블로그 글 - 소수와 관련된 두 가지 알고리즘</a> 에 대해 읽어보면 알 수 있을 것이다.</p>
+
+<p><br /></p>
+
+<h2 id="그렇다면-대량의-소수를-한꺼번에-판별하고자-할-때-효율적인-알고리즘은">그렇다면 대량의 소수를 한꺼번에 판별하고자 할 때 효율적인 알고리즘은?</h2>
+
+<p>이 때 사용하는 것이 에라토스테네스의 체 라는 알고리즘이다.</p>
+
+<p><br /></p>
+
+<h1 id="-에라토스테네스의-체-작동-원리">👨‍🦳 에라토스테네스의 체 작동 원리</h1>
+
+<p>예를 들어, 1부터 25까지의 수 중에서 소수인 수는 어떤 수들인지를 판별해야 한다고 가정하자.</p>
+
+<p>그러면 일단 1부터 25를 배열에 모두 넣는다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/78376835-d3e4ec80-7609-11ea-97df-dc3356f16c32.PNG" alt="01" /></p>
+
+<p>위와 같이 2차원 배열을 만들어서 배열의 각 원소에 1부터 25까지의 수를 저장하였다.</p>
+
+<blockquote>
+  <p>표를 통해 시각적으로 알기 쉽도록 2차원 배열을 만든 것이다. 1차원 배열로 에라토스테네스의 체를 동작시켜도 상관 없다!</p>
+</blockquote>
+
+<p>그렇다면 이제부터 <strong>2부터 시작해서 특정 숫자의 배수에 해당하는 숫자들을 모두 지우면 된다.</strong> (1은 항상 소수가 아니기 때문에 1은 생각하지 않아도 된다.)</p>
+
+<p>먼저 2의 배수를 지워보자. (이 때, 자기 자신은 지우지 않는다!)</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/78377169-3a6a0a80-760a-11ea-884a-c8fc583e4c10.PNG" alt="02" /></p>
+
+<p>그 다음으로는 3의 배수를 지워보자.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/78377350-77360180-760a-11ea-979b-49c265a3a6f4.PNG" alt="03" /></p>
+
+<p>그 다음으로는 4의 배수를 지워야 하지만 이미 4가 지워져 있으므로 5의 배수를 지우면 된다.</p>
+
+<p>이런식으로 <strong>모든 숫자에 대해서 지워지지 않은 수 중에서 가장 작은 수의 배수를 지우면</strong> 다음과 같이 지워지지 않고 남아있는 숫자들이 있을 것이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/78378056-676aed00-760b-11ea-9e90-428b99cef90b.PNG" alt="04" /></p>
+
+<p>남아있는 수들만이 “소수” 이다.</p>
+
+<p><br /></p>
+
+<h1 id="-에라토스테네스의-체-코드-작성해보기">👨‍🦳 에라토스테네스의 체 코드 작성해보기</h1>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;iostream&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="c1">// 총 십만까지의 수 중에서 소수인 수 판별하기  
+</span><span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="mi">100001</span><span class="p">];</span> <span class="c1">// 인덱스 0은 사용하지 않음  
+</span>
+<span class="c1">// '소수를 판별하는 체' 라는 함수  
+</span><span class="kt">void</span> <span class="n">primeNumberSieve</span><span class="p">(){</span>
+	<span class="c1">// 배열 초기화  
+</span>	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">100000</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+	<span class="p">}</span>
+	
+	<span class="c1">// 지우기  
+</span>	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">100000</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="c1">// 이미 지워진 경우  
+</span>		<span class="k">if</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+		
+		<span class="c1">// 지워지지 않은 경우 자기자신을 제외한 수부터 배수 지우기  
+</span>		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">i</span> <span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="mi">100000</span> <span class="p">;</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="n">i</span><span class="p">){</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+			<span class="k">else</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>	<span class="c1">// 지우기 (0으로 저장) 
+</span>		<span class="p">}</span> 
+	<span class="p">}</span>
+	
+	<span class="c1">// 소수 출력하기 
+</span>	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">100000</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">){</span>
+			<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="sc">' '</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span> 
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+	<span class="n">primeNumberSieve</span><span class="p">();</span>
+<span class="p">}</span> 
+</code></pre></div></div>
+
+<p>위 코드를 실행시켜보면</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/78379468-6044de80-760d-11ea-958e-64eb8bd1a411.PNG" alt="05" /></p>
+
+<p>이와 같이 십만까지의 수 중에 소수인 수들이 출력된다!</p>
+
+<p>에라토스테네스의 체는 시간복잡도가 <strong>O(Nlog(logN))</strong> 으로 가장 빠르고 정확하게 소수를 구하는 알고리즘이다.</p>
+
+<p>시간복잡도가 왜 저렇게 되는지는 너무 까다롭기 때문에 그냥 가장 빠르다고만 알고 있어도 충분하다.</p>
+
+<p><br /></p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

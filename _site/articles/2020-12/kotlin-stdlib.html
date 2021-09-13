@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="1️⃣ 코틀린도 표준 라이브러리를 가지고 있다!✍🏻 kotlin 도큐먼트 - stdlib 를 참고하여 작성합니다.코틀린은 코틀린 언어로 개발할 때 필수적으로 사용되는 여러 함수나 자료구조들을 코틀린 표준 라이브러리(Kotlin Standard Library, kotlin stdli...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[Kotlin] 코틀린 표준 라이브러리(kotlin stdlib) | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[Kotlin] 코틀린 표준 라이브러리(kotlin stdlib) | choheeis">
+  <meta name="twitter:description" content="1️⃣ 코틀린도 표준 라이브러리를 가지고 있다!✍🏻 kotlin 도큐먼트 - stdlib 를 참고하여 작성합니다.코틀린은 코틀린 언어로 개발할 때 필수적으로 사용되는 여러 함수나 자료구조들을 코틀린 표준 라이브러리(Kotlin Standard Library, kotlin stdli...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-12/kotlin-stdlib">
+  <meta property="og:title" content="[Kotlin] 코틀린 표준 라이브러리(kotlin stdlib) | choheeis">
+  <meta property="og:description" content="1️⃣ 코틀린도 표준 라이브러리를 가지고 있다!✍🏻 kotlin 도큐먼트 - stdlib 를 참고하여 작성합니다.코틀린은 코틀린 언어로 개발할 때 필수적으로 사용되는 여러 함수나 자료구조들을 코틀린 표준 라이브러리(Kotlin Standard Library, kotlin stdli...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[Kotlin] 코틀린 표준 라이브러리(kotlin stdlib) | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-12/kotlin-stdlib">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[Kotlin] 코틀린 표준 라이브러리(kotlin stdlib)">[Kotlin] 코틀린 표준 라이브러리(kotlin stdlib)</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        12 DEC 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    1 min read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="1️⃣-코틀린도-표준-라이브러리를-가지고-있다">1️⃣ 코틀린도 표준 라이브러리를 가지고 있다!</h2>
+
+<p>✍🏻 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/">kotlin 도큐먼트 - stdlib</a> 를 참고하여 작성합니다.</p>
+
+<p>코틀린은 코틀린 언어로 개발할 때 필수적으로 사용되는 여러 함수나 자료구조들을 <strong>코틀린 표준 라이브러리(Kotlin Standard Library, kotlin stdlib)</strong> 로 제공한다.</p>
+
+<h2 id="2️⃣-패키지로-관리되는-코틀린-표준-라이브러리">2️⃣ 패키지로 관리되는 코틀린 표준 라이브러리</h2>
+
+<p>코틀린 표준 라이브러리 안에 구현되어 있는 다양한 함수나 자료구조들은 비슷한 것끼리 분류되어 <strong>폴더로 묶여 관리</strong> 되고 있다.</p>
+
+<p>이러한 폴더를 <strong>패키지(package)</strong> 라고 부른다.</p>
+
+<p><img width="731" alt="01" src="https://user-images.githubusercontent.com/31889335/101944234-bacc1b00-3c2f-11eb-8c3d-3d350e3c3a27.png" /></p>
+
+<p>위 그림에서 볼 수 있듯이, 여러 패키지들이 존재하고 패키지 이름은 ‘kotlin.~~’ 로 지어져있다.(위 그림에서 보여지는 패키지 외에도 다양한 패키지들이 있다.)</p>
+
+<p><strong>패키지 안에는 어떤 것들이 있을까?</strong></p>
+
+<p>예시로 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/">kotlin.collections</a> 라는 패키지를 살펴보자.</p>
+
+<p><img width="585" alt="02" src="https://user-images.githubusercontent.com/31889335/101944616-58274f00-3c30-11eb-8d7c-66f1453c4a30.png" /></p>
+
+<p>이 패키지에는 Iterable, Collection, List, Set, Map 같은 Collection 타입의 것들과 그와 관련된 확장 함수들이 구현되어 있다.</p>
+
+<p>따라서 코틀린으로 개발하면서 Collection 관련된 것을 사용해야 할 때는 이 패키지에 존재하는 것들을 불러다 사용하면 된다!</p>
+
+<p>이처럼 코틀린 표준 라이브러리에는 정말 무수한 함수와 자료구조들이 구현되어 있기 때문에 어떤 것들이 있는지 아는 것도 중요하고 각 함수나 자료구조의 사용법을 찾아내 적용하는 것도 중요하다!</p>
+
+<h1 id="끝">끝!</h1>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

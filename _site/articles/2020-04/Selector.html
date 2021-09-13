@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="⭐️ Selector를 이용해서 만들고 싶은 것?이렇게 별표를 누르면 노란색으로 표시되고 다시 한번 누르면 노란색 표시가 없어지는 뷰를 만들고 싶다!어떻게 만들까??⭐️ CheckedTextView 라는 것을 먼저 알아보자.CheckedTextView 공식 도큐먼트 을 읽어보면 C...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[안드로이드] ⭐️ Selector 만드는 나만의 라이브러리 | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[안드로이드] ⭐️ Selector 만드는 나만의 라이브러리 | choheeis">
+  <meta name="twitter:description" content="⭐️ Selector를 이용해서 만들고 싶은 것?이렇게 별표를 누르면 노란색으로 표시되고 다시 한번 누르면 노란색 표시가 없어지는 뷰를 만들고 싶다!어떻게 만들까??⭐️ CheckedTextView 라는 것을 먼저 알아보자.CheckedTextView 공식 도큐먼트 을 읽어보면 C...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-04/Selector">
+  <meta property="og:title" content="[안드로이드] ⭐️ Selector 만드는 나만의 라이브러리 | choheeis">
+  <meta property="og:description" content="⭐️ Selector를 이용해서 만들고 싶은 것?이렇게 별표를 누르면 노란색으로 표시되고 다시 한번 누르면 노란색 표시가 없어지는 뷰를 만들고 싶다!어떻게 만들까??⭐️ CheckedTextView 라는 것을 먼저 알아보자.CheckedTextView 공식 도큐먼트 을 읽어보면 C...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[안드로이드] ⭐️ Selector 만드는 나만의 라이브러리 | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-04/Selector">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[안드로이드] ⭐️ Selector 만드는 나만의 라이브러리">[안드로이드] ⭐️ Selector 만드는 나만의 라이브러리</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        15 APR 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    4 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="️-selector를-이용해서-만들고-싶은-것">⭐️ Selector를 이용해서 만들고 싶은 것?</h2>
+<hr />
+
+<p><img src="https://user-images.githubusercontent.com/31889335/79417268-7b8bf280-7fec-11ea-8e0d-df53fe8fe13c.PNG" alt="01" /></p>
+
+<p>이렇게 별표를 누르면 노란색으로 표시되고 다시 한번 누르면 노란색 표시가 없어지는 뷰를 만들고 싶다!</p>
+
+<p>어떻게 만들까??</p>
+
+<p><br /></p>
+
+<h2 id="️-checkedtextview-라는-것을-먼저-알아보자">⭐️ CheckedTextView 라는 것을 먼저 알아보자.</h2>
+<hr />
+
+<p><a href="https://developer.android.com/reference/android/widget/CheckedTextView">CheckedTextView 공식 도큐먼트</a> 을 읽어보면 CheckedTextView 라는 뷰가 어떤 것인지 알 수 있다.</p>
+
+<p>일단 CheckedTextView는</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/79417442-184e9000-7fed-11ea-832c-57fede7a3870.PNG" alt="02" /></p>
+
+<p>위에서 알 수 있듯이 API level 1 안에 추가되어 있는 뷰이다.</p>
+
+<p>즉, 엄청 오래 전부터 있던 뷰!</p>
+
+<blockquote>
+  <p>API level 에 관련된 도큐먼트 –&gt; <a href="https://developer.android.com/guide/topics/manifest/uses-sdk-element?hl=ko">여기</a></p>
+</blockquote>
+
+<p>이 CheckedTextView 라는 뷰의 상속계층을 보면 TextView 클래스 하위에 존재하는 것을 알 수 있다.</p>
+
+<p>즉, Check 관련 interface를 지원하는 확장된 TextView 클래스 라고 생각하면 된다!</p>
+
+<p>그럼 이제 CheckedTextView를 가지고 위와 같은 별모양 체크 표시 마크를 만들어보자!</p>
+
+<p><br /></p>
+
+<h2 id="️-checkedtextview-사용하기">⭐️ CheckedTextView 사용하기</h2>
+<hr />
+
+<p><a href="https://developer.android.com/reference/android/widget/CheckedTextView">CheckedTextView 공식 도큐먼트</a> 를 읽어보면 CheckedTextView 라는 클래스 안에 어떤 메소드들이 있는지를 알 수 있다.</p>
+
+<p>나와있는 public method들을 이용해서 코드상 CheckedTextView 뷰를 조작할 수 있다.</p>
+
+<p>그리고 문서를 더 읽어보면</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/79418501-c9eec080-7fef-11ea-89cf-00d5f94a4491.PNG" alt="03" /></p>
+
+<p>이렇게 CheckedTextView를 xml 상에서 작성할 때 사용할 수 있는 속성들이 어떤 것들이 있는지 알 수 있다.</p>
+
+<p>여러 속성들을 잘 읽어보고 필요한 속성을 적용시켜보자!</p>
+
+<p>그리고 CheckedTextView는 TextView를 상속하고 있으므로 xml 상에서 TextView에서 사용되는 속성들을 사용할 수 있다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/79418862-92ccdf00-7ff0-11ea-83ea-e5322ba10f0e.PNG" alt="04" /></p>
+
+<p>이런 xml 을 작성하면 다음과 같은 결과가 나오게 된다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/79418722-4a152600-7ff0-11ea-8434-4bdc9b4fb07f.PNG" alt="05" /></p>
+
+<p>이러한 CheckedTextView가</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/79417268-7b8bf280-7fec-11ea-8e0d-df53fe8fe13c.PNG" alt="01" /></p>
+
+<p>요러한 뷰를 만들 때 사용하는 이유는 뭘까?</p>
+
+<p>바로 다음에서 언급할 CheckedTextView 클래스가 가지고 있는 특별한 xml 속성과 public method 때문이다.</p>
+
+<p>먼저, CheckedTextView 가 제공하는 xml 속성 중</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/79418898-a710dc00-7ff0-11ea-99ec-a7b0114d376b.PNG" alt="06" /></p>
+
+<p>위와 같은 속성이 있다.</p>
+
+<p>이 속성을 사용하면 CheckedTextView 가 check가 된 상태인지 아닌지를 xml 상에서 초기화 해줄 수 있다!</p>
+
+<p>일단 이런 속성이 있다는 것을 염두해두고, 아주 좋은 메소드 하나를 알아보자.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/79419646-2c48c080-7ff2-11ea-9a03-f8ec51206ede.PNG" alt="07" /></p>
+
+<p>바로 이 toggle() 이라는 함수이다.</p>
+
+<p>이 함수는 CheckedTextView의 check 상태를 바꿔주는 함수이다.</p>
+
+<p>따.라.서</p>
+
+<p>맨 처음 CheckedTextView의 check 상태를 xml에서 정해준 후, 이 check 상태가 바껴야 할 때마다 코틀린 코드 상에서 toggle() 함수를 호출하면 되는 것이다!</p>
+
+<p>이런 CheckedTextView의 사용법을 알았으면 이제 Selector에 대해서 알아보자~!</p>
+
+<p><br /></p>
+
+<h2 id="️-selector-가-무엇이냐">⭐️ Selector 가 무엇이냐!</h2>
+<hr />
+
+<p><img src="https://user-images.githubusercontent.com/31889335/79434340-33c79400-8009-11ea-929a-47dd78696dc3.PNG" alt="08" /></p>
+
+<p>Selector라는 것을 알아보기 전에 위에서 보이는 목차를 봐보자.</p>
+
+<p>android developers 사이트의 가이드 부분을 보면 이와 같은 목차로 가이드 문서가 나뉘어져 있는데 그 중 <strong>앱 리소스(app resource)</strong> 라는 카테고리 안의 리소스 유형이라는 부분에는 <strong>드로어블(drawable)</strong> 이라는 것이 있다.</p>
+
+<blockquote>
+  <p>앱 리소스에 대한 내용은 <a href="https://choheeis.github.io/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/2020/04/16/AppResource.html">앱 리소스 포스팅</a> 에서 볼 수 있다!</p>
+</blockquote>
+
+<p>안드로이드 프로젝트에서 drawable 리소스로 분류되는 것들의 종류는 다양하다.</p>
+
+<p>어떤 것들이 drawable 리소스인지 알아보기 위해서는 <a href="https://developer.android.com/guide/topics/resources/drawable-resource">여기</a> 를 보면 알 수 있을 것이다.</p>
+
+<p><br /></p>
+
+<p>drawable 리소스로 분류되는 것들 중 <strong>state list(상태 목록)</strong> 이라는 것을 알아보면 Selector가 무엇인지 알 수 있을 것이다.</p>
+
+<p>state list(상태 목록) 은 <strong>객체(=뷰 객체)의 상태에 따라</strong> 여러 다른 이미지를 다르게 적용할 수 있도록 지원해주는 <strong>drawable 객체</strong> 이다.</p>
+
+<p>예를 들어, Button 은 눌러진 상태, 누르지 않은 상태 등 여러 상태를 중 하나의 상태에 존재한다.</p>
+
+<p><strong>Button의 상태에 따라 개발자가 다른 이미지를 사용해야 한다고 할 때 사용할 수 있는 drawable 객체가 state list 이다.</strong></p>
+
+<p>state list(상태 목록)은 여러 가지 상태 별로 적용될 것들을 <strong>리스트 형식</strong> 으로 나열할 수 있어서 상태 <strong>“목록(list)”</strong> 이라고 부른다.</p>
+
+<p><br /></p>
+
+<p>그렇다면 state list를 만드는 방법에 대해서 알아보자!</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/79457140-abf28180-802a-11ea-8d11-873393711600.PNG" alt="11" /></p>
+
+<p>일단 drawable 디렉토리 안에 xml 파일로 만들면 된다.</p>
+
+<p>그 다음</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/79457254-e2300100-802a-11ea-9d2f-b29060d53f96.PNG" alt="13" /></p>
+
+<p>이런 형식으로 코드를 작성해주면 된다.</p>
+
+<p>위 코드에서 <strong>&lt;item&gt;</strong> 은 특정 상태 동안 사용될 drawable을 정의하는 곳이다.</p>
+
+<p>따라서 여러 상태에 따라 각각 다른 drawable이 적용되어야 한다면 아래와 같이  여러 개의 &lt;item&gt; 을 추가로 작성해주면 된다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/79458077-41424580-802c-11ea-9ae1-5e4ddb4d8e7e.PNG" alt="14" /></p>
+
+<p>이 때, 알아두어야 할 것은!</p>
+
+<p><strong>state list는 객체의 현재 상태와 일치하는 첫 번째 &lt;\item&gt; 에 정의된 것대로 적용된다!</strong> 는 것이다.</p>
+
+<blockquote>
+  <p>위 코드의 &lt;item&gt; 외의 다른 코드의 의미는 <a href="https://developer.android.com/guide/topics/resources/drawable-resource">Android drawable Documentation</a> 에서 state list(상태 목록) 부분을 보면 알 수 있을 것이다.</p>
+</blockquote>
+
+<p>이렇게 정의한 state list를 뷰 객체에 적용시키려면</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/79457139-ab59eb00-802a-11ea-8ca2-5ba08412daf9.PNG" alt="12" /></p>
+
+<p>위와 같은 형식으로 상태 목록을 적용할 뷰 xml의 속성에 넣어주어야 한다.</p>
+
+<p>예를 들어, button.xml 이라는 파일에 정의한 state list를 Button 뷰 객체에 적용하기 위해서는 다음과 같이 xml 코드를 작성해주면 된다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/79458232-7e0e3c80-802c-11ea-87c6-c40a2e21d0bb.PNG" alt="15" /></p>
+
+<p><br /></p>
+
+<p>그렇다면 본격적으로</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/79417268-7b8bf280-7fec-11ea-8e0d-df53fe8fe13c.PNG" alt="01" /></p>
+
+<p>이러한 뷰를 만들어보자!</p>
+
+<p><br /></p>
+
+<h2 id="️-checkedtextview--state-list-사용해서-원하는-뷰-만들기">⭐️ CheckedTextView + State List 사용해서 원하는 뷰 만들기</h2>
+<hr />
+
+<p><img src="https://user-images.githubusercontent.com/31889335/79459173-d4c84600-802d-11ea-9824-5e8bb394f6cd.PNG" alt="18" /></p>
+
+<p>위와 같은 star_selector.xml 이라는 state list 파일을 drawable 폴더에 하나 만든다.</p>
+
+<p>이 state list에 있는 item들은 뷰 객체의 check 값이 true 일 때는 노란별을 적용시키는 item 한 개와 , false 일 때는 회색벽을 적용시키는 item 한 개 이다.</p>
+
+<p>그 다음 아래 코드와 같이 CheckedTextView를 만들고 위에서 만든 star_selector를 적용시킨다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/79459176-d5f97300-802d-11ea-8364-2d01dbfcb496.PNG" alt="16" /></p>
+
+<p>그리고 마지막으로 이 CheckedTextView에 클릭 리스너를 달고 toggle() 함수를 통해 누를때마다 true와 false가 바뀌도록 해주면 완성이다!</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/79459175-d560dc80-802d-11ea-98d0-7a4707129a9d.PNG" alt="17" /></p>
+
+<p><br /></p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/79541664-2bcd2a00-80c5-11ea-9a56-09f2ebae32da.gif" alt="selector" /></p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

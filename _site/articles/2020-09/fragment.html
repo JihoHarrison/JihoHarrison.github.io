@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="안드로이드 앱 개발을 하면서 Fragment를 많이 사용하지만 아직 제대로 Fragment에 대해 공부를 해본 적이 없었다.Android Developer - Fragment 개요 문서를 읽어보면서 Fragment에 대해 알아보자.1️⃣ Fragment는 언제 처음 Android ...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[안드로이드] 🗒 Fragment의 디자인 철학과 라이프 사이클을 알아보자! | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[안드로이드] 🗒 Fragment의 디자인 철학과 라이프 사이클을 알아보자! | choheeis">
+  <meta name="twitter:description" content="안드로이드 앱 개발을 하면서 Fragment를 많이 사용하지만 아직 제대로 Fragment에 대해 공부를 해본 적이 없었다.Android Developer - Fragment 개요 문서를 읽어보면서 Fragment에 대해 알아보자.1️⃣ Fragment는 언제 처음 Android ...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-09/fragment">
+  <meta property="og:title" content="[안드로이드] 🗒 Fragment의 디자인 철학과 라이프 사이클을 알아보자! | choheeis">
+  <meta property="og:description" content="안드로이드 앱 개발을 하면서 Fragment를 많이 사용하지만 아직 제대로 Fragment에 대해 공부를 해본 적이 없었다.Android Developer - Fragment 개요 문서를 읽어보면서 Fragment에 대해 알아보자.1️⃣ Fragment는 언제 처음 Android ...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[안드로이드] 🗒 Fragment의 디자인 철학과 라이프 사이클을 알아보자! | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-09/fragment">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[안드로이드] 🗒 Fragment의 디자인 철학과 라이프 사이클을 알아보자!">[안드로이드] 🗒 Fragment의 디자인 철학과 라이프 사이클을 알아보자!</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        16 SEP 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    10 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <p>안드로이드 앱 개발을 하면서 Fragment를 많이 사용하지만 아직 제대로 Fragment에 대해 공부를 해본 적이 없었다.</p>
+
+<p><a href="https://developer.android.com/guide/components/fragments">Android Developer - Fragment 개요</a> 문서를 읽어보면서 Fragment에 대해 알아보자.</p>
+
+<h2 id="1️⃣-fragment는-언제-처음-android-플랫폼에-등장했고-왜-등장했을까">1️⃣ Fragment는 언제 처음 Android 플랫폼에 등장했고 왜 등장했을까?</h2>
+
+<p>Android가 프래그먼트라는 것을 처음 도입한 것은 Android 3.0(API 레벨 11)부터이다. Android 3.0은 허니콤이라는 이름으로 출시된 안드로이드 버전이고 2011년에 출시되었다.</p>
+
+<p>즉, 프래그먼트는 2011년부터 등장하여 꾸준히 업그레이드 된 녀석이다.</p>
+
+<p><strong>처음 프래그먼트가 Android 플랫폼에 도입된 이유</strong> 는 태블릿과 같은 큰 화면에서 더욱 유연한 UI 디자인을 지원하기 위해서였다.</p>
+
+<p>예를 들어, 기본 모바일 화면보다 화면 크기가 큰 태블릿에서 뉴스 앱을 실행시킨다고 가정해보자.</p>
+
+<p>이 뉴스 앱은 프래그먼트를 사용하여 구현되어 있다고 가정해보자.</p>
+
+<p>하나의 프래그먼트를 사용하여 왼쪽에 기사의 목록을 보여주고, 다른 하나의 프래그먼트를 사용해 오른쪽에는 기사 내용을 보여주도록 되어 있다고 상상해보자.</p>
+
+<p><img width="581" alt="02" src="https://user-images.githubusercontent.com/31889335/93320234-c932b280-f84b-11ea-9de9-4cda4288739a.png" /></p>
+
+<p>이 <strong>두 프래그먼트 모두 하나의 액티비티 위에서 양쪽으로 나란히 배치되어 나타나며 각 프래그먼트는 자신만의 생명 주기</strong> 를 가지고 있게 된다. 따라서 각자의 생명 주기 콜백 메소드를 사용하여 사용자 이벤트를 왼쪽 프래그먼트 따로 오른쪽 프래그먼트 따로 처리할 수 있다.</p>
+
+<p>만약 이 뉴스 앱이 프래그먼트를 사용하지 않았다면 기사의 목록을 보는데 액티비티 하나를 사용하고, 선택한 기사의 내용을 보는데 또 다른 액티비티를 사용해야 했을 것이다.</p>
+
+<p>프래그먼트를 사용함으로써 단 하나의 액티비티에서 두 가지 일을 한 번에 처리할 수 있게 된 셈이다!</p>
+
+<p>이 뉴스 앱 예시를 통해 프래그먼트의 장점을 느낄 수 있을 것이고, 왜 프래그먼트가 등장했는지도 이해되었을 것이다.</p>
+
+<h2 id="2️⃣-fragment를-사용할-때-지켜야하는-디자인-철학이-있다">2️⃣ Fragment를 사용할 때 지켜야하는 디자인 철학이 있다?</h2>
+
+<p>Fragment를 사용할 때 지켜야 하는 디자인 철학이 존재한다.</p>
+
+<ol>
+  <li>
+    <p><strong>각 프래그먼트는 모듈이라고 생각해야 한다. 즉, 재사용 가능한 화면을 구현할 때 사용해라.</strong></p>
+
+    <p>프래그먼트는 자체적인 생명 주기를 가지고 있고, 그 안에 자체적인 동작을 구현하기 때문에 서로 다른 액티비티에 올라가도 재사용이 가능하다.</p>
+
+    <p>따라서 다른 액티비티에서도 다시 사용할 것을 염두해 두고 프래그먼트를 구현하는 것이 좋다.</p>
+  </li>
+  <li>
+    <p><strong>하나의 프래그먼트를 다른 프래그먼트에서 직접 조작하는 것을 삼가야 한다.</strong></p>
+
+    <p>바로 위에서 프래그먼트를 모듈이라고 생각하라고 했는데 여기에 추가적으로 프래그먼트는 <strong>독립적인</strong> 모듈이다.</p>
+
+    <p>그렇기 때문에 두 개 이상의 프래그먼트가 서로 종속되거나 연관되어 있어서는 안된다.</p>
+
+    <p>프래그먼트의 이러한 독립적인 모듈 특성으로 인해 다음과 같은 상황에 대처할 수 있게 된다.</p>
+
+    <p>예를 들어, 태블릿에서 작동하는 뉴스앱과 일반 모바일 핸드폰에서 작동하는 뉴스앱이 있다고 가정해보자.</p>
+
+    <p>태블릿에서 작동하는 뉴스앱은 아래와 같다.</p>
+
+    <p><img width="581" alt="02" src="https://user-images.githubusercontent.com/31889335/93320234-c932b280-f84b-11ea-9de9-4cda4288739a.png" /></p>
+
+    <p>Activity A 라는 하나의 액티비티 안에 기사 목록을 보여주는 프래그먼트와 기사 내용을 보여주는 프래그먼트를 나란히 배치된 모습이다.</p>
+
+    <p>반면 일반 모바일 핸드폰에서 뉴스앱이 작동한다면 화면이 어떻게 구현될까?</p>
+
+    <p>일반 모바일 핸드폰은 태블릿보다 화면 크기가 작기 때문에 하나의 액티비티 안에 기사의 목록도 보여주고, 기사 내용도 보여주는 것은 너무 투머치일 것이다.</p>
+
+    <p>따라서 일반 모바일 핸드폰 뉴스앱에서는 아래와 같이 UI를 구성할 것이다.</p>
+
+    <p><img width="330" alt="03" src="https://user-images.githubusercontent.com/31889335/93443580-4bce7700-f90b-11ea-9bc4-a567536b3a8f.png" /></p>
+
+    <p>Activity A 라는 액티비티에 뉴스 목록을 보여주는 프래그먼트를 배치하고, 또 다른 액티비티인 Activity B 라는 액티비티에 뉴스 내용을 보여주는 프래그먼트를 배치할 것이다.</p>
+
+    <p>따라서 Activity A 에서 뉴스 목록을 통해 하나의 뉴스를 클릭하면 Activity B 로 전환되어 해당 뉴스의 내용을 볼 수 있을 것이다.</p>
+
+    <p>즉, 하나의 같은 앱이라도 디바이스의 크기 및 종료에 따라 UI가 다르게 구성될 수 있는 것이다.</p>
+
+    <p>그렇기 때문에 목록을 보여주는 프래그먼트와 뉴스 내용을 보여주는 프래그먼트는 서로 독립적이여야 한다.</p>
+  </li>
+</ol>
+
+<h2 id="3️⃣-fragment만의-생명-주기와-꼭-구현해야-하는-3가지-생명-주기">3️⃣ Fragment만의 생명 주기와 꼭 구현해야 하는 3가지 생명 주기</h2>
+
+<p>프래그먼트는 자신만의 생명주기를 가지고 있다. Activity의 생명주기와 비슷한 주기들도 있어서 잘 구분할 수 있어야 한다.</p>
+
+<p><strong>프래그먼트가 올려져 있는 액티비티가 실행 중일 때</strong> 프래그먼트의 생명 주기는 다음 그림과 같다!</p>
+
+<p><img width="271" alt="04" src="https://user-images.githubusercontent.com/31889335/93446835-a3211700-f90c-11ea-872f-2a95f0aad121.png" /></p>
+
+<p>실제로 프래그먼트를 구현할 때는 위 그림의 모든 생명 주기에 대한 콜백 메소드를 구현할 필요는 없지만 최소한 <strong>onCreate()</strong>, <strong>onCreateView()</strong>, <strong>onPause()</strong> 콜백 메소드는 구현해야 한다.</p>
+
+<ol>
+  <li>
+    <p><strong><a href="https://developer.android.com/reference/androidx/fragment/app/Fragment#onCreate(android.os.Bundle)">onCreate()</a></strong></p>
+
+    <p>이 콜백 메소드는 초기의 프래그먼트가 생성될 때 시스템에서 호출하는 메소드이다.</p>
+
+    <p>프래그먼트가 생성되어 onCreate() 콜백 메소드가 호출되는 순간들은 <strong>처음 프래그먼트가 생성될 때</strong>, <strong>프래그먼트가 일시 정지 되었다가 재개될 때</strong>, <strong>프래그먼트가 중단되었다가 재개될 때</strong> 이다.</p>
+
+    <p>따라서 onCreate() 콜백 메소드는 프래그먼트를 구성하는 요소 중 프래그먼트가 일시 정지되거나 중단되었다가 다시 재개되었을 때 유지되어야 하는 요소들을 초기화시켜주는 용도로 사용된다.</p>
+
+    <p>여기서 프래그먼트가 일시 정지되는 경우와 중단되는 경우의 차이는 조금 이따가 알아볼 것이므로 일단 넘어가자.</p>
+  </li>
+  <li>
+    <p><strong><a href="https://developer.android.com/reference/androidx/fragment/app/Fragment#onCreateView(android.view.LayoutInflater,%20android.view.ViewGroup,%20android.os.Bundle)">onCreateView()</a></strong></p>
+
+    <p>이 콜백 메소드는 해당 프래그먼트가 자신의 UI를 처음으로 그릴 시간이 되면 시스템에서 호출하는 메소드이다.</p>
+
+    <p>앞서 예시로 들었던 뉴스 앱을 기억해보면 뉴스 목록을 나타내는 프래그먼트와 뉴스 내용을 나타내는 프래그먼트가 존재했었다.</p>
+
+    <p>이 두 프래그먼트는 자신이 올라가있는 Activity UI와 독립된 자신만의 UI를 각각 가지고 있었다.</p>
+
+    <p>이 때 두 프래그먼트가 Activity UI와 독립된 각자의 레이아웃을 그릴 순간이 되면 onCreateView() 콜백 메소드를 호출하는 것이다.</p>
+
+    <p>이 콜백 메소드의 반환값은 Fragment의 레이아웃의 root View 객체이다. 만약 해당 프래그먼트에서 UI를 제공하지 않는 경우라면 null 을 반환하면 된다.</p>
+
+    <p>레이아웃의 root 뷰를 반환하기 위해 XML에 정의된 레이아웃 resource 들을 inflate 하는 작업이 필요하다.</p>
+
+    <p>onCreateView() 콜백 메소드는 inflate 작업을 용이하게 하기 위해 <strong>LayoutInflater 객체</strong> 를 첫 번째 매개변수로 제공하고 있다.</p>
+
+    <p><img width="477" alt="06" src="https://user-images.githubusercontent.com/31889335/99402366-9fba0400-292c-11eb-821e-2c94478ad3e8.png" /></p>
+
+    <p>따라서 onCreateView() 콜백 메소드를 구현할 때 첫 번째 매개변수로 제공되는 LayoutInflater 객체를 사용해 쉽게 레이아웃을 inflate 하면 된다!</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">class</span> <span class="nc">ExampleFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
+
+     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateView</span><span class="p">(</span>
+             <span class="n">inflater</span><span class="p">:</span> <span class="n">LayoutInflater</span><span class="p">,</span>
+             <span class="n">container</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">?,</span>
+             <span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?</span>
+     <span class="p">):</span> <span class="n">View</span> <span class="p">{</span>
+         <span class="c1">// Inflate the layout for this fragment
+</span>         <span class="k">return</span> <span class="n">inflater</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">example_fragment</span><span class="p">,</span> <span class="n">container</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
+     <span class="p">}</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>onCreateView() 콜백 메소드의 두 번째 매개변수로 제공되는 <strong>ViewGroup</strong> 은 해당 Fragment가 올려지는 Activity로부터의 상위 ViewGroup이다. 이 ViewGroup 안에 프래그먼트의 레이아웃이 삽입된다.</p>
+
+    <p>onCreateView() 콜백 메소드는 반드시 레이아웃을 inflate 하는 용도로만 사용하고, 그 외의 로직은 onCreateView() 메소드가 return 된 직후에 바로 실행되는 <strong><a href="https://developer.android.com/reference/android/app/Fragment#onViewCreated(android.view.View,%20android.os.Bundle)">onViewCreated()</a></strong> 콜백 메소드에 작성하길 권장한다고 한다.</p>
+
+    <p>onViewCreated() 메소드의 매개변수로 onCreateView() 메소드에서 return한 root View 객체를 전달하기 때문에 inflate 외의 다른 작업들을 onViewCreated() 안에서 할 수 있는 것이다.</p>
+
+    <p>또, Fragment 라이프 사이클 그림에서는 onViewCreated() 메소드가 없기 때문에 ‘이것도 수명주기인가? 없어진 수명주기인가?’ 라고 생각할 수 있지만 그림에 없는 수명 주기들도 <a href="https://developer.android.com/reference/androidx/fragment/app/Fragment?hl=ko">Fragment</a> 클래스에 존재하는 수명 주기 메소드이며 다만 수명 주기 흐름에 큰 주제를 차지하는 녀석들이 아니여서 그림에 표시하지 않은 것이다!</p>
+  </li>
+  <li>
+    <p><strong><a href="https://developer.android.com/reference/androidx/fragment/app/Fragment#onPause()">onPause()</a></strong></p>
+
+    <p>이 콜백 메소드는 사용자가 해당 프래그먼트를 떠났을 때 시스템에서 호출하는 메소드이다.</p>
+
+    <p>사용자가 프래그먼트를 떠났다는 것의 의미는 프래그먼트가 소멸(destroy)되었다는 것이 아니다.</p>
+
+    <p>다른 액티비티가 가장 앞에 있어 사용자의 포커스를 받고 있는 상태면서 이 프래그먼트를 가지고 있는 액티비티도 여전히 화면에 조금이라도 표시되고 있는 상태를 의미한다.</p>
+
+    <p>예를 들어, 가장 앞에서 포커스되고 있는 액티비티가 투명한 색을 가지고 있거나 화면의 전체를 덮지 않고 있어 해당 프래그먼트를 가지고 있는 액티비티가 뒤에 보이는 경우 onPause() 콜백 메소드가 호출된다.</p>
+
+    <p>따라서 <strong>‘일시정지’</strong> 상태라고 생각하면 된다.</p>
+
+    <p>onPause인 경우에는 두 가지 가능성이 있다. 사용자가 해당 프래그먼트를 잠깐 떠났다가 다시 되돌아 올 수도 있고, 아예 돌아오지 않을 수도 있다.</p>
+
+    <p>따라서 onPause() 콜백 메소드에서는 현재 사용자가 세션을 넘어서도 지속되어야 하는 값들을 저장하거나 커밋해주는 코드를 구현해야 한다. 왜냐하면 사용자가 아예 돌아오지 않을 가능성도 있기 때문이다.</p>
+  </li>
+</ol>
+
+<p>이렇게 프래그먼트를 생성했을 때 최소한으로 구현해야 하는 3가지 콜백 메소드들을 알아보았다.</p>
+
+<h2 id="4️⃣-fragment-만들기">4️⃣ Fragment 만들기</h2>
+
+<p>위 3️⃣번 내용을 통해 Fragment에서 꼭 구현해야 하는 3가지 생명 주기 콜백 메소드에 대해 알아보았다.</p>
+
+<p>그럼 이제 Fragment를 만들어보자.</p>
+
+<p>Fragment를 만들기까지는 3단계가 있다고 생각하면 쉽다.</p>
+
+<ol>
+  <li>
+    <p><strong>XML 파일상에서 Activity에 Fragment 배치하기</strong></p>
+  </li>
+  <li>
+    <p><strong>Fragment 클래스 만들기</strong></p>
+  </li>
+  <li>
+    <p><strong>onCreateView() 콜백 메소드 구현하여 Fragment 레이아웃의 root 반환하기</strong></p>
+  </li>
+</ol>
+
+<p>이 순서대로 Fragment를 만들어보자!</p>
+
+<ol>
+  <li>
+    <p><strong>XML 파일상에서 Activity에 Fragment 배치하기</strong></p>
+
+    <p>뉴스 앱을 예시로 들 때 보았던 것처럼 Fragment는 일반적으로 어떤 Activity 위에 올라가서 존재하는 경우가 대부분이다.</p>
+
+    <p>따라서 Activity 레이아웃 안에 Fragment를 추가해줘야 한다.</p>
+
+    <p>Acitivity 레이아웃 안에 Fragment를 추가하는 방법은 2가지 방법이 있다.</p>
+
+    <p><strong>XML 상에서 추가해주는 방법</strong> 이 있고 <strong>Java(Kotlin) 코드로 추가해주는 방법</strong> 이 있다.</p>
+
+    <p>XML 상에서 추가해주는 방법이 개인적으로 더 쉬운 것 같아서 이곳에 소개하고 코드로 추가해주는 방법은 링크만 제시할 것이다.</p>
+
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+ <span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+     <span class="na">android:orientation=</span><span class="s">"horizontal"</span>
+     <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+     <span class="na">android:layout_height=</span><span class="s">"match_parent"</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;fragment</span> <span class="na">android:name=</span><span class="s">"com.example.news.ArticleListFragment"</span>
+             <span class="na">android:id=</span><span class="s">"@+id/list"</span>
+             <span class="na">android:layout_weight=</span><span class="s">"1"</span>
+             <span class="na">android:layout_width=</span><span class="s">"0dp"</span>
+             <span class="na">android:layout_height=</span><span class="s">"match_parent"</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;fragment</span> <span class="na">android:name=</span><span class="s">"com.example.news.ArticleReaderFragment"</span>
+             <span class="na">android:id=</span><span class="s">"@+id/viewer"</span>
+             <span class="na">android:layout_weight=</span><span class="s">"2"</span>
+             <span class="na">android:layout_width=</span><span class="s">"0dp"</span>
+             <span class="na">android:layout_height=</span><span class="s">"match_parent"</span> <span class="nt">/&gt;</span>
+ <span class="nt">&lt;/LinearLayout&gt;</span>
+</code></pre></div>    </div>
+
+    <p>위 xml 코드는 어떤 Acitivity의 xml 코드에 &lt;fragment&gt; 라는 뷰 태그를 사용해서 2개의 Fragment를 추가한 모습이다.</p>
+
+    <p>&lt;fragment&gt; 는 android:name 이라는 속성을 갖고 있는데 이 속성을 통해 해당 Fragment 뷰 태그가 어떤 Fragment 클래스를 인스턴스화 하는지 지정해줘야 한다.</p>
+
+    <p>Fragment 클래스에 구현된 onCreateView() 콜백 메소드의 반환값인 root View가 &lt;fragment&gt; 뷰 태그 자리에 곧바로 삽입된다.</p>
+
+    <p>두 번째 방법인 코드를 통해 Activity에 추가하는 방법은 <a href="https://developer.android.com/guide/components/fragments#Adding">여기</a> 에서 확인할 수 있다.</p>
+  </li>
+  <li>
+    <p><strong>Fragment 클래스 만들기</strong></p>
+
+    <p>Fragment 클래스는 Fragment 라는 이름의 클래스를 상속받는 클래스를 만듬으로써 생성 가능하다.</p>
+
+    <p><img width="325" alt="05" src="https://user-images.githubusercontent.com/31889335/99402358-9df04080-292c-11eb-98b0-835698593e58.png" /></p>
+
+    <p>Fragment 클래스는 1번 과정에서 android:name 이라는 속성으로 지정해준 클래스와 동일하다.</p>
+
+    <p>쉬운 방법으로는 Android Studio의 Fragment 생성하기 기능을 사용하면 된다.</p>
+
+    <p><img width="762" alt="07" src="https://user-images.githubusercontent.com/31889335/99404510-10fab680-292f-11eb-9f4c-2ff9769f6975.png" /></p>
+
+    <p>상속받은 Fragment라는 클래스에는 위에서 배웠던 3가지 Fragment 생명 주기 메소드를 포함한 여러 생명 주기 콜백 메소드들이 Fragment 클래스의 public method로 구현되어 있다.</p>
+
+    <p>또 프래그먼트 생명 주기 메소드 외의 다양한 메소드들도 구현되어 있다.</p>
+
+    <p>따라서 override 하여 필요한 생명 주기 콜백 메소드 및 여러 메소드를 구현하면 된다.</p>
+  </li>
+  <li>
+    <p><strong>onCreateView() 콜백 메소드 구현하여 Fragment 레이아웃의 root 반환하기</strong></p>
+
+    <p>위에서 알아본 내용 중 onCreateView() 콜백 메소드가 무엇인지에 대해 알아본 것을 기반으로 onCreateView() 콜백 메소드가 Fragment 레이아웃의 root를 반환하도록 하면 된다.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="kd">class</span> <span class="nc">ExampleFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
+
+         <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateView</span><span class="p">(</span>
+                 <span class="n">inflater</span><span class="p">:</span> <span class="n">LayoutInflater</span><span class="p">,</span>
+                 <span class="n">container</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">?,</span>
+                 <span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?</span>
+         <span class="p">):</span> <span class="n">View</span> <span class="p">{</span>
+             <span class="c1">// Inflate the layout for this fragment
+</span>             <span class="k">return</span> <span class="n">inflater</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">example_fragment</span><span class="p">,</span> <span class="n">container</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
+         <span class="p">}</span>
+     <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>이와 같은 3가지 과정을 통해 Fragment를 생성하여 사용할 수 있다!</p>
+
+<h2 id="5️⃣-fragment-의-3가지-상태에-따른-수명-주기-콜백-메소드">5️⃣ Fragment 의 3가지 상태에 따른 수명 주기 콜백 메소드</h2>
+
+<p>그렇다면 이제 앞에서 알아본 onCreate(), onCreateView(), onPause() 콜백 메소드 외의 다른 프래그먼트 수명 주기 콜백 메소드를 알아보자.</p>
+
+<p>✍🏻 <a href="https://developer.android.com/guide/components/fragments#Lifecycle">Fragment Life Cycle 도큐먼트</a> 를 참고하여 작성합니다.</p>
+
+<p>프래그먼트는 액티비티와 동일하게 <strong>3가지 상태(state)</strong> 로 존재한다.</p>
+
+<p><img width="257" alt="08" src="https://user-images.githubusercontent.com/31889335/99815549-cf1b7b80-2b8d-11eb-90c8-c51bc38e05ae.png" /></p>
+
+<p>위 그림에서 볼 수 있듯이, 프래그먼트의 콜백 메소드에는 액티비티의 3가지 상태인 <strong>Resumed</strong>, <strong>Paused</strong>, <strong>Stopped</strong> 와 대응하는 메소드가 존재한다.</p>
+
+<p>각 상태는 어떤 상태인지 알아보자.</p>
+
+<ul>
+  <li>
+    <p><strong>Resumed(재개됨)</strong></p>
+
+    <p>실행중인 액티비티 위에 프래그먼트가 표시되는 상태</p>
+  </li>
+  <li>
+    <p><strong>Paused(일시정지됨)</strong></p>
+
+    <p>다른 액티비티가 포그라운드에서 포커스를 가지고 있지만, 이 프래그먼트가 있는 액티비티도 표시되고 있는 상태</p>
+
+    <p>예 ) 포그라운드의 액티비티가 부분적으로 투명하거나 전체 화면을 덮고 있지 않은 경우</p>
+  </li>
+  <li>
+    <p><strong>Stopped(정지됨)</strong></p>
+
+    <p>프래그먼트가 보이지 않는 상태</p>
+
+    <p>예 ) 해당 프래그먼트를 가지고 있는 호스트 액티비티가 정지되었거나 프래그먼트가 액티비티에서 제거되었지만 백 스택에 추가된 경우</p>
+  </li>
+</ul>
+
+<p>위 3가지 상태는 프래그먼트에서 onResume(), onPause(), onStop() 이라는 콜백 메소드를 통해 구현된다.</p>
+
+<p>또한 위 3가지 상태는 액티비티의 생명 주기에 직접적인 영향을 받는 상태이기 때문에 액티비티에서 onPause() 콜백 메소드가 호출되었다면 이 액티비티 위에 올려져있는 모든 프래그먼트의 onPause() 콜백 메소드가 호출된다.</p>
+
+<h2 id="6️⃣-프래그먼트-만의-ui를-빌드하고-소멸시키기-위해-존재하는-콜백-메소드">6️⃣ 프래그먼트 만의 UI를 빌드하고 소멸시키기 위해 존재하는 콜백 메소드</h2>
+
+<p>✍🏻 <a href="https://developer.android.com/guide/components/fragments#CoordinatingWithActivity">프래그먼트 UI 관련 수명 주기 도큐먼트</a> 를 참고하여 작성합니다.</p>
+
+<p>프래그먼트는 액티비티 위에 올려져서 동작하기 때문에 액티비티의 상태에 직접적인 영향을 받지만 액티비티 UI와 독립된 프래그먼트만의 UI를 가지고 있다.</p>
+
+<p>따라서 프래그먼트만의 UI를 빌드하고 소멸시키기 위한 용도의 수명 주기 콜백 메소드도 존재한다.</p>
+
+<ul>
+  <li>
+    <p><strong>onAttach()</strong></p>
+
+    <p><img width="338" alt="09" src="https://user-images.githubusercontent.com/31889335/99817594-7a2d3480-2b90-11eb-9b54-856b12e7aaee.png" /></p>
+
+    <p>위 그림처럼 onAttach() 콜백 메소드는 액티비티가 Created(생성됨) 상태일 때 호출되는 메소드이다.</p>
+
+    <p>어떤 액티비티가 프래그먼트를 가지고 있다면 해당 액티비티에 올라가 있는 모든 프래그먼트에서는 onAttach() 콜백 메소드가 호출된다.</p>
+
+    <p>onAttach() 콜백 메소드는 액티비티에 프래그먼트가 <strong>처음으로 붙여질 때</strong> 호출되는 메소드라고 생각하면 쉽다.</p>
+
+    <p><a href="https://developer.android.com/reference/androidx/fragment/app/Fragment#onAttach(android.content.Context)">onAttach() 콜백 메소드 도큐먼트</a> 를 보면 onAttach() 콜백 메소드의 원형을 볼 수 있다.</p>
+
+    <p><img width="713" alt="10" src="https://user-images.githubusercontent.com/31889335/99818079-1c4d1c80-2b91-11eb-8be2-29fdda61ea6b.png" /></p>
+
+    <p>매개변수로 Context 라는 것이 전달되는데 프래그먼트가 붙여지는 대상인 Activity가 전달된다고 생각하면 된다.</p>
+
+    <blockquote>
+      <p>Context는 따로 공부하자..!</p>
+    </blockquote>
+  </li>
+  <li>
+    <p><strong>onCreateView()</strong></p>
+
+    <p>이 포스팅을 맨 처음부터 읽었다면 onCreateView()에 대해서는 이미 알고 있을 것이다.</p>
+
+    <p>패쓰!</p>
+  </li>
+  <li>
+    <p><strong>onActivityCreated()</strong></p>
+
+    <p><a href="https://developer.android.com/reference/androidx/fragment/app/Fragment#onActivityCreated(android.os.Bundle)">onActivityCreated() 콜백 메소드 도큐먼트</a>를 읽어보면 이 메소드는 현재 Android Platform에서 <strong>비추천(deprecated)</strong> 하는 메소드인 것을 알 수 있다.</p>
+
+    <p>이 메소드는 액티비티의 onCreate() 콜백 메소드가 반환될 때 호출된다.</p>
+  </li>
+  <li>
+    <p><strong>onDestroyView()</strong></p>
+
+    <p><img width="355" alt="11" src="https://user-images.githubusercontent.com/31889335/99820280-e3fb0d80-2b93-11eb-9a95-1a104e44f647.png" /></p>
+
+    <p>이 메소드는 onCreatView() 콜백 메소드에 의해 그려진 UI가 프래그먼트에서 떨어질 때 호출되는 콜백 메소드이다.</p>
+
+    <p>프래그먼트만의 UI가 프래그먼트에서 제거되고 있는 중일 때 호출되는 콜백 메소드이다.</p>
+  </li>
+  <li>
+    <p><strong>onDetach()</strong></p>
+
+    <p>이 메소드는 프래그먼트가 액티비티에서 떨어질 때 호출되는 메소드이다.</p>
+  </li>
+</ul>
+
+<p>이렇게 액티비티의 영향을 받는 동안의 프래그먼트의 수명 주기들을 알아보았다.</p>
+
+<h1 id="끝">끝!</h1>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

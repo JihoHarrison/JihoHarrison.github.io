@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="ViewPager2라는 것이 Jetpack에 속해 출시되었다! (2019년 2월 출시)기존의 ViewPager로 만든 화면 슬라이드는 ViewPager 구현하는 이전 포스팅 에서 볼 수 있다.ViewPager2는 기존의 ViewPager와 어떤 점이 다른지 살펴보자!0️⃣ View...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[안드로이드] 🗺 ViewPager2로 화면 슬라이드 만드는 나만의 라이브러뤼~ | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[안드로이드] 🗺 ViewPager2로 화면 슬라이드 만드는 나만의 라이브러뤼~ | choheeis">
+  <meta name="twitter:description" content="ViewPager2라는 것이 Jetpack에 속해 출시되었다! (2019년 2월 출시)기존의 ViewPager로 만든 화면 슬라이드는 ViewPager 구현하는 이전 포스팅 에서 볼 수 있다.ViewPager2는 기존의 ViewPager와 어떤 점이 다른지 살펴보자!0️⃣ View...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-08/ViewPager2">
+  <meta property="og:title" content="[안드로이드] 🗺 ViewPager2로 화면 슬라이드 만드는 나만의 라이브러뤼~ | choheeis">
+  <meta property="og:description" content="ViewPager2라는 것이 Jetpack에 속해 출시되었다! (2019년 2월 출시)기존의 ViewPager로 만든 화면 슬라이드는 ViewPager 구현하는 이전 포스팅 에서 볼 수 있다.ViewPager2는 기존의 ViewPager와 어떤 점이 다른지 살펴보자!0️⃣ View...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[안드로이드] 🗺 ViewPager2로 화면 슬라이드 만드는 나만의 라이브러뤼~ | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-08/ViewPager2">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[안드로이드] 🗺 ViewPager2로 화면 슬라이드 만드는 나만의 라이브러뤼~">[안드로이드] 🗺 ViewPager2로 화면 슬라이드 만드는 나만의 라이브러뤼~</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        12 AUG 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    8 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <p>ViewPager2라는 것이 Jetpack에 속해 출시되었다! (2019년 2월 출시)</p>
+
+<p>기존의 ViewPager로 만든 화면 슬라이드는 <a href="https://choheeis.github.io/newblog//articles/2020-03/ViewPager">ViewPager 구현하는 이전 포스팅</a> 에서 볼 수 있다.</p>
+
+<p>ViewPager2는 기존의 ViewPager와 어떤 점이 다른지 살펴보자!</p>
+
+<p><br /></p>
+
+<h2 id="0️⃣-viewpager-vs-viewpager2">0️⃣ <strong>ViewPager</strong> vs <strong>ViewPager2</strong></h2>
+
+<p>ViewPager2는 왜 출시되었고, 기존의 ViewPager과 어떤 점에서 다른지 <a href="https://developer.android.com/training/animation/vp2-migration">ViewPager에서 ViewPager2로 이전하기 문서</a> 를 보고 알아보자!</p>
+
+<blockquote>
+  <p><a href="https://www.youtube.com/watch?v=lAP6cz1HSzA">ViewPager2 소개 유튜브 영상</a> 를 보면 더욱 빠르게 ViewPager2에 대해서 알 수 있을 것이다!</p>
+</blockquote>
+
+<p>ViewPager2는 기존의 ViewPager 라이브러리에 몇 가지 기능을 추가하여 출시된, <strong>화면을 슬라이드하는 애니메이션</strong> 이 구현되어있는 안드로이드 Jetpack 컴포넌트이다.</p>
+
+<p>기존의 ViewPager 라이브러리를 사용하던 개발자들은 여러 불편한 점을 제기하였고, 이에 구글은 조금 더 다양한 슬라이드 애니메이션 기능이 있는 ViewPager2를 출시한 것이다.</p>
+
+<p>따라서 앞으로 구글은 ViewPager2만을 개발 지원 및 유지 보수할 것이라고 하므로 기존에 사용하던 ViewPager를 ViewPager2로 이전할 필요가 있다!</p>
+
+<p>이제 ViewPager2만이 가지는 기능에 대해서 알아보자.</p>
+
+<ol>
+  <li>
+    <p><strong>세로 방향 지원</strong></p>
+
+    <p>ViewPager2는 세로 방향으로 슬라이드하는 애니메이션도 지원한다.</p>
+
+    <p>세로 방향으로 슬라이드하는 방법은 <a href="https://developer.android.com/training/animation/vp2-migration">ViewPager에서 ViewPager2로 이전하기 문서</a> 에 잘 나와있으니 참고하도록 하자!</p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p><strong>오른쪽에서 왼쪽지원</strong></p>
+
+    <p>우리나라는 책을 읽을 때 왼쪽에서 오른쪽으로 읽는 문화가 있기 때문에 ViewPager가 TabLayout과 연동되는 경우 각 Tab들의 순서는 왼쪽에서 오른쪽으로 이동하도록 되어있다.</p>
+
+    <p><img width="328" alt="02" src="https://user-images.githubusercontent.com/31889335/90099651-f0422400-dd75-11ea-824b-48c0ca38482f.png" /></p>
+
+    <p>위 사진처럼 Tab의 숫자들이 왼쪽에서 오른쪽으로 증가하는 형식이라는 의미이다!</p>
+
+    <p>하지만 우리나라 외의 다른 나라에는 오른쪽에서 왼쪽으로 읽는 문화도 있기 때문에 이런 나라에서는 왼쪽에서 오른쪽으로 증가하는 UI가 익숙하지 않고 어색하다고 느낄 수 있을 것이다.</p>
+
+    <p>ViewPager2에서는 이러한 불편함을 개선하여 TabLayout과 연동시킬 경우 오른쪽에서 왼쪽으로 증가하는 모션이 추가되었다.</p>
+
+    <p><img width="231" alt="03" src="https://user-images.githubusercontent.com/31889335/90101709-2b465680-dd7a-11ea-928b-77bde97718a2.png" /></p>
+
+    <p>오른쪽에서 왼쪽으로 증가하는 기능을 사용하는 방법도 <a href="https://developer.android.com/training/animation/vp2-migration">ViewPager에서 ViewPager2로 이전하기 문서</a> 에 잘 나와있으니 참고하자!</p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p><strong>수정 가능한 Fragment Collection 지원</strong></p>
+
+    <p>ViewPager2는 수정 가능한 Fragment Collection 기능을 통해 페이징을 지원하며 기본 Collection이 변경되면 notifyDatasetChanged() 를 호출하여 UI를 업데이트 해준다.</p>
+
+    <blockquote>
+      <p>요 부분은 개인적으로 잘 이해가 안되어 짧게 마무리 하고 후에 더 공부를 해야겠다!</p>
+    </blockquote>
+  </li>
+  <li>
+    <p><strong>DiffUtil</strong></p>
+
+    <p>ViewPager2는 RecyclerView 를 기반으로 빌드되므로 DiffUtil이라는 유틸리티 클래스에 엑세스할 수 있다.</p>
+
+    <p>따라서 ViewPager2 객체는 RecyclerView 클래스의 notifyDatasetChanged()를 활용할 수 있다.</p>
+
+    <blockquote>
+      <p>DiffUtil 이라는 클래스에 대해서 더 찾아봐야할 것 같다!</p>
+    </blockquote>
+  </li>
+</ol>
+
+<p>이렇게 4가지 정도의 기능이 ViewPager2에 추가되었다.</p>
+
+<p>이제부터 본격적으로 ViewPager2를 사용하여 화면 슬라이드 기능을 구현하는 방법에 대해서 알아보자.</p>
+
+<p><br /></p>
+
+<h2 id="1️⃣-종속성-추가하기">1️⃣ 종속성 추가하기</h2>
+
+<p>ViewPager2는 Jetpack 컴포넌트이므로 사용하기 위해 프로젝트에 종속성 추가를 해줘야한다.</p>
+
+<p><a href="https://developer.android.com/jetpack/androidx/releases/viewpager2">ViewPager2 출시 문서</a> 를 읽어보면 androidx라는 패키지 이름으로</p>
+
+<p><img width="158" alt="01" src="https://user-images.githubusercontent.com/31889335/89979415-a5a7a580-dcaa-11ea-8d6f-483a504c5480.png" /></p>
+
+<p>묶여있다는 것을 알 수 있고,</p>
+
+<p>다음과 같이 종속성 추가를 해야한다는 것도 알 수 있다!</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencies</span> <span class="p">{</span>
+        <span class="n">implementation</span> <span class="s">"androidx.viewpager2:viewpager2:1.0.0"</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Jetpack에 대해서는 <a href="https://choheeis.github.io/newblog//articles/2020-05/jetpack">Jetpack에 대한 이전 포스팅</a> 를 보면 된다!</p>
+</blockquote>
+
+<p><br /></p>
+
+<h2 id="2️⃣-화면-슬라이드에-포함될-각-화면의-xml-파일-작성하기">2️⃣ 화면 슬라이드에 포함될 각 화면의 xml 파일 작성하기</h2>
+
+<p>ViewPager2를 사용하여 화면 슬라이드를 구현하기 위해 <a href="https://developer.android.com/training/animation/screen-slide-2?hl=ko">ViewPager2로 화면 슬라이드 구현하기 문서</a> 를 읽어보자!</p>
+
+<p>가장 먼저 화면 슬라이드에 포함될 화면을 3개라고 가정하고 각 화면의 xml 파일을 작성해야 한다.</p>
+
+<p>나는 fragment_1.xml, fragment_2.xml, fragment_3.xml 이라는 파일을 각각 만들고 텍스트뷰의 내용을 통해 세 개의 프래그먼트에 구분을 주었다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//fragment_1.xml
+</span><span class="p">&lt;?</span><span class="n">xml</span> <span class="n">version</span><span class="p">=</span><span class="s">"1.0"</span> <span class="n">encoding</span><span class="p">=</span><span class="s">"utf-8"</span><span class="p">?&gt;</span>
+<span class="p">&lt;</span><span class="n">androidx</span><span class="p">.</span><span class="n">constraintlayout</span><span class="p">.</span><span class="n">widget</span><span class="p">.</span><span class="n">ConstraintLayout</span> 
+    <span class="n">xmlns</span><span class="p">:</span><span class="n">android</span><span class="p">=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="n">android</span><span class="p">:</span><span class="n">layout_width</span><span class="p">=</span><span class="s">"match_parent"</span>
+    <span class="n">android</span><span class="p">:</span><span class="n">layout_height</span><span class="p">=</span><span class="s">"match_parent"</span>
+    <span class="n">xmlns</span><span class="p">:</span><span class="n">app</span><span class="p">=</span><span class="s">"http://schemas.android.com/apk/res-auto"</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="n">TextView</span>
+        <span class="n">app</span><span class="p">:</span><span class="n">layout_constraintTop_toTopOf</span><span class="p">=</span><span class="s">"parent"</span>
+        <span class="n">app</span><span class="p">:</span><span class="n">layout_constraintStart_toStartOf</span><span class="p">=</span><span class="s">"parent"</span>
+        <span class="n">app</span><span class="p">:</span><span class="n">layout_constraintBottom_toBottomOf</span><span class="p">=</span><span class="s">"parent"</span>
+        <span class="n">app</span><span class="p">:</span><span class="n">layout_constraintEnd_toEndOf</span><span class="p">=</span><span class="s">"parent"</span>
+        <span class="n">android</span><span class="p">:</span><span class="n">layout_width</span><span class="p">=</span><span class="s">"match_parent"</span>
+        <span class="n">android</span><span class="p">:</span><span class="n">layout_height</span><span class="p">=</span><span class="s">"match_parent"</span>
+        <span class="n">android</span><span class="p">:</span><span class="n">gravity</span><span class="p">=</span><span class="s">"center"</span>
+        <span class="n">android</span><span class="p">:</span><span class="n">text</span><span class="p">=</span><span class="s">"첫번째 프래그먼트"</span>
+        <span class="n">android</span><span class="p">:</span><span class="n">textSize</span><span class="p">=</span><span class="s">"30sp"</span><span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="n">androidx</span><span class="p">.</span><span class="n">constraintlayout</span><span class="p">.</span><span class="n">widget</span><span class="p">.</span><span class="n">ConstraintLayout</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<p>즉, 총 3개의 xml 파일을 만들면 된다.</p>
+
+<p><br /></p>
+
+<h2 id="3️⃣-각-xml-파일에-대응하는-fragment-클래스-작성하기">3️⃣ 각 xml 파일에 대응하는 Fragment 클래스 작성하기</h2>
+
+<p>fragment xml 파일을 작성한 후에는 각 xml 파일의 Fragment 클래스를 작성해야 한다.</p>
+
+<p>그리고 각 클래스 안의 <strong>onCreateView</strong> 함수에서 각 xml 파일을 인플레이트한다.</p>
+
+<p>나는 Fragment1.kt, Fragment2.kt, Fragment3.kt 클래스를 각각 만들고 인플레이트 부분의 xml 파일이름만 바꿔주었다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Fragment1.kt 파일
+</span><span class="k">package</span> <span class="nn">com.example.viewpager2</span>
+
+<span class="k">import</span> <span class="nn">android.os.Bundle</span>
+<span class="k">import</span> <span class="nn">android.view.LayoutInflater</span>
+<span class="k">import</span> <span class="nn">android.view.View</span>
+<span class="k">import</span> <span class="nn">android.view.ViewGroup</span>
+<span class="k">import</span> <span class="nn">androidx.fragment.app.Fragment</span>
+
+<span class="kd">class</span> <span class="nc">Fragment1</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateView</span><span class="p">(</span>
+        <span class="n">inflater</span><span class="p">:</span> <span class="n">LayoutInflater</span><span class="p">,</span>
+        <span class="n">container</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">?,</span>
+        <span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?</span>
+    <span class="p">):</span> <span class="n">View</span><span class="p">?</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">.</span><span class="n">onCreateView</span><span class="p">(</span><span class="n">inflater</span><span class="p">,</span> <span class="n">container</span><span class="p">,</span> <span class="n">savedInstanceState</span><span class="p">)</span>
+        <span class="kd">val</span> <span class="py">view</span><span class="p">:</span> <span class="n">View</span> <span class="p">=</span> <span class="n">inflater</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">fragment_1</span><span class="p">,</span> <span class="n">container</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">view</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h2 id="4️⃣-viewpager2-추가하기">4️⃣ ViewPager2 추가하기</h2>
+
+<p>이제 화면 슬라이드를 실행할 부분에 ViewPager2를 추가해야한다.</p>
+
+<p>나는 메인화면에서 화면 슬라이드를 실행할 것이므로 activity_main.xml 파일에 다음과 같이 ViewPager2를 추가하였다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// activity_main.xml 파일
+</span><span class="p">&lt;?</span><span class="n">xml</span> <span class="n">version</span><span class="p">=</span><span class="s">"1.0"</span> <span class="n">encoding</span><span class="p">=</span><span class="s">"utf-8"</span><span class="p">?&gt;</span>
+<span class="p">&lt;</span><span class="n">androidx</span><span class="p">.</span><span class="n">constraintlayout</span><span class="p">.</span><span class="n">widget</span><span class="p">.</span><span class="n">ConstraintLayout</span> <span class="n">xmlns</span><span class="p">:</span><span class="n">android</span><span class="p">=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="n">xmlns</span><span class="p">:</span><span class="n">app</span><span class="p">=</span><span class="s">"http://schemas.android.com/apk/res-auto"</span>
+    <span class="n">xmlns</span><span class="p">:</span><span class="n">tools</span><span class="p">=</span><span class="s">"http://schemas.android.com/tools"</span>
+    <span class="n">android</span><span class="p">:</span><span class="n">layout_width</span><span class="p">=</span><span class="s">"match_parent"</span>
+    <span class="n">android</span><span class="p">:</span><span class="n">layout_height</span><span class="p">=</span><span class="s">"match_parent"</span>
+    <span class="n">tools</span><span class="p">:</span><span class="n">context</span><span class="p">=</span><span class="s">".MainActivity"</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="n">androidx</span><span class="p">.</span><span class="n">viewpager2</span><span class="p">.</span><span class="n">widget</span><span class="p">.</span><span class="n">ViewPager2</span>
+        <span class="n">android</span><span class="p">:</span><span class="n">id</span><span class="p">=</span><span class="s">"@+id/viewPager2"</span>
+        <span class="n">app</span><span class="p">:</span><span class="n">layout_constraintTop_toTopOf</span><span class="p">=</span><span class="s">"parent"</span>
+        <span class="n">app</span><span class="p">:</span><span class="n">layout_constraintStart_toStartOf</span><span class="p">=</span><span class="s">"parent"</span>
+        <span class="n">app</span><span class="p">:</span><span class="n">layout_constraintBottom_toBottomOf</span><span class="p">=</span><span class="s">"parent"</span>
+        <span class="n">app</span><span class="p">:</span><span class="n">layout_constraintEnd_toEndOf</span><span class="p">=</span><span class="s">"parent"</span>
+        <span class="n">android</span><span class="p">:</span><span class="n">layout_width</span><span class="p">=</span><span class="s">"0dp"</span>
+        <span class="n">android</span><span class="p">:</span><span class="n">layout_height</span><span class="p">=</span><span class="s">"0dp"</span><span class="p">/&gt;</span>
+
+<span class="p">&lt;/</span><span class="n">androidx</span><span class="p">.</span><span class="n">constraintlayout</span><span class="p">.</span><span class="n">widget</span><span class="p">.</span><span class="n">ConstraintLayout</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h2 id="5️⃣-viewpageradapter-만들기">5️⃣ ViewPagerAdapter 만들기</h2>
+
+<p>ViewPager2는 내장되어 있는 슬라이드 기능을 통해 새로운 페이지를 보여준다.</p>
+
+<p>이 과정에서 <strong>새로운 페이지를 보여주기 위한 작업</strong> 을 담당하는 것은 <strong><a href="https://developer.android.com/reference/androidx/viewpager2/adapter/FragmentStateAdapter">FragmentStateAdapter</a></strong> 라는 객체임을 알아둬야 한다.</p>
+
+<p>그럼 FragmentStateAdapter 은 뭘까?</p>
+
+<p><img width="734" alt="04" src="https://user-images.githubusercontent.com/31889335/100071509-7ba37900-2e7e-11eb-915b-b9386e48f1e7.png" /></p>
+
+<p>FragmentStateAdapter는 <a href="https://developer.android.com/reference/androidx/viewpager2/adapter/FragmentViewHolder">FragmentViewHolder</a> 를 ViewHolder로 가진 <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter">Adapter</a> 라는 클래스를 상속하고 있고 ViewPager2에 맞는 여러 메소드들을 추가로 구현해놓은 클래스이다.</p>
+
+<p><img width="730" alt="05" src="https://user-images.githubusercontent.com/31889335/100072001-0ab09100-2e7f-11eb-86bc-0f7bf21a81ac.png" /></p>
+
+<p>Adapter 라는 클래스에 대해 알아보니 RecyclerView에서 제공하는 Adapter 클래스와 동일한 클래스였다.</p>
+
+<p>즉 FragmentStateAdapter는 이름은 이렇게 길지만 그냥 RecyclerView에서 사용되는 Adapter와 비슷하다고 보면 된다.</p>
+
+<p><a href="https://choheeis.github.io/newblog//articles/2019-12/%EB%A6%AC%EC%82%AC%EC%9D%B4%ED%81%B4%EB%9F%AC%EB%B7%B0">RecyclerView에 대한 이전 포스팅</a> 을 보면 RecyclerView를 구현할 때 Adapter에 ViewHolder 라는 것을 지정해주었던 기억이 있다.</p>
+
+<p>이와 비슷하게 FragmentStateAdapter에도 <a href="https://developer.android.com/reference/androidx/viewpager2/adapter/FragmentViewHolder">FragmentViewHolder</a> 라는 ViewHolder가 지정된다.</p>
+
+<p>다시 정리해보면 RecyclerView는 Adpater에 ViewHolder를 지정하여 구현되고, ViewPager2도 FragmentStateAdapter에 FragmentViewHolder가 지정되어 구현된다는 것이다.</p>
+
+<p>따라서 RecyclerView와 ViewPager2는 같은 원리로 작동된다고 생각하면 된다.</p>
+
+<p>이제 우리의 ViewPager2 구현에서 사용될 ViewPagerAdapter 라는 이름의 클래스를 만들어보자. 위에서 알아본 것에 의해 당연히 이 클래스는 FragmentStateAdapter 클래스를 상속하게 해야한다.</p>
+
+<p>FragmentStateAdapter 클래스 상속을 위해 <a href="https://developer.android.com/reference/androidx/viewpager2/adapter/FragmentStateAdapter#public-constructors_1">FragmentStateAdapter 도큐먼트</a>를 살펴보았더니</p>
+
+<p><img width="860" alt="06" src="https://user-images.githubusercontent.com/31889335/100078137-882bcf80-2e86-11eb-8a56-2fa9117b5e16.png" /></p>
+
+<p>위와 같이 3가지 방법으로 생성할 수 있음을 알게되었다.</p>
+
+<p>각각의 방법은 ViewPager2가 FragmentActivity의 subclass에 사용되느냐 Fragment의 subclass에 사용되느냐 등에 따라 사용해야할 생성자가 달라진다.</p>
+
+<p>적합한 생성자를 사용해 FragmentStateAdapter 클래스를 상속해주면 된다.</p>
+
+<p><img width="148" alt="07" src="https://user-images.githubusercontent.com/31889335/100078857-549d7500-2e87-11eb-846f-f2c4c5e49d59.png" /></p>
+
+<p>또한 FragmentStateAdapter는 위의 목록에서 볼 수 있듯이 다양한 public method를 가지고 있으므로 필요한 용도에 맞는 method를 override하여 구현해주면 된다.</p>
+
+<p>하지만 필수적으로 구현해야 하는 메소드는 <strong>getItemCount()</strong> 와 <strong>createFragment()</strong> 라는 메소드이다.</p>
+
+<ul>
+  <li>
+    <p><strong><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter#getItemCount()">getItemCount()</a></strong> : FragmentStateAdapter의 public method는 아니다. FragmentStateAdapter가 상속하는 Recyclerview.Adapter 클래스의 public method이다.</p>
+
+    <p>해당 Adapter가 가지고 있는 data set 안에서의 전체 아이템 수를 리턴하는 메소드이다.</p>
+  </li>
+  <li>
+    <p><strong><a href="https://developer.android.com/reference/kotlin/androidx/viewpager2/adapter/FragmentStateAdapter#createfragment">createFragment()</a></strong> : FragmentStateAdapter의 public method이다.</p>
+
+    <p>특정 포지션에 연결된 새로운 Fragment를 제공하는 기능을 가지고 있는 메소드이다.</p>
+  </li>
+</ul>
+
+<p>아래 코드는 위에서 알아본 FragmentStateAdapter 클래스에 대한 정보를 바탕으로 구현한 ViewPagerAdapter 클래스이다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">androidx.fragment.app.Fragment</span>
+<span class="k">import</span> <span class="nn">androidx.fragment.app.FragmentActivity</span>
+<span class="k">import</span> <span class="nn">androidx.viewpager2.adapter.FragmentStateAdapter</span>
+
+<span class="kd">class</span> <span class="nc">ViewPagerAdapter</span><span class="p">(</span><span class="n">fragmentActivity</span><span class="p">:</span> <span class="n">FragmentActivity</span><span class="p">)</span> <span class="p">:</span> <span class="n">FragmentStateAdapter</span><span class="p">(</span><span class="n">fragmentActivity</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
+        <span class="c1">// 페이지 개수를 정적 변수로 선언
+</span>        <span class="k">private</span> <span class="k">const</span> <span class="kd">val</span> <span class="py">NUM_PAGES</span> <span class="p">=</span> <span class="m">3</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">getItemCount</span><span class="p">():</span> <span class="n">Int</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">NUM_PAGES</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">createFragment</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">Fragment</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">position</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">Fragment1</span><span class="p">()</span>
+        <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">position</span> <span class="p">==</span> <span class="m">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">Fragment2</span><span class="p">()</span>
+        <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">Fragment3</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="6️⃣-viewpageradapter-객체를-생성하고-viewpager2의-adapter로-지정해주기">6️⃣ ViewPagerAdapter 객체를 생성하고 ViewPager2의 adapter로 지정해주기</h2>
+
+<p>FragmentStateAdapter 클래스를 상속한 ViewPagerAdapter를 만들었으면 우리의 ViewPager2의 어댑터로 ViewPagerAdapter 클래스를 지정해줘야 한다!</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">android.os.Bundle</span>
+<span class="k">import</span> <span class="nn">androidx.appcompat.app.AppCompatActivity</span>
+<span class="k">import</span> <span class="nn">androidx.viewpager2.widget.ViewPager2</span>
+
+<span class="kd">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="c1">// 1. activity_main.xml 에 존재하는 viewPager2 뷰 객체 초기화를 액티비티 lifecycle에 맞게 지연시킴
+</span>    <span class="k">private</span> <span class="k">lateinit</span> <span class="kd">var</span> <span class="py">viewPager2</span><span class="p">:</span> <span class="n">ViewPager2</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+        <span class="n">setContentView</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">activity_main</span><span class="p">)</span>
+
+        <span class="c1">// 2. 초기화 지연시킨 viewPager2 객체를 여기서 초기화함
+</span>        <span class="n">viewPager2</span> <span class="p">=</span> <span class="n">findViewById</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">viewPager2</span><span class="p">)</span>
+
+        <span class="c1">// 3. viewPager2 뷰 객체에 어댑터 적용하기
+</span>        <span class="n">viewPager2</span><span class="p">.</span><span class="n">adapter</span> <span class="p">=</span> <span class="n">ViewPagerAdapter</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 추가 기능 ) back 버튼 클릭시 화면 슬라이드 과거로 이동시키기
+</span>    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onBackPressed</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">viewPager2</span><span class="p">.</span><span class="n">currentItem</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">super</span><span class="p">.</span><span class="n">onBackPressed</span><span class="p">()</span>
+        <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+            <span class="n">viewPager2</span><span class="p">.</span><span class="n">currentItem</span> <span class="p">=</span> <span class="n">viewPager2</span><span class="p">.</span><span class="n">currentItem</span> <span class="p">-</span> <span class="m">1</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="7️⃣-실행">7️⃣ 실행</h2>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/90098344-f84c9480-dd72-11ea-8e58-f6aa4ed946de.gif" alt="ViewPager2" /></p>
+
+<p>실습 코드는 <a href="https://github.com/choheeis/Android_YoungChaYoungCha/tree/master/ViewPager2">여기</a>에 저장되어 있다.</p>
+
+<h1 id="끝">끝!</h1>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="🤳🏻 NestedScrollView가 뭘까?안드로이드 개발을 1년 반 정도 하다보니 예전에 사용하던 xml 뷰 태그랑 지금 사용하는 xml 뷰 태그가 바뀐 것이 있었다.그 중 하나가 ScrollView 였다.안드로이드 개발 초창기에는 화면을 스크롤하기 위해 ScrollView 라는...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[안드로이드] 🤳🏻 왜 NestedScrollView를 써야 하나?? | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[안드로이드] 🤳🏻 왜 NestedScrollView를 써야 하나?? | choheeis">
+  <meta name="twitter:description" content="🤳🏻 NestedScrollView가 뭘까?안드로이드 개발을 1년 반 정도 하다보니 예전에 사용하던 xml 뷰 태그랑 지금 사용하는 xml 뷰 태그가 바뀐 것이 있었다.그 중 하나가 ScrollView 였다.안드로이드 개발 초창기에는 화면을 스크롤하기 위해 ScrollView 라는...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-05/nestedScrollView">
+  <meta property="og:title" content="[안드로이드] 🤳🏻 왜 NestedScrollView를 써야 하나?? | choheeis">
+  <meta property="og:description" content="🤳🏻 NestedScrollView가 뭘까?안드로이드 개발을 1년 반 정도 하다보니 예전에 사용하던 xml 뷰 태그랑 지금 사용하는 xml 뷰 태그가 바뀐 것이 있었다.그 중 하나가 ScrollView 였다.안드로이드 개발 초창기에는 화면을 스크롤하기 위해 ScrollView 라는...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[안드로이드] 🤳🏻 왜 NestedScrollView를 써야 하나?? | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-05/nestedScrollView">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[안드로이드] 🤳🏻 왜 NestedScrollView를 써야 하나??">[안드로이드] 🤳🏻 왜 NestedScrollView를 써야 하나??</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        25 MAY 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    2 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <p><br /></p>
+
+<h2 id="-nestedscrollview가-뭘까">🤳🏻 NestedScrollView가 뭘까?</h2>
+<hr />
+
+<p>안드로이드 개발을 1년 반 정도 하다보니 예전에 사용하던 xml 뷰 태그랑 지금 사용하는 xml 뷰 태그가 바뀐 것이 있었다.</p>
+
+<p>그 중 하나가 ScrollView 였다.</p>
+
+<p>안드로이드 개발 초창기에는 화면을 스크롤하기 위해 ScrollView 라는 xml 태그를 사용했었는데 현재는 스크롤 하기 위해 NestedScrollView를 사용하고 있다.</p>
+
+<p>하지만 이 차이가 무엇인지 알지 못하고 언제부터인가 NestedScrollView를 사용하기 시작했었다.</p>
+
+<p>그래서 이번 포스팅을 계획하면서 ScrollView와 NestedScrollView의 차이를 알아보기로 하였다!</p>
+
+<p><br /></p>
+
+<p>먼저 안드로이드 developers 사이트에서 ScrollView에 대한 reference를 읽어보면서 <strong><a href="https://developer.android.com/reference/android/widget/ScrollView.html">ScrollView</a></strong> 에 대해서 알아보자.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/82780777-25d02300-9e93-11ea-8ff3-01ea9dc9d0f1.PNG" alt="01" /></p>
+
+<p>ScrollView라는 클래스는 안드로이드 API level 1 수준에서 추가된 클래스이고, FrameLayout 이라는 클래스를 상속받고 있다.</p>
+
+<p>ScrollView는 화면을 스크롤 할 수 있도록 하기 위해 사용할 수 있는데 주의할 점은 ScrollView 는 단 하나의 direct 자식만을 가질 수 있다는 점이다.</p>
+
+<p>따라서 ScrollView 안에 여러 개의 View들을 넣고 싶다면 이 여러 개의 View들을 감싸는 단 하나의 View Group을 만들어야 한다.</p>
+
+<p>즉, 아래와 같은 코드로 이해해보자.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/82781246-3df47200-9e94-11ea-930f-52c21733cc80.PNG" alt="02" /></p>
+
+<p>첫 번째 엑스 표시된 코드는 ScrollView안의 자식으로 두 개의 TextView가 있다.</p>
+
+<p>이것은 ScrollView의 direct 자식이 두 개 존재하는 것이다.</p>
+
+<p>하지만 ScrollView는 direct 자식이 단 하나만 존재해야 하므로 동그라미 표시된 두 번째 코드처럼 두 TextView를 하나의 ConstraintLayout 으로 묶어야 한다.</p>
+
+<p>이렇게 하면 ScrollView 입장에서는 ConstraintLayout 하나가 direct 자식이 되기 때문이다.</p>
+
+<p><br /></p>
+
+<p>또, ScrollView 자체는 수직 스크롤만 허용하므로 수평 스크롤을 사용하고 싶다면 API level 3 에서 추가된 <a href="https://developer.android.com/reference/android/widget/HorizontalScrollView">HorizontalScrollView</a> 를 사용해야 한다.</p>
+
+<p>ScrollView를 사용할 때 꼭 알아두어야 하는 것이 하나 더 있다!</p>
+
+<p>RecyclerView나 ListView를 ScrollView 안에 넣어서는 절대 안된다.</p>
+
+<p>ScrollView 안에 RecyclerView나 ListView를 넣는 경우에는 UI 적으로 좋지 않은 performance가 나타나고 좋지 않은 User Experience가 나타나게 된다.</p>
+
+<p>performance 차이가 어떻게 나는지 직접 ScrollView와 NestedScrollView 안에 리사이클러뷰를 넣어보았다!</p>
+
+<p>먼저 ScrollView 안에 12개의 아이템을 가지고 있는 리사이클러뷰를 넣은 모습은 다음과 같다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/82785530-bc094680-9e9d-11ea-9266-ae2a2f35b4b4.gif" alt="ScrollView" /></p>
+
+<p>ScrollView 안에 리사이클러뷰를 넣었을 때는 한 번의 스크롤 동작으로 맨 마지막인 12번째 아이템까지 스크롤되지 않는다.</p>
+
+<p>11번째 아이템까지만 한 번의 스크롤 동작으로 내려가고 12번째 아이템을 보기 위해 추가로 한 번 더 스크롤 동작이 필요하다!</p>
+
+<p><br /></p>
+
+<p>다음은 NestedScrollView 안에 똑같은 리사이클러뷰를 넣은 모습이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/82785533-bd3a7380-9e9d-11ea-8939-39297afe9402.gif" alt="NestedScrollView" /></p>
+
+<p>NestedScrollView를 사용했을 때는 단 한 번의 스크롤 동작으로 12개 모든 아이템이 스크롤되는 모습이다.</p>
+
+<p>따라서 ScrollView 안에 리사이클러뷰를 넣었을 경우에는 번거로운 두 번의 스크롤 동작을 해야하므로 좋지 않은 user experience가 발생하게 된다.</p>
+
+<p><br /></p>
+
+<p>따라서 리사이클러뷰를 포함하는 스크롤 화면을 구현해야 할 경우, ScrollView 대신 NestedScrollView 를 사용하자!</p>
+
+<p><a href="https://developer.android.com/reference/androidx/core/widget/NestedScrollView">NestedScrollView</a> 클래스에 정의된 멤버 함수들은 링크로 걸어둔 문서를 통해 확인하면 된다.</p>
+
+<p><br /></p>
+
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

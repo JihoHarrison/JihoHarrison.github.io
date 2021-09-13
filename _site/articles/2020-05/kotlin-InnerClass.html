@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Inner class 가 뭘까?이전에는 안드로이드 개발을 하며 recyclerView를 위한 Adapter를 만들 때 ViewHolder 클래스를 Adapter 클래스와 따로 분리했었다.하지만 프로그라피 6기 활동을 하면서 recyclerView의 수가 많아질수록 Adapter 클...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[Kotlin] ⭐️ Inner class | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[Kotlin] ⭐️ Inner class | choheeis">
+  <meta name="twitter:description" content="Inner class 가 뭘까?이전에는 안드로이드 개발을 하며 recyclerView를 위한 Adapter를 만들 때 ViewHolder 클래스를 Adapter 클래스와 따로 분리했었다.하지만 프로그라피 6기 활동을 하면서 recyclerView의 수가 많아질수록 Adapter 클...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-05/kotlin-InnerClass">
+  <meta property="og:title" content="[Kotlin] ⭐️ Inner class | choheeis">
+  <meta property="og:description" content="Inner class 가 뭘까?이전에는 안드로이드 개발을 하며 recyclerView를 위한 Adapter를 만들 때 ViewHolder 클래스를 Adapter 클래스와 따로 분리했었다.하지만 프로그라피 6기 활동을 하면서 recyclerView의 수가 많아질수록 Adapter 클...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[Kotlin] ⭐️ Inner class | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-05/kotlin-InnerClass">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[Kotlin] ⭐️ Inner class">[Kotlin] ⭐️ Inner class</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        29 MAY 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    2 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <p><br /></p>
+
+<h2 id="inner-class-가-뭘까">Inner class 가 뭘까?</h2>
+<hr />
+
+<p>이전에는 안드로이드 개발을 하며 recyclerView를 위한 Adapter를 만들 때 ViewHolder 클래스를 Adapter 클래스와 따로 분리했었다.</p>
+
+<p>하지만 프로그라피 6기 활동을 하면서 recyclerView의 수가 많아질수록 Adapter 클래스도 많아지고 동시에 ViewHolder 클래스도 많아지게 되므로 ViewHolder 클래스를 Adapter 클래스 안으로 넣어버리자는 의견이 나왔었다.</p>
+
+<p>ViewHolder 클래스를 Adapter 클래스 안으로 넣기 위해 사용한 코틀린 예약어는 <strong>inner class</strong> 였다.</p>
+
+<p>이 때 사용한 inner class에 대해서 kotlin 문서를 보고 공부해보자!</p>
+
+<p><br /></p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/83166158-7670a600-a149-11ea-9189-d79500666fb1.PNG" alt="01" /></p>
+
+<p>inner class에 대한 설명은 코틀린 클래스와 코틀린 객체 카테고리 안의 <a href="https://kotlinlang.org/docs/reference/nested-classes.html">Nested Classes</a> 부분을 읽어보면 된다.</p>
+
+<p>이 문서를 읽어보니 <strong>코틀린 클래스는 하나의 클래스 안에 중첩으로 다른 클래스를 포함할 수 있다</strong> 고 설명되어 있었다.</p>
+
+<p>아래 코드를 보고 더 자세히 이해해보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Outer</span><span class="p">{</span>
+    <span class="k">private</span> <span class="kd">val</span> <span class="py">bar</span><span class="p">:</span> <span class="n">Int</span> <span class="p">=</span> <span class="m">1</span>
+
+    <span class="kd">class</span> <span class="nc">Nested</span><span class="p">{</span>
+        <span class="k">fun</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">=</span> <span class="m">2</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// demo = 2
+</span><span class="kd">val</span> <span class="py">demo</span> <span class="p">=</span> <span class="n">Outer</span><span class="p">.</span><span class="n">Nested</span><span class="p">().</span><span class="n">foo</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>위 코드를 보면 Outer라는 클래스 안에 Nested 라는 클래스가 중첩되어 있는 것을 확인할 수 있다.</p>
+
+<p>Nested 클래스는 멤버 함수로 foo() 라는 함수를 가지고 있다.</p>
+
+<p>이 foo() 함수를 어떻게 사용하는지에 대해서는 demo 변수를 초기화 하는 부분을 보면 된다.</p>
+
+<p><br /></p>
+
+<p>문서를 계속 읽어보니 이렇게 하나의 클래스 안에 포함된 다른 클래스를 <strong>inner</strong> 이라는 예약어로도 표시할 수 있다고 설명되어 있었다.</p>
+
+<p>다만 inner 예약어를 사용하여 중첩 클래스를 나타낼 경우에는 중첩 클래스에 접근하는 방법이 위와 조금 달라진다.</p>
+
+<p>아래 코드를 통해 어떤 차이가 있는지 알아보자!</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Outer</span><span class="p">{</span>
+    <span class="k">private</span> <span class="kd">val</span> <span class="py">bar</span><span class="p">:</span> <span class="n">Int</span> <span class="p">=</span> <span class="m">1</span>
+
+    <span class="k">inner</span> <span class="kd">class</span> <span class="nc">Nested</span><span class="p">{</span>
+        <span class="k">fun</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">=</span> <span class="n">bar</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// demo = 1
+</span><span class="kd">val</span> <span class="py">demo</span> <span class="p">=</span> <span class="n">Outer</span><span class="p">().</span><span class="n">Nested</span><span class="p">().</span><span class="n">foo</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>위 코드와 첫 번째 코드는 다른 점이 하나 있다.</p>
+
+<p>foo() 함수의 값이 2가 아니라 bar 값인 1이라는 점이다.</p>
+
+<p>왜 예시 코드에 이런 차이를 두었을까?</p>
+
+<p>inner 라는 예약어를 사용해서 중첩 클래스를 나타내면 중첩 클래스의 바깥 클래스가 가지는 멤버에 접근할 수 있다는 것을 보여주기 위해서이다.</p>
+
+<p>즉, bar 변수는 Nested 클래스의 멤버 변수가 아니라 Outer 클래스의 멤버 변수이지만 Nested 클래스의 멤버 함수인 foo() 에서 접근할 수 있다!</p>
+
+<p>이 점을 보여주기 위해 예시 코드가 조금 달라졌다는 것을 깨달을 수 있을 것이다.</p>
+
+<p><br /></p>
+
+<p>inner class 중에 익명으로 생성되는 클래스들도 있는데 예를 들어,</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">window</span><span class="p">.</span><span class="n">addMouseListener</span><span class="p">(</span><span class="kd">object</span> <span class="err">: </span><span class="nc">MouseAdapter</span><span class="p">(){</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">mouseClicked</span><span class="p">(</span><span class="n">e</span> <span class="p">:</span> <span class="n">MouseEvent</span><span class="p">){</span>
+        <span class="o">..</span><span class="p">.</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">mouseEntered</span><span class="p">(</span><span class="n">e</span> <span class="p">:</span> <span class="n">MounseEvent</span><span class="p">){</span>
+        <span class="o">..</span><span class="p">.</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>위와 같은 코드에서 마우스 리스너의 인자로 들어가 있는 MouseAdapter 가 익명 inner class라고 할 수 있다.</p>
+
+<p>익명 inner class를 생성할 때는 <strong>object :</strong> 를 앞에 붙여서 생성해야 한다.</p>
+
+<p><br /></p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

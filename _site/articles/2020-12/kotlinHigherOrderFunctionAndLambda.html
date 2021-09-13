@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="코틀린의 고차 함수(Higher-Order Function)와 람다(Lambda)표현식와 익명 함수(Anonymous Function)에 대해 알아보기 전에 코틀린 함수가 일급 함수임을 먼저 이해해야 한다.0️⃣ 코틀린의 함수는 일급 함수다!✍🏻 kotlin 도큐먼트 - Highe...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[Kotlin] 코틀린의 고차 함수와 람다 표현식과 익명 함수에 대해서 | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[Kotlin] 코틀린의 고차 함수와 람다 표현식과 익명 함수에 대해서 | choheeis">
+  <meta name="twitter:description" content="코틀린의 고차 함수(Higher-Order Function)와 람다(Lambda)표현식와 익명 함수(Anonymous Function)에 대해 알아보기 전에 코틀린 함수가 일급 함수임을 먼저 이해해야 한다.0️⃣ 코틀린의 함수는 일급 함수다!✍🏻 kotlin 도큐먼트 - Highe...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-12/kotlinHigherOrderFunctionAndLambda">
+  <meta property="og:title" content="[Kotlin] 코틀린의 고차 함수와 람다 표현식과 익명 함수에 대해서 | choheeis">
+  <meta property="og:description" content="코틀린의 고차 함수(Higher-Order Function)와 람다(Lambda)표현식와 익명 함수(Anonymous Function)에 대해 알아보기 전에 코틀린 함수가 일급 함수임을 먼저 이해해야 한다.0️⃣ 코틀린의 함수는 일급 함수다!✍🏻 kotlin 도큐먼트 - Highe...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[Kotlin] 코틀린의 고차 함수와 람다 표현식과 익명 함수에 대해서 | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-12/kotlinHigherOrderFunctionAndLambda">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[Kotlin] 코틀린의 고차 함수와 람다 표현식과 익명 함수에 대해서">[Kotlin] 코틀린의 고차 함수와 람다 표현식과 익명 함수에 대해서</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        1 DEC 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    11 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <p>코틀린의 고차 함수(Higher-Order Function)와 람다(Lambda)표현식와 익명 함수(Anonymous Function)에 대해 알아보기 전에 <strong>코틀린 함수가 일급 함수임을 먼저 이해해야 한다.</strong></p>
+
+<h2 id="0️⃣-코틀린의-함수는-일급-함수다">0️⃣ 코틀린의 함수는 일급 함수다!</h2>
+
+<p>✍🏻 <a href="https://en.wikipedia.org/wiki/First-class_function">kotlin 도큐먼트 - Higher-Order Functions and Lambdas</a> 를 참고하여 작성합니다.</p>
+
+<p>코틀린 함수는 <strong>일급 함수(first-class function)</strong> 이다.</p>
+
+<p>일급 함수라는 것에 대해 알아보기 위해 <a href="https://en.wikipedia.org/wiki/First-class_function">위키피디아 - First Class Function</a> 을 읽어보자.</p>
+
+<p>Computer Science 분야에서는 어떠한 프로그래밍 언어의 함수가 <strong>first-class citizen(일급 시민)</strong> 으로 다뤄진다면 해당 프로그래밍 언어가 <strong>first-class function(일급 함수)</strong> 를 가지고 있는 언어라고 부른다.</p>
+
+<p>다시 말해 <strong>어떤 프로그래밍 언어의 함수가 일급 시민(first-class citizen) 이라면 그 언어의 함수는 일급 함수(first-class function)라고 부른다</strong> 는 것이다!</p>
+
+<p>그럼 이번에는 일급 함수의 정의에서 사용된 <strong>first-class citizen(일급 시민)</strong> 이라는 것이 무엇인지 <a href="https://en.wikipedia.org/wiki/First-class_citizen">위키피디아 - First Class Citizen</a> 을 읽어보고 알아보자.</p>
+
+<p>일급 시민은 <strong>일급 객체(first-class Object)</strong> 라고도 통용된다. 이 포스팅에서는 앞으로 일급 시민을 일급 객체라고 표현할 것이다.</p>
+
+<p>컴퓨터 프로그래밍 언어 디자인 분야에서 일급 객체란!</p>
+
+<p>용어만 보면 퀄리티가 높아 다른 것들과 차별성을 띄는 객체일 것 같지만 그게 아니다!</p>
+
+<p><strong>일급 객체란 다른 객체들에 적용 가능한 연산을 모두 지원하는 객체</strong> 를 말한다.</p>
+
+<p>‘다른 객체들에 적용 가능한 연산을 모두 지원한다’ 라는 말이 잘 이해되지 않는다면 먼저 아래의 <strong>일급 객체가 갖는 특징</strong> 에 대해 이해해보자.</p>
+
+<ul>
+  <li>
+    <p><strong>일급 객체는 함수의 매개변수가 될 수 있다.</strong></p>
+  </li>
+  <li>
+    <p><strong>일급 객체는 함수의 return 값이 될 수 있다.</strong></p>
+  </li>
+  <li>
+    <p><strong>일급 객체는 할당 명령문(=, 대입)의 대상이 될 수 있다.</strong></p>
+  </li>
+  <li>
+    <p><strong>일급 객체는 동일 비교(==, equal)의 대상이 될 수 있다.</strong></p>
+  </li>
+</ul>
+
+<p>즉, 어떤 객체가 함수의 매개변수에 사용될 수 있고, 함수의 return 값이 될 수 있고, 할당 명령문의 대상이 될 수 있고, 동일 비교의 대상이 될 수 있다면 해당 객체를 일급 객체라고 명칭하는 것이다.</p>
+
+<p>이 특징들을 살펴보고 나니 그동안 자연스럽게 써오던 변수들이 대부분 일급 객체의 특징을 가지고 있다는 것을 깨닫게 되었다.</p>
+
+<p>하지만 C언어의 배열과 문자열은 매개변수로 넘길 때 포인터 형태로 넘어가야 하기 때문에 일급 객체로 볼 수 없긴 하다.</p>
+
+<p>이렇게 일급 객체가 갖는 특징을 알아보니 위에서 잘 이해되지 않았던 ‘다른 객체들에 적용 가능한 연산을 모두 지원하는 객체’ 라는 말이 이해될 것이다.</p>
+
+<blockquote>
+  <p>🕵🏻‍♀️ <strong>프로그래밍 언어 Design 분야에서 일급 객체라는 말이 언제 등장했나?</strong></p>
+
+  <p>1960년대의 영국 컴퓨터 과학자 크리스토퍼 스트래치라는 사람이</p>
+
+  <p><img width="123" alt="01" src="https://user-images.githubusercontent.com/31889335/100901866-aa1cf600-3507-11eb-9671-e120f52cfd20.png" /></p>
+
+  <p><a href="https://ko.wikipedia.org/wiki/%EC%95%8C%EA%B3%A8_(%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D_%EC%96%B8%EC%96%B4)">알골(Algol)</a> 이라는 프로그래밍 언어에서 <a href="https://ko.wikipedia.org/wiki/%EC%8B%A4%EC%88%98">실수</a>와 <a href="https://ko.wikipedia.org/wiki/%ED%95%A8%EC%88%98">프로시저</a> 를 비교하면서 처음 만들어낸 개념이 <strong>일급 객체 및 이급 객체</strong> 였다..</p>
+
+  <p>🕵🏻‍♀️ <strong>일급 객체를 __일급 시민</strong> 이라고 부르는 이유는?__</p>
+
+  <p>자유롭게 거주하고 일하며 출입국의 자유도 가지고, 투표의 자유도 가지는 시민들에 일급 객체를 비유했기 때문이다.</p>
+</blockquote>
+
+<p>지금까지는 <strong>“일급 객체”</strong> 에 대해 알아본 것이고 다시 돌아가서 <strong>“일급 함수”</strong> 의 정의를 이해해보자.</p>
+
+<p>위에서 <strong>어떤 프로그래밍 언어의 함수가 일급 객체(first-class object) 라면 해당 언어의 함수는 일급 함수(first-class function)라고 부른다</strong> 고 했다.</p>
+
+<p>또 가장 처음부터 <strong>코틀린의 함수는 일급 함수</strong> 라고 언급했으니 코틀린의 함수가 일급 객체이기 때문에 일급 함수일 것임을 예측할 수 있다.</p>
+
+<p>그렇다면 위에서 알아보았던 일급 객체의 4가지 특징의 주어를 “코틀린의 함수”로 바꿔보자!</p>
+
+<ul>
+  <li>
+    <p><strong>코틀린의 함수는 함수의 매개변수가 될 수 있다.</strong></p>
+  </li>
+  <li>
+    <p><strong>코틀린의 함수는 함수의 return 값이 될 수 있다.</strong></p>
+  </li>
+  <li>
+    <p><strong>코틀린의 함수는 할당 명령문(=, 대입)의 대상이 될 수 있다.</strong></p>
+  </li>
+  <li>
+    <p><strong>코틀린의 함수는 동일 비교(==, equal)의 대상이 될 수 있다.</strong></p>
+  </li>
+</ul>
+
+<p>이 4가지 특징이 바로 코틀린의 함수가 가지고 있는 특징이며 코틀린 함수가 왜 일급 함수라고 불리는지 이해하기 위한 가장 좋은 사실들이다!</p>
+
+<p>또 이러한 특징을 갖는 일급 함수는 <strong>함수형 프로그래밍(Functional Programming)</strong> 스타일에 필수적으로 존재해야 하는 요소이다.</p>
+
+<h2 id="1️⃣-고차-함수higher-order-function란">1️⃣ 고차 함수(Higher-Order Function)란?</h2>
+
+<p>위에서 알아본 일급 함수의 특징을 잘 이해하고 있다면 고차 함수에 대해 이해하는 건 식은 죽 먹기다!</p>
+
+<p><strong>고차 함수</strong> 란 Computer Science에서 통용되는 용어 중 하나로, <strong>어떤 함수가 다른 함수의 매개변수가 되거나(OR) 다른 함수의 return 값이 된다면 해당 함수를 고차 함수</strong> 라고 부른다.</p>
+
+<p>즉, 위에서 알아본 일급 함수의 4가지 특징 중 아래 2가지 특징을</p>
+
+<ul>
+  <li>
+    <p><strong>어떤 함수는 다른 함수의 매개변수가 될 수 있다.</strong></p>
+  </li>
+  <li>
+    <p><strong>어떤 함수는 다른 함수의 return 값이 될 수 있다.</strong></p>
+  </li>
+</ul>
+
+<p>하나라도 만족시킨다면 해당 함수를 고차 함수라고 부르는 것이다!</p>
+
+<p>아래 코드는 고차 함수의 예시를 코틀린으로 작성해본 코드이다.</p>
+
+<p>✍🏻 <a href="https://developer.android.com/kotlin/learn?hl=ko#higher-order">Android Developer 도큐먼트 - 고차 함수</a> 를 참고하여 가져온 예시입니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">stringMapper</span><span class="p">(</span><span class="n">str</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">mapper</span><span class="p">:</span> <span class="p">(</span><span class="n">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Int</span><span class="p">):</span> <span class="n">Int</span> <span class="p">{</span>
+    <span class="c1">// Invoke function
+</span>    <span class="k">return</span> <span class="n">mapper</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>위 stringMapper() 함수는 총 두 개의 매개변수를 넘기는데 첫 번째 매개변수는 str 이라는 이름의 String 형 변수이고, 두 번째 매개변수는 mapper 라는 이름의 함수이다.</p>
+
+<p>stringMapper() 함수는 고차 함수가 될 수 있는 조건 중 <strong>어떤 함수는 다른 함수의 매개변수가 될 수 있다.</strong> 라는 조건을 만족하기 때문에 고차 함수의 예시로 적합하다.</p>
+
+<p>그럼 다른 곳에서 이 stringMapper() 를 호출하려면 어떻게 호출해야 할까?</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stringMapper</span><span class="p">(</span><span class="s">"Android"</span><span class="p">,</span> <span class="p">{</span> <span class="n">input</span> <span class="p">-&gt;</span>
+    <span class="n">input</span><span class="p">.</span><span class="n">length</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>위와 같이 첫 번째 매개 변수에는 “Android” 라는 String 형 데이터를 넘기고, 두 번째 매개 변수에는 함수를 구현하여 넘기면 된다.</p>
+
+<p>두 번째 매개 변수에서 구현된 함수는 람다 표현식을 사용하여 구현된 모습이다.</p>
+
+<p>람다 표현식에 대해서는 바로 아래에서 알아볼 수 있을 것이다!</p>
+
+<p>고차함수는 자바나 코틀린에서 콜백 인터페이스를 사용할 때처럼 구성 요소 간 통신할 때 유용하다.</p>
+
+<h2 id="2️⃣-람다lambda-표현식이란">2️⃣ 람다(Lambda) 표현식이란?</h2>
+
+<p>✍🏻 <a href="https://kotlinlang.org/docs/reference/lambdas.html#lambda-expressions-and-anonymous-functions">kotlin 도큐먼트 - 람다 표현식</a> 을 참고하여 작성합니다.</p>
+
+<p>고차 함수에 대해서 알아보았다면 이제 람다표현식(Lambda Expression) 이 무엇인지 알아보자.</p>
+
+<p><strong>람다 표현식이란 이름 없는 함수를 정의할 때 사용되는 “함수 표현식” 이다.</strong></p>
+
+<p>밑에서 추가로 배울 익명 함수도 람다 표현식과 함께 이름 없는 함수를 정의할 때 사용되는 표현식임을 알아두자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">max</span><span class="p">(</span><span class="n">strings</span><span class="p">,</span> <span class="p">{</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="p">-&gt;</span> <span class="n">a</span><span class="p">.</span><span class="n">length</span> <span class="p">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">length</span> <span class="p">})</span>
+</code></pre></div></div>
+
+<p>위 코드에서 볼 수 있는 map() 라는 함수는 고차 함수이다. (위에서 고차 함수에 대해 이해했다면 바로 인정할 것이다! 두 번째 매개 변수로 함수가 넘겨지므로!)</p>
+
+<p>map() 함수의 두 번째 매개변수를 통해 함수가 넘겨지는데 이 함수의 모양새가 조금 익숙하지 않을 수 있다.</p>
+
+<p>두 번째 매개변수로 넘겨지는 함수의 모양새만 따로 자세히 봐보자!</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="p">-&gt;</span> <span class="n">a</span><span class="p">.</span><span class="n">length</span> <span class="p">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">length</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>사실 위와 같은 모양새의 함수는 아래의 compare() 이라는 함수와 동일한 함수이다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">compare</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">length</span> <span class="p">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">length</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>여기서 하나 깨달을 수 있는 것이 있다.</p>
+
+<p>위에서 람다 표현식과 익명 함수는 이름 없는 함수를 정의하기 위해 사용되는 함수 표현식이라고 했는데 compare() 이라는 이름이 있는 함수를 이름이 없는</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="p">-&gt;</span> <span class="n">a</span><span class="p">.</span><span class="n">length</span> <span class="p">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">length</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>로 표현했다는 것이 된다. 즉, 이 함수 표현식은 람다 표현식이거나 익명 함수이거나 둘 중 하나일 것이다!</p>
+
+<p>결론부터 말하자면 위 표현식은 <strong>람다 표현식</strong> 이다.</p>
+
+<p>람다 표현식을 사용해서 이름이 있는 함수를 굳이 만들지 않고도 간편하고 빠르게 이름 없는 함수를 구현할 수 있다.</p>
+
+<p>위에서 봤었던</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">max</span><span class="p">(</span><span class="n">strings</span><span class="p">,</span> <span class="p">{</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="p">-&gt;</span> <span class="n">a</span><span class="p">.</span><span class="n">length</span> <span class="p">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">length</span> <span class="p">})</span>
+</code></pre></div></div>
+
+<p>이 max() 함수도 두 번째 인자로 이름 없는 함수를 람다 표현식을 사용해 간편하게 구현하여 전달한 것이다.</p>
+
+<p>람다 표현식은 항상 <strong>{ } 중괄호</strong> 로 둘러싸져 있으며 <strong>-&gt; 기호</strong> 뒤에서부터가 함수의 body 부분이다.</p>
+
+<p><strong>-&gt;</strong> 기호 앞에는 함수에 전달될 매개 변수를 표시해야 하고, 두 개 이상의 매개 변수를 전달할 때는 <strong>,(콤마)</strong> 를 통해 구분해야 한다.</p>
+
+<p><strong>-&gt;</strong> 기호 앞에 매개 변수를 표시할 때 매개 변수의 데이터 타입은 명시해도 되고 명시하지 않아도 된다.</p>
+
+<p>만약 위 예시에서 매개 변수의 데이터 타입을 명시한다면</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span> <span class="n">a</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">String</span> <span class="p">-&gt;</span> <span class="n">a</span><span class="p">.</span><span class="n">length</span> <span class="p">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">length</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>으로 표현된다.</p>
+
+<p>코틀린에서 지원하는 람다 표현식에 관한 Convention(컨벤션, 관습)이 하나 있는데 <a href="https://kotlinlang.org/docs/reference/lambdas.html#passing-a-lambda-to-the-last-parameter">kotlin 도큐먼트 - Passing trailing lambdas(후행 람다 전달)</a> 문서를 보면 알 수 있을 것이다.</p>
+
+<p>만약</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">max</span><span class="p">(</span><span class="n">strings</span><span class="p">,</span> <span class="p">{</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="p">-&gt;</span> <span class="n">a</span><span class="p">.</span><span class="n">length</span> <span class="p">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">length</span> <span class="p">})</span>
+</code></pre></div></div>
+
+<p>위 max() 함수처럼 어떤 함수의 매개 변수 중 가장 마지막 매개 변수에 함수가 전달되는 고차함수라면 해당 함수 코드를 아래와 같이 바꿀 수 있다는 Convention이 존재한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">max</span><span class="p">(</span><span class="n">strings</span><span class="p">)</span> <span class="p">{</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="p">-&gt;</span> <span class="n">a</span><span class="p">.</span><span class="n">length</span> <span class="p">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">length</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>또는</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">max</span><span class="p">(</span><span class="n">strings</span><span class="p">)</span> <span class="p">{</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="p">-&gt;</span> 
+    <span class="n">a</span><span class="p">.</span><span class="n">length</span> <span class="p">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">length</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>위와 같이 개행을 통해 조금 더 보기 편하게 바꾸기도 한다.</p>
+
+<p>또한 어떤 함수가 단 하나의 매개 변수만 전달하는데 그 매개 변수로 함수가 전달된다면 다음과 같이 함수의 <strong>()</strong> 괄호 표시를 아예 생략할 수도 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// () 표시가 생략 안 된 경우
+</span><span class="n">run</span> <span class="p">({</span> <span class="n">println</span><span class="p">(</span><span class="s">"..."</span><span class="p">)</span> <span class="p">})</span>
+
+<span class="c1">// () 표시가 생략된 경우
+</span><span class="n">run</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="s">"..."</span><span class="p">)</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>마지막으로 람다 표현식을 사용하다보면 <strong>it</strong> 이라는 변수 비슷한 것이 나타낼 때가 있을 것이다.</p>
+
+<p><img width="450" alt="02" src="https://user-images.githubusercontent.com/31889335/101335014-f8414900-38bb-11eb-9967-8eab220efd03.png" /></p>
+
+<p>람다 표현식으로 표현되는 함수의 매개변수가 1개일 경우에는 컴파일러가 <strong>-&gt;</strong> 기호를 생략할 수 있게 해준다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span> <span class="n">a</span> <span class="p">-&gt;</span> <span class="n">a</span><span class="p">.</span><span class="n">length</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>예를 들어 위 코드처럼 람다 표현식으로 표현되는 함수의 매개변수가 한 개 일 때 -&gt; 기호를 생략할 수 있고, <strong>대신 매개변수 a를 it 이라고 표시</strong> 한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">length</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>즉, 위 코드처럼 더 간단하게 나타낼 수 있다는 것이다!</p>
+
+<h2 id="3️⃣-익명-함수anonymous-function-이란">3️⃣ 익명 함수(Anonymous Function) 이란?</h2>
+
+<p>✍🏻 <a href="https://kotlinlang.org/docs/reference/lambdas.html#anonymous-functions">kotlin 도큐먼트 - 익명 함수</a> 를 참고하여 작성합니다.</p>
+
+<p>익명 함수는 위에서 배운 람다 표현식과 전혀 다른 개념이 아니다!</p>
+
+<p>람다 표현식에 몇 가지 코드가 추가된 함수 표현식이 익명 함수이다.</p>
+
+<p>위에서 람다 표현식은</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="p">-&gt;</span> <span class="n">a</span><span class="p">.</span><span class="n">length</span> <span class="p">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">length</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>위와 같은 모습으로 표현되는 것이라고 알아보았다.</p>
+
+<p>이 람다 표현식에 대해서 조금 더 깊게 생각해보면 <strong>람다 표현식은 함수의 return 타입을 명시하지 않고 있다</strong> 는 것을 깨닫게 될 것이다.</p>
+
+<p>하지만 어떤 경우는 굳이 굳이 람다 표현식을 사용하면서 동시에 함수의 return 타입을 명시해줘야 하는 경우가 있을 수도 있다.</p>
+
+<p>이런 경우에는</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">length</span> <span class="p">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">length</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>위와 같이 함수 이름은 없지만 fun 키워드와 return 타입까지 사용해서 return 타입을 명시해줄 수 있다.</p>
+
+<p>또한 fun 키워드 뒤에 함수 이름이 존재하지 않는다.</p>
+
+<p>이와 같은 표현식을 <strong>익명 함수</strong> 라고 한다.</p>
+
+<h2 id="4️⃣-추가적으로-알아두면-좋은-것들">4️⃣ 추가적으로 알아두면 좋은 것들</h2>
+
+<p>일급 함수인 코틀린의 함수가 가진 4가지 특징에 대해 알아보았을 때</p>
+
+<p><strong>코틀린의 함수는 할당 명령문(=, 대입)의 대상이 될 수 있다.</strong> 라는 특징이 존재했었다.</p>
+
+<p>따라서 아래와 같은 코드가 성립한다는 것이다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">testFun</span> <span class="p">=</span> <span class="p">{</span> <span class="n">name</span> <span class="p">-&gt;</span> <span class="n">name</span><span class="p">.</span><span class="n">length</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>이 때, testFun 이라는 이름의 변수의 데이터 타입을 명시해주고 싶다면 어떻게 명시해야 할까?</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">testFun</span><span class="p">:</span> <span class="p">(</span><span class="n">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Int</span> <span class="p">=</span> <span class="p">{</span> <span class="n">name</span> <span class="p">-&gt;</span> <span class="n">name</span><span class="p">.</span><span class="n">length</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>라고 명시하면 된다.</p>
+
+<p>데이터 타입을 <strong>(String) -&gt; Int</strong> 라고 명시한 것인데 람다 표현식의 매개 변수에 해당하는 데이터 타입은 괄호()를 사용하여 표현하고, return 타입에 해당하는 데이터 타입은 괄호()를 사용하지 않는다.</p>
+
+<h1 id="끝">끝!</h1>
+
+<p>고차 함수, 람다 표현식, 익명 함수가 이 포스팅처럼 하나의 흐름으로 공부할 수 있다는 것을 깨닫게 되었습니다 😁 어디에서 누군가 “Hoxy,, 너 고차 함수가 뭔지 아니?” 라고 물어보면 설명할 수 있길..!!</p>
+
+<p>(🕵🏻‍♀️ 추가로 찾아볼 것들)</p>
+<ul>
+  <li>
+    <p><strong>일급 객체 조건 4개 다 만족해야 하나?</strong></p>
+
+    <p>다 만족하는 것이 맞을 것 같다. 왜냐하면 일급 객체의 정의 자체가 <strong>다른 객체들에 적용 가능한 연산을 “모두” 지원하는 객체</strong> 이기 때문!</p>
+  </li>
+  <li>
+    <p><strong>람다 매개 변수 데이터 타입 생략 가능한거 코틀린에서만인가?</strong></p>
+
+    <p>자바에서도 생략 가능한듯! 자바 람다 표현식 예시를 검색해보니 생략하더랏,,!</p>
+
+    <p>자바스크립트에서도 생략 가능한듯! 애초에 자바스크립트는 모든 데이터 타입을 Object 타입과 Primitive 타입(기본형)으로 취급한다고 알고 있고, 자바스크립트 인터프리터가 알아서 변수의 데이터 타입을 파악하고 저장해 따로 데이터 타입을 쓰지 않는다고 함!</p>
+  </li>
+  <li>
+    <p><strong>고차함수를 사용함으로써 얻는 장점? —&gt; 컴포넌트간 통신이 유용하다?</strong></p>
+  </li>
+</ul>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

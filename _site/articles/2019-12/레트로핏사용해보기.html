@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="  SOPT 25기 안드로이드 - 서버 합동 세미나를 위해 Retrofit 이라는 라이브러리를 배웠다.  아직 안드로이드의 HTTP 통신에 대해서 공부하지 못해서 통신에 대한 지식 없이 Retrofit 라이브러리가 무엇인지만 공부하며 작성하였다.  –&gt; Retrofit 공식 ...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[안드로이드] 💻 Retrofit 사용하여 서버와 통신하기 | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[안드로이드] 💻 Retrofit 사용하여 서버와 통신하기 | choheeis">
+  <meta name="twitter:description" content="  SOPT 25기 안드로이드 - 서버 합동 세미나를 위해 Retrofit 이라는 라이브러리를 배웠다.  아직 안드로이드의 HTTP 통신에 대해서 공부하지 못해서 통신에 대한 지식 없이 Retrofit 라이브러리가 무엇인지만 공부하며 작성하였다.  –&amp;gt; Retrofit 공식 ...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2019-12/%EB%A0%88%ED%8A%B8%EB%A1%9C%ED%95%8F%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EA%B8%B0">
+  <meta property="og:title" content="[안드로이드] 💻 Retrofit 사용하여 서버와 통신하기 | choheeis">
+  <meta property="og:description" content="  SOPT 25기 안드로이드 - 서버 합동 세미나를 위해 Retrofit 이라는 라이브러리를 배웠다.  아직 안드로이드의 HTTP 통신에 대해서 공부하지 못해서 통신에 대한 지식 없이 Retrofit 라이브러리가 무엇인지만 공부하며 작성하였다.  –&amp;gt; Retrofit 공식 ...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[안드로이드] 💻 Retrofit 사용하여 서버와 통신하기 | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2019-12/%EB%A0%88%ED%8A%B8%EB%A1%9C%ED%95%8F%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EA%B8%B0">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[안드로이드] 💻 Retrofit 사용하여 서버와 통신하기">[안드로이드] 💻 Retrofit 사용하여 서버와 통신하기</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        22 DEC 2019
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    20 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <blockquote>
+  <p>SOPT 25기 안드로이드 - 서버 합동 세미나를 위해 <strong>Retrofit</strong> 이라는 라이브러리를 배웠다.</p>
+
+  <p>아직 안드로이드의 HTTP 통신에 대해서 공부하지 못해서 통신에 대한 지식 없이 Retrofit 라이브러리가 무엇인지만 공부하며 작성하였다.</p>
+
+  <p>–&gt; <a href="http://devflow.github.io/retrofit-kr/">Retrofit 공식 문서</a> 와 <a href="https://developer.github.com/v3/">github Rest API 문서</a> 를 참고합니다.</p>
+</blockquote>
+
+<h2 id="1️⃣-retrofit-이-뭐지">1️⃣ Retrofit 이 뭐지?</h2>
+
+<p>✍🏻 <a href="http://devflow.github.io/retrofit-kr/">Retrofit 공식 문서</a> 통해 학습</p>
+
+<p>Retrofit은 앱 개발시 서버 통신에 사용되는 HTTP API를 자바나 코틀린의 인터페이스 형태로 변환해 안드로이드 개발시 API를 쉽게 호출할 수 있도록 지원하는 <strong>라이브러리</strong> 이다.</p>
+
+<p>예를 들어 https://~~/user/{user}/repos 라는 HTTP API가 존재한다고 가정했을 때 Retrofit 라이브러리를 사용하면 HTTP API를 아래 코드와 같은 인터페이스 형태로 변환할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">GitHubService</span> <span class="p">{</span>
+    <span class="n">@GET</span><span class="p">(</span><span class="s">"users/{user}/repos"</span><span class="p">)</span>
+    <span class="k">fun</span> <span class="nf">getRepoList</span><span class="p">(</span><span class="n">@Path</span><span class="p">(</span><span class="s">"user"</span><span class="p">)</span> <span class="n">user</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">Call</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">Repo</span><span class="p">&gt;&gt;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이에 관해서는 아래 내용들에서 더 자세히 알아볼 것이니 지금 이해가 안 되어도 상관 없다~!</p>
+
+<h2 id="2️⃣-retrofit-사용해서-서버와-통신하기-전-안드로이드-개발자로서-해야할-준비단계">2️⃣ Retrofit 사용해서 서버와 통신하기 전 안드로이드 개발자로서 해야할 준비단계</h2>
+
+<blockquote>
+  <p>✍🏻 ‘IT 창업 동아리 SOPT 25기 서버 세미나’에서 배운 내용을 바탕으로 작성합니다.</p>
+</blockquote>
+
+<ol>
+  <li>
+    <p><strong>안드로이드 프로젝트에 Internet 퍼미션 추가하기</strong></p>
+  </li>
+  <li>
+    <p><strong>Retrofit 라이브러리를 프로젝트에 추가하기</strong></p>
+  </li>
+  <li>
+    <p><strong>서버 개발자와 필요한 데이터에 대해서 논의하는 시간 갖기</strong></p>
+  </li>
+  <li>
+    <p><strong>서버 개발자가 만들어준 API 문서 확인하기</strong></p>
+  </li>
+</ol>
+
+<p><br /></p>
+
+<ol>
+  <li>
+    <p><strong>안드로이드 프로젝트에 Internet 퍼미션 추가하기</strong></p>
+
+    <p>서버와의 통신은 인터넷을 거쳐 이루어지기 때문에 먼저 안드로이드 프로젝트의 Manifest 파일에 Internet 퍼미션을 추가해줘야 한다.</p>
+
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+ <span class="nt">&lt;manifest</span> <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+     <span class="na">package=</span><span class="s">"com.example.thisisretrofit"</span><span class="nt">&gt;</span>
+
+     <span class="c">&lt;!-- permission 추가 --&gt;</span>
+     <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.INTERNET"</span><span class="nt">/&gt;</span>
+
+     <span class="nt">&lt;application</span>
+         <span class="na">android:allowBackup=</span><span class="s">"true"</span>
+         <span class="na">android:icon=</span><span class="s">"@mipmap/ic_launcher"</span>
+         <span class="na">android:label=</span><span class="s">"@string/app_name"</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>Retrofit 라이브러리를 프로젝트에 추가하기</strong></p>
+
+    <p>본격적으로 Retrofit 라이브러리를 사용하기 위해 프로젝트의 Module 수준의 build.gradle 파일에 Retrofit 라이브러리 종속성을 추가해야 한다.</p>
+
+    <p><a href="http://devflow.github.io/retrofit-kr/">Retrofit 공식 문서의 Download 부분</a> 을 보면 라이브러리 추가에 관한 정보를 찾을 수 있을 것이다!</p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/69706880-f9358b80-113b-11ea-95a8-74c08a03ee1b.PNG" alt="01" /></p>
+
+    <p>(insert latest version)를 작성하기 위해 최신 버전이 몇 인지를 그때 그때 찾아봐야 하는데 <a href="https://github.com/square/retrofit">Retrofit github</a> 에 접속해보면 최신 버전이 리드미에 명시되어 있다.</p>
+
+    <p>버전을 알아왔다면 프로젝트 Module 수준의 build.gradle 파일에 종속성을 추가해보자!</p>
+
+    <p>~~~kotlin
+ dependencies {
+     …
+     // Retrofit 라이브러리 추가
+     implementation ‘com.squareup.retrofit2:retrofit:2.9.0’
+ }
+ ~~</p>
+  </li>
+  <li>
+    <p><strong>서버 개발자와 필요한 데이터에 대해 논의하는 시간 갖기</strong></p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/69725359-5263e600-1161-11ea-942a-bb4394f573c4.jpg" width="300" /></p>
+
+    <p>만약, 위와 같은 UI를 가진 엑티비티가 있다면 여기서 필요한 정보는 무엇일까?</p>
+
+    <p>위 화면은 choheeis 라는 github 계정을 가진 유저의 repository 목록과 각 repository에 대한 간단한 정보들을 나타낸 화면이다.</p>
+
+    <p>위 화면을 구현하기 위해 필요한 정보들을 생각해보면</p>
+
+    <p><strong>각 repository의 제목</strong></p>
+
+    <p><strong>각 repository의 설명</strong></p>
+
+    <p><strong>각 repository의 주요 언어</strong></p>
+
+    <p>들이 필요하다.</p>
+
+    <p>따라서, 이러한 정보들을 서버에 요청하여 받아와야 하는 것이다!</p>
+  </li>
+  <li>
+    <p><strong>서버 개발자가 만들어 준 API 문서 확인하기</strong></p>
+
+    <p>협업을 하면 서버 개발자가 Rest API 문서를 만들어서 프론트앤드 개발자에게 보여줄 것이다. 이 API 문서를 보고 통신을 하는 것이 가장 좋지만 이 포스팅에서는 서버 개발자가 없으니 일단 <a href="https://docs.github.com/en/free-pro-team@latest/rest">Github에서 제공하는 REST API 문서</a> 를 사용할 것이다!</p>
+
+    <p>API 문서를 보기 전에 RESTful 통신이라는 것에 대해 간략하게나마 알아보자.</p>
+
+    <p>RESTful은 <strong>Representational State Transfer</strong> 의 약자로, 서버에 존재하는 데이터에 접근하기 위한 규칙들의 모음이다.</p>
+
+    <p>RESTful 하게 짜여진 API는 URL로 서버에 있는 데이터나 서버의 행위를 식별할 수 있고, <strong>GET</strong>, <strong>POST</strong>, <strong>PUT</strong>, <strong>DELETE</strong> 이렇게 4가지 행위를 할 수 있다.</p>
+
+    <ul>
+      <li>
+        <p>GET : 데이터를 서버에서 얻는 행위</p>
+      </li>
+      <li>
+        <p>POST : 데이터를 서버에 제출하는 행위</p>
+      </li>
+      <li>
+        <p>PUT : 서버의 데이터를 변경하는 행위</p>
+      </li>
+      <li>
+        <p>DELETE : 서버의 데이터를 삭제하는 행위</p>
+      </li>
+    </ul>
+
+    <p><a href="https://docs.github.com/en/free-pro-team@latest/rest/overview/resources-in-the-rest-api">Github REST API 문서의 Current Version 문서</a> 에 접속해보면 Github REST API의 최신 버전에 대해 다음과 같이 설명해 놓았다.</p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/69738552-a7abf180-1179-11ea-8b10-868bdae03fd9.PNG" alt="03" /></p>
+
+    <p>위 설명을 읽어보면 https://api.github.com 이라는 서버로 들어온 모든 요청은 이 v3 버전의 API가 응답한다고 되어있다.</p>
+
+    <p>이 말을 통해 <code class="highlighter-rouge">BASE URL</code> 이 https://api.github.com 이라는 것을 알 수 있다.</p>
+
+    <p><code class="highlighter-rouge">BASE URL</code> 은 데이터를 요청할 서버의 이름을 말한다. 이 BASE URL 뒤에 붙는 것이 어떤 것인지에 따라 이 서버에 어떤 서비스를 요청하는 API 인지 정해지게 된다.</p>
+
+    <p>위에서 필요한 데이터가 무엇인지 알아보았으니 이제 이 데이터들을 얻으려면 어떤 API를 사용해야 하는지 알아보자!</p>
+
+    <p><a href="https://docs.github.com/en/free-pro-team@latest/rest/reference/repos">Repository에 관한 데이터를 제공하는 API 문서</a> 를 보면 우리가 필요한 데이터 얻기를 요청하는 API에 대해 알 수 있다.</p>
+
+    <p><img width="607" alt="01" src="https://user-images.githubusercontent.com/31889335/98629642-a5c44980-235c-11eb-915f-defba50dfaed.png" /></p>
+
+    <p>이 API 문서는 특정 계정의 레포지토리 리스트를 얻을 수 있는 API에 대한 문서이다.</p>
+
+    <p>먼저 URL 앞에 <strong>GET</strong> 이 붙어있으므로 이 API는 서버에 있는 데이터를 얻을 수 있는 API 이다.</p>
+
+    <p>GET 뒤의 <strong>/orgs/{org}/repos</strong> 라는 부분은 BASE URL 뒤에 붙는 부분이다. 특정 계정({org})의 레포지토리 리스트(repos)를 얻을 수 있는 API라는 것을 직관적으로 알 수 있다.</p>
+
+    <p>또 Parameters 부분을 보면 여러 파라미터들을 적절한 위치에 사용하여 얻고자 하는 데이터를 더욱 구체적으로 얻을 수 있음을 알 수 있다.</p>
+  </li>
+</ol>
+
+<h2 id="3️⃣-retrofit-사용법">3️⃣ Retrofit 사용법</h2>
+
+<p>이제 서버에서 작성해준 API 문서(이 포스팅에서는 github Rest API 문서)를 확인했으니 이 문서를 토대로 Retrofit을 이용해 서버와 통신을 해야할 차례이다!</p>
+
+<p>서버와 통신을 하기 위해 가장 중요한 Retrofit이라는 라이브러리를 사용법을 알아보자.</p>
+
+<p>Retrofit의 사용법은 아래와 같은 3가지 순서로 진행된다.</p>
+
+<ol>
+  <li>
+    <p><strong>Retrofit Interface 생성하고 Interface 안에 Request 메소드들 작성하기</strong></p>
+  </li>
+  <li>
+    <p><strong>Retrofit Interface의 실제 구현체 만들기</strong></p>
+  </li>
+  <li>
+    <p><strong>Request 메소드 호출하여 통신 처리하기</strong></p>
+
+    <p><img width="815" alt="02" src="https://user-images.githubusercontent.com/31889335/98630793-40258c80-235f-11eb-8782-5e7cb9960443.png" /></p>
+  </li>
+</ol>
+
+<p>한 단계씩 알아보자.</p>
+
+<ol>
+  <li>
+    <p><strong>Retrofit 인터페이스 생성하고 Interface 안에 Request 메소드들 작성하기</strong></p>
+
+    <p><img width="805" alt="03" src="https://user-images.githubusercontent.com/31889335/98631005-bc1fd480-235f-11eb-9f86-c93ae78826d2.png" /></p>
+
+    <p>가장 먼저 위 코드처럼 자바 or 코틀린 인터페이스를 하나 생성해야 한다. 위 코드는 자바의 인터페이스이지만 이 포스팅에서는 코틀린으로 변환하여 설명할 것이다.</p>
+
+    <p>안드로이드 스튜디오에서 아래 그림처럼 이름이 GithubService 라는 인터페이스를 하나 만든다.</p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/69929970-75e1b480-1504-11ea-9588-93ec6a0c9658.PNG" alt="07" /></p>
+
+    <p><img width="192" alt="04" src="https://user-images.githubusercontent.com/31889335/98631191-3e0ffd80-2360-11eb-83fb-c880a6ab3e3c.png" /></p>
+
+    <p>코틀린 인터페이스를 만들었다면 이 인터페이스 안에 Request 메소드들을 작성해주어야 한다.</p>
+
+    <p><strong>Request 메소드</strong> 란 다음과 같은 요청 메소드를 말하는데</p>
+
+    <p><img width="464" alt="05" src="https://user-images.githubusercontent.com/31889335/98631733-5b919700-2361-11eb-83fc-574155301bbd.png" /></p>
+
+    <p>이전에 아래와 같은 API 문서에서 보았던</p>
+
+    <p><img width="607" alt="01" src="https://user-images.githubusercontent.com/31889335/98629642-a5c44980-235c-11eb-915f-defba50dfaed.png" /></p>
+
+    <p>URL이나 Parameters 들을 메소드 형태로 작성한 것이라고 생각하면 된다.</p>
+
+    <p>한 개의 Request 메소드가 한 개의 API 를 대신한다.</p>
+
+    <p>만약 호출해야 하는 API 의 종류가 많다면 여러 개의 Request 메소드를 인터페이스 안에 작성하면 된다.</p>
+
+    <p>Request 메소드를 작성할 때는 Retrofit에서 제공하는 <code class="highlighter-rouge">어노테이션(annotation)</code> 을 사용할 수 있다.</p>
+
+    <p><strong>어노테이션</strong> 이란 아래 코드에서 볼 수 있는 것처럼</p>
+
+    <p><img width="410" alt="06" src="https://user-images.githubusercontent.com/31889335/98636258-d8c10a00-2369-11eb-84f0-4ccd808b26c5.png" /></p>
+
+    <p>@ 기호를 이용해 특별한 의미를 담은 표현식이다.</p>
+
+    <p>Request 메소드를 작성할 때 Retrofit 어노테이션은 Request 메소드에 작성할 파라미터들을 대신할 수도 있고, 쿼리 파라미터를 지원하는 용도로 사용할 수도 있다.</p>
+
+    <p>또한 Multipart Request의 바디와 파일 업로드에 대해서도 어노테이션을 사용할 수 있다.</p>
+
+    <p>그럼 이제 Request 메소드를 어떻게 작성하면 되는지 예를 들어보자!</p>
+
+    <p>특정 계정의 레포지토리 리스트를 얻을 수 있는 아래 API 문서를 보고 이 API를 대신하는 Request 메소드를 작성해볼 것이다.</p>
+
+    <p><img width="607" alt="01" src="https://user-images.githubusercontent.com/31889335/98629642-a5c44980-235c-11eb-915f-defba50dfaed.png" /></p>
+
+    <p>먼저 모든 Request 메소드는 <code class="highlighter-rouge">HTTP 어노테이션</code> 을 작성함으로써 시작된다.</p>
+
+    <p>HTTP 어노테이션을 작성한 후 그 밑에 API 에 관한 Request 메소드를 작성하면 된다.</p>
+
+    <p>HTTP 어노테이션의 예시는</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">@GET</span><span class="p">(</span><span class="s">"users/list"</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <p>와 같다. 위 어노테이션은 GET 을 표현한 어노테이션이지만 이외에 사용할 수 있는 HTTP 어노테이션에는 <strong>HTTP, GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD</strong> 이렇게 총 8가지가 있다.</p>
+
+    <p>추가로 HTTP 어노테이션의 괄호안에는 API의 URL을 문자열 형태로 넣어줘야 한다.</p>
+
+    <p>다음과 같이 URL에 특정 쿼리 파라미터를 넣어주는 것도 가능하다.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">@GET</span><span class="p">(</span><span class="s">"users/list?sort=desc"</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <p>그럼 이제 우리가 얻고자 하는 API 문서에 나와있는 URL대로 어노테이션을 작성해보자.</p>
+
+    <p><img width="286" alt="07" src="https://user-images.githubusercontent.com/31889335/98637290-9993b880-236b-11eb-9e36-c0711cf97729.png" /></p>
+
+    <p>HTTP 어노테이션을 작성했다면 그 아래에 Request 메소드를 작성해보자.</p>
+
+    <p>Request 메소드의 매개변수에는 API URL에서 동적으로 변경되어야 할 값들을 넣어주고, 리턴 타입에는 Call&lt;T&gt; 인터페이스를 적어줘야 한다. 이 인터페이스는 일단 여기선 넘어가자.</p>
+
+    <p><img width="420" alt="08" src="https://user-images.githubusercontent.com/31889335/98637721-263e7680-236c-11eb-8abb-f375f0f5cafa.png" /></p>
+
+    <p>HTTP 어노테이션에 작성한 URL에서 {org} 부분은 동적으로 바뀔 수 있는 값이다. 즉, 계정 이름에 따라 가져올 데이터가 다르므로 {org} 로 되어 있는 것이다.</p>
+
+    <p>이렇게 동적으로 바뀔 수 있는 부분에 대해 매개변수를 작성할 때는 <code class="highlighter-rouge">@Path("동적으로 변하는 부분의 URL 이름")</code> 라는 Retrofit 어노테이션을 변수 앞에 붙여줘야 한다.</p>
+
+    <p>이 다음으로 <strong>Request 메소드의 리턴 타입</strong> 을 작성해보자.</p>
+
+    <p>Retrofit의 Request 메소드가 호출된 후 리턴하는 타입은 Retrofit이 제공하는 <code class="highlighter-rouge">Call&lt;T&gt;</code> 이라는 타입이다.</p>
+
+    <p><a href="https://square.github.io/retrofit/2.x/retrofit/">Call&lt;T&gt; 에 대한 문서</a> 를 읽어보니 Call&lt;T&gt; 은 여러 메소드들을 정의하고 있는 <strong>인터페이스</strong> 라는 것을 알 수 있다.</p>
+
+    <p>여기서 T 는 성공적으로 응답될 response body type의 클래스이고, 안드로이드에서 response body type의 클래스를 data class 로 사용하고 있다.</p>
+
+    <p>즉, &lt;&gt; 안에는 성공적으로 <strong>응답될</strong> Body 타입의 data class를 넣어주면 된다.</p>
+
+    <p>정리해보자면 Request 메소드가 호출된 후 반환값으로 Call&lt;T&gt; 타입의 <strong>인터페이스</strong> 를 반환한다. (이 부분은 다른 내용을 조금 더 알아보고 적절한 순간에 아래에서 다시 설명할 것이니 Request 메소드의 반환값이 ‘인터페이스’ 라는 것만 기억하자!)</p>
+
+    <p>응답될 Body 타입의 data class에 대해서도 조금 후에 설명할 것이니 일단은 &lt;&gt; 안이 비어있는 상태로 리턴 값을 작성해보자.</p>
+
+    <p><img width="484" alt="12" src="https://user-images.githubusercontent.com/31889335/98648840-2776a000-237a-11eb-97e6-cf0277c05f5a.png" /></p>
+  </li>
+  <li>
+    <p><strong>Retrofit Interface의 실제 구현체 만들기</strong></p>
+
+    <p>2번 과정까지의 상황을 다시 한 번 정리해보면 어떤 하나의 코틀린 인터페이스를 만들고 이 인터페이스 안에 필요한 API들을 Request 메소드로 만들어 놓은 상황일 것이다.</p>
+
+    <p>하지만 자바와 코틀린에서 <code class="highlighter-rouge">인터페이스</code> 라는 것은 사용할 곳에서 인터페이스를 구현해야 한다는 것을 알고 있을 것이다.</p>
+
+    <p>따라서 이제 우리는 이 Request 메소드들을 정의하고 있는 인터페이스를 사용할 곳에서 직접 구현해야 한다.</p>
+
+    <p>구현하기 전! 생각해볼 거리가 있다. 우리가 구현해야 할 인터페이스는 API 를 호출을 대신하는 Request 메소드가 포함되어 있는 인터페이스이다.</p>
+
+    <p>즉, 앱 안에서 서버 호출이 필요한 곳마다 이 인터페이스를 사용해야 한다는 것이고 (앱 안에서 서버 호출이 필요한 곳은 정말 많을 것이다..) 그 때마다 사용할 곳에서 인터페이스를 구현해야 한다는 것이다. 그렇다면..? 인터페이스 구현 코드가 이 파일 저 파일에 많이 존재하게 될 것이다.</p>
+
+    <p>따라서 이 인터페이스를 한 번만 구현해놓고 필요한 곳에서 재구현 없이 사용할 수 없을까?</p>
+
+    <p>방법이 있다. 코틀린의 <code class="highlighter-rouge">object</code> 를 사용하면 된다! object는 싱글톤이기 때문에 전역 변수처럼 앱의 모든 곳에서 접근할 수 있다.</p>
+
+    <blockquote>
+      <p>object 공부하고 이 부분 내용 수정하기..</p>
+    </blockquote>
+
+    <p>즉, <code class="highlighter-rouge">object</code> 로 인터페이스의 구현체를 만들어 놓으면 필요한 곳에서 재구현없이 전역 공간에 있는 구현체를 가져다 사용할 수 있다!</p>
+
+    <p>안드로이드 스튜디오를 통해 아래와 같이 object 파일을 생성하면</p>
+
+    <p><img width="361" alt="13" src="https://user-images.githubusercontent.com/31889335/98650127-cfd93400-237b-11eb-8403-2f6502d15080.png" /></p>
+
+    <p><img width="288" alt="14" src="https://user-images.githubusercontent.com/31889335/98650120-ce0f7080-237b-11eb-84b3-d1726f118898.png" /></p>
+
+    <p>위와 같은 object 파일이 생성될 것이다.</p>
+
+    <p><img width="803" alt="15" src="https://user-images.githubusercontent.com/31889335/98650308-0fa01b80-237c-11eb-8f85-e4c92be32f30.png" /></p>
+
+    <p>구현체는 위와 같이 작성하면 된다고 Retrofit 문서에 나와있다. 코틀린으로 바꿔서 작성해보자.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">object</span> <span class="nc">GithubServiceImpl</span> <span class="p">{</span>
+
+     <span class="c1">// BASE_URL을 private const 변수로 저장해놓았다.
+</span>     <span class="k">private</span> <span class="k">const</span> <span class="kd">val</span> <span class="py">BASE_URL</span> <span class="p">=</span> <span class="s">"https://api.github.com"</span>
+
+     <span class="k">private</span> <span class="kd">val</span> <span class="py">retrofit</span><span class="p">:</span> <span class="n">Retrofit</span> <span class="p">=</span> <span class="n">Retrofit</span><span class="p">.</span><span class="n">Builder</span><span class="p">()</span>
+         <span class="p">.</span><span class="n">baseUrl</span><span class="p">(</span><span class="n">BASE_URL</span><span class="p">)</span>
+         <span class="p">.</span><span class="n">build</span><span class="p">()</span>
+
+     <span class="c1">// GithubService는 Request 메소드들을 작성해놓은 인터페이스 이름이다.
+</span>     <span class="kd">val</span> <span class="py">service</span><span class="p">:</span> <span class="n">GithubService</span> <span class="p">=</span> <span class="n">retrofit</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">GithubService</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
+
+ <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>이렇게 실제 구현체를 싱글톤으로 구현하는 것까지 해보았다. 이제 인터페이스에 작성해놓은 Request 메소드들을 서버 호출이 필요한 곳에서 호출만 하면 된다!</p>
+
+    <p>하지만 그 전에,, 앞에서 미뤄두었던 <strong>응답될 Body</strong> 에 대해서 알아보고 Request 메소드를 완벽히 작성해보자.</p>
+  </li>
+</ol>
+
+<ul>
+  <li>
+    <p><strong>응답될 Body data 클래스 작성하기</strong></p>
+
+    <p><a href="https://docs.github.com/en/free-pro-team@latest/rest/reference/repos">Repository에 관한 데이터를 제공하는 API 문서</a> 의 Default Response 부분을 보면 통신이 성공적일 때 응답되는 Response가 무엇인지 예시가 나와있다.</p>
+
+    <p><img width="750" alt="09" src="https://user-images.githubusercontent.com/31889335/98646129-44a96f80-2376-11eb-86dc-688d7d1c7453.png" /></p>
+
+    <p>위와 같은 데이터들을 서버에서 받아올 수 있다는 것다. (정말 많은 데이터를 얻을 수 있다..!)</p>
+
+    <p>이 때 알아두어야 할 것이 있다.</p>
+
+    <p>위에서 응답 데이터의 형식을 보면 <code class="highlighter-rouge">json</code> 형식이라는 것을 깨닫게 될 것이다. (Key와 Value 값으로 데이터를 정의하고 있음)</p>
+
+    <p>이는 해당 REST API 를 만든 서버에서 클라이언트에 데이터를 응답할 때 json 형태로 포맷된 데이터를 보내도록 만들어져 있기 때문이다.</p>
+
+    <p>하지만 앞서 Retrofit에서 Call&lt;&gt; 객체의 &lt;&gt; 안에는 성공적으로 응답될 Body 타입의 <strong>data 클래스</strong> 를 넣어줘야 한다고 했다.</p>
+
+    <p><strong>즉, 서버에서 응답 받는 실데이터는 json 포맷의 데이터인 반면 클라이언트에서 응답 받을 데이터 타입은 data 클래스 객체로 주고 받는 모습이 다른 것이다.</strong></p>
+
+    <p>따라서 서버에서 응답되는 json 포맷의 데이터가 클라이언트의 data 클래스 객체로 변환되어야 성공적인 통신이 가능하게 된다.</p>
+
+    <p>이는 클라이언트에서 서버에 데이터를 보낼 때에도 마찬가지이다. 클라이언트에서 데이터를 data 클래스 객체 형태로 보내면 이를 json 형식의 데이터로 변환하여 보내야 서버가 받을 수 있다.</p>
+
+    <p>이렇게 data class &lt;-&gt; json 사이를 왔다 갔다  <strong>변환하는 기능</strong> 은 Retrofit 라이브러리에 <code class="highlighter-rouge">Gson</code> 이라는 Java 라이브러리를 추가로 묶어서 사용함으로써 가능하다. (Gson은 Json 문자열과 Java 객체 사이를 변환해주는 라이브러리이다.)</p>
+
+    <p>Gson은 Java 라이브러리이기 때문에 Gson만 단독으로도 사용 가능하다. 단독으로 사용하려면 <a href="https://github.com/google/gson">Gson Github</a> 에서 Gson 종속성 추가 방법을 알아보면 된다.</p>
+
+    <p>다만, Retrofit을 사용한다면 Retrofit과 묶어서 함께 사용할 수 있고, 이를 위해 아래와 같은 방법으로 Module 수준의 build.gradle 파일에 종속성을 추가하여 Retrofit에 Converter로 함께 사용되는 Gson 라이브러리를 추가해주면 된다.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">dependencies</span> <span class="p">{</span>
+      <span class="o">..</span><span class="p">.</span>
+      <span class="c1">// 이전에 추가한 Retrofit 라이브러리이다.
+</span>      <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="p">.</span><span class="n">squareup</span><span class="p">.</span><span class="n">retrofit2</span><span class="p">:</span><span class="n">retrofit</span><span class="p">:</span><span class="m">2.9</span><span class="p">.</span><span class="m">0</span><span class="err">'</span>
+
+      <span class="c1">// Retrofit에 Converter로 함께 사용되는 Gson 라이브러리 추가
+</span>      <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="p">.</span><span class="n">squareup</span><span class="p">.</span><span class="n">retrofit2</span><span class="p">:</span><span class="n">converter</span><span class="p">-</span><span class="n">gson</span><span class="p">:</span><span class="m">2.9</span><span class="p">.</span><span class="m">0</span><span class="err">'</span>
+</code></pre></div>    </div>
+
+    <p>종속성 추가 후, 앞에서 작성했던 인터페이스 구현체를 조금 수정하여 Retrofit의 Converter로 Gson 라이브러리를 사용하겠다는 설정을 구현체에 해주어야 한다.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">object</span> <span class="nc">GithubServiceImpl</span> <span class="p">{</span>
+
+      <span class="k">private</span> <span class="k">const</span> <span class="kd">val</span> <span class="py">BASE_URL</span> <span class="p">=</span> <span class="s">"https://api.github.com"</span>
+
+      <span class="k">private</span> <span class="kd">val</span> <span class="py">retrofit</span><span class="p">:</span> <span class="n">Retrofit</span> <span class="p">=</span> <span class="n">Retrofit</span><span class="p">.</span><span class="n">Builder</span><span class="p">()</span>
+          <span class="p">.</span><span class="n">baseUrl</span><span class="p">(</span><span class="n">BASE_URL</span><span class="p">)</span>
+          <span class="c1">// 이 부분 추가하기
+</span>          <span class="p">.</span><span class="n">addConverterFactory</span><span class="p">(</span><span class="n">GsonConverterFactory</span><span class="p">.</span><span class="n">create</span><span class="p">())</span>
+          <span class="p">.</span><span class="n">build</span><span class="p">()</span>
+
+      <span class="kd">val</span> <span class="py">service</span><span class="p">:</span> <span class="n">GithubService</span> <span class="p">=</span> <span class="n">retrofit</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">GithubService</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
+  <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>이렇게 Gson Converter 까지 설정해줬으니 본격적으로 Call&lt;&gt; 객체의 &lt;&gt; 안에 들어가는 응답될 Body data class를 생성해보자.</p>
+
+    <p>먼저 코틀린의 data 클래스를 생성한다.</p>
+
+    <p><img width="296" alt="10" src="https://user-images.githubusercontent.com/31889335/98647668-83402980-2378-11eb-8039-1371c9a5077d.png" /></p>
+
+    <p>위와 같이 data class를 생성한 후, data class의 인자로 API 문서에서 확인할 수 있었던 응답시 받을 수 있는 모든 데이터들의 Key값을 변수화하여 작성해주면 된다. 단, 변수화할 때 변수 이름은 반드시 Key 와 동일한 이름이여야 한다!</p>
+
+    <blockquote>
+      <p>data class의 인자인지 생성자 함수인지 알아보고 수정하자.</p>
+    </blockquote>
+
+    <p><img width="307" alt="11" src="https://user-images.githubusercontent.com/31889335/98647946-f21d8280-2378-11eb-833c-9fcb11262b90.png" /></p>
+
+    <p>하지만 위와 같이 모든 데이터에 대해 변수화할 필요가 있을까?</p>
+
+    <p>우리는 모든 데이터 중 레포지토리 이름을 나타내는 데이터인 name과 레포지토리 아이디인 id 라는 key에 해당하는 데이터만 사용하려고 한다면?</p>
+
+    <p>즉, 클라이언트는 서버에서 제공하는 모든 데이터를 사용하는 경우보다 필요한 일부의 데이터만 사용하게 되는 경우가 더 많다.</p>
+
+    <p>따라서 모든 데이터가 아닌 사용하고자 하는 데이터에 관해서만 변수화하면 된다.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">data class</span> <span class="nc">GitRepositoryResponseData</span> <span class="p">(</span>
+      <span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+      <span class="kd">val</span> <span class="py">id</span><span class="p">:</span> <span class="n">Int</span>
+  <span class="p">)</span>
+</code></pre></div>    </div>
+
+    <p>이렇게 작성한 data class를 이전에 비워놓았던 Call&lt;T&gt; 인터페이스의 T 자리에 넣어주자.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">@GET</span><span class="p">(</span><span class="s">"/orgs/{org}/repos"</span><span class="p">)</span>
+  <span class="k">fun</span> <span class="nf">getRepoList</span><span class="p">(</span><span class="n">@Path</span><span class="p">(</span><span class="s">"org"</span><span class="p">)</span> <span class="n">username</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">Call</span><span class="p">&lt;</span><span class="n">GitRepositoryResponseData</span><span class="p">&gt;</span>
+</code></pre></div>    </div>
+
+    <p>data class를 작성할 때 마지막으로 알아두면 좋은 것이 있다.</p>
+
+    <p>보통 위와 같은 data class를 작성할 때 각각의 변수마다 <code class="highlighter-rouge">@Serializedname</code> 이라는 어노테이션을 붙이곤 한다.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">data class</span> <span class="nc">GitRepositoryResponseData</span> <span class="p">(</span>
+      <span class="n">@SerializedName</span><span class="p">(</span><span class="s">"name"</span><span class="p">)</span>
+      <span class="kd">val</span> <span class="py">repoName</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+      <span class="n">@SerializedName</span><span class="p">(</span><span class="s">"id"</span><span class="p">)</span>
+      <span class="kd">val</span> <span class="py">id</span><span class="p">:</span> <span class="n">Int</span>
+  <span class="p">)</span>
+</code></pre></div>    </div>
+
+    <p>이렇게 말이다!</p>
+
+    <p>@SerializedName이라는 어노테이션은 Gson 라이브러리에서 제공하는 어노테이션이다. 이 어노테이션을 붙이는 이유가 뭘까?</p>
+
+    <p>일단 SerializedName을 살짝 한국말로 이해해보면 Serialize 된 이름이라는 뜻이다.</p>
+
+    <p>그럼 Serialize 의 의미는 무엇일까?</p>
+
+    <p>Serialize는 직렬화라는 한글 뜻을 가지고 있고, 자바 시스템 내부에서 사용되는 Object나 Data를 외부의 자바 시스템에서도 사용할 수 있도록 byte 형태의 데이터로 변환하는 기술을 명칭하는 것이라고 한다.</p>
+
+    <p>쉽게 이해해보면 앞서 Gson 에 대해 알아보았을 때, 클라이언트에서 서버에 데이터를 보낼 경우 data class 객체를 json 포맷 데이터로 변환해야 한다고 했었다.</p>
+
+    <p>즉, data class 객체가 json 포맷 데이터로 변환되는 것이 Serialize 인 것이다!</p>
+
+    <p>반대로 json 포맷 데이터가 data class 객체로 변환되는 것은 Deserialize 이라고 한다.</p>
+
+    <p><strong>따라서 SerializedName은 json 포맷 데이터로 변환된 이름이라는 것이다.</strong></p>
+
+    <p>이러한 이해를 바탕으로 아래 data class를 이해해보자.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">data class</span> <span class="nc">GitRepositoryResponseData</span> <span class="p">(</span>
+      <span class="n">@SerializedName</span><span class="p">(</span><span class="s">"name"</span><span class="p">)</span>
+      <span class="kd">val</span> <span class="py">repoName</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+      <span class="n">@SerializedName</span><span class="p">(</span><span class="s">"id"</span><span class="p">)</span>
+      <span class="kd">val</span> <span class="py">id</span><span class="p">:</span> <span class="n">Int</span>
+  <span class="p">)</span>
+</code></pre></div>    </div>
+
+    <p>@SerializedName(“name”) 부분은 json 포맷 데이터로 변환된 이름이 name이라는 것이다.</p>
+
+    <p>그리고 여기에 해당하는 변수 이름은 name이 아니라 repoName 이라고 되어 있는 것을 볼 수 있다.</p>
+
+    <p>즉, data class에서 사용할 이름은 repoName이지만 이 변수가 서버와 통신하기 위해 json 포맷 데이터로 변환될 때는 name 이라는 이름으로 변환된다는 것을 명시한 것이다.</p>
+
+    <p>왜 굳이 name으로 변환할까? 왜냐하면 앞에서 반드시 json의 Key값과 변수 이름이 동일해야 한다고 했기 때문이다.</p>
+
+    <p>이렇게 @SerializedName 어노테이션은 data class 변수 이름을 서버 쪽 json 포맷 데이터의 key 이름과 동일하게 사용하고 싶지 않을 때 작성해주면 이름을 다르게 사용할 수 있게 도와주는 녀석이다.</p>
+  </li>
+</ul>
+
+<ol>
+  <li>
+    <p><strong>Request 메소드 호출하여 통신 처리하기</strong></p>
+
+    <p>앞서 <strong>1. Retrofit 인터페이스 생성하고 Interface 안에 Request 메소드들 작성하기</strong> 단계에서 기억하고 넘어갔던 것이 있을 것이다.</p>
+
+    <p>바로 Request 메소드가 호출된 후 반환값으로 Call&lt;T&gt; 타입의 <strong>인터페이스</strong> 를 반환한다는 것이다.</p>
+
+    <p>Request 메소드를 호출하여 통신을 처리하는 단계에서 꼭 필수적으로 알고 있어야 하는 것이 이 Call&lt;T&gt; 타입의 인터페이스이다.</p>
+
+    <p>일단 이 인터페이스에 어떤 메소드들이 <strong>정의(구현된 상태가 아님)</strong> 되어 있는지 <a href="https://square.github.io/retrofit/2.x/retrofit/">Call&lt;T&gt; 문서</a> 를 보고 알아보자.</p>
+
+    <p><img width="939" alt="16" src="https://user-images.githubusercontent.com/31889335/98686822-5dcd1300-23ac-11eb-8543-1ddd69004307.png" /></p>
+
+    <p>위 그림처럼 총 7개의 메소드가 정의되어 있다. 그 중 가장 주목해야 하는 메소드는 <code class="highlighter-rouge">enqueue(Callback&lt;T&gt; callback)</code> 와 <code class="highlighter-rouge">execute()</code> 이다.</p>
+
+    <p>이 두 개의 메소드가 중요한 이유는 <strong>동기식 통신</strong> 과 <strong>비동기식 통신</strong> 을 할 수 있게 해주는 메소드들이기 때문이다.</p>
+
+    <p>사실 거의 대부분의 통신은 비동기식 통신으로 이루어진다.</p>
+
+    <p>왜냐하면 동기식 통신을 하게 되면 통신을 하는 동안 모든 작업이 중단되기 때문이다. (동기의 개념이 하나의 작업에 대한 결과를 받아야만 다음 작업을 할 수 있는 처리 방식이기 때문)</p>
+
+    <p>하지만 서버와의 통신은 은근히 시간이 오래 걸리는 작업이다. 통신은 몇 초 이상을 넘기도 하고, 더 긴 시간이 걸리는 경우도 존재한다. 따라서 동기식 통신을 하게 되면 통신이 완료될 때까지 아무 작업도 하지 못하고 모든 기능이 중단되게 된다.</p>
+
+    <p>따라서 서버와 통신을 할 때는 <strong>비동기식 통신</strong> 을 하여 통신의 결과를 기다리지 않고 다른 작업을 이어서 할 수 있게 해야 한다.</p>
+
+    <p>다른 작업을 이어서 하다가 통신에 대한 결과를 받으면 그 때 다시 받은 결과로 처리할 작업을 수행하면 된다.</p>
+
+    <p>위에서 주목했던 두 메소드 중 <code class="highlighter-rouge">execute()</code> 메소드가 동기식 통신을 처리할 때 구현하는 메소드이고, <code class="highlighter-rouge">enqueue(Callback&lt;T&gt; callback)</code> 메소드가 비동기식 통신을 처리할 때 구현하는 메소드이다.</p>
+
+    <p>대부분의 통신은 비동기식 통신으로 하는 이유를 알게 되었으니 비동기식 통신을 하게 해주는 enqueue(Callback<T> callback) 메소드에 대해 알아보자.</T></p>
+
+    <p><img width="795" alt="17" src="https://user-images.githubusercontent.com/31889335/98690839-bacac800-23b0-11eb-8ca8-09fed5c33cce.png" /></p>
+
+    <p>이 메소드는 비동기식으로 요청을 보내며 이 메소드의 인자인 Callback&lt;T&gt; 라는 <strong>인터페이스</strong> 를 통해 통신 중 발생한 에러를 알아차리기도 하고 통신이 성공할 경우 서버로부터 응답받은 데이터를 처리하는 작업을 하기도 한다고 한다.</p>
+
+    <p>Callback 이라는 것을 의미적으로 해석해보면 Call(호출) 을 실행한 후 비동기적으로 무엇인가를 처리하다가 처리 결과를 받게 되는 순간 Callback(거꾸로 호출) 이 실행되어 처리 결과에 따른 후작업을 진행하는 것으로 해석해 볼 수 있다.</p>
+
+    <p>이 쯤에서 1번 과정에서 만들어놓은 Request 메소드 중</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">@GET</span><span class="p">(</span><span class="s">"/orgs/{org}/repos"</span><span class="p">)</span>
+ <span class="k">fun</span> <span class="nf">getRepoList</span><span class="p">(</span><span class="n">@Path</span><span class="p">(</span><span class="s">"org"</span><span class="p">)</span> <span class="n">username</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">Call</span><span class="p">&lt;</span><span class="n">GitRepositoryResponseData</span><span class="p">&gt;</span>
+</code></pre></div>    </div>
+
+    <p>이와 같은 메소드를 호출하는 코드를 작성해보자.</p>
+
+    <p>코드는 간단하게 MainActivity.kt 의 onCreate 메소드에서 Request 메소드를 호출 방식으로 작성할 것이다.</p>
+
+    <p>1번과 2번 과정에서 Request 메소드는 인터페이스 안에 정의되어 있어 실제 호출할 곳에서 인터페이스를 구현해야 했고, 이 구현체를 object 를 사용하여 싱글톤으로 구현해 놓았었다.</p>
+
+    <p>따라서 onCreate 메소드 안에서 getRepoList() 라는 Request 메소드를 호출하려면 다음 코드의 주석 1 처럼 코드를 작성하면 된다.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// MainActivity.kt
+</span> <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+     <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+     <span class="n">setContentView</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">activity_gitrepository</span><span class="p">)</span>
+
+     <span class="c1">// 주석 1 ) 이 때 service는 GithubServiceImplementation 안에 만들어놓은 변수이다.
+</span>     <span class="kd">val</span> <span class="py">call</span><span class="p">:</span> <span class="n">Call</span><span class="p">&lt;</span><span class="n">GitrepositoryItemData</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">GithubServiceImplementation</span><span class="p">.</span><span class="n">service</span><span class="p">.</span><span class="n">getRepoList</span><span class="p">(</span><span class="s">"choheeis"</span><span class="p">)</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>주석 1에서는 getRepoList() 메소드를 호출하면 반환 값으로 Call&lt;GitrepositoryItemData&gt; 인터페이스가 반환된다는 것을 알고 있으므로 반환된 Call&lt;GitrepositoryItemData&gt; 인터페이스를 변수로 받아놓았다.</p>
+
+    <p>이제 Call&lt;T&gt; 인터페이스에 정의되어 있는 비동기식 통신 메소드인 enqueue(Callback<T> callback) 를 직접 구현하여 비동기로 서버에 통신을 요청해보자.</T></p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// MainActivity.kt
+</span> <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+     <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+     <span class="n">setContentView</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">activity_gitrepository</span><span class="p">)</span>
+
+     <span class="c1">// 이 때 service는 GithubServiceImplementation 안에 만들어놓은 변수이다.
+</span>     <span class="kd">val</span> <span class="py">call</span><span class="p">:</span> <span class="n">Call</span><span class="p">&lt;</span><span class="n">GitrepositoryItemData</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">GithubServiceImplementation</span><span class="p">.</span><span class="n">service</span><span class="p">.</span><span class="n">getRepoList</span><span class="p">(</span><span class="s">"choheeis"</span><span class="p">)</span>
+
+     <span class="n">call</span><span class="p">.</span><span class="n">enqueue</span><span class="p">(</span><span class="err">이</span> <span class="err">부분에</span> <span class="n">Callback</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="err">인터페이스를</span> <span class="err">구현해야</span> <span class="err">한다</span><span class="p">.)</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>앞서 enqueue() 메소드의 매개변수에는 또 다른 인터페이스인 Callback&lt;T&gt; 라는 인터페이스가 들어간다는 것을 알아보았다.</p>
+
+    <p>그럼 [Callback<T> 인터페이스](https://square.github.io/retrofit/2.x/retrofit/retrofit2/Callback.html) 에는 어떤 메소드들이 정의(구현된 상태가 아님)되어 있는지 알아보자. (후후,,, 포스팅 글이 엄~청 길어지는 군요 보는 사람이 있을려나ㅠ)</T></p>
+
+    <p><img width="1346" alt="18" src="https://user-images.githubusercontent.com/31889335/98693521-beac1980-23b3-11eb-8710-475e695ba906.png" /></p>
+
+    <p>위와 같이 두 개의 메소드가 정의되어 있는 것을 알 수 있다.</p>
+
+    <p>각각은 통신에 성공했을 때 호출되거나 실패했을 때 호출되는 메소드이다. 따라서 통신 성공 여부에 따라 작업할 일들을 이 두 개의 메소드 안에 나누어 구현하면 된다.</p>
+
+    <p>그럼 위 코드에 이어서 작성해보자.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// MainActivity.kt
+</span> <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+     <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+     <span class="n">setContentView</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">activity_gitrepository</span><span class="p">)</span>
+
+     <span class="c1">// 이 때 service는 GithubServiceImplementation 안에 만들어놓은 변수이다.
+</span>     <span class="kd">val</span> <span class="py">call</span><span class="p">:</span> <span class="n">Call</span><span class="p">&lt;</span><span class="n">GitrepositoryItemData</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">GithubServiceImplementation</span><span class="p">.</span><span class="n">service</span><span class="p">.</span><span class="n">getRepoList</span><span class="p">(</span><span class="s">"choheeis"</span><span class="p">)</span>
+
+     <span class="n">call</span><span class="p">.</span><span class="n">enqueue</span><span class="p">(</span>
+         <span class="kd">object</span> <span class="err">: </span><span class="nc">Callback</span><span class="p">&lt;</span><span class="n">GitrepositoryItemData</span><span class="p">&gt;{</span>
+             <span class="c1">// 서버 통신에 실패했을 때 처리할 작업을 작성한다.
+</span>             <span class="k">override</span> <span class="k">fun</span> <span class="nf">onFailure</span><span class="p">(</span><span class="n">call</span><span class="p">:</span> <span class="n">Call</span><span class="p">&lt;</span><span class="n">GitrepositoryItemData</span><span class="p">&gt;,</span> <span class="n">t</span><span class="p">:</span> <span class="n">Throwable</span><span class="p">)</span> <span class="p">{</span>
+                 <span class="n">Log</span><span class="p">.</span><span class="n">e</span><span class="p">(</span><span class="s">"server_test"</span><span class="p">,</span> <span class="s">"fail"</span><span class="p">)</span>
+             <span class="p">}</span>
+
+             <span class="c1">// 서버 통신에 성공했을 때 처리할 작업을 작성한다.
+</span>             <span class="c1">// 이 메소드의 매개변수에 있는 Response에 서버에서 응답 받아온 데이터가 들어있다.
+</span>             <span class="c1">// Response에 대해서 -&gt; https://square.github.io/retrofit/2.x/retrofit/retrofit2/Response.html
+</span>             <span class="k">override</span> <span class="k">fun</span> <span class="nf">onResponse</span><span class="p">(</span>
+                 <span class="n">call</span><span class="p">:</span> <span class="n">Call</span><span class="p">&lt;</span><span class="n">GitrepositoryItemData</span><span class="p">&gt;,</span>
+                 <span class="n">response</span><span class="p">:</span> <span class="n">Response</span><span class="p">&lt;</span><span class="n">GitrepositoryItemData</span><span class="p">&gt;</span>
+             <span class="p">)</span> <span class="p">{</span>
+                 <span class="c1">// 여기에 응답 받아온 데이터를 가지고 처리할 코드를 작성!
+</span>                 <span class="c1">// 받아온 데이터를 textView에 set 한다던지!
+</span>             <span class="p">}</span>
+         <span class="p">}</span>
+     <span class="p">)</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>추가로 <a href="https://square.github.io/retrofit/2.x/retrofit/">onFailure() 콜백 메소드와 onResponse() 콜백 메소드에 대한 설명</a> 도 읽어보면 좋다!</p>
+
+    <p>이렇게까지 하면 Retrofit을 이용해 서버와 통신하는 모~~든 과정이 끝이 난다!</p>
+  </li>
+</ol>
+
+<h1 id="끝">끝!!</h1>
+
+<p>와아ㅏㅏㅏㅏㅏ~~!!! 너무 긴 포스팅 정말 죄송합니다,,, 이걸 보시는 분들에게 가능한 자세한 지식을 주고 싶은 마음과 저 또한 깊게 공부하고 싶은 마음에,,, ㅎㅎ휴ㅠㅠ</p>
+
+<p>다른 포스팅으로 Request 메소드 작성하는 다양한 방법들, 다양한 어노테이션들 예시를 주제로 작성해보고 싶다.</p>
+
+<p>마지막 수정일 : 2020년 11월 9일 (네이버 웹툰 인턴 자소서를 작성하면서 Retrofit에 대해 쓸 일이 생겼다. 다시 확인해보고 내용을 추가하였다!)</p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

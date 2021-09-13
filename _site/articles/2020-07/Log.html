@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="🧐 안드로이드 개발에서 사용되는 로그들!어떤 개발이든지 로그를 찍어서 확인하고 싶은 정보를 확인하는 경우도 많고 디버깅을 하는 용도로 로그를 사용하는 경우도 있다!나는 주로 Log.d() 를 사용해서 확인해보고 싶은 변수값을 확인하거나 디버깅을 하는데 Log.d() 외에도 여러 종...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[안드로이드] 🧐 Log | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[안드로이드] 🧐 Log | choheeis">
+  <meta name="twitter:description" content="🧐 안드로이드 개발에서 사용되는 로그들!어떤 개발이든지 로그를 찍어서 확인하고 싶은 정보를 확인하는 경우도 많고 디버깅을 하는 용도로 로그를 사용하는 경우도 있다!나는 주로 Log.d() 를 사용해서 확인해보고 싶은 변수값을 확인하거나 디버깅을 하는데 Log.d() 외에도 여러 종...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-07/Log">
+  <meta property="og:title" content="[안드로이드] 🧐 Log | choheeis">
+  <meta property="og:description" content="🧐 안드로이드 개발에서 사용되는 로그들!어떤 개발이든지 로그를 찍어서 확인하고 싶은 정보를 확인하는 경우도 많고 디버깅을 하는 용도로 로그를 사용하는 경우도 있다!나는 주로 Log.d() 를 사용해서 확인해보고 싶은 변수값을 확인하거나 디버깅을 하는데 Log.d() 외에도 여러 종...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[안드로이드] 🧐 Log | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-07/Log">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[안드로이드] 🧐 Log">[안드로이드] 🧐 Log</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        9 JUL 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    3 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="-안드로이드-개발에서-사용되는-로그들">🧐 안드로이드 개발에서 사용되는 로그들!</h2>
+<hr />
+
+<p>어떤 개발이든지 로그를 찍어서 확인하고 싶은 정보를 확인하는 경우도 많고 디버깅을 하는 용도로 로그를 사용하는 경우도 있다!</p>
+
+<p>나는 주로 Log.d() 를 사용해서 확인해보고 싶은 변수값을 확인하거나 디버깅을 하는데 Log.d() 외에도 여러 종류의 Log 종류(?)들이 있기 때문에 조금 더 자세히 공부해보고 싶었다!</p>
+
+<p><br /></p>
+
+<p>Log에 대해 자세히 공부하기 위해 <a href="https://developer.android.com/reference/kotlin/android/util/Log">Android Developers - Log</a> 문서를 펼쳤다!</p>
+
+<p><img width="216" alt="01" src="https://user-images.githubusercontent.com/31889335/87005814-93919d80-c1fa-11ea-9a0b-f40b6321fcee.png" /></p>
+
+<p>위 그림은 Android Platform에 포함되어 있는 클래스들의 목록이다.</p>
+
+<p>그림에 보여진 클래스들 뿐 아니라 더욱 많은 클래스들이 Android Platform 안에 포함되어 있고, android.~ 라는 이름으로 패키지화 되어 있는 것을 볼 수 있다.</p>
+
+<p>그 중 android.util 이라는 패키지도 Android Platform에 포함되어 있는데 이 패키지 안을 보면 다음과 같은 클래스 목록들이 android.util 패키지 안에 속해있는 것을 볼 수 있다.</p>
+
+<p><img width="246" alt="02" src="https://user-images.githubusercontent.com/31889335/87006095-0e5ab880-c1fb-11ea-9dfd-29ab75715443.png" /></p>
+
+<p>위 그림을 통해 android.util 패키지 안에 Log 클래스가 포함되어 있는 것을 알 수 있었다!</p>
+
+<p><br /></p>
+
+<p>이제부터 본격적으로 <a href="https://developer.android.com/reference/kotlin/android/util/Log">Android Developers - Log</a> 문서를 읽어보자!</p>
+
+<p><strong>Log 클래스는 로그 출력을 위한 안드로이드 플랫폼 API</strong> 이다.</p>
+
+<p>로그 출력을 위해 일반적으로 사용되는 로그 함수들은 총 5가지가 있는데 <strong>Log.v()</strong>, <strong>Log.d()</strong>, <strong>Log.i()</strong>, <strong>Log.w()</strong>, <strong>Log.e()</strong> 가 이 5가지에 속한다.</p>
+
+<p>이 5가지의 로그 함수를 통한 출력 결과는 안드로이드 스튜디오의 <strong>logcat 창</strong> 에서 볼 수 있다.</p>
+
+<p>위 5가지 로그 함수에 대한 설명을 하기 전에 로그 함수를 사용할 때 알아두면 좋을 Tip이 있다.</p>
+
+<ul>
+  <li>
+    <p>Tip!</p>
+
+    <p>로그 함수를 사용할 클래스에 constant 변수로 TAG 라는 변수를 선언한다.</p>
+
+    <p>TAG의 내용으로 주로 오류가 발생한 앱 컴포넌트를 명시하며 따라서 해당 클래스 이름을 많이 사용한다.</p>
+
+    <p>그러나 TAG 문자열이 23자를 넘는 경우 Logcat 창에서 태그 이름이 짤려 보이게 된다.</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// 자바 코드</span>
+  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">TAG</span> <span class="o">=</span> <span class="s">"MyActivity"</span><span class="o">;</span>
+</code></pre></div>    </div>
+
+    <p>그 다음, Log 함수를 작성할 때 이 TAG 변수를 사용하는 것이다.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">Log</span><span class="p">.</span><span class="n">v</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"index="</span> <span class="p">+</span> <span class="n">i</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>그럼 이제부터 5가지 로그 함수에 대해서 조금 더 자세히 알아보자.</p>
+
+<p><br /></p>
+
+<ul>
+  <li>
+    <p><strong>Log.d()</strong></p>
+
+    <p>이 로그 함수는 DEBUG(디버그)를 위한 로그 함수이다.</p>
+
+    <p><img width="186" alt="03" src="https://user-images.githubusercontent.com/31889335/87007890-e7ea4c80-c1fd-11ea-8fbd-a1edaac6dc98.png" /></p>
+
+    <p>이 함수의 인자는 총 3개가 있는데 맨 마지막 인자는 생략해도 된다.</p>
+
+    <p>3개의 인자를 모두 작성하면 Log.d() 함수는 디버그 메시지를 보내고 예외를 기록한다.</p>
+
+    <p>또한 디버깅을 위해 사용되는 Log.d() 함수는 컴파일은 되지만 런타임에 제거된다.</p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p><strong>Log.e()</strong></p>
+
+    <p>이 로그 함수는 Error(에러) 출력을 위한 로그 함수이다.</p>
+
+    <p>따라서 에러가 났을 경우 logcat에 로그를 출력하고 싶다면 Log.e() 함수를 통해 로그 출력을 해주는 것이 좋다.</p>
+
+    <p><img width="168" alt="04" src="https://user-images.githubusercontent.com/31889335/87008569-ef5e2580-c1fe-11ea-9589-d53244c3e1ba.png" /></p>
+
+    <p>이 로그 함수도 Log.d() 함수와 마찬가지로 세 번째 인자로 Throwable 변수를 작성해도 된다.</p>
+
+    <p>이 로그는 런타임시에도 그대로 남아있는다.</p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p><strong>Log.i()</strong></p>
+
+    <p>이 로그 함수는 Info(정보) 출력을 위한 로그 함수이다.</p>
+
+    <p><img width="174" alt="05" src="https://user-images.githubusercontent.com/31889335/87009010-89be6900-c1ff-11ea-899d-d01de0494f72.png" /></p>
+
+    <p>이 로그 함수도 세 번째 인자를 생략해도 된다.</p>
+
+    <p>이 로그는 런타임시에도 그대로 남아있는다.</p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p><strong>Log.v()</strong></p>
+
+    <p>이 로그 함수는 Verbose(상세) 출력을 위한 로그 함수이다.</p>
+
+    <p><img width="171" alt="06" src="https://user-images.githubusercontent.com/31889335/87009154-c0947f00-c1ff-11ea-9793-59c45ecf2d03.png" /></p>
+
+    <p>Log.v() 함수는 개발 단계를 제외하고는 앱 어플리케이션 안에서 컴파일하면 안된다.</p>
+
+    <p>이 로그 함수도 세 번째 인자를 생략해도 된다.</p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p><strong>Log.w()</strong></p>
+
+    <p>이 로그 함수는 Warn(경고) 출력을 위한 로그 함수이다.</p>
+
+    <p><img width="169" alt="07" src="https://user-images.githubusercontent.com/31889335/87009684-7cee4500-c200-11ea-9019-dc1e0f61dc9d.png" /></p>
+
+    <p>이 로그 함수도 세 번째 인자를 생략해도 된다.</p>
+
+    <p>이 로그는 런타임시에도 그대로 남아있는다.</p>
+
+    <p><br /></p>
+  </li>
+</ul>
+
+<p>이렇게 총 5개의 로그 함수들에 대해서 알아보았다. 그 전에는 로그의 용도가 무엇이든 Log.d() 함수만을 사용했었는데 이제는 용도에 따라 나눠서 사용할 수 있을 것 같다!</p>
+
+<p><br /></p>
+
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

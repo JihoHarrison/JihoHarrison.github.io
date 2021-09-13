@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="0️⃣ 코틀린에서 Map 자료구조를 사용하려면?코틀린에서 Map 자료구조는 kotlin 표준 라이브러리(kotlin stdlib) 안의 kotlin.collections 라는 패키지 안에 구현되어 있음을 Collection에 대한 이전 포스팅 을 보면 알 수 있을 것이다.따라서 코...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[Kotlin] 1️⃣0️⃣ 코틀린의 Map들 | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[Kotlin] 1️⃣0️⃣ 코틀린의 Map들 | choheeis">
+  <meta name="twitter:description" content="0️⃣ 코틀린에서 Map 자료구조를 사용하려면?코틀린에서 Map 자료구조는 kotlin 표준 라이브러리(kotlin stdlib) 안의 kotlin.collections 라는 패키지 안에 구현되어 있음을 Collection에 대한 이전 포스팅 을 보면 알 수 있을 것이다.따라서 코...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-11/kotlinMap">
+  <meta property="og:title" content="[Kotlin] 1️⃣0️⃣ 코틀린의 Map들 | choheeis">
+  <meta property="og:description" content="0️⃣ 코틀린에서 Map 자료구조를 사용하려면?코틀린에서 Map 자료구조는 kotlin 표준 라이브러리(kotlin stdlib) 안의 kotlin.collections 라는 패키지 안에 구현되어 있음을 Collection에 대한 이전 포스팅 을 보면 알 수 있을 것이다.따라서 코...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[Kotlin] 1️⃣0️⃣ 코틀린의 Map들 | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-11/kotlinMap">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[Kotlin] 1️⃣0️⃣ 코틀린의 Map들">[Kotlin] 1️⃣0️⃣ 코틀린의 Map들</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        25 NOV 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    2 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="0️⃣-코틀린에서-map-자료구조를-사용하려면">0️⃣ 코틀린에서 Map 자료구조를 사용하려면?</h2>
+
+<p>코틀린에서 Map 자료구조는 kotlin 표준 라이브러리(kotlin stdlib) 안의 <strong>kotlin.collections</strong> 라는 패키지 안에 구현되어 있음을 <a href="https://choheeis.github.io/newblog//articles/2020-10/kotlinCollection">Collection에 대한 이전 포스팅</a> 을 보면 알 수 있을 것이다.</p>
+
+<p>따라서 코틀린에서 Map 자료구조를 사용하려면 kotlin 표준 라이브러리에 있는 것들을 가져다 사용하면 된다!</p>
+
+<h2 id="1️⃣-map-이라는-자료구조">1️⃣ Map 이라는 자료구조</h2>
+
+<p><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/">Map</a>은 kotlin.collections 패키지에 구현되어 있는 자료구조 중 하나이다.</p>
+
+<p>Map 이라는 자료구조는 일반적으로 <strong>key</strong> 와 <strong>value</strong> 의 쌍으로 데이터를 저장하는 구조를 구현한 자료구조이다.</p>
+
+<p>어떤 자료구조들보다 key를 통해서 value를 빠르게 찾아올 수 있어 효율적일 때가 많다.</p>
+
+<p>단, value를 찾기 위해서 key는 반드시 <strong>중복되면 안된다.</strong></p>
+
+<p>코틀린의 Map은 신기한 점이 있다. <strong>value의 값으로 함수가 들어갈 수 있다</strong> 는 점이다!</p>
+
+<p>이렇게 간단하다면 간단한 자료구조인 Map을 코틀린에서 어떻게 조작할 수 있는지 알아보자.</p>
+
+<h2 id="2️⃣-map을-조작할-수-있는-코틀린-함수들">2️⃣ Map을 조작할 수 있는 코틀린 함수들</h2>
+
+<p>✍🏻 <a href="https://kotlinlang.org/docs/reference/map-operations.html">Map Specific Operations 도큐먼트</a> 를 참고하여 작성합니다.</p>
+
+<ul>
+  <li>
+    <p><strong>Map 자료구조 선언하기 –&gt; mapOf() 사용</strong></p>
+
+    <p>Map 자료구조를 사용하려면 코드로 Map 자료형의 변수를 선언해야 한다.</p>
+
+    <p>Map 자료형 변수 선언시 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/map-of.html">mapOf()</a>라는 메소드를 사용하면 된다.</p>
+
+    <p>단, mapOf()는 read-only(읽기 전용, 수정 불가)한 Map 자료형을 선언할 때만 사용된다.</p>
+
+    <p>만약 수정 가능한 Map 자료형을 선언하려면 MutableMap에 대해 알아보면 된다.</p>
+
+    <p>mapOf() 함수를 사용하여 () 안에 key-value 쌍의 데이터를 <strong>배열의 형태로</strong> 한꺼번에 여러개 선언할 수 있다.</p>
+
+    <p><strong>to</strong> 라는 표현을 사용해서 key와 value를 매칭해준다.</p>
+
+    <p><img width="576" alt="01" src="https://user-images.githubusercontent.com/31889335/100115993-8e39a480-2eb6-11eb-8453-1d4b7acd848f.png" /></p>
+
+    <p>위 코드의 출력 결과는</p>
+
+    <p><img width="182" alt="02" src="https://user-images.githubusercontent.com/31889335/100116084-ac9fa000-2eb6-11eb-9b95-90d11ff6cfea.png" /></p>
+
+    <p>위와 같다.</p>
+
+    <p>출력 결과를 분석해보면 map이라는 이름의 배열에 Map 형태의 자료구조가 총 3개 저장된 모습이다.</p>
+
+    <p>mapOf() 함수는 배열에 Map을 저장하기 때문에 <strong>순서</strong> 를 가지고 있고, 만약 동일한 key를 가진 Map이 한 배열에 여러 개 저장되어 있으면 그 중 가장 마지막 원소로 저장된 Map의 key만 유효하게 된다.</p>
+  </li>
+  <li>
+    <p><strong>key를 통해 value값 찾기</strong></p>
+
+    <p>Map 자료구조의 장점은 key를 통해 해당 value를 빠르게 찾을 수 있다는 점이라고 했다.</p>
+
+    <p><img width="575" alt="03" src="https://user-images.githubusercontent.com/31889335/100117407-1a989700-2eb8-11eb-9a4f-89e1615c68a2.png" /></p>
+
+    <p>출력 결과는</p>
+
+    <p><img width="48" alt="04" src="https://user-images.githubusercontent.com/31889335/100117155-dc9b7300-2eb7-11eb-977b-b2c4af854cac.png" /></p>
+
+    <p>위와 같다.</p>
+
+    <p>위 코드를 보면 알 수 있듯이 <strong>get()</strong> 함수를 사용하여 ()안에 key를 지정해줌으로써 해당 value 값을 가져올 수 있다.</p>
+
+    <p>마찬가지로 간단하게 <strong>[key]</strong> 표현을 사용하여 해당 value 값을 가져올 수도 있다.</p>
+
+    <p>추가로 key를 통해 value를 찾는 기능이 몇 가지 더 있다.</p>
+
+    <ul>
+      <li>
+        <p><strong><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/get-value.html">getValue()</a></strong> : 해당 key가 존재하지 않으면 exception을 던진다.</p>
+      </li>
+      <li>
+        <p><strong><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/get-or-else.html">getOrElse()</a></strong> : 해당 key가 존재하지 않으면 작성해준 lambda 함수를 실행한다.</p>
+      </li>
+      <li>
+        <p><strong><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/get-or-default.html">getOrDefault()</a></strong> : 해당 key가 존재하지 않으면 지정해준 값을 리턴한다.</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

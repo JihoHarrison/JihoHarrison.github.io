@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="🙌 C++ STL 중 pair이라는 클래스가 있다!?알고리즘 문제를 풀다보니 2차원 배열의 좌표 x, y를 동시에 한 원소로 취급해야 하는 경우가 발생했다.이런 경우에 다른 사람들은 어떻게 해결하나 찾아봤더니 pair 이라는 클래스(자료형)를 사용하고 있었다!C++ pair 클래스...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[C++] 🤲 C++ pair 클래스 | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[C++] 🤲 C++ pair 클래스 | choheeis">
+  <meta name="twitter:description" content="🙌 C++ STL 중 pair이라는 클래스가 있다!?알고리즘 문제를 풀다보니 2차원 배열의 좌표 x, y를 동시에 한 원소로 취급해야 하는 경우가 발생했다.이런 경우에 다른 사람들은 어떻게 해결하나 찾아봤더니 pair 이라는 클래스(자료형)를 사용하고 있었다!C++ pair 클래스...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-04/C++STLpair">
+  <meta property="og:title" content="[C++] 🤲 C++ pair 클래스 | choheeis">
+  <meta property="og:description" content="🙌 C++ STL 중 pair이라는 클래스가 있다!?알고리즘 문제를 풀다보니 2차원 배열의 좌표 x, y를 동시에 한 원소로 취급해야 하는 경우가 발생했다.이런 경우에 다른 사람들은 어떻게 해결하나 찾아봤더니 pair 이라는 클래스(자료형)를 사용하고 있었다!C++ pair 클래스...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[C++] 🤲 C++ pair 클래스 | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-04/C++STLpair">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[C++] 🤲 C++ pair 클래스">[C++] 🤲 C++ pair 클래스</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        1 APR 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    2 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h1 id="-c-stl-중-pair이라는-클래스가-있다">🙌 C++ STL 중 pair이라는 클래스가 있다!?</h1>
+
+<p>알고리즘 문제를 풀다보니 2차원 배열의 좌표 x, y를 동시에 한 원소로 취급해야 하는 경우가 발생했다.</p>
+
+<p>이런 경우에 다른 사람들은 어떻게 해결하나 찾아봤더니 pair 이라는 클래스(자료형)를 사용하고 있었다!</p>
+
+<p><a href="http://www.cplusplus.com/reference/utility/pair/">C++ pair 클래스</a> 는 어떤 것일까?</p>
+
+<p>c++ pair 클래스의 레퍼런스에 들어가보니</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/78138994-c2151500-7462-11ea-8bd1-e5b670fcf95e.PNG" alt="01" /></p>
+
+<p>pair 이라는 클래스는 &lt;utility&gt; 라는 헤더파일에 정의되어 있는 클래스였다.</p>
+
+<h2 id="그렇다면-utility-라는-헤더파일은-어떤-것들을-정의하고-있는지-궁금해졌다">그렇다면 <strong>utility 라는 헤더파일은 어떤 것들을 정의하고 있는지</strong> 궁금해졌다!</h2>
+
+<p><a href="http://www.cplusplus.com/reference/utility/">utility 헤더파일 레퍼런스</a> 를 읽어보면 이 헤더파일은 서로 연관성 없는 것들에 대한 여러 기능들을 포함하고 있다고 한다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/78227519-584f4680-7508-11ea-8983-c5eb63aff4fb.PNG" alt="02" /></p>
+
+<p>utility 헤더파일 속해있는 멤버 변수로는 swap, make_pair 등이 있고, 또 pair 이라는 타입(=클래스)도 속해있는 것을 알 수 있다.</p>
+
+<p>그럼 본격적으로 <a href="http://www.cplusplus.com/reference/utility/pair/">pair</a> 클래스에 대해서 알아보자.</p>
+
+<p>pair 클래스는 두 개의 데이터를 하나의 쌍으로 만들어주는 기능이 있는 클래스이다.</p>
+
+<p>이 때, 두 개의 데이터는 서로 다른 자료형이여도 가능하다.</p>
+
+<p>이 두 개의 데이터는 각각 하나씩 따로 접근할 수 있는데 pair 클래스 안에 정의된 멤버 변수인 first와 second 변수로 접근가능하다.</p>
+
+<p><br /></p>
+
+<h1 id="-pair-타입을-사용하는-다양한-방법들">👓 pair 타입을 사용하는 다양한 방법들</h1>
+
+<p>pair 타입은 utility 라는 헤더파일 안에 정의된 클래스이기 때문에 pair을 사용하기 위해서는</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;utility&gt;
+</span></code></pre></div></div>
+
+<p>을 꼭 작성해줘야 한다.</p>
+
+<p>하지만! &lt;utility&gt; 라는 헤더파일은 &lt;algorithm&gt; 헤더파일과 &lt;vector&gt; 헤더파일에서 이미 include하고 있는 헤더파일이기 때문에 이 두 개의 헤더파일을 사용할 경우에는 따로 &lt;utility&gt; 헤더파일을 선언하지 않아도 된다.</p>
+
+<p><br /></p>
+
+<h2 id="pair-타입-생성하기">pair 타입 생성하기</h2>
+
+<p><a href="http://www.cplusplus.com/reference/utility/pair/pair/">pair 타입을 생성</a> 하기 위해서는 먼저 pair 타입을 선언해주어야 한다.</p>
+
+<p>선언하는 방법은</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;utility&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+	<span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">p1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이런 방법으로 선언할 수 있다.</p>
+
+<p><br /></p>
+
+<h2 id="pair에-두-개의-데이터쌍-저장하기">pair에 두 개의 데이터쌍 저장하기</h2>
+
+<p>pair에 두 개의 데이터쌍을 저장하는 방법으로는 <a href="http://www.cplusplus.com/reference/utility/make_pair/">make_pair</a> 이라는 함수를 이용하면 된다.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;utility&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+	<span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">p1</span><span class="p">;</span>
+	<span class="n">p1</span> <span class="o">=</span> <span class="n">make_pair</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h2 id="pair에-저장된-두-개의-데이터에-접근하기">pair에 저장된 두 개의 데이터에 접근하기</h2>
+
+<p>pair에 저장된 두 개의 데이터에 각각 접근하는 방법은 pair 클래스의 멤버 변수인 first와 second를 사용하면 된다.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;utility&gt;
+#include&lt;iostream&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+	<span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">p1</span><span class="p">;</span>
+	<span class="n">p1</span> <span class="o">=</span> <span class="n">make_pair</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+
+	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">p1</span><span class="p">.</span><span class="n">first</span><span class="o">&lt;&lt;</span><span class="sc">'\n'</span><span class="p">;</span>
+	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">p1</span><span class="p">.</span><span class="n">second</span><span class="o">&lt;&lt;</span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>위와 같이 first와 second 변수를 사용하면 다음과 같은 출력결과를 얻을 수 있다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/78233537-e3343f00-7510-11ea-9156-7f349965bcaa.PNG" alt="03" /></p>
+
+<p><br /></p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

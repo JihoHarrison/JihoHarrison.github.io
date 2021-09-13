@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="  경성대학교 양희재 교수님 - 운영체제 서비스 을 보고 포스팅한 것입니다.이 포스팅을 읽기 전에 이 블로그의 다른 포스팅 - 운영체제가 무엇인가에 대해서 먼저 읽어보는 것을 추천합니다!0️⃣ 컴퓨터 구조 복습하기!이 블로그의 다른 포스팅 - 운영체제가 무엇인가 에서 컴퓨터 구조가...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[운영체제] 👩🏼‍💻 4. 운영체제가 하는 일 | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[운영체제] 👩🏼‍💻 4. 운영체제가 하는 일 | choheeis">
+  <meta name="twitter:description" content="  경성대학교 양희재 교수님 - 운영체제 서비스 을 보고 포스팅한 것입니다.이 포스팅을 읽기 전에 이 블로그의 다른 포스팅 - 운영체제가 무엇인가에 대해서 먼저 읽어보는 것을 추천합니다!0️⃣ 컴퓨터 구조 복습하기!이 블로그의 다른 포스팅 - 운영체제가 무엇인가 에서 컴퓨터 구조가...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-12/OS-4">
+  <meta property="og:title" content="[운영체제] 👩🏼‍💻 4. 운영체제가 하는 일 | choheeis">
+  <meta property="og:description" content="  경성대학교 양희재 교수님 - 운영체제 서비스 을 보고 포스팅한 것입니다.이 포스팅을 읽기 전에 이 블로그의 다른 포스팅 - 운영체제가 무엇인가에 대해서 먼저 읽어보는 것을 추천합니다!0️⃣ 컴퓨터 구조 복습하기!이 블로그의 다른 포스팅 - 운영체제가 무엇인가 에서 컴퓨터 구조가...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[운영체제] 👩🏼‍💻 4. 운영체제가 하는 일 | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-12/OS-4">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[운영체제] 👩🏼‍💻 4. 운영체제가 하는 일">[운영체제] 👩🏼‍💻 4. 운영체제가 하는 일</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        4 DEC 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    4 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <blockquote>
+  <p><a href="http://www.kocw.net/home/search/kemView.do?kemId=978503">경성대학교 양희재 교수님 - 운영체제 서비스</a> 을 보고 포스팅한 것입니다.</p>
+</blockquote>
+
+<p>이 포스팅을 읽기 전에 <a href="https://choheeis.github.io/newblog//articles/2020-05/OSstart">이 블로그의 다른 포스팅 - 운영체제가 무엇인가</a>에 대해서 먼저 읽어보는 것을 추천합니다!</p>
+
+<h2 id="0️⃣-컴퓨터-구조-복습하기">0️⃣ 컴퓨터 구조 복습하기!</h2>
+
+<p><a href="https://choheeis.github.io/newblog//articles/2020-05/OSstart">이 블로그의 다른 포스팅 - 운영체제가 무엇인가</a> 에서 컴퓨터 구조가 아래 크림과 같이 생겼음을 알아보았었다.</p>
+
+<p><img width="200" alt="01" src="https://user-images.githubusercontent.com/31889335/101133791-c4acb780-364c-11eb-8f90-86f53c760c98.png" /></p>
+
+<p>이 그림을 조금 더 구체적으로 그려보자면</p>
+
+<p><img width="875" alt="02" src="https://user-images.githubusercontent.com/31889335/101137496-45ba7d80-3652-11eb-97b8-c73b4e52f2bd.png" /></p>
+
+<p>위와 같이 그릴 수 있다.</p>
+
+<p>컴퓨터에는 여러 하드웨어가 들어있는데 CPU(프로세서), 메인 메모리, 마우스/키보드/모니터, 하드 디스크, 프린터 등이 있다. 컴퓨터 하드웨어를 <strong>컴퓨터 Resource(리소스, 자원)</strong> 이라고도 부른다.</p>
+
+<p>또 사용자가 실행시켜 사용하는 Application도 존재하는데 카카오톡, 워드, 게임 등이 Application이다.</p>
+
+<p>이 Application이 작동할 때 컴퓨터의 CPU라든지, 메인 메모리라든지, 키보드/마우스라든지의 컴퓨터 하드웨어를 가져다 사용하게 된다.</p>
+
+<p>하드웨어를 Application에게 적절하게 나누어주는 일을 운영체제가 중간에서 담당하고 있는 것이고, 이 일들을 비슷한 분류끼리 묶어서 위 그림과 같이 표현한다.</p>
+
+<p>즉, 운영체제는 하드웨어와 Application 사이에서 컴퓨터가 잘 작동될 수 있도록 <strong>Management(관리)</strong> 를 하는 역할인 것이다.</p>
+
+<p>이제부터 위 그림에서 OS가 담당하고 있는 각 Management 들에 대해 자세히 알아보자.</p>
+
+<h2 id="1️⃣-process-management프로세스-관리">1️⃣ Process Management(프로세스 관리)</h2>
+
+<p>Computer Science 분야에서는 <strong>프로그램</strong> 과 <strong>프로세스</strong> 를 구분하고 있다.</p>
+
+<p><strong>프로그램</strong> 은 지금까지 언급했던 Application이나 운영체제처럼 코드로 작성되어 있는 컴퓨터 프로그램을 말한다. 프로그램은 하드디스크(보조기억장치)에 저장되어 있다. 운영체제도 프로그램이다.(시스템 소프트웨어다)</p>
+
+<p><strong>프로세스</strong> 는 하드디스크에 저장되어 있는 프로그램 중 실제로 메인 메모리에 올라가서 CPU 작업을 받으며 실행 중인 프로그램을 말한다. (“프로세서” 와도 구분을 해야한다. 프로세서는 CPU이다!)</p>
+
+<p>운영체제는 현재 메모리에 올라와 실행 중인 프로세스들을 관리하는 일을 한다. 이것을 <strong>Process Management</strong> 라고 부른다.</p>
+
+<p>그럼 Process Management 에서는 더 자세히 어떤 일들을 할까?</p>
+
+<ul>
+  <li>
+    <p><strong>프로세스 생성 및 소멸 시키기</strong></p>
+  </li>
+  <li>
+    <p><strong>프로세스 활동 일시 중지 및 활동 재개하기</strong></p>
+  </li>
+  <li>
+    <p><strong>프로세스간 통신하기</strong></p>
+  </li>
+  <li>
+    <p><strong>프로세스간 동기화하기</strong></p>
+  </li>
+  <li>
+    <p><strong>교착상태 처리하기</strong></p>
+  </li>
+</ul>
+
+<p>운영체제가 하는 일 중 위와 같은 일들을 묶어서 Process Management 라고 하는 것이다.</p>
+
+<p>위와 같은 Process Management에서 하는 일들의 각각에 대해서는 다른 포스팅을 통해 집중적으로 알아볼 예정이다.</p>
+
+<blockquote>
+  <p>각 일에 대해 공부한 후, 링크 걸기</p>
+</blockquote>
+
+<h2 id="2️⃣-main-memory-management메인메모리-관리-주기억장치-관리">2️⃣ Main Memory Management(메인메모리 관리, 주기억장치 관리)</h2>
+
+<p>운영체제는 하드웨어 중 하나인 <strong>메인 메모리</strong> 를 관리하는 일도 한다. 이것을 <strong>Main Memory Management</strong> 라고 부른다.</p>
+
+<p>그럼 Main Memory Management 에서는 더 자세히 어떤 일들을 할까?</p>
+
+<ul>
+  <li>
+    <p><strong>프로세스에게 메모리 공간 할당하기</strong></p>
+  </li>
+  <li>
+    <p><strong>메모리의 어느 부분이 어느 프로세스에 할당되었는지 추적 및 감시하기</strong></p>
+  </li>
+  <li>
+    <p><strong>프로세스 종료시 메모리 회수하기</strong></p>
+  </li>
+  <li>
+    <p><strong>메모리의 효과적 사용 관리하기</strong></p>
+  </li>
+  <li>
+    <p><strong>가상 메모리 관리하기</strong></p>
+  </li>
+</ul>
+
+<p>운영체제가 하는 일 중 위와 같은 일들을 묶어서 Main Memory Management 라고 하는 것이다.</p>
+
+<p>위와 같은 Main Memory Management에서 하는 일들의 각각에 대해서는 다른 포스팅을 통해 집중적으로 알아볼 예정이다.</p>
+
+<blockquote>
+  <p>각 일에 대해 공부한 후, 링크 걸기</p>
+</blockquote>
+
+<h2 id="3️⃣-file-management파일-관리">3️⃣ File Management(파일 관리)</h2>
+
+<p>하드디스크는 물리적으로 Track/Sector로 구성되어 있지만 논리적으로는 파일이라는 관점으로 볼 수 있다.</p>
+
+<p>운영체제는 하드웨어 중 하나인 <strong>하드 디스크(논리적으로 파일)</strong> 를 관리하는 일도 한다. 이것을 <strong>File Management</strong> 라고 부른다.</p>
+
+<p>그럼 File Management 에서는 더 자세히 어떤 일들을 할까?</p>
+
+<ul>
+  <li>
+    <p><strong>파일 생성 및 삭제하기</strong></p>
+  </li>
+  <li>
+    <p><strong>디렉토리(폴더) 생성 및 삭제하기</strong></p>
+  </li>
+  <li>
+    <p><strong>파일에서 일어나는 기본적인 동작 지원하기(open, write, read, delete, create)</strong></p>
+  </li>
+  <li>
+    <p><strong>물리적인 Track/Sector와 논리적인 file을 매핑해주기</strong></p>
+  </li>
+  <li>
+    <p><strong>파일 백업 기능 지원하기</strong></p>
+  </li>
+</ul>
+
+<p>운영체제가 하는 일 중 위와 같은 일들을 묶어서 File Management 라고 하는 것이다.</p>
+
+<p>위와 같은 File Management에서 하는 일들의 각각에 대해서는 다른 포스팅을 통해 집중적으로 알아볼 예정이다.</p>
+
+<blockquote>
+  <p>각 일에 대해 공부한 후, 링크 걸기</p>
+</blockquote>
+
+<h2 id="4️⃣-secondary-storage-management보조기억장치-관리">4️⃣ Secondary Storage Management(보조기억장치 관리)</h2>
+
+<p>컴퓨터 하드웨어 중 주기억장치인 메인 메모리 외에 프로그램이 저장되는 공간이 별도로 존재하는데 이를 <strong>보조기억장치</strong> 라고 한다. 보조기억장치에는 하드디스크, 플래시메모리(USB) 등이 포함된다.</p>
+
+<p>운영체제는 이러한 <strong>보조기억장치</strong> 에 관련된 일도 하는데 이것을 <strong>Secondary Storage Management</strong> 라고 부른다.</p>
+
+<p>그럼 Secondary Storage Management 에서는 더 자세히 어떤 일들을 할까?</p>
+
+<ul>
+  <li>
+    <p><strong>빈공간 관리하기</strong></p>
+  </li>
+  <li>
+    <p><strong>저장공간 할당하기</strong></p>
+  </li>
+  <li>
+    <p><strong>디스크 스케줄링하기(어떻게 하면 하드디스크의 헤더를 적게 움직이면서 원하는 Track이나 Sector로 이동시킬지)</strong></p>
+  </li>
+</ul>
+
+<p>운영체제가 하는 일 중 위와 같은 일들을 묶어서 Secondary Storage Management 라고 하는 것이다.</p>
+
+<p>위와 같은 Secondary Storage Management에서 하는 일들의 각각에 대해서는 다른 포스팅을 통해 집중적으로 알아볼 예정이다.</p>
+
+<blockquote>
+  <p>각 일에 대해 공부한 후, 링크 걸기</p>
+</blockquote>
+
+<h2 id="5️⃣-io-device-management입출력장치-관리">5️⃣ I/O Device Management(입출력장치 관리)</h2>
+
+<p>컴퓨터 하드웨어 중 마우스, 키보드, 스피커, 모니터 등을 입출력장치라고 한다.</p>
+
+<p>운영체제는 이러한 <strong>입출력장치</strong> 에 관련된 일도 하는데 이것을 <strong>I/O Device Management</strong> 라고 부른다.</p>
+
+<p>그럼 I/O Device Management 에서는 더 자세히 어떤 일들을 할까?</p>
+
+<ul>
+  <li>
+    <p><strong>입출력장치의 드라이브 관리하기</strong></p>
+  </li>
+  <li>
+    <p><strong>입출력장치의 성능 향상시키기(버퍼링, 캐싱 등)</strong></p>
+  </li>
+</ul>
+
+<p>운영체제가 하는 일 중 위와 같은 일들을 묶어서 I/O Device Management 라고 하는 것이다.</p>
+
+<p>위와 같은 I/O Device Management에서 하는 일들의 각각에 대해서는 다른 포스팅을 통해 집중적으로 알아볼 예정이다.</p>
+
+<blockquote>
+  <p>각 일에 대해 공부한 후, 링크 걸기</p>
+</blockquote>
+
+<p><strong>이렇게 운영체제는 하는일이 굉장히 많기 때문에 사람이 만들어낸 프로그램 중 정말 큰 프로그램, 코드가 100만줄이 넘어가는 프로그램이다.</strong></p>
+
+<h2 id="6️⃣-시스템-콜system-call">6️⃣ 시스템 콜(System Call)</h2>
+
+<blockquote>
+  <p>29분 51초부터 이어서 보기</p>
+</blockquote>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

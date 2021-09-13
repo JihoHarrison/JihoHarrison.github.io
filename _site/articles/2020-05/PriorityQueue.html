@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="  라이 블로그 - Priority Queue 를 보고 공부한 내용입니다.👆 우선 순위 큐(Priority Queue)란?우선 순위 큐는 ‘큐(queue)’ 라는 말이 포함되어 있듯이 데이터를 넣을 수도 있고, 뺄 수도 있는 구조이다.하지만!일반적인 큐와는 하는일도 다르고 내부 구...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[자료구조] 👆 우선 순위 큐 | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[자료구조] 👆 우선 순위 큐 | choheeis">
+  <meta name="twitter:description" content="  라이 블로그 - Priority Queue 를 보고 공부한 내용입니다.👆 우선 순위 큐(Priority Queue)란?우선 순위 큐는 ‘큐(queue)’ 라는 말이 포함되어 있듯이 데이터를 넣을 수도 있고, 뺄 수도 있는 구조이다.하지만!일반적인 큐와는 하는일도 다르고 내부 구...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-05/PriorityQueue">
+  <meta property="og:title" content="[자료구조] 👆 우선 순위 큐 | choheeis">
+  <meta property="og:description" content="  라이 블로그 - Priority Queue 를 보고 공부한 내용입니다.👆 우선 순위 큐(Priority Queue)란?우선 순위 큐는 ‘큐(queue)’ 라는 말이 포함되어 있듯이 데이터를 넣을 수도 있고, 뺄 수도 있는 구조이다.하지만!일반적인 큐와는 하는일도 다르고 내부 구...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[자료구조] 👆 우선 순위 큐 | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-05/PriorityQueue">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[자료구조] 👆 우선 순위 큐">[자료구조] 👆 우선 순위 큐</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        5 MAY 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    3 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <blockquote>
+  <p><a href="http://blog.naver.com/kks227/220791188929">라이 블로그 - Priority Queue</a> 를 보고 공부한 내용입니다.</p>
+</blockquote>
+
+<p><br /></p>
+
+<h2 id="-우선-순위-큐priority-queue란">👆 우선 순위 큐(Priority Queue)란?</h2>
+<hr />
+
+<p>우선 순위 큐는 ‘큐(queue)’ 라는 말이 포함되어 있듯이 데이터를 넣을 수도 있고, 뺄 수도 있는 구조이다.</p>
+
+<p>하지만!</p>
+
+<p><strong>일반적인 큐와는 하는일도 다르고 내부 구조도 완전히 다르다!!</strong></p>
+
+<p>우선 순위 큐에도 대표적인 기능으로 <strong>push</strong>, <strong>top</strong>, <strong>pop</strong> 이라는 기능들이 있지만 top과 pop에 의해서 빠져나오는 원소는 일반적인 큐와는 다른 원소가 빠져나온다.</p>
+
+<p>일반적인 큐에서 pop을 하였을 경우 가장 먼저 들어간 데이터가 나오는데 우선 순위 큐에서는 가장 먼저 들어간 데이터가 나오는 것이 아니라 <strong>우선순위가 높은 데이터가 나오게 된다!</strong></p>
+
+<p>예를 들어 우선 순위 큐에 {1, 4, 3, 7} 을 순서대로 넣었다면 처음 pop 연산에 의해 나오는 데이터는 1이 아니라 7이 된다.</p>
+
+<p>7이 빠진 {1, 4, 3}에서 다시 한번 pop 연산을 하면 4가 나오게 되는 것이다!</p>
+
+<p>즉, 우선 순위 큐 내부에서는 <strong>정렬</strong> 이 일어난다는 의미이며 우선 순위 큐 내부에서 사용되는 정렬 알고리즘은 <strong>힙 정렬(Heap sort)</strong> 이다.</p>
+
+<blockquote>
+  <p>힙 정렬에 대한 포스팅 –&gt; <a href="https://choheeis.github.io/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/2020/02/04/heapSort.html">여기</a></p>
+</blockquote>
+
+<p><br /></p>
+
+<h2 id="-우선-순위-큐priority-queue-내부-원리">👆 우선 순위 큐(Priority Queue) 내부 원리</h2>
+<hr />
+
+<p>우선 순위 큐는 기본적으로 pop 연산을 할 때 우선 순위가 높은 것 부터 나오게 된다.</p>
+
+<p>그렇기 때문에 <strong>최대 힙</strong> 을 사용한 힙 정렬이 내부에서 일어나고 있는 것이다.</p>
+
+<p>먼저 우선 순위 큐에 <strong>push</strong> 연산을 할 경우 내부에서 일어나는 일에 대해 알아보자.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/81049658-9968bb00-8ef9-11ea-97d3-7aec282b37ad.PNG" alt="01" /></p>
+
+<p>우선 순위 큐 내부에 위와 같은 데이터들이 최대 힙 구조로 들어가 있다고 가정하고, 9라는 데이터가 추가로 push 되었다고 해보자.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/81049817-e187dd80-8ef9-11ea-8c24-806d0b3e2b4b.PNG" alt="02" /></p>
+
+<p>그렇다면 이렇게 일단 힙의 완전 이진 트리 형태를 유지하도록 첫 번째 빈자리로 들어가게 된다.</p>
+
+<p>그 다음, 최대 힙 구조를 만족하도록 9는 다시 한번 배치가 될 것이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/81049940-257ae280-8efa-11ea-8268-fcbd13c861b1.PNG" alt="03" /></p>
+
+<p>이렇게 9는 자신의 부모 노드 3과 자리를 바꿀 것이고, 이어서</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/81050011-43484780-8efa-11ea-8aaf-3ff61dc78150.PNG" alt="04" /></p>
+
+<p>이와 같이 새로운 부모 노드인 6과도 자리를 바꿀 것이다.</p>
+
+<p>여기까지가 9를 push 했을 때 우선 순위 큐의 내부에서 일어나는 일의 전부이다!</p>
+
+<p>push 연산 한 번 할 때 자리를 바꾸는 연산은 최대 트리의 높이만큼 수행될 수 있으므로 push 연산의 시간 복잡도는 O(logN) 이다.</p>
+
+<blockquote>
+  <p>N은 트리의 전체 노드 수.</p>
+</blockquote>
+
+<p><br /></p>
+
+<p>그렇다면 이번에는 <strong>pop</strong> 연산이 수행될 경우 우선 순위 내부에서 일어나는 일에 대해 알아보자.</p>
+
+<p>우선 순위 큐에서 pop 연산을 하면 우선 순위가 높은 원소가 빠져나오게 되므로 위 트리에서는 root 노드였던 17이 빠져나오게 될 것이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/81050730-7808ce80-8efb-11ea-8c66-ea4cb8eb187c.PNG" alt="05" /></p>
+
+<p>그렇다면 17이 빠져나간 root 자리가 비어있게 되는데 어떻게 되는 것일까??</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/81051731-3a0caa00-8efd-11ea-8090-969d1a01a8d3.PNG" alt="06" /></p>
+
+<p>이렇게 최대 힙 구조의 가장 마지막 원소를 root 자리에 넣는다!</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/81050818-a1c1f580-8efb-11ea-91d6-86a7cf2c2d0e.PNG" alt="07" /></p>
+
+<p>즉, 위와 같은 그림이 되겠지만..! 최대 힙 구조를 만들지 못하고 있으므로 다시 한 번 최대 힙 구조를 만들어야 한다.</p>
+
+<p>먼저 부모 노드로 선정된 3보다 자식 노드인 13이 더 크므로 13이 부모 노드로 올라가게 된다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/81051841-717b5680-8efd-11ea-8806-8043a5979822.PNG" alt="08" /></p>
+
+<p>계속적으로 최대 힙을 만들기 위해 자리를 바꿔주다 보면</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/81052038-c028f080-8efd-11ea-82ca-1fa682ee3d59.PNG" alt="09" /></p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/81052044-c1f2b400-8efd-11ea-8d4a-60618cae0ea0.PNG" alt="10" /></p>
+
+<p>이렇게 3은 자신이 있어야 할 자리로 배치되고 root 노드는 13이 차지하게 된다.</p>
+
+<p>따라서 맞는 자리를 찾으면 pop 연산은 끝이 난다!</p>
+
+<p>이렇게 pop 연산이 행해졌을 때 우선 순위 큐 내부에서 일어나는 swap 행위는 최대 트리 높이만큼 일어나게 되므로</p>
+
+<p>pop 연산의 시간 복잡도는 <strong>O(logN)</strong> 이 된다!</p>
+
+<p><br /></p>
+
+<h2 id="-우선순위-큐-c-stl로-쉽게-사용하기">👆 우선순위 큐 C++ STL로 쉽게 사용하기</h2>
+<hr />
+
+<p><a href="http://www.cplusplus.com/reference/queue/">c++ queue 레퍼런스</a> 에 들어가보면</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/81053332-de8feb80-8eff-11ea-8e30-bff6ba31d53c.PNG" alt="11" /></p>
+
+<p>위와 같이 &lt;queue&gt; 라는 헤더파일에 총 두 개의 클래스가 정의되어 있는 것을 볼 수 있다.</p>
+
+<p>그 중 우선 순위 큐를 위한 <strong><a href="http://www.cplusplus.com/reference/queue/priority_queue/">priority_queue</a></strong> 라는 클래스가 있다!</p>
+
+<p>이 클래스를 읽어보니 최대 힙을 사용한 우선순위 큐를 구현해놓고 여러 멤버 함수로 큐 내부의 원소에 접근할 수 있도록 만들어진 클래스이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/81054677-2e6fb200-8f02-11ea-9b11-bf2588b2290f.PNG" alt="12" /></p>
+
+<p>위와 같은 멤버 함수들이 있으니 적합할 때 사용하면 된다!</p>
+
+<p><br /></p>
+
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

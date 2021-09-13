@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Kotlin으로 안드로이드 개발을 할 때 자주 사용되는 코틀린 언어 패턴이 있다!패턴이 생기게 된 이유는 코틀린이라는 언어를 통해 안드로이드 개발을 할 때 코틀린의 가장 유용한 점들을 적용하기 위해서이다.✍🏻 Android Developer 도규먼트 - kotlin pattern을...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[Kotlin] 💅 안드로이드 개발에서 자주 사용되는 코틀린 패턴 | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[Kotlin] 💅 안드로이드 개발에서 자주 사용되는 코틀린 패턴 | choheeis">
+  <meta name="twitter:description" content="Kotlin으로 안드로이드 개발을 할 때 자주 사용되는 코틀린 언어 패턴이 있다!패턴이 생기게 된 이유는 코틀린이라는 언어를 통해 안드로이드 개발을 할 때 코틀린의 가장 유용한 점들을 적용하기 위해서이다.✍🏻 Android Developer 도규먼트 - kotlin pattern을...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-07/kotlinPattern">
+  <meta property="og:title" content="[Kotlin] 💅 안드로이드 개발에서 자주 사용되는 코틀린 패턴 | choheeis">
+  <meta property="og:description" content="Kotlin으로 안드로이드 개발을 할 때 자주 사용되는 코틀린 언어 패턴이 있다!패턴이 생기게 된 이유는 코틀린이라는 언어를 통해 안드로이드 개발을 할 때 코틀린의 가장 유용한 점들을 적용하기 위해서이다.✍🏻 Android Developer 도규먼트 - kotlin pattern을...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[Kotlin] 💅 안드로이드 개발에서 자주 사용되는 코틀린 패턴 | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-07/kotlinPattern">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[Kotlin] 💅 안드로이드 개발에서 자주 사용되는 코틀린 패턴">[Kotlin] 💅 안드로이드 개발에서 자주 사용되는 코틀린 패턴</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        22 JUL 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    17 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <p>Kotlin으로 안드로이드 개발을 할 때 자주 사용되는 코틀린 언어 패턴이 있다!</p>
+
+<p>패턴이 생기게 된 이유는 코틀린이라는 언어를 통해 안드로이드 개발을 할 때 코틀린의 가장 유용한 점들을 적용하기 위해서이다.</p>
+
+<p>✍🏻 <a href="https://developer.android.com/kotlin/common-patterns?hl=ko">Android Developer 도규먼트 - kotlin pattern</a>을 참고하여 작성합니다.</p>
+
+<h2 id="1️⃣-상속-할-때-사용되는-코틀린-언어-패턴들">1️⃣ <strong>상속</strong> 할 때 사용되는 코틀린 언어 패턴들</h2>
+
+<p>✍🏻 <a href="https://developer.android.com/kotlin/common-patterns#inheritance">Android Developer 도규먼트 - kotlin pattern 중 상속부분</a> 을 참고하여 작성합니다.</p>
+
+<ol>
+  <li>
+    <p><strong>상속할 때는 : 기호를 사용한다!</strong></p>
+
+    <p>코틀린으로 안드로이드 개발을 하다보면 다른 클래스를 부모 클래스로 상속해야 하는 경우가 많다.</p>
+
+    <p>코틀린에서 상속을 할 때는 <strong>:</strong> 기호를 사용한다.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">class</span> <span class="nc">LoginFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> 
+</code></pre></div>    </div>
+
+    <p>LoginFragment 클래스는 Fragment 클래스의 <strong>서브클래스(sub class)</strong> 라고 부른다.</p>
+
+    <p>Fragment 클래스는 LoginFragment 클래스의 <strong>슈퍼클래스(super class)</strong> 라고 부른다.</p>
+
+    <p>이 두 용어는 계속 사용될 예정이니 잘 알아두도록 하자!</p>
+  </li>
+  <li>
+    <p><strong>슈퍼 클래스에 존재하는 메소드를 서브 클래스에서 오버라이드하여 재정의할 때는 override 키워드를 사용한다.</strong></p>
+
+    <p>Fragment 클래스를 상속받은 LoginFragment 클래스는 부모 클래스(super class)인 Fragment 클래스에 이미 정의되어 있는 여러 프래그먼트 수명 주기 함수들을 override 하여 <strong>재정의</strong> 할 수 있다.</p>
+
+    <p>함수를 재정의할 때는 아래의 코드처럼 <strong>override</strong> 키워드를 fun 키워드 앞에 붙이면 된다.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// Fragment 클래스의 onCreateView() 콜백 메소드를 override 하여 재정의한 모습
+</span> <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateView</span><span class="p">(</span>
+         <span class="n">inflater</span><span class="p">:</span> <span class="n">LayoutInflater</span><span class="p">,</span>
+         <span class="n">container</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">?,</span>
+         <span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?</span>
+ <span class="p">):</span> <span class="n">View</span><span class="p">?</span> <span class="p">{</span>
+     <span class="k">return</span> <span class="n">inflater</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">login_fragment</span><span class="p">,</span> <span class="n">container</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>super 키워드를 사용하여 슈퍼 클래스에 존재하는 메소드를 호출한다.</strong></p>
+
+    <p>✍🏻 <a href="https://kotlinlang.org/docs/reference/classes.html#calling-the-superclass-implementation">super 키워드에 대한 kotlin 도큐먼트</a> 를 참고하여 작성합니다.</p>
+
+    <p>서브 클래스(sub class) 안에서 자신이 상속받은 슈퍼 클래스(super class)의 public 메소드나 public 속성을 호출할 수 있다.</p>
+
+    <p>이 때 <code class="highlighter-rouge">super</code> 이라는 키워드를 사용하여 슈퍼 클래스의 메소드 및 속성을 호출한다.</p>
+
+    <p>아래 코드를 예시로 이해해보자.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">open</span> <span class="kd">class</span> <span class="nc">Super</span> <span class="p">{</span>
+     <span class="k">open</span> <span class="k">fun</span> <span class="nf">draw</span><span class="p">()</span> <span class="p">{</span>
+         <span class="n">println</span><span class="p">(</span><span class="s">"슈퍼 클래스 draw()"</span><span class="p">)</span>
+     <span class="p">}</span>
+ <span class="p">}</span>
+
+ <span class="kd">class</span> <span class="nc">Sub</span> <span class="p">:</span> <span class="n">Super</span><span class="p">()</span> <span class="p">{</span>
+     <span class="k">override</span> <span class="k">fun</span> <span class="nf">draw</span><span class="p">(){</span>
+         <span class="k">super</span><span class="p">.</span><span class="n">draw</span><span class="p">()</span>
+         <span class="n">println</span><span class="p">(</span><span class="s">"서브 클래스 draw()"</span><span class="p">)</span>
+     <span class="p">}</span>
+ <span class="p">}</span>
+
+ <span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+     <span class="kd">val</span> <span class="py">sub</span> <span class="p">=</span> <span class="n">Sub</span><span class="p">()</span>
+     <span class="n">sub</span><span class="p">.</span><span class="n">draw</span><span class="p">()</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>위 코드에서 주목해야 하는 부분은 Sub 클래스이다.</p>
+
+    <p>Sub 클래스는 Super 클래스를 상속받은 클래스이다. Sub 클래스 안에서 override 키워드를 사용해서 슈퍼 클래스의 메소드인 draw()를 재정의하고 있다.</p>
+
+    <p>재정의할 때 <strong>super.draw()</strong> 라고 작성하여 슈퍼 클래스의 draw() 메소드를 한 번 호출하도록 한 모습이다.</p>
+
+    <p>따라서 main() 함수를 호출하여 출력된 결과는</p>
+
+    <p><img width="131" alt="01" src="https://user-images.githubusercontent.com/31889335/100314228-80d90300-2ff9-11eb-838e-7b8681badf8f.png" /></p>
+
+    <p>위와 같다.</p>
+
+    <p>위 내용들을 바탕으로 안드로이드 개발에서 많이 볼 수 있는 코드 중 아래 코드를 이해해보자.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">class</span> <span class="nc">LoginFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
+
+ <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>위와 같이 정의된 LoginFragment 클래스에서 super class인 Fragment 클래스에 존재하는 onViewCreated() 라는 메소드를 재정의해보자.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">class</span> <span class="nc">LoginFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
+
+     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onViewCreated</span><span class="p">(</span><span class="n">view</span><span class="p">:</span> <span class="n">View</span><span class="p">,</span> <span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+         <span class="k">super</span><span class="p">.</span><span class="n">onViewCreated</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">savedInstanceState</span><span class="p">)</span>
+         <span class="n">println</span><span class="p">(</span><span class="s">"Kotlin"</span><span class="p">)</span>
+     <span class="p">}</span>
+
+ <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>super class인 Fragment 클래스에 존재하는 onViewCreated() 메소드를 LoginFragment 클래스 안에서 재정의하기 위해 <code class="highlighter-rouge">override</code> 키워드를 사용하였다.</p>
+
+    <p>이 때, <code class="highlighter-rouge">super</code> 키워드를 사용하여 Fragment 클래스에 존재하는 onViewCreated() 메소드를 한 번 호출 후, 추가로 println(“Kotlin”) 이라는 다른 작업을 하게 하도록 재정의하고 있다.</p>
+  </li>
+</ol>
+
+<h2 id="2️⃣-객체를-초기화-할-때-사용되는-코틀린-언어-패턴">2️⃣ <strong>객체를 초기화</strong> 할 때 사용되는 코틀린 언어 패턴</h2>
+
+<p>✍🏻 <a href="https://developer.android.com/kotlin/common-patterns#fragment-nullability">Android Developer 도규먼트 - kotlin pattern 중 초기화 부분</a> 을 참고하여 작성합니다.</p>
+
+<ul>
+  <li>
+    <p><strong>lateinit 키워드를 통해 초기화를 지연시킬 수 있다!</strong></p>
+
+    <p>kotlin에서는 객체를 선언할 때 <strong>반드시 객체의 속성을 초기화해줘야 한다.</strong> 그래야 해당 클래스의 인스턴스를 가져올 때 클래스 내부 변수들을 즉시 참고할 수 있기 때문이다.</p>
+
+    <blockquote>
+      <p>💁🏼‍♀️ 클래스의 인스턴스를 가져온다?</p>
+
+      <p>예를 들어 A라는 클래스가 존재한다고 할 때 다른 곳에서 A라는 클래스를 사용하려면 먼저 A라는 클래스의 인스턴스를 생성해야 한다. 즉, 클래스의 생성자 함수를 호출하여야 한다는 것이다. 이것을 클래스의 인스턴스를 가져온다라고 하는 것!</p>
+    </blockquote>
+
+    <p>그런데 kotlin 언어를 사용하여 안드로이드 앱 개발을 할 때 객체의 속성을 초기화 해주는 부분에서 문제가 발생하는 경우가 존재한다.</p>
+
+    <p>어떤 경우에 어떤 문제가 발생하는지 알아보자.</p>
+
+    <p>만약 아래 코드와 같이 LoginFragment 클래스의 멤버로 UI View 객체를 선언하고 초기화한다고 가정해보자.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">class</span> <span class="nc">LoginFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
+      <span class="c1">// findViewById() 함수를 사용하여 UI 레이아웃 객체들을 초기화
+</span>      <span class="k">private</span> <span class="kd">var</span> <span class="py">usernameEditText</span><span class="p">:</span> <span class="n">EditText</span> <span class="p">=</span> <span class="n">findViewById</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="p">.~~)</span>
+      <span class="k">private</span> <span class="kd">var</span> <span class="py">passwordEditText</span><span class="p">:</span> <span class="n">EditText</span> <span class="p">=</span> <span class="n">findViewById</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="p">.~~)</span>
+      <span class="k">private</span> <span class="kd">var</span> <span class="py">loginButton</span><span class="p">:</span> <span class="n">Button</span> <span class="p">=</span> <span class="n">findViewById</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="p">.~~)</span>
+      <span class="k">private</span> <span class="kd">var</span> <span class="py">statusTextView</span><span class="p">:</span> <span class="n">TextView</span> <span class="p">=</span> <span class="n">findViewById</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="p">.~~)</span>
+
+  <span class="o">..</span><span class="p">.</span>
+  <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>하지만 위 코드를 실행시키면 컴파일 에러가 난다.</p>
+
+    <p>왜냐하면 안드로이드 앱 개발에는 <strong>생명주기(life cycle)</strong> 라는 중요한 개념이 존재하기 때문이다.</p>
+
+    <p>kotlin 언어는 객체의 속성을 반드시 초기화해야 한다는 특징이 있으므로 이를 지키기 위해 안드로이드 개발 시에도 LoginFragment 클래스 상단에서 멤버 변수로 View 객체들을 초기화 한다면?</p>
+
+    <p>Fragment의 생명 주기에 따르면 UI 레이아웃은 onCreateView() 라는 생명 주기 콜백 메소드가 호출될 때 비로소 inflate 되어 참조할 수 있게 된다.</p>
+
+    <p>하지만 LoginFragment 클래스 상단에서 View 객체들을 초기화 한다면 아직 onCreateView() 메소드가 실행되기 전이라 UI 레이아웃 뷰들이 참조될 준비가 되어 있지 않은 상태이기 때문에 참조 자체가 안 된다.</p>
+
+    <p>따라서 LoginFragment 클래스 상단에 View 객체들을 초기화 할 <strong>계획만 작성해두고</strong> 진짜 초기화 작업은 onCreateView() 메소드가 호출될 때까지 <strong>지연시킬 수 있는 방법</strong> 이 필요하다.</p>
+
+    <p>이를 위해 코틀린에서는 <code class="highlighter-rouge">lateinit</code> 이라는 키워드를 제공하고 있다.</p>
+
+    <p>✍🏻 <a href="https://kotlinlang.org/docs/reference/properties.html#late-initialized-properties-and-variables">lateinit 키워드에 대한 kotlin 도큐먼트</a> 를 추가로 참고하여 작성합니다.</p>
+
+    <p><strong>lateinit</strong> 키워드를 붙여주어 선언해준 해당 멤버 변수(객체)는 해당 클래스 인스턴스를 가져올 때 곧바로 초기화되는 것이 아니라 클래스의 body 안에서 초기화 될 수 있게 된다.</p>
+
+    <p>다만, lateinit으로 초기화를 지연시킨 경우 지연 시간이 길지 않도록 최대한 빨리 초기화 작업을 해줘야 한다.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">class</span> <span class="nc">LoginFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="c1">// lateinit 키워드를 사용하여 초기화를 미룬 모습
+</span>  <span class="k">lateinit</span> <span class="kd">var</span> <span class="py">usernameEditText</span><span class="p">:</span> <span class="n">EditText</span>
+  <span class="k">lateinit</span> <span class="kd">var</span> <span class="py">passwordEditText</span><span class="p">:</span> <span class="n">EditText</span>
+  <span class="k">lateinit</span> <span class="kd">var</span> <span class="py">loginButton</span><span class="p">:</span> <span class="n">Button</span>
+  <span class="k">lateinit</span> <span class="kd">var</span> <span class="py">statusTextView</span><span class="p">:</span> <span class="n">TextView</span>
+
+  <span class="c1">// onCreateView 함수가 호출되고 난 바로 다음에 호출되는 onViewCreated 함수 안에서 초기화시켜줌으로써 최대한 빨리 초기화 시켜주는 모습!
+</span>  <span class="k">override</span> <span class="k">fun</span> <span class="nf">onViewCreated</span><span class="p">(</span><span class="n">view</span><span class="p">:</span> <span class="n">View</span><span class="p">,</span> <span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+      <span class="k">super</span><span class="p">.</span><span class="n">onViewCreated</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">savedInstanceState</span><span class="p">)</span>
+
+      <span class="n">usernameEditText</span> <span class="p">=</span> <span class="n">view</span><span class="p">.</span><span class="n">findViewById</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">username_edit_text</span><span class="p">)</span>
+      <span class="n">passwordEditText</span> <span class="p">=</span> <span class="n">view</span><span class="p">.</span><span class="n">findViewById</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">password_edit_text</span><span class="p">)</span>
+      <span class="n">loginButton</span> <span class="p">=</span> <span class="n">view</span><span class="p">.</span><span class="n">findViewById</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">login_button</span><span class="p">)</span>
+      <span class="n">statusTextView</span> <span class="p">=</span> <span class="n">view</span><span class="p">.</span><span class="n">findViewById</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">status_text_view</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="o">..</span><span class="p">.</span>
+  <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>lateinit 으로 지연시킨 객체 속성을 초기화 작업 전에 엑세스하면 kotlin은 <strong><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-uninitialized-property-access-exception/">UninitializedPropertyAccessException</a></strong> 을 발생시킨다.</p>
+  </li>
+</ul>
+
+<h2 id="3️⃣-sam-변환-기능을-적극-사용하는-코틀린-패턴">3️⃣ SAM 변환 기능을 적극 사용하는 코틀린 패턴</h2>
+
+<p>✍🏻 <a href="https://developer.android.com/kotlin/common-patterns#sam">Android Developer 도규먼트 - kotlin pattern 중 SAM conversion 부분</a> 과 <a href="https://kotlinlang.org/docs/reference/java-interop.html#sam-conversions">SAM Conversions 에 대한 kotlin 도큐먼트</a>를 참고하여 작성합니다.</p>
+
+<p>코틀린은 SAM 변환(conversion) 기능을 제공한다.</p>
+
+<p><strong>SAM Conversion</strong> 이란 <strong>Single Abstract Method Conversion</strong> 의 약자로, <strong>단일 추상 메소드 변환</strong> 이라고도 부를 수 있다.</p>
+
+<p>그렇다면 <strong>SAM Conversion</strong> 이라는 것은 무엇일까?</p>
+
+<p>이해하기 쉽게 알아보자.</p>
+
+<p>예를 들어, kotlin 으로 안드로이드 앱 개발을 할 때 자주 작성하는 코드 중 아래와 같은 코드가 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">loginButton</span><span class="p">:</span> <span class="n">Button</span> <span class="p">=</span> <span class="n">findViewById</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">btn_login</span><span class="p">)</span>
+
+<span class="o">..</span><span class="p">.</span>
+
+<span class="c1">// 이 부분 주목!
+</span><span class="n">loginButton</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+    <span class="c1">// 로그인 버튼을 클릭했을 때 실행되어야 하는 코드를 작성한다.
+</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>위 코드를 하나 하나 뜯어보자.</p>
+
+<p>먼저, loginButton은 <a href="https://developer.android.com/reference/kotlin/android/widget/Button">Button</a> 의 객체이다.</p>
+
+<p><img width="335" alt="02" src="https://user-images.githubusercontent.com/31889335/100537537-c8b39080-326c-11eb-86c2-9ee2cdc35e88.png" /></p>
+
+<p>Button 클래스의 정의를 보면 위 그림에 빨간 줄로 표시해둔 것처럼 super class로 <a href="https://developer.android.com/reference/kotlin/android/view/View">View 라는 클래스</a> 를 상속받고 있음을 알 수 있다.</p>
+
+<p>View라는 클래스를 뜯어보면 이 클래스가 가지고 있는 public 메소드 중 <strong><a href="https://developer.android.com/reference/kotlin/android/view/View#setonclicklistener">setOnClickListener</a></strong> 라는 메소드가 존재함을 알 수 있을 것이다. 이 메소드는 view(여기서는 Button이 된다)가 클릭될 때 호출되어야 할 콜백 작업들을 등록할 수 있도록 지원해주는 메소드이다.</p>
+
+<p>이번에는 이 setOnClickListener 메소드를 뜯어보자.</p>
+
+<p><img width="790" alt="03" src="https://user-images.githubusercontent.com/31889335/100537698-fc42ea80-326d-11eb-9878-d755fe4cb852.png" /></p>
+
+<p>이 메소드는 매개 변수로 <a href="https://developer.android.com/reference/kotlin/android/view/View.OnClickListener">onClickListener</a> 라는 인터페이스를 가지고 있는 것을 볼 수 있다.</p>
+
+<p><img width="720" alt="04" src="https://user-images.githubusercontent.com/31889335/100537752-71162480-326e-11eb-8f3e-ebb1fdf62914.png" /></p>
+
+<p>따라서 setOnClickListener 이라는 View 클래스의 public 메소드를 sub class에서 호출하려면 매개 변수인 OnClickListener(인터페이스)를 구현해줘야 한다는 것이고, 아래와 같이 구현될 것이다.</p>
+
+<p>(인터페이스를 사용하려면 사용하고자 하는 곳에서 구현해야 한다는 객체 지향 언어의 다형성 때문에 아래와 같이 구현해야 함!)</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// kotlin 에서 OnClickListener를 구현한 모습
+</span><span class="n">loginButton</span><span class="p">.</span><span class="n">setOnClickListener</span><span class="p">(</span><span class="kd">object</span> <span class="err">: </span><span class="nc">View</span><span class="p">.</span><span class="n">OnClickListener</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onClick</span><span class="p">(</span><span class="n">p0</span><span class="p">:</span> <span class="n">View</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="n">TODO</span><span class="p">(</span><span class="s">"Not yet implemented"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>그런데 여기서 주목할 점이 있다. onClickListener 라는 인터페이스 안에 정의되어 있는 메소드는 <strong>onClick</strong> 이라는 <strong>추상 메소드 딱 한 개뿐 이라는 점</strong> 이다.</p>
+
+<p>진짜로 딱 한 개만 정의되어 있는지 <a href="https://developer.android.com/reference/android/view/View.OnClickListener">onClickListener 도큐먼트</a> 를 봐보자.</p>
+
+<p><img width="340" alt="05" src="https://user-images.githubusercontent.com/31889335/100537791-d10ccb00-326e-11eb-83f2-c58bb24f4b4e.png" /></p>
+
+<p><img width="812" alt="06" src="https://user-images.githubusercontent.com/31889335/100538038-ab80c100-3270-11eb-8572-c451c2330390.png" /></p>
+
+<p>정말 이 인터페이스 안에는 onClick 이라는 추상 메소드 단 한 개만 정의되어 있다!</p>
+
+<p>일단 이쯤에서 지금까지의 내용을 정리해보자.</p>
+
+<p>버튼이 클릭되면 실행될 작업들을 작성해주기 위해서는 setOnClickListener 이라는 메소드를 사용해야 하는데 이 메소드의 매개변수에 OnClickListener 라는 인터페이스가 존재하므로 이 인터페이스 안에 정의된 메소드를 구현해줘야 한다!</p>
+
+<p>그런데 OnClickListener 라는 인터페이스에 정의되어 있는 메소드는 onClick 이라는 단 한 개의 추상 메소드(단일 추상 메소드)이다.</p>
+
+<p>따라서 setOnClickListener()는 항상 OnClickListener 라는 인터페이스를 매개 변수로 가져오고 OnClickListener는 항상 onClick 메소드라는 단일 추상 메소드만을 구현하게 된다는 것을 이해하면 SAM 변환을 이해하기 위한 충분한 배경 지식을 갖추게 된 것이다!</p>
+
+<p>그래서 원래는 setOnClickListener를 사용하려면 아래와 같은 코드로 작성해야 한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// kotlin 에서 OnClickListener를 구현한 모습
+</span><span class="n">loginButton</span><span class="p">.</span><span class="n">setOnClickListener</span><span class="p">(</span><span class="kd">object</span> <span class="err">: </span><span class="nc">View</span><span class="p">.</span><span class="n">OnClickListener</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onClick</span><span class="p">(</span><span class="n">p0</span><span class="p">:</span> <span class="n">View</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="n">TODO</span><span class="p">(</span><span class="s">"Not yet implemented"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>그런데 안드로이드 스튜디오에서 이것을 구현하려고 하다보면</p>
+
+<p><img width="599" alt="07" src="https://user-images.githubusercontent.com/31889335/100544858-fcf27580-329b-11eb-9231-359cf2cff1a6.png" /></p>
+
+<p>위 그림과 같이 setOnClickListener를 조금 더 쉽게 작성할 수 있는 메뉴가 나온다.</p>
+
+<p>빨간 박스로 표시를 해둔 메뉴를 선택하면 아래와 같은 코드가 자동으로 작성된다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">loginButton</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span> 
+    <span class="n">TODO</span><span class="p">(</span><span class="s">"Not yet implemented"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이 코드는 아래 코드와</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// kotlin 에서 OnClickListener를 구현한 모습
+</span><span class="n">loginButton</span><span class="p">.</span><span class="n">setOnClickListener</span><span class="p">(</span><span class="kd">object</span> <span class="err">: </span><span class="nc">View</span><span class="p">.</span><span class="n">OnClickListener</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onClick</span><span class="p">(</span><span class="n">p0</span><span class="p">:</span> <span class="n">View</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="n">TODO</span><span class="p">(</span><span class="s">"Not yet implemented"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>같은 기능을 하지만 훨~씬 단순하고 간단한 모습이다.</p>
+
+<p>이게 바로 코틀린이 지원하는 <strong>SAM 변환</strong> 기능이다!</p>
+
+<p>즉, 매개 변수로 인터페이스가 존재하며 이 인터페이스가 단일 추상 메소드를 가지고 있을 때 코틀린에서 위와 같이 간단하게 구현하도록 변환시켜주는 것이다!</p>
+
+<p>이제 <strong>SAM 변환 = Single Abstract Method Conversion = 단일 추상 메소드 변환</strong> 이라는 등식이 성립함을 이해할 수 있을 것이다.</p>
+
+<p>또 onClickListener 인터페이스처럼 인터페이스에 단 하나의 추상 메소드만 정의하고 있는 인터페이스를 <strong>함수형 인터페이스</strong> 라고 부른다.</p>
+
+<h2 id="4️⃣-companion-object-를-사용하는-코틀린-패턴">4️⃣ <strong>companion object</strong> 를 사용하는 코틀린 패턴</h2>
+
+<p>✍🏻 이 부분에 대한 내용은 길이가 길어질 것 같아 따로 공부 후 포스팅할 예정입니다.</p>
+
+<blockquote>
+  <p>포스트 링크 연결하기</p>
+</blockquote>
+
+<h2 id="5️⃣-property속성-delegation위임-을-사용하는-코틀린-패턴">5️⃣ property(속성) delegation(위임) 을 사용하는 코틀린 패턴</h2>
+
+<p>✍🏻 이 부분에 대한 내용도 길이가 길어질 것 같아 따로 공부 후 포스팅할 예정입니다.</p>
+
+<blockquote>
+  <p>포스트 링크 연결하기</p>
+</blockquote>
+
+<h2 id="6️⃣-null-허용-여부에-대해-명시할-때-사용되는-코틀린-패턴">6️⃣ Null 허용 여부에 대해 명시할 때 사용되는 코틀린 패턴</h2>
+
+<p>✍🏻 <a href="https://developer.android.com/kotlin/common-patterns#nullability">Android Developer 도규먼트 - kotlin pattern 중 Null 허용 부분</a></p>
+
+<ol>
+  <li>
+    <p><strong>? 기호를 사용하여 Null 허용 여부를 명시하는 코틀린 패턴</strong></p>
+
+    <p>코틀린은 앱 전체에서 타입 안정성을 유지할 수 있도록 <strong>null 허용 여부 규칙을 엄격하게 지키도록 한다.</strong></p>
+
+    <p>원칙적으로 코틀린에서는 객체 참조에 null 값이 포함될 수 없지만 null 값을 포함시켜야 하는 경우가 발생한다면 <strong>? 기호</strong> 를 변수의 type명 뒤에 추가하여 <strong>해당 변수에는 null 값이 저장될 수도 있다</strong> 는 것을 직접 명시해야 한다.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="k">null</span> <span class="c1">// 컴파일 에러
+</span>    
+ <span class="kd">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span> <span class="c1">// 컴파일 성공
+</span></code></pre></div>    </div>
+
+    <p>이렇게 코틀린은 null 허용 여부를 직접 명시해줘야 한다는 엄격한 규칙을 적용함으로써 앱을 비정상 종료시킬 수 있는 <strong>NullPointerException</strong> 에러가 발생할 가능성을 줄이고자 한 언어이다.</p>
+  </li>
+  <li>
+    <p><strong>자바 코드와 상호적으로 작동하는 경우 달라지는 Null 허용 여부 표시</strong></p>
+
+    <p>코틀린이라는 언어는 자바와 상호운용(하나의 시스템이 동일 또는 다른 시스템과 아무런 제약 없이 서로 호환되어 사용할 수 있는 성질)을 할 수 있는 언어이다.</p>
+
+    <p>즉, 코틀린 언어를 사용하는 개발 환경에서도 자바 코드를 호출할 수 있다는 것이다.</p>
+
+    <p>다음은 코틀린 언어를 사용하는 개발 환경에서 자바의 Queue를 호출한 코드이다.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">import</span> <span class="nn">java.util.*</span>
+
+ <span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+     <span class="c1">// 큐 선언하기
+</span>     <span class="kd">var</span> <span class="py">queue</span><span class="p">:</span> <span class="n">Queue</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">LinkedList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;()</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>이처럼 코틀린 언어를 사용하는 개발 환경에서도 자바 코드를 자유롭게 호출할 수 있으며 특히 안드로이드 개발에 사용되는 Android API 들이 자바 언어로 작성된 경우가 대부분이라 안드로이드 개발에서는 자주 일어나는 현상이다.</p>
+
+    <p>하지만 자바는 코틀린과 달리 Null 허용 여부에 대해 ? 연산자를 사용하여 명시적으로 나타내라는 엄격한 규칙이 없다!</p>
+
+    <p>자바는 코틀린보다 Null 허용 여부에 대해 덜 엄격한 편이기 때문이다.</p>
+
+    <p>따라서 자바로 작성된 Android API를 코틀린으로 호출할 경우 Null 허용 여부가 엄격한 코틀린 규칙에 벗어나는 자바 코드가 호출되는 경우가 발생하게 된다.</p>
+
+    <p>예를 들어 다음과 같은 상황이 발생할 수 있다.</p>
+
+    <p>다음과 같은 자바 언어로 작성된 Account 클래스가 존재한다고 가정해보자.</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// 자바로 작성된 코드</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Account</span> <span class="kd">implements</span> <span class="n">Parcelable</span> <span class="o">{</span>
+     <span class="kd">public</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+     <span class="kd">public</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">type</span><span class="o">;</span>
+
+     <span class="o">...</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>코틀린 개발 환경에서 위 Account 클래스의 name 이라는 멤버를 참조한다면 코틀린 컴파일러는 name 멤버가 String인지 String?(null 허용)인지 알 수 없게 된다.</p>
+
+    <p>코틀린 컴파일러 입장에서  public final String name; 코드를 보고 null 허용인가? 미허용인가? 하며 모호성을 띄게 된다는 것이다.</p>
+
+    <p>코틀린은 이러한 모호성을 표시하기 위해 <strong>!연산자</strong> 를 사용하여 <strong>String!</strong> 이라고 표시한다. String!는 특별한 의미가 없고, ‘String 이거나 String? 둘 중 하나일 거야~’ 를 나타내는 표현 방법이다.</p>
+
+    <p>그럼 코틀린 컴파일러는 String! 표시를 보고 String 또는 String? 둘 중 하나로 값을 할당할 수 있다.</p>
+
+    <p>하지만 !기호를 사용하여 모호성을 표시하는 것보다 애초에 모호성 자체를 없애는 것이 훨씬 좋기 때문에 모호성을 해결하기 위한 방법들이 생겨났다.</p>
+
+    <p>바로 코틀린이 모호해할 것을 예상하여 자바에서 null 허용 여부를 엄격하게 지키는 방법이다!</p>
+
+    <p>자바로 Account 클래스를 작성할 때 아래와 같이 @Nullable 어노테이션을 붙여주면 코틀린의 String?와 같이 null을 허용한다는 것이 명시되어 모호성이 해결된다.</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// 자바로 작성된 코드</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Account</span> <span class="kd">implements</span> <span class="n">Parcelable</span> <span class="o">{</span>
+     <span class="c1">// @Nullable 어노테이션을 붙여줌으로써 Null 허용 명시</span>
+     <span class="kd">public</span> <span class="kd">final</span> <span class="nd">@Nullable</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+
+     <span class="c1">// @NonNull 어노테이션을 붙여줌으로써 Null 미허용 명시</span>
+     <span class="kd">public</span> <span class="kd">final</span> <span class="nd">@NonNull</span> <span class="n">String</span> <span class="n">type</span><span class="o">;</span>
+
+     <span class="o">...</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>하지만 이제는 코틀린 언어로 안드로이드 개발을 할 때 자바가 null 허용 여부를 엄격하게 지키지 않아서 발생하는 모호성을 크게 걱정할 필요가 없다!</p>
+
+    <p>자바로 작성된 최근의 Android API는 대부분 위와 같은 어노테이션을 붙여주어 코틀린과 상호운용을 원활히 하도록 개선되었기 때문이다 😃</p>
+  </li>
+  <li>
+    <p><strong>!! 연산자를 사용하기도 하는 코틀린 패턴</strong></p>
+
+    <p>코틀린은 앱 전체에서 타입 안정성을 유지할 수 있도록 null 허용 여부 규칙을 엄격하게 지키도록 하여 null을 허용하려면 <strong>? 연산자</strong> 를 통해 Null 허용 여부를 명시해주어야 함을 배웠다.</p>
+
+    <p>? 연산자를 통해 Null이 참조되더라도 NullPointerException 이 발생하지 않고, 앱이 강제 종료되지 않게 된다.</p>
+
+    <p>하지만 어떤 경우에는 Null일 경우 NullPointerException 를 발생시키고 코드 실행을 막아야 하는 경우도 분명 존재할 것이다.</p>
+
+    <p>이럴 때 사용하는 연산자가 <strong>!! 연산자</strong> 이다. 다음 코드를 봐보자.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">?</span> <span class="p">=</span> <span class="s">"Kimchohee"</span>
+ <span class="kd">val</span> <span class="py">realName</span> <span class="p">=</span> <span class="n">name</span><span class="o">!!</span><span class="p">.</span><span class="n">trim</span><span class="p">()</span>
+</code></pre></div>    </div>
+
+    <p>위 코드의 name 변수는 ? 연산자를 통해 Null이 허용된 String? 타입의 변수이다.</p>
+
+    <p>realName 변수는 trim() 이라는 함수를 사용해 name의 맨 앞과 뒤에 공백이 포함되어 있을 경우 공백을 제거한 문자열이 저장되는 변수이다.</p>
+
+    <p>그런데 만약 name에 “Kimchohee”가 아닌 null이 참조된다면 realName은 null 값의 앞 뒤 공백을 제거하라는 의미가 되므로 말이 되지 않는 이상한 의미가 되버릴 것이다.</p>
+
+    <p>이런 상황을 방지하기 위해</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">?</span> <span class="p">=</span> <span class="s">"Kimchohee"</span>
+
+ <span class="c1">// !! 연산자를 사용해 Null 허용을 막음
+</span> <span class="kd">val</span> <span class="py">realName</span> <span class="p">=</span> <span class="n">name</span><span class="o">!!</span><span class="p">.</span><span class="n">trim</span><span class="p">()</span>
+</code></pre></div>    </div>
+
+    <p>위와 같이 원래는 Null이 허용된 변수이지만 realName에 정확한 값을 저장하기 위해 name의 값이 Null일 경우 NullPointerException 에러를 발생시키라는 !! 연산자를 붙여준 것이다.</p>
+
+    <p>!! 연산자는 이러한 경우에 사용되지만 NullPointerException 에러를 발생시키는 원인이 되므로 자주 사용해서는 안된다.</p>
+
+    <p>코틀린은 !! 연산자를 사용할 수밖에 없어 NullPointerException이 발생하는 상황을 더욱 줄이고자 새로운 방법을 등장시켰다!존재한다!</p>
+
+    <p>바로 <strong>?: 연산자</strong> 를 사용하는 방법이다.</p>
+
+    <p>이에 대해서는 <a href="https://choheeis.github.io/newblog//articles/2020-11/kotlinKeywords">이 블로그의 다른 포스팅 - 코틀린에 존재하는 키워드들</a> 에서 알 수 있을 것이다.</p>
+
+    <p>?: 연산자에 대해 알아보고 나면 !! 연산자를 사용하지 않고 다음과 같이 해결할 수 있음을 알게 될 것이다.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">?</span> <span class="p">=</span> <span class="s">"Kimchohee"</span>
+
+ <span class="c1">// ?: 연산자를 사용해 Null 허용을 처리함
+</span> <span class="kd">val</span> <span class="py">accountName</span> <span class="p">=</span> <span class="n">account</span><span class="p">.</span><span class="n">name</span><span class="o">?.</span><span class="n">trim</span><span class="p">()</span> <span class="o">?:</span> <span class="s">"Default name"</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="7️⃣-속성을-초기화-할-때-사용되는-코틀린-패턴">7️⃣ 속성을 초기화 할 때 사용되는 코틀린 패턴</h2>
+
+<p>✍🏻 <a href="https://developer.android.com/kotlin/common-patterns#init">Android Developer 도규먼트 - kotlin pattern 중 속성 초기화 부분</a> 을 참고하여 작성합니다.</p>
+
+<p>앞에서도 계속 언급되었지만 코틀린은 속성을 초기화하지 않음을 허용하지 않는다. 즉, 클래스가 생성될 때 클래스 안의 멤버 속성들이 곧바로 초기화 되도록 코드를 작성해야 한다.</p>
+
+<p>코틀린에서 속성을 초기화할 때 사용되는 패턴은 여러 가지가 있다.</p>
+
+<ol>
+  <li>
+    <p><strong>첫 번째 방법</strong></p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">class</span> <span class="nc">LoginFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
+     <span class="kd">val</span> <span class="py">index</span><span class="p">:</span> <span class="n">Int</span> <span class="p">=</span> <span class="m">12</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>LoginFragment 라는 클래스가 생성될 때 index 라는 멤버도 곧바로 12로 초기화 된다.</p>
+  </li>
+  <li>
+    <p><strong>두 번째 방법</strong> –&gt; <strong>init 블럭 사용</strong></p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">class</span> <span class="nc">LoginFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
+     <span class="kd">val</span> <span class="py">index</span><span class="p">:</span> <span class="n">Int</span>
+
+     <span class="n">init</span> <span class="p">{</span>
+         <span class="n">index</span> <span class="p">=</span> <span class="m">12</span>
+     <span class="p">}</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p>https://kotlinlang.org/docs/reference/classes.html#constructors 문서 읽고 init 블럭에 대해 조금 더 자세히 알아볼 필요 있음!</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>세 번째 방법 –&gt; <strong>lateinit</strong> 사용</p>
+  </li>
+</ol>
+
+<p>이 부분에 대해서는 이 포스팅의 <strong>2️⃣ __객체 초기화</strong> 할 때 사용되는 코틀린 언어 패턴들__ 부분에서 이미 설명했었다!</p>
+
+<h1 id="끝">끝!</h1>
+
+<p>대장정의 포스팅이였습니당,,,, 이렇게 코틀린을 개발 언어로 안드로이드 개발을 할 때 자주 사용되는 언어 패턴을 모두 알아보았습니다~ 거의 1주일 동안 이어가며 쓴 것 같은데,, 중간 중간 덜 공부한 부분도 있네요ㅠㅠ 휴우! 😂</p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

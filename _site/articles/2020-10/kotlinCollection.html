@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="  사실 이 포스팅은 코틀린의 List, ArrayList, MutableList 등을 먼저 공부한 후 작성하는 것이다.  위의 것들을 공부하다 보니 Collection 패키지에 대해 궁금하게 되었고, 한 번 공부를 해야겠다고 생각했다.0️⃣ Collection이 뭔가?✍🏻 kot...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[Kotlin] 코틀린의 Collection | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[Kotlin] 코틀린의 Collection | choheeis">
+  <meta name="twitter:description" content="  사실 이 포스팅은 코틀린의 List, ArrayList, MutableList 등을 먼저 공부한 후 작성하는 것이다.  위의 것들을 공부하다 보니 Collection 패키지에 대해 궁금하게 되었고, 한 번 공부를 해야겠다고 생각했다.0️⃣ Collection이 뭔가?✍🏻 kot...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-10/kotlinCollection">
+  <meta property="og:title" content="[Kotlin] 코틀린의 Collection | choheeis">
+  <meta property="og:description" content="  사실 이 포스팅은 코틀린의 List, ArrayList, MutableList 등을 먼저 공부한 후 작성하는 것이다.  위의 것들을 공부하다 보니 Collection 패키지에 대해 궁금하게 되었고, 한 번 공부를 해야겠다고 생각했다.0️⃣ Collection이 뭔가?✍🏻 kot...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[Kotlin] 코틀린의 Collection | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-10/kotlinCollection">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[Kotlin] 코틀린의 Collection">[Kotlin] 코틀린의 Collection</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        13 OCT 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    4 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <blockquote>
+  <p>사실 이 포스팅은 코틀린의 List, ArrayList, MutableList 등을 먼저 공부한 후 작성하는 것이다.</p>
+
+  <p>위의 것들을 공부하다 보니 Collection 패키지에 대해 궁금하게 되었고, 한 번 공부를 해야겠다고 생각했다.</p>
+</blockquote>
+
+<h2 id="0️⃣-collection이-뭔가">0️⃣ Collection이 뭔가?</h2>
+
+<p>✍🏻 <a href="https://kotlinlang.org/docs/reference/collections-overview.html">kotlin 도큐먼트 - Collection 개요</a> 를 참고하여 작성합니다.</p>
+
+<p>Collection이라는 것은 코틀린 외에도 다양한 프로그래밍 언어에 존재하는 개념인데 <strong>여러 원소를 저장할 수 있는 자료구조</strong> 를 통틀어 말하는 개념이다.</p>
+
+<p>여러 원소를 저장할 수 있는 자료구조에는 보통 <strong>Array(배열)</strong>, <strong>List(리스트)</strong>, <strong>Map</strong>, <strong>Set</strong> 등이 포함된다.</p>
+
+<p>하지만 프로그래밍 언어마다 Collection 개념에 포함하는 자료구조들이 조금씩 다를 수 있다.</p>
+
+<h2 id="1️⃣-kotlin코틀린의-collection에-대해서">1️⃣ Kotlin(코틀린)의 Collection에 대해서!</h2>
+
+<p>위에서 언급한 것과 같이, 프로그래밍 언어마다 Collection 개념에 포함되는 자료구조의 종류가 조금씩 다를 수 있다.</p>
+
+<p>Kotlin(코틀린)에서는 <strong>List</strong>, <strong>Set</strong>, <strong>Map</strong> 이 3가지 자료구조가 Collection 개념에 포함된다.</p>
+
+<blockquote>
+  <p>각 자료구조에 대해서는 이 블로그의 자료구조 카테고리에서 알아볼 수 있을 것이다. 😁</p>
+</blockquote>
+
+<p>Kotlin(코틀린)은 이러한 Collection 개념에 속하는 자료구조들을 쉽게 생성하고, 조작하고, 관리할 수 있도록 <strong>Kotlin Standard Library(코틀린 표준 라이브러리)에 각 자료구조와 관련된 인터페이스, 클래스, 메소드들을 제공</strong> 하고 있다.</p>
+
+<blockquote>
+  <p>코틀린 표준 라이브러리가 무엇인지는 <a href="https://choheeis.github.io/newblog//articles/2020-12/kotlin-stdlib">이 블로그의 다른 포스팅 - Kotlin Standard Library(코틀린 표준 라이브러리)</a> 를 읽어보면 알 수 있을 것이다 😃</p>
+</blockquote>
+
+<p>Collection에 포함되는 각 자료구조와 관련된 인터페이스, 클래스, 메소드들을 Kotlin Standard Library 안의 <strong><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/">kotlin.collections</a></strong> 패키지 안에 들어있다.</p>
+
+<h2 id="2️⃣-kotlincollections-패키지에-구현되어-있는-자료-구조들은-어떻게-구현되어-있나">2️⃣ kotlin.collections 패키지에 구현되어 있는 자료 구조들은 어떻게 구현되어 있나?</h2>
+
+<p>Kotlin Standard Library는 Collection 개념에 속하는 list, set, map 과 관련된 자료구조들을 구현하여 제공하고 있다.</p>
+
+<p>이 자료구조들을 구현하고 있는 Class에서는 아래와 같은 2가지 특징으로 분류되는 인터페이스들을 구현하고 있다.</p>
+
+<ul>
+  <li>
+    <p><strong>read-only 특징을 갖는 인터페이스</strong> : 이 인터페이스를 구현하는 자료구조는 각 원소가 저장하고 있는 데이터를 수정할 수 없다. 데이터 확인만 가능하다.</p>
+  </li>
+  <li>
+    <p><strong>mutable 특징을 갖는 인터페이스</strong> : 이 인터페이스를 구현하는 자료구조는 read-only 인터페이스를 확장한 것으로 각 원소가 저장하고 있는 데이터를 수정할 수도 있다. (원소 확인, 원소 추가, 원소 삭제, 원소 수정이 모두 가능하다)</p>
+
+    <p>알아두면 좋은 것은 mutable 특징을 갖는 인터페이스를 구현하는 자료 구조는 원소를 변경하기 위해 굳이 <strong>var</strong> 키워드로 선언하지 않아도 된다는 것이다.</p>
+
+    <p><strong>val</strong> 키워드로 선언해도 된다.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+      <span class="c1">// 1) mutable 인터페이스를 구현하는 mutableList라는 자료구조를 val 키워드를 사용하여 선언하였다.
+</span>      <span class="c1">// 2) 3개의 원소에 각각 1, 2, 3 이라는 Int 형 데이터를 저장하였다.
+</span>      <span class="kd">val</span> <span class="py">mutableList</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
+
+      <span class="c1">// 3) 저장된 원소를 확인하기 위해 출력 코드를 작성하였다.
+</span>      <span class="c1">// 출력결과 ) 1(개행) 2(개행) 3(개행)
+</span>      <span class="n">mutableList</span><span class="p">.</span><span class="n">forEach</span><span class="p">{</span>
+          <span class="n">println</span><span class="p">(</span><span class="n">it</span><span class="p">)</span>
+      <span class="p">}</span>
+
+      <span class="c1">// 4) val로 선언했던 mutableList 자료구조에 새로운 원소 추가 작업을 하였다.
+</span>      <span class="n">mutableList</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="m">4</span><span class="p">)</span>
+      <span class="n">mutableList</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="m">5</span><span class="p">)</span>
+
+      <span class="c1">// 5) 저장된 원소를 확인하기 위해 출력 코드를 작성하였다.
+</span>      <span class="c1">// 출력결과 ) 1(개행) 2(개행) 3(개행) 4(개행) 5(개행)
+</span>      <span class="n">mutableList</span><span class="p">.</span><span class="n">forEach</span> <span class="p">{</span>
+          <span class="n">println</span><span class="p">(</span><span class="n">it</span><span class="p">)</span>
+      <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p><img width="27" alt="05" src="https://user-images.githubusercontent.com/31889335/101980263-93189980-3ca7-11eb-80fc-8d270cd198f5.png" /></p>
+
+    <p>출력 결과는 위와 같다.</p>
+
+    <p>출력 결과를 통해 <strong>val</strong> 키워드로 선언해도 새로운 원소 추가가 정상적으로 작동하는 것을 확인할 수 있다.</p>
+
+    <p>하지만 <strong>val</strong> 키워드로 선언한 mutable 자료구조에는 <strong>재할당이 불가</strong> 하다.</p>
+
+    <p><img width="421" alt="06" src="https://user-images.githubusercontent.com/31889335/101980332-e4288d80-3ca7-11eb-96ba-468558fa7d7d.png" /></p>
+
+    <p>이렇게 컴파일 에러가 난다.</p>
+
+    <p>따라서 mutable 특징을 갖는 인터페이스를 구현하는 자료구조가 재할당을 해야할 경우에는 <strong>var</strong> 키워드를 사용해서 선언해야 한다.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+      <span class="c1">// 1) var 키워드로 mutableList 자료구조 선언
+</span>      <span class="kd">var</span> <span class="py">mutableList</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
+      <span class="n">mutableList</span><span class="p">.</span><span class="n">forEach</span><span class="p">{</span>
+          <span class="n">println</span><span class="p">(</span><span class="n">it</span><span class="p">)</span>
+      <span class="p">}</span>
+
+      <span class="c1">// 2) 재할당 작업
+</span>      <span class="n">mutableList</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;(</span><span class="m">1</span><span class="p">)</span>
+      <span class="n">mutableList</span><span class="p">.</span><span class="n">forEach</span> <span class="p">{</span>
+          <span class="n">println</span><span class="p">(</span><span class="n">it</span><span class="p">)</span>
+      <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p><img width="34" alt="07" src="https://user-images.githubusercontent.com/31889335/101980381-43869d80-3ca8-11eb-8e8e-d79f78da154f.png" /></p>
+
+    <p>출력 결과는 위와 같다.</p>
+
+    <p>출력 결과를 통해 <strong>var</strong> 키워드로 선언하면 컴파일 에러 없이 재할당이 정상적으로 동작하는 것을 확인할 수 있다.</p>
+  </li>
+</ul>
+
+<p>이렇게 kotlin.collections 패키지에 구현되어 있는 자료구조들은 read-only 특징을 갖는 인터페이스와 mutable 특징을 갖는 인터페이스를 구현하고 있음을 알게 되었다.</p>
+
+<p>이제 read-only, mutable 특징을 갖는 인터페이스에는 실제로 어떤 인터페이스들이 있는지 알아보자!</p>
+
+<p><img width="733" alt="08" src="https://user-images.githubusercontent.com/31889335/101980427-8e081a00-3ca8-11eb-81c4-d049e4c69f3f.png" /></p>
+
+<p>위 다이어그램은 kotlin.collections 패키지에서 제공하는 여러 자료구조들이 구현하고 있는 인터페이스를 나타낸다.</p>
+
+<p>아래와 같이 분류할 수 있다.</p>
+
+<ul>
+  <li>
+    <p><strong>read-only 특징을 갖는 인터페이스</strong></p>
+
+    <ul>
+      <li>
+        <p>Iterable</p>
+      </li>
+      <li>
+        <p>Collection</p>
+      </li>
+      <li>
+        <p>List</p>
+      </li>
+      <li>
+        <p>Set</p>
+      </li>
+      <li>
+        <p>Map</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>mutable 특징을 갖는 인터페이스</strong></p>
+
+    <ul>
+      <li>
+        <p>MutableIterable</p>
+      </li>
+      <li>
+        <p>MutableCollection</p>
+      </li>
+      <li>
+        <p>MutableList</p>
+      </li>
+      <li>
+        <p>MutableSet</p>
+      </li>
+      <li>
+        <p>MutableMap</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>또한 위 다이어그램에 존재하는 화살표는 각 인터페이스의 상속 관계를 나타낸다.</p>
+
+<p>예를 들어, Collection 인터페이스는 Iterable 인터페이스를 상속하고 있다.</p>
+
+<p>다이어그램의 진위여부를 하기 위해 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/">Collection 인터페이스</a> 문서를 확인해보자.</p>
+
+<p><img width="783" alt="09" src="https://user-images.githubusercontent.com/31889335/101980569-a88ec300-3ca9-11eb-90f5-5332b22ac41c.png" /></p>
+
+<p>정말 Collection 인터페이스는 Iterable 인터페이스를 SuperInterface(부모 인터페이스)로 가지고 있다!</p>
+
+<p>이제 위 다이어그램에 존재하는 각 인터페이스를 구현하는 자료구조들의 종류에 대해 알아보자!</p>
+
+<h2 id="3️⃣-kotlincollections-패키지가-제공하는-자료구조들">3️⃣ kotlin.collections 패키지가 제공하는 자료구조들!</h2>
+
+<p>kotlin.collections 패키지 안에 있는 자료구조들은 각 자료구조들을 공부한 내용의 다른 포스팅에서 알아보자!</p>
+
+<ul>
+  <li>
+    <p><a href="https://choheeis.github.io/newblog//articles/2020-10/kotlinList">List 형 자료구조들을 공부한 포스팅</a></p>
+  </li>
+  <li>
+    <p>Map 분류의 자료구조들을 공부한 포스팅 –&gt; 공부 전</p>
+  </li>
+  <li>
+    <p>Set 분류의 자료구조들을 공부한 포스팅 –&gt; 공부 전</p>
+  </li>
+</ul>
+
+<h1 id="끝">끝!</h1>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

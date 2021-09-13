@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="0️⃣ Queue 란?자료구조 Queue에 관련한 개념은 자료구조에 관련된 이전 포스팅 의 큐 부분에서 알아볼 수 있기 때문에 이 포스팅에서 따로 설명하지 않을 것이다.또한 Queue을 활용하는데 사용되는 기본 함수들인 pop, push, front 등도 c++ stl을 사용하여 ...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[Kotlin] 8️⃣ 코틀린에서 Queue 사용하기 | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[Kotlin] 8️⃣ 코틀린에서 Queue 사용하기 | choheeis">
+  <meta name="twitter:description" content="0️⃣ Queue 란?자료구조 Queue에 관련한 개념은 자료구조에 관련된 이전 포스팅 의 큐 부분에서 알아볼 수 있기 때문에 이 포스팅에서 따로 설명하지 않을 것이다.또한 Queue을 활용하는데 사용되는 기본 함수들인 pop, push, front 등도 c++ stl을 사용하여 ...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-10/kotlinQueue">
+  <meta property="og:title" content="[Kotlin] 8️⃣ 코틀린에서 Queue 사용하기 | choheeis">
+  <meta property="og:description" content="0️⃣ Queue 란?자료구조 Queue에 관련한 개념은 자료구조에 관련된 이전 포스팅 의 큐 부분에서 알아볼 수 있기 때문에 이 포스팅에서 따로 설명하지 않을 것이다.또한 Queue을 활용하는데 사용되는 기본 함수들인 pop, push, front 등도 c++ stl을 사용하여 ...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[Kotlin] 8️⃣ 코틀린에서 Queue 사용하기 | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-10/kotlinQueue">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[Kotlin] 8️⃣ 코틀린에서 Queue 사용하기">[Kotlin] 8️⃣ 코틀린에서 Queue 사용하기</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        22 OCT 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    3 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="0️⃣-queue-란">0️⃣ Queue 란?</h2>
+
+<p>자료구조 Queue에 관련한 개념은 <a href="https://choheeis.github.io/newblog//articles/2019-07/BasicDataStructure">자료구조에 관련된 이전 포스팅</a> 의 큐 부분에서 알아볼 수 있기 때문에 이 포스팅에서 따로 설명하지 않을 것이다.</p>
+
+<p>또한 Queue을 활용하는데 사용되는 기본 함수들인 pop, push, front 등도 <a href="https://choheeis.github.io/newblog//articles/2020-03/C++Queue">c++ stl을 사용하여 queue 만지기 이전 포스팅</a> 에서 확인할 수 있으니 따로 설명하지 않을 것이다.</p>
+
+<p>다만 언어마다 Queue를 활용하는데 사용되는 기본 함수들의 이름은 조금 다를 수 있다!</p>
+
+<h2 id="1️⃣-코틀린에는-자료구조-queue를-구현해놓은-라이브러리가-없다">1️⃣ 코틀린에는 자료구조 Queue를 구현해놓은 라이브러리가 없다?</h2>
+
+<p>이전에 c++로 알고리즘 문제를 풀 때는 stl이라는 c++ 표준 라이브러리에 자료구조 queue와 queue에 사용되는 함수들(push, pop 등)이 이미 구현되어 있었기 때문에</p>
+
+<p>이 라이브러리를 include 하여 queue를 직접 구현하지 않고도 사용할 수 있었다.</p>
+
+<p><strong>하지만</strong> 코틀린 표준 라이브러리인 kotlin std-lib에는 Queue가 구현되어 있는 라이브러리가 존재하지 않는다..ㅠ</p>
+
+<p>그럼 Koltin에서는 어떻게 Queue를 사용할 수 있을까? 코틀린에서 큐를 사용할 수 있는 방법은 두 가지가 있다.</p>
+
+<p>👉🏻 Kotlin에 존재하는 여러 자료구조들 중 Queue를 대신하여 큐처럼 사용할 수 있을 법한 자료구조를 사용하기</p>
+
+<p>이 때, 중요한 것은 Queue의 pop(), push() 함수의 시간복잡도가 O(1) 로 엄청 빠르다. 그렇기 때문에 어떤 자료구조의 맨 앞 데이터를 삭제하거나 맨 뒤 데이터를 삽입할 때 Queue와 비슷한 시간 복잡도를 갖는 자료구조를 Queue처럼 사용해야 한다.</p>
+
+<p>👉🏻 Java에서 제공하는 Queue 라이브러리 사용하기</p>
+
+<p>이제 이 두 가지 방법에 대해 코드로 살펴보자!</p>
+
+<h2 id="2️⃣-방법-1--arraylist를-큐처럼-사용하기">2️⃣ 방법 1 ) ArrayList를 큐처럼 사용하기</h2>
+
+<p><strong>첫번째 방법은 ArrayList를 큐처럼 사용하는 것</strong> 이다.</p>
+
+<p>ArrayList에 대한 설명은 <a href="https://choheeis.github.io/newblog//articles/2020-10/kotlinList">이전 포스팅 - 코틀린의 List들</a> 에서 확인하자.</p>
+
+<p>ArrayList의 index 0 번째 데이터를 큐의 맨 앞 원소라고 생각하고, ArrayList의 맨 뒤에 추가되는 데이터를 큐의 맨 뒤에 추가되는 원소라고 생각하면 된다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 1. ArrayList를 큐처럼 사용하기
+</span>    <span class="kd">var</span> <span class="py">queue</span> <span class="p">=</span> <span class="n">arrayListOf</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;()</span>
+
+    <span class="c1">// 2. add() : 큐의 맨 뒤에 데이터 삽입하기
+</span>    <span class="n">queue</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+    <span class="n">queue</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="m">2</span><span class="p">)</span>
+    <span class="n">queue</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="m">3</span><span class="p">)</span>
+
+    <span class="c1">// 3. removeAt(0) : 큐의 맨 앞 데이터 삭제하기
+</span>    <span class="n">queue</span><span class="p">.</span><span class="n">removeAt</span><span class="p">(</span><span class="m">0</span><span class="p">)</span>
+
+    <span class="c1">// 4. 큐의 맨 앞 원소 확인하기
+</span>    <span class="n">print</span><span class="p">(</span><span class="n">queue</span><span class="p">[</span><span class="m">0</span><span class="p">])</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="3️⃣-방법-2--java에-구현되어-있는-queue-라이브러리-사용하기">3️⃣ 방법 2 ) Java에 구현되어 있는 Queue 라이브러리 사용하기</h2>
+
+<p>✍🏻 <a href="https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/util/Queue.html">Java Docs - Queue 문서</a> 를 참고한다!</p>
+
+<p>코틀린은 JVM 위에서 돌아가는 언어이기 때문에 자바에 존재하는 라이브러리를 가져다 사용할 수 있다.</p>
+
+<p>자바에는 이미 Queue라는 자료구조가 구현되어 라이브러리화 되어 있고, 큐에서 사용되는 함수들도 이미 구현되어 있다.</p>
+
+<p>다만 <a href="https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/util/Queue.html">Java Docs - Queue 문서</a> 를 읽어보면 Queue라는 것이 클래스 형태가 아니라 인터페이스이고, Queue 인터페이스를 구현하고 있는 여러 클래스들이 따로 존재한다는 것을 알 수 있을 것이다.</p>
+
+<p><img width="952" alt="01" src="https://user-images.githubusercontent.com/31889335/96832453-bed28c80-1479-11eb-8f4a-2f645ece52be.png" /></p>
+
+<p>따라서 자바의 큐를 사용하려면 큐 인터페이스를 구현하고 있는 클래스들의 인스턴스를 선언함으로써 사용할 수 있다!</p>
+
+<p>주로 LinkedList 라는 클래스를 선언하여 큐를 사용한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.util.*</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 큐 선언하기
+</span>    <span class="kd">var</span> <span class="py">queue</span><span class="p">:</span> <span class="n">Queue</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">LinkedList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><img width="381" alt="02" src="https://user-images.githubusercontent.com/31889335/96834002-3dc8c480-147c-11eb-940c-bbce6ee16f9f.png" /></p>
+
+<p>자바의 큐 인터페이스에 구현되어 있는 기본 함수들은 위와 같다.</p>
+
+<p>위 표를 보면 큐에 사용되는 메소드들이 <strong>삽입, 삭제, 확인</strong> 하는 세 가지 기능으로 분류되고 각 기능에는 에러를 던지는 메소드를 포함해 2개씩의 메소드들이 구현되어 있음을 알 수 있다.</p>
+
+<p>각 메소드들의 차이점도 <a href="https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/util/Queue.html">Java Docs - Queue 문서</a> 에 잘 설명되어 있으니 읽어보자!</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.util.*</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 큐 선언하기
+</span>    <span class="kd">var</span> <span class="py">queue</span><span class="p">:</span> <span class="n">Queue</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">LinkedList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;()</span>
+
+    <span class="c1">// 맨 뒤에 데이터 삽입하기
+</span>    <span class="n">queue</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+    <span class="n">queue</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="m">2</span><span class="p">)</span>
+    <span class="n">queue</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="m">3</span><span class="p">)</span>
+
+    <span class="c1">// 맨 앞 데이터 삭제하기
+</span>    <span class="n">queue</span><span class="p">.</span><span class="n">poll</span><span class="p">()</span>
+
+    <span class="c1">// 맨 앞 데이터 확인하기
+</span>    <span class="n">print</span><span class="p">(</span><span class="n">queue</span><span class="p">.</span><span class="n">peek</span><span class="p">())</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

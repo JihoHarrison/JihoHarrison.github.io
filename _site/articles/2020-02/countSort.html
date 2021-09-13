@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="  유튜버 동빈나 - 계수 정렬 을 보고 공부한 내용입니다.🎨 계수정렬(Count Sort)이란?그 동안 정렬 알고리즘들을 배우면서 빠른 편에 속하는 정렬 알고리즘은 시간복잡도 O(nlogn) 을 갖는 퀵 정렬, 병합 정렬, 힙 정렬 등이 있었다!하지만 어떤 특정한 조건에서는 이 ...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[알고리즘] 🎨 계수정렬 | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[알고리즘] 🎨 계수정렬 | choheeis">
+  <meta name="twitter:description" content="  유튜버 동빈나 - 계수 정렬 을 보고 공부한 내용입니다.🎨 계수정렬(Count Sort)이란?그 동안 정렬 알고리즘들을 배우면서 빠른 편에 속하는 정렬 알고리즘은 시간복잡도 O(nlogn) 을 갖는 퀵 정렬, 병합 정렬, 힙 정렬 등이 있었다!하지만 어떤 특정한 조건에서는 이 ...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-02/countSort">
+  <meta property="og:title" content="[알고리즘] 🎨 계수정렬 | choheeis">
+  <meta property="og:description" content="  유튜버 동빈나 - 계수 정렬 을 보고 공부한 내용입니다.🎨 계수정렬(Count Sort)이란?그 동안 정렬 알고리즘들을 배우면서 빠른 편에 속하는 정렬 알고리즘은 시간복잡도 O(nlogn) 을 갖는 퀵 정렬, 병합 정렬, 힙 정렬 등이 있었다!하지만 어떤 특정한 조건에서는 이 ...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[알고리즘] 🎨 계수정렬 | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-02/countSort">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[알고리즘] 🎨 계수정렬">[알고리즘] 🎨 계수정렬</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        24 FEB 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    3 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <blockquote>
+  <p><a href="https://www.youtube.com/watch?v=n4kbFRn2z9M&amp;list=PLRx0vPvlEmdDHxCvAQS1_6XV4deOwfVrz&amp;index=12">유튜버 동빈나 - 계수 정렬</a> 을 보고 공부한 내용입니다.</p>
+</blockquote>
+
+<p><br /></p>
+
+<h2 id="-계수정렬count-sort이란">🎨 계수정렬(Count Sort)이란?</h2>
+<hr />
+
+<p>그 동안 정렬 알고리즘들을 배우면서 빠른 편에 속하는 정렬 알고리즘은 시간복잡도 O(nlogn) 을 갖는 퀵 정렬, 병합 정렬, 힙 정렬 등이 있었다!</p>
+
+<p>하지만 어떤 특정한 조건에서는 이 정렬 알고리즘들보다 더 빠른 정렬 알고리즘이 있는데 무려 시간복잡도가 <strong>O(N)</strong> 이다.</p>
+
+<blockquote>
+  <p><img src="https://user-images.githubusercontent.com/31889335/75222916-acb82580-57e8-11ea-88cf-ba6ec9fd4939.PNG" alt="시간복잡도" /></p>
+</blockquote>
+
+<p>시간복잡도 O(N)을 갖는 알고리즘은 바로 계수 정렬(Count Sort)이다.</p>
+
+<p>예를 들어, 5이하의 자연수 데이터들인</p>
+
+<p>1 3 2 4 3 2 5 3 1 2 3 4 4 3 5 1 2 3 5 2 3 1 4 3 5 1 2 1 1 1</p>
+
+<p>을 오름차순으로 정렬해야 한다면 Count Sort를 사용하면 된다.</p>
+
+<p>여기서 <strong>5이하의 자연수 데이터</strong> 라는 특정한 <strong>범위 조건</strong> 이 주어졌다는 것이 특징이다.</p>
+
+<p><br /></p>
+
+<h2 id="-계수-정렬count-sort-작동원리">🎨 계수 정렬(Count Sort) 작동원리</h2>
+<hr />
+
+<p>계수 정렬은 Count Sort라고도 한다.</p>
+
+<p>여기서 Count라는 것은 <strong>갯수를 세다</strong> 라는 것을 의미하는데 계수 정렬은 이 Count 의미와 동일하게 단순히 갯수를 세는 것으로 정렬이 가능하다.</p>
+
+<p>예를 들어 5이하의 자연수 데이터들인</p>
+
+<p>1 3 2 4 3 2 5 3 1 2 3 4 4 3 5 1 2 3 5 2 3 1 4 3 5 1 2 1 1 1</p>
+
+<p>을 어떻게 정렬하면 좋을까?</p>
+
+<p>5이하의 범위가 주어졌으므로</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/75227648-e6415e80-57f1-11ea-9aa0-60dacdf9ad77.PNG" alt="01" /></p>
+
+<p>이렇게 해당 데이터별로 등장한 갯수를 표시하는 표를 만들어보자!</p>
+
+<p>그 다음 주어진 데이터의 맨 처음부터 접근하면서 해당 데이터의 개수 칸에 하나씩 숫자를 증가시키며 개수를 세는 것이다.</p>
+
+<p>즉, 주어진 데이터의 맨 처음 수는 1이므로</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/75227722-125cdf80-57f2-11ea-8893-80b68c7bda43.PNG" alt="02" /></p>
+
+<p>이렇게 표를 업데이트 할 수 있다.</p>
+
+<p>그 다음 수는 3이므로</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/75227766-256faf80-57f2-11ea-85a9-106aa55422af.PNG" alt="03" /></p>
+
+<p>이렇게 업데이트 될 것이다.</p>
+
+<p>이와 같은 방법으로 주어진 데이터를 모두 한 번씩 접근하여 개수를 세어보면</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/75227850-4cc67c80-57f2-11ea-907d-07debaa0af7d.PNG" alt="04" /></p>
+
+<p>이렇게 될 것이다!</p>
+
+<p>그렇다면 정렬된 결과를 출력할 때는 1을 8번 출력한 후 2를 6번 출력하고, 이어서 3을 8번 출력하고 4를 4번, 5를 4번 출력하면 된다.</p>
+
+<p>즉, 1 1 1 1 1 1 1 1 2 2 2 2 2 2 3 3 3 3 3 3 3 3 4 4 4 4 5 5 5 5</p>
+
+<p>이렇게 정렬될 것이다!</p>
+
+<p><br /></p>
+
+<h2 id="-계수-정렬의-시간복잡도">🎨 계수 정렬의 시간복잡도</h2>
+<hr />
+
+<p>위에서 알아본 것과 같이 계수 정렬은 주어진 데이터를 한 번씩 처음부터 마지막까지 접근하면서 count를 세는 방식으로 동작한다.</p>
+
+<p>즉, 주어진 데이터의 개수만큼 접근하므로 계수 정렬의 시간복잡도는 <strong>O(N)</strong> 이라는 것을 쉽게 알 수 있을 것이다.</p>
+
+<p><br /></p>
+
+<h2 id="-계수-정렬-알고리즘-코드-작성">🎨 계수 정렬 알고리즘 코드 작성</h2>
+<hr />
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;iostream&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+	<span class="kt">int</span> <span class="n">data</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>
+	<span class="kt">int</span> <span class="n">count</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+	
+	
+	<span class="cm">/* count 하기 */</span>
+	<span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">30</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">tmp</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+		<span class="n">count</span><span class="p">[</span><span class="n">tmp</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+	<span class="p">}</span>
+	
+	<span class="cm">/* 출력하기 */</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="c1">// count 값이 0이 아닐 경우라는 조건을 달아줘야 for문이 안정적으로 돌아감  
+</span>		<span class="k">if</span><span class="p">(</span><span class="n">count</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">){</span>
+			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">count</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+				<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="sc">' '</span><span class="p">;</span>
+			<span class="p">}</span>	
+		<span class="p">}</span>
+		
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

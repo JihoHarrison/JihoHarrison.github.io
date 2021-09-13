@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="  유튜버 동빈나 - 힙 정렬 을 통해 공부한 내용입니다.  힙(Heap) 정렬은 병합 정렬과 퀵 정렬만큼 빠른 시간 복잡도를 가진 정렬 알고리즘이다.👍 힙 정렬에 사용되는 “힙(Heap)”이란?힙 정렬은 힙 트리 구조 를 사용해서 정렬하는 방법이다. 따라서 힙 정렬을 알기 위해서...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[알고리즘] 👍 힙정렬 | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[알고리즘] 👍 힙정렬 | choheeis">
+  <meta name="twitter:description" content="  유튜버 동빈나 - 힙 정렬 을 통해 공부한 내용입니다.  힙(Heap) 정렬은 병합 정렬과 퀵 정렬만큼 빠른 시간 복잡도를 가진 정렬 알고리즘이다.👍 힙 정렬에 사용되는 “힙(Heap)”이란?힙 정렬은 힙 트리 구조 를 사용해서 정렬하는 방법이다. 따라서 힙 정렬을 알기 위해서...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-02/heapSort">
+  <meta property="og:title" content="[알고리즘] 👍 힙정렬 | choheeis">
+  <meta property="og:description" content="  유튜버 동빈나 - 힙 정렬 을 통해 공부한 내용입니다.  힙(Heap) 정렬은 병합 정렬과 퀵 정렬만큼 빠른 시간 복잡도를 가진 정렬 알고리즘이다.👍 힙 정렬에 사용되는 “힙(Heap)”이란?힙 정렬은 힙 트리 구조 를 사용해서 정렬하는 방법이다. 따라서 힙 정렬을 알기 위해서...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[알고리즘] 👍 힙정렬 | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-02/heapSort">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[알고리즘] 👍 힙정렬">[알고리즘] 👍 힙정렬</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        4 FEB 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    10 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <blockquote>
+  <p><a href="https://www.youtube.com/watch?v=iyl9bfp_8ag&amp;list=PLRx0vPvlEmdDHxCvAQS1_6XV4deOwfVrz&amp;index=11">유튜버 동빈나 - 힙 정렬</a> 을 통해 공부한 내용입니다.</p>
+
+  <p>힙(Heap) 정렬은 병합 정렬과 퀵 정렬만큼 빠른 시간 복잡도를 가진 정렬 알고리즘이다.</p>
+</blockquote>
+
+<p><br /></p>
+
+<h2 id="-힙-정렬에-사용되는-힙heap이란">👍 힙 정렬에 사용되는 “힙(Heap)”이란?</h2>
+<hr />
+
+<p>힙 정렬은 <strong>힙 트리 구조</strong> 를 사용해서 정렬하는 방법이다. 따라서 힙 정렬을 알기 위해서는 힙 트리 구조가 무엇인지를 먼저 알아야 한다.</p>
+
+<p>힙 트리 구조에 대해서 알아보기 전에 <strong>이진 트리</strong> 라는 것을 알아야할 필요가 있다. 힙 트리 구조는 이진 트리에서 나온 트리이기 때문이다.</p>
+
+<p><br /></p>
+
+<ul>
+  <li>
+    <p><strong>이진 트리(Binary Tree)</strong></p>
+
+    <p>이진 트리는 컴퓨터가 데이터를 표현할 때 데이터를 각 노드에 담은 뒤 노드를 두 개씩 이어 붙여서 트리 형태로 표현하는 구조를 말한다.</p>
+
+    <p>더 자세한 이진 트리에 대한 내용은 <a href="https://choheeis.github.io/c++/2019/07/16/BasicDataStructure.html">자료구조 포스팅</a> 의 이진 트리를 설명한 부분에서 알 수 있다!</p>
+
+    <p>이처럼 <strong>“트리(Tree)”</strong> 라는 것은 말 그대로 가지를 계속 뻗어나가면서 데이터가 서로 연결되어 있는 모습을 나타내는 자료 구조이다. 트리는 그 형태에 따라서 종류가 굉장히 다양한데 그 중 우리는 이진 트리 라는 구조를 알아본 것이다!</p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p><strong>완전 이진 트리</strong></p>
+
+    <p>앞에서 알아본 이진 트리에서 더 나아가 완전 이진 트리라는 것을 알아보자!</p>
+
+    <p>왜냐하면 힙이라는 것이 완전 이진 트리를 기반으로 되어 있는 구조이기 때문이다.</p>
+
+    <p>완전 이진 트리는 자식 노드를 추가할 때 왼쪽 노드부터 오른쪽 자식 노드로 차례대로 차근차근 빽빽히 채우는 구조를 가진 이진 트리이다.</p>
+
+    <p>그림을 보면서 더 쉽게 이해해보자.</p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/73719882-04bcb880-4764-11ea-949b-cdfc24382655.PNG" alt="01" /></p>
+
+    <p>이런 모습의 루트 노드가 있다고 가정하자. 이 루트 노드에 자식 노드를 연결할 때는 무조건 왼쪽부터 채워야 완전 이진 트리를 만들 수 있다.</p>
+
+    <p>자식 노드를 왼쪽부터 채우면</p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/73719880-04242200-4764-11ea-985b-1d99dc446a15.PNG" alt="02" /></p>
+
+    <p>이렇게 루트 노드의 왼쪽에 자식 노드가 배치된다.</p>
+
+    <p>다음 자식 노드는</p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/73719879-04242200-4764-11ea-905e-0f049efeca12.PNG" alt="03" /></p>
+
+    <p>이렇게 연결될 것이다.</p>
+
+    <p>그렇다면 여기서 그 다음 자식 노드는 어디에 연결되어야 할까?</p>
+
+    <p>완전 이진 트리 구조를 만드려면 반드시 가장 왼쪽부터 채워야 하므로</p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/73719878-04242200-4764-11ea-8e91-e2fa3233909b.PNG" alt="04" /></p>
+
+    <p>이렇게 연결되어야 한다.</p>
+
+    <p>따라서 총 7개의 데이터가 연결된 완전 이진 트리의 모습은</p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/73719877-04242200-4764-11ea-8780-3726adf4ab9e.PNG" alt="05" /></p>
+
+    <p>이런 모습이 된다.</p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p><strong>힙(Heap)</strong></p>
+
+    <p>힙은 <strong>최솟값이나 최댓값을 빠르게 찾아내기 위해</strong> 완전 이진 트리를 기반으로 만들어진 트리이다!</p>
+
+    <blockquote>
+      <p>힙도 트리 종류 중 하나인 것!!</p>
+
+      <p>Heap = ‘더미’ 라는 뜻을 가짐</p>
+    </blockquote>
+
+    <p>힙은 두 가지 종류로 나눠지는데 <strong>최대 힙</strong> 과 <strong>최소 힙</strong> 으로 나눠진다.</p>
+
+    <p>힙에 대한 자세한 내용은 <a href="https://choheeis.github.io/c++/2019/07/16/BasicDataStructure.html">자료구조 포스팅</a> 에서 힙 부분을 참고하자!</p>
+
+    <p><br /></p>
+  </li>
+</ul>
+
+<h2 id="-힙-구조-만들기">👍 힙 구조 만들기</h2>
+<hr />
+
+<p>그렇다면 최대 힙, 최소 힙 트리는 <strong>어떻게 만드는</strong> 것일까??</p>
+
+<p>예를 들어서 다음과 같이 최대 힙이 완성되지 않은 트리가 있다고 가정해보자.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/75137360-baa77100-572a-11ea-8e5c-243f82b85a1f.PNG" alt="06" /></p>
+
+<p>위 그림에서 최대 힙 붕괴 원인이라고 표시된 부분에 의해 최대 힙이 완성되지 못한 것을 알 수 있다.</p>
+
+<p>이 때 이 트리를 어떻게 최대 힙 구조로 완성시킬 수 있을까?</p>
+
+<p><strong>붕괴 원인이 되는 부분의 자식 노드 중 더 큰 노드를 부모 노드와 바꿔주기</strong> 만 하면 간단하게 최대 힙 구조로 만들 수 있다!</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/75137499-17a32700-572b-11ea-9668-19718681d62f.PNG" alt="07" /></p>
+
+<p>위 그림과 같이 자식 노드 중 가장 큰 수인 8을 부모 노드인 6과 바꾸면</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/75137556-428d7b00-572b-11ea-84c2-cdfe44e1f5f2.PNG" alt="08" /></p>
+
+<p>이렇게 최대 힙이 붕괴된 부분을 쉽게 고칠 수 있다!</p>
+
+<p>하지만 이 한 부분의 붕괴된 부분을 고쳤더니 결과적으로는 전체 힙이 붕괴되는 현상이 발생할 수도 있다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/75137680-95ffc900-572b-11ea-865a-7d667df2c6c6.PNG" alt="17" /></p>
+
+<p>즉, 고친 부분의 위 쪽 부분이 다시 붕괴될 수 있기 때문에 위로 올라가면서 다시 붕괴 여부를 확인해줘야 한다.</p>
+
+<p>위로 올라가면서 발견된 추가 붕괴 부분도 아까와 마찬가지로 자식 노드 중 더 큰 수를 부모 노드와 바꿔주면 된다!</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/75137902-335afd00-572c-11ea-8bde-7e5fb50085d2.PNG" alt="18" /></p>
+
+<p>이러한 방식으로 트리의 아래부터 붕괴된 부분을 계속 찾아서 고쳐주는 방식으로 최대 힙을 만들 수 있는 것이다.</p>
+
+<p>그렇다면 이제 최대 힙을 이용해서 정렬을 하는 방법에 대해서 알아보자.</p>
+
+<p><br /></p>
+
+<h2 id="-힙-정렬-알고리즘-작동-과정">👍 힙 정렬 알고리즘 작동 과정</h2>
+<hr />
+
+<p>그렇다면 정렬을 하기 위에서 최대 힙을 어떻게 이용해야 할까?</p>
+
+<p>예를 들어</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/73722373-ab578800-4769-11ea-8bf7-427ee00e5c90.PNG" alt="09" /></p>
+
+<p>이와 같은 이진 트리가 존재한다고 가정했을 때 이것을 최대 힙 구조로 바꿔보자!</p>
+
+<p>최대 힙 구조로 바꾸는 과정은 위에서 알아본 것과 마찬가지로 붕괴된 부분의 자식 노드 중 더 큰 수를 부모 노드와 바꿔주면 된다!</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/73724905-b57c8500-476f-11ea-9f3b-aa78ab6429cd.PNG" alt="11" /></p>
+
+<p>그러면 이렇게 최대 힙 구조로 바꿀 수 있을 것이다.</p>
+
+<p>하지만 이 구조가 최종적으로 정렬된 결과일까?</p>
+
+<p>루트노드부터 봐보면 9, 8, 7, 6, 3, 5, 5, 1, 6 으로 완전히 정렬된 결과는 아니다!</p>
+
+<p>따라서 최종적으로 정렬된 결과를 만드려면 이 상태에서 한 가지 작업을 더 실행해줘야 한다.</p>
+
+<p>위 최대 힙 구조에서 루트 노드에 있는 9는 9개의 수 중 가장 큰 수이다. 이 9를 최대 힙 구조의 가장 마지막 위치에 있는 6과 바꿔주면</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/73725174-2fad0980-4770-11ea-999c-ccef42f25e90.PNG" alt="12" /></p>
+
+<p>위 그림의 오른쪽과 같은 그림처럼 될 것이다.</p>
+
+<p>그럼 이제 9를 제외한 나머지 부분을 다시 최대 힙 구조로 만든다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/73725529-e9a47580-4770-11ea-9ea0-183078f92e84.PNG" alt="13" /></p>
+
+<p>그 다음 새로운 루트 노드인 8이 9을 제외한 수 중 가장 큰 수가 되므로 9를 제외한 트리의 가장 마지막 위치에 있는 수 1과 위치를 바꿔준다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/73725661-32f4c500-4771-11ea-8cea-8d71f5bef802.PNG" alt="14" /></p>
+
+<p>그럼 위와 같은 그림처럼 될 것이다!</p>
+
+<p>이 과정을 9번(데이터 개수만큼 반복) 계속 반복하면</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/73725962-df36ab80-4771-11ea-8b62-3bf663f1e372.PNG" alt="15" /></p>
+
+<p>이렇게 최종적으로 정렬된 트리 구조를 얻을 수 있게 된다!</p>
+
+<p><br /></p>
+
+<h2 id="-힙-정렬-알고리즘">👍 힙 정렬 알고리즘</h2>
+<hr />
+
+<p>위와 같은 힙 정렬 작동 원리를 이해한 후, 코드로 힙 정렬 알고리즘을 작성해보자.</p>
+
+<p>먼저 힙 정렬을 하기 위해서는 힙 구조를 코드상으로 표현해야 하는데 어떻게 표현해야 할까?</p>
+
+<p>힙 구조를 배열로 바꾸어서 표현하면 된다! 배열로 바꾸어서 나타낸 후, 위에서 알아본대로 정렬하는 과정을 반복적으로 실행하면 정렬된 배열을 얻을 수 있는 것이다.</p>
+
+<p>힙 구조는 완전 이진 트리이기 때문에 일단 완전 이진 트리를 배열로 나타내보자.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/73722373-ab578800-4769-11ea-8bf7-427ee00e5c90.PNG" alt="09" /></p>
+
+<p>다음과 같이 데이터가 9개인 완전 이진 트리를 배열로 나타내려면 위에서 아래로 내려오면서 왼쪽부터 오른쪽 순서로 차례대로 배열에 담으면 된다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/73722589-30db3800-476a-11ea-818b-841fd2eb3278.PNG" alt="10" /></p>
+
+<p>이렇게 힙 트리 구조를 배열로 나타낸 후, 위에서 알아본 힙 정렬 작동 과정을 코드로 작성해보면 다음과 같다!</p>
+
+<p><br /></p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;iostream&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="n">number</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">heap</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">};</span>
+
+<span class="c1">// 인자 size는 힙의 전체 노드 수  
+</span><span class="kt">int</span> <span class="n">makeMaxHeap</span><span class="p">(</span><span class="kt">int</span> <span class="n">size</span><span class="p">){</span>
+	<span class="cm">/* 먼저 전체 트리 구조를 최대 힙 구조로 바꾸기 */</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="c1">// 현재 노드 
+</span>		<span class="kt">int</span> <span class="n">currentNode</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+		<span class="k">do</span><span class="p">{</span>
+			<span class="c1">// 현재 노드의 부모 노드 구하기  
+</span>			<span class="kt">int</span> <span class="n">currentRoot</span> <span class="o">=</span> <span class="p">(</span><span class="n">currentNode</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+			
+			<span class="c1">// 부모 노드보다 자식 노드가 큰 경우 swap 해주기
+</span>			<span class="c1">// 아래 코드로 인해 자식 노드끼리 비교는 따로 하지 않아도 비교되는 효과.
+</span>			<span class="c1">// ex) 부모노드 = 4, 자식 1 = 5, 자식 2 = 7 일 경우
+</span>			<span class="c1">// 아래 코드로 인해 자식 1이 부모노드로 되었다가 다시 자식 2가 부모 노드가 됨.  
+</span>			<span class="k">if</span><span class="p">(</span><span class="n">heap</span><span class="p">[</span><span class="n">currentRoot</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">heap</span><span class="p">[</span><span class="n">currentNode</span><span class="p">]){</span>
+				<span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">heap</span><span class="p">[</span><span class="n">currentRoot</span><span class="p">];</span>
+				<span class="n">heap</span><span class="p">[</span><span class="n">currentRoot</span><span class="p">]</span> <span class="o">=</span> <span class="n">heap</span><span class="p">[</span><span class="n">currentNode</span><span class="p">];</span>
+				<span class="n">heap</span><span class="p">[</span><span class="n">currentNode</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+			<span class="p">}</span>
+			
+			<span class="c1">// 현재 노드에서 위로 올라가면서 붕괴된 트리 찾기 위함. 
+</span>			<span class="n">currentNode</span> <span class="o">=</span> <span class="n">currentRoot</span><span class="p">;</span>
+			
+		<span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="n">currentNode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span> 
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+	
+	<span class="cm">/* 먼저 전체 트리 구조를 최대 힙 구조로 바꾸기 */</span>
+	<span class="n">makeMaxHeap</span><span class="p">(</span><span class="n">number</span><span class="p">);</span>	
+	
+	<span class="cm">/* 최대 힙 만든 후, 최종 정렬 위한 한 가지 작업 추가 */</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">number</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">){</span>
+		
+		<span class="c1">// 최대 힙의 root 노드의 데이터와 마지막 노드의 데이터를 swap. 
+</span>		<span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">heap</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+		<span class="n">heap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">heap</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+		<span class="n">heap</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+		
+		<span class="c1">// 마지막 노드를 제외한 트리를 다시 한 번 최대 힙으로 만들기 	
+</span>		<span class="n">makeMaxHeap</span><span class="p">(</span><span class="n">i</span><span class="p">);</span> 
+	<span class="p">}</span>
+	
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">number</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">heap</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="sc">' '</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span> 
+</code></pre></div></div>
+
+<p>힙 트리 구조를 생각하면서 위 코드를 작성해보면 쉽게 작성할 수 있을 것이다!</p>
+
+<p>위 코드를 컴파일한 결과는</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/81044698-c912c580-8eef-11ea-9cd9-7d17501bf57a.PNG" alt="19" /></p>
+
+<p>이와 같다!</p>
+
+<p><br /></p>
+
+<h2 id="-힙-정렬의-시간복잡도">👍 힙 정렬의 시간복잡도</h2>
+<hr />
+
+<p>예를 들어 다음과 같은 이진 트리를 최대 힙 구조로 만드려면</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/73724905-b57c8500-476f-11ea-9f3b-aa78ab6429cd.PNG" alt="11" /></p>
+
+<p>자식 노드 중 큰 수를 부모 노드와 바꿔주는 작업을 해주면 된다고 배웠다.</p>
+
+<p>그럼 이 작업을 하는데 걸리는 수행시간은 얼마일까?</p>
+
+<p>트리의 높이와 같다.</p>
+
+<p>왜냐하면 트리의 맨 밑에서부터 붕괴가 존재한다고 가정하면 트리의 맨 꼭대기까지 붕괴 여부를 파악하면서 올라와야 하기 때문에 트리의 높이를 최대 힙을 만드는데 걸리는 수행시간이라고 생각할 수 있다.</p>
+
+<p>트리의 높이는</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/73753807-9baa6480-47a6-11ea-8592-f195ee1a1cd4.PNG" alt="16" /></p>
+
+<p>와 같다. 여기서 n은 노드의 수이다.</p>
+
+<p>그리고 최종적으로 정렬된 배열을 얻기 위해서 root 노드에 있는 수와 가장 마지막에 있는 수를 바꿔주는 작업을 n 만큼 해주어야 하므로 힙 정렬을 끝마치는데 걸리는 최종 시간은 <strong>nlogn</strong> 이다!</p>
+
+<p><br /></p>
+
+<h2 id="-힙-정렬은-unstable-하다">👍 힙 정렬은 unstable 하다?</h2>
+<hr />
+
+<p>어떠한 알고리즘을 사용해서 정렬을 할 때 같은 값을 가지는 원소들이 정렬 후 원래 위치가 아닌 다른 위치에 배치가 되면 그것을 <strong>unstable(불안정한)</strong> 정렬이라고 한다.</p>
+
+<p>반면 정렬 후에도 순서가 바뀌지 않는 것을 stable 정렬이라고 한다.</p>
+
+<p>예를 들어, 5, 2, 4, 6, 3, 4 라는 배열을 정렬해야 한다고 가정하자. (주의 깊게 볼 점은 4를 값으로 가진 원소가 2개라는 것이다.)</p>
+
+<p>정렬된 결과는 2, 3, 4, 4, 5, 6 일 것이다.</p>
+
+<p>이 정렬된 결과에서 두 개의 4 중 첫 번째로 보이는 4가 정렬 이전의 배열에서 마지막 원소인 4였다면? unstable 하다.</p>
+
+<p>하지만 만약 첫 번째 4가 정렬 이전의 배열에서 3번째 원소였던 4라면 stable 한 것이다.</p>
+
+<p>즉, 같은 수를 갖는 원소의 순서가 정렬 후에 바뀐다면 unstable한 정렬이고 순서가 바뀌지 않는다면 stable한 정렬인 것이다.</p>
+
+<p><br /></p>
+
+<p><strong>힙 정렬은 unstable 한 정렬</strong> 이다.</p>
+
+<p>그 이유에 대해 알아보자!</p>
+
+<p>위에서 힙 정렬 작동 과정에 사용된 이 배열을 계속 살펴보자.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/73725661-32f4c500-4771-11ea-8cea-8d71f5bef802.PNG" alt="14" /></p>
+
+<p>이 다음 과정에서는 8, 9를 제외한 나머지 노드에서 최대 힙 만들기 과정이 일어난다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/83015799-f4568380-a05b-11ea-84cb-727d09dbd812.PNG" alt="20" /></p>
+
+<p>이렇게 최대힙을 만들어서 7이 root에 오도록 될 것이고,</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/83016046-544d2a00-a05c-11ea-8c46-56c50554f0bc.PNG" alt="21" /></p>
+
+<p>이렇게 7과 5가 자리가 바뀔 것이다.</p>
+
+<p>이 때 주목해야 할 점은 root에 올라간 5가 순서상 두 번째 5라는 것을 기억해야 한다!</p>
+
+<p>이 다음 7,8,9를 제외한 부분을 다시 최대 힙 구조로 만들면</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/83016184-82cb0500-a05c-11ea-8e56-3ff31c538855.PNG" alt="22" /></p>
+
+<p>이렇게 되고 root와 맨 마지막 노드의 자리를 바꾸면</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/83016282-a68e4b00-a05c-11ea-8451-3016e7316d95.PNG" alt="23" /></p>
+
+<p>이렇게 된다.</p>
+
+<p>계속 최대 힙과 root 자리 바꾸기를 해보자!</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/83016402-d76e8000-a05c-11ea-8f69-5d29a751e26c.PNG" alt="24" /></p>
+
+<p>이렇게 최대 힙을 만들고,</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/83016477-f66d1200-a05c-11ea-83d1-9eb360eeb316.PNG" alt="25" /></p>
+
+<p>이렇게 root와 자리를 바꾼다.</p>
+
+<p>이제 여기가 중요하다!</p>
+
+<p>6, 6, 7, 8, 9를 제외한 부분을 최대 힙으로 만드려고 했더니 3보다 큰 5가 둘 다 같은 레벨에 위치해 있는 상태이다.</p>
+
+<p>이 때 어떤 5를 올려야 할까??</p>
+
+<p>2번째 5라고 표시되어 있지 않은 5를 올려보자.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/83016664-4e0b7d80-a05d-11ea-8e3b-542d6b24eb1c.PNG" alt="26" /></p>
+
+<p>이렇게 최대 힙이 될 것이고,</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/83016800-8317d000-a05d-11ea-9623-4c3a3bac7eea.PNG" alt="27" /></p>
+
+<p>이렇게 root와 자리가 바뀔 것이다!</p>
+
+<p>즉, 정렬 후 모습을 생각해보면 첫 번째 순서였던 5가 정렬 후에는 두 번째 순서로 배치되게 된다.</p>
+
+<p>힙 정렬은 이렇게 될 가능성이 있으므로 unstable 정렬이다!</p>
+
+<p><br /></p>
+
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

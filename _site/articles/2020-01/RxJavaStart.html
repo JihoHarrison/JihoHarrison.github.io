@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="🔥 RxJava가 뭘까?  RxJava에 대해 알아보기 전에 Reactive Programming 포스팅을 한 번 읽고 오자!RxJava는 Reactive Programming을 할 수 있게 해주는 “JVM 위에서 자바로 구현해놓은 라이브러리” 이다!.  Rx는 ReactiveX의...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[RxJava] 🔥 RxJava 시작하기! | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[RxJava] 🔥 RxJava 시작하기! | choheeis">
+  <meta name="twitter:description" content="🔥 RxJava가 뭘까?  RxJava에 대해 알아보기 전에 Reactive Programming 포스팅을 한 번 읽고 오자!RxJava는 Reactive Programming을 할 수 있게 해주는 “JVM 위에서 자바로 구현해놓은 라이브러리” 이다!.  Rx는 ReactiveX의...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-01/RxJavaStart">
+  <meta property="og:title" content="[RxJava] 🔥 RxJava 시작하기! | choheeis">
+  <meta property="og:description" content="🔥 RxJava가 뭘까?  RxJava에 대해 알아보기 전에 Reactive Programming 포스팅을 한 번 읽고 오자!RxJava는 Reactive Programming을 할 수 있게 해주는 “JVM 위에서 자바로 구현해놓은 라이브러리” 이다!.  Rx는 ReactiveX의...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[RxJava] 🔥 RxJava 시작하기! | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-01/RxJavaStart">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[RxJava] 🔥 RxJava 시작하기!">[RxJava] 🔥 RxJava 시작하기!</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        22 JAN 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    1 min read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="-rxjava가-뭘까">🔥 RxJava가 뭘까?</h2>
+
+<blockquote>
+  <p>RxJava에 대해 알아보기 전에 <a href="">Reactive Programming</a> 포스팅을 한 번 읽고 오자!</p>
+</blockquote>
+
+<p><br /></p>
+
+<p>RxJava는 Reactive Programming을 할 수 있게 해주는 <strong>“JVM 위에서 자바로 구현해놓은 라이브러리”</strong> 이다!.</p>
+
+<blockquote>
+  <p>Rx는 ReactiveX의 줄임말이고 ReactiveX는 <strong>Reactive Extensions</strong> 의 줄임말이다.</p>
+</blockquote>
+
+<p>RxJava는 사실 2013년에 넷플릭스가 처음 만든 라이브러리이다. 당시 넷플릭스는 REST 기반의 API 호출 시 콜백 지옥에 빠지는 점을 해결하기 위해 RxJava를 만들게 되었고, 지금은 <strong>RxJava3</strong> 이 작성될 정도로 꾸준히 업데이트 되고 있는 라이브러리이다.</p>
+
+<p>그렇다면 RxJava와 같이 Reactive Programming을 지원해주는 다른 언어로 만들어진 라이브러리가 있을까?</p>
+
+<p>있다!!!</p>
+
+<p><a href="https://github.com/ReactiveX">ReactiveX 의 공식 깃헙</a>에 들어가보면 RxJava외에도 RxKotlin, RxSwift, RxPY, RxAndroid, RxCpp, RxRuby 등등 이미 많은 언어들이 Reactive Programming을 지원하고 있음을 알 수 있다.</p>
+
+<p><br /></p>
+
+<h2 id="-rxjava로-프로젝트-시작하기">🔥 RxJava로 프로젝트 시작하기!</h2>
+<hr />
+
+<blockquote>
+  <p>사용한 IDE - Intellij</p>
+</blockquote>
+
+<p><br /></p>
+
+<ul>
+  <li>
+    <p><strong>1. 프로젝트 생성하기</strong></p>
+
+    <blockquote>
+      <p>Intellij는 이번 RxJava 스터디를 하면서 처음 사용해본 IDE 였다. Android Studio에 익숙해서 그런지 Intellij도 많이 낯설지 않은 편이여서 다행이다..</p>
+    </blockquote>
+
+    <p>프로젝트를 생성하기 위해 먼저</p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/73610164-e21d8900-4617-11ea-9f21-e548199915ea.PNG" alt="01" /></p>
+
+    <p>이렇게 Gradle 프로젝트를 만든다.</p>
+
+    <p>그러면 다음과 같은 구조를 가지고 있는 프로젝트가 생성될 것이다.</p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/73610237-7a1b7280-4618-11ea-89b0-4f38a019f622.PNG" alt="04" /></p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p><strong>2. dependency 설정하기</strong></p>
+
+    <p>RxJava는 라이브러리이기 때문에 다음과 같이 프로젝트의 dependency로 직접 추가해줘야 한다.</p>
+
+    <p><a href="https://github.com/ReactiveX/RxJava">RxJava 공식 깃허브 리드미</a> 를 보면 Rxjava 실습을 위한 <strong>Gradle compile dependency</strong> 로 RxJava3 버전이 명시되어 있다. 현재 포스팅일 기준으로는</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">implementation</span> <span class="s">"io.reactivex.rxjava3:rxjava:3.0.0-RC9"</span>
+</code></pre></div>    </div>
+
+    <p>이 최신 버전이다.</p>
+
+    <p>위에 있는 프로젝트 구조를 나타낸 그림에서 <strong>build.gradle</strong> 파일에서 다음과 같이 추가해주면 된다.</p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/73610163-e184f280-4617-11ea-8985-c8d4d1daf926.PNG" alt="02" /></p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p><strong>3. 실습할 파일 만들기</strong></p>
+
+    <p>이제 위 프로젝트 구조 그림에 있는 java 폴더 안에서 실습을 위한 클래스 파일을 하나 생성해주자.</p>
+
+    <p>java 폴더를 더블 클릭하니 다음과 같은 Project Structure 가 나와서 Dependencies 설정에서 앞에서 추가한 라이브러리를 체크해주었다!</p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/73610162-e184f280-4617-11ea-8ddb-1959e39458e6.PNG" alt="03" /></p>
+
+    <p>그 후, java 폴더위에서 마우스 오른쪽 클릭 후, 원하는 이름의 자바 클래스를 하나 생성하면 실습할 준비 끝이다!</p>
+
+    <p><br /></p>
+  </li>
+</ul>
+
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

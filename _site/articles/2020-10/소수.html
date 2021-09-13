@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="0️⃣ 소수란?소수 : 2보다 크거나 같은 수 중 약수가 1과 자기 자신밖에 없는 자연수소수는 영어로 Prime Number 이라고 명칭한다.1️⃣ 소수와 관련된 두 가지 알고리즘소수와 관련된 두 가지 알고리즘을 알아보자!      첫 번째 알고리즘 ) 어떤 수 N이 소수인지 아닌...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[알고리즘] 🔴 소수와 관련된 두 가지 알고리즘 | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[알고리즘] 🔴 소수와 관련된 두 가지 알고리즘 | choheeis">
+  <meta name="twitter:description" content="0️⃣ 소수란?소수 : 2보다 크거나 같은 수 중 약수가 1과 자기 자신밖에 없는 자연수소수는 영어로 Prime Number 이라고 명칭한다.1️⃣ 소수와 관련된 두 가지 알고리즘소수와 관련된 두 가지 알고리즘을 알아보자!      첫 번째 알고리즘 ) 어떤 수 N이 소수인지 아닌...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-10/%EC%86%8C%EC%88%98">
+  <meta property="og:title" content="[알고리즘] 🔴 소수와 관련된 두 가지 알고리즘 | choheeis">
+  <meta property="og:description" content="0️⃣ 소수란?소수 : 2보다 크거나 같은 수 중 약수가 1과 자기 자신밖에 없는 자연수소수는 영어로 Prime Number 이라고 명칭한다.1️⃣ 소수와 관련된 두 가지 알고리즘소수와 관련된 두 가지 알고리즘을 알아보자!      첫 번째 알고리즘 ) 어떤 수 N이 소수인지 아닌...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[알고리즘] 🔴 소수와 관련된 두 가지 알고리즘 | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-10/%EC%86%8C%EC%88%98">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[알고리즘] 🔴 소수와 관련된 두 가지 알고리즘">[알고리즘] 🔴 소수와 관련된 두 가지 알고리즘</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        19 OCT 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    3 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="0️⃣-소수란">0️⃣ 소수란?</h2>
+
+<p><strong>소수</strong> : 2보다 크거나 같은 수 중 약수가 1과 자기 자신밖에 없는 자연수</p>
+
+<p>소수는 영어로 <strong>Prime Number</strong> 이라고 명칭한다.</p>
+
+<h2 id="1️⃣-소수와-관련된-두-가지-알고리즘">1️⃣ 소수와 관련된 두 가지 알고리즘</h2>
+
+<p>소수와 관련된 두 가지 알고리즘을 알아보자!</p>
+
+<ol>
+  <li>
+    <p><strong>첫 번째 알고리즘 ) 어떤 수 N이 소수인지 아닌지 판별하는 알고리즘</strong></p>
+
+    <p>어떤 수 N이 소수가 되려면 일단 N의 값이 2보다 크거나 같아야 하고, N-1보다 작거나 같고 2보다 크거나 같은 수로 나누어 떨어지면 안된다.</p>
+
+    <p>위 조건을 코드로 작성해보면 다음과 같다.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// kotlin
+</span> <span class="k">fun</span> <span class="nf">isPrime</span><span class="p">(</span><span class="n">N</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
+     <span class="k">if</span><span class="p">(</span><span class="n">N</span> <span class="p">&lt;</span> <span class="m">2</span><span class="p">)</span> <span class="p">{</span>
+         <span class="k">return</span> <span class="k">false</span>
+     <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+         <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">2</span> <span class="n">until</span> <span class="n">N</span><span class="p">)</span> <span class="p">{</span>
+             <span class="k">if</span> <span class="p">(</span><span class="n">N</span> <span class="p">%</span> <span class="n">i</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+                 <span class="k">return</span> <span class="k">false</span>
+             <span class="p">}</span>
+         <span class="p">}</span>
+     <span class="p">}</span>
+     <span class="k">return</span> <span class="k">true</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>위 알고리즘의 for문을 보면 시간복잡도가 <strong>O(N)</strong> 이라는 것을 알 수 있다.</p>
+
+    <p>하지만 이 시간복잡도보다 더 빠르게 소수를 판별하는 방법이 있다!</p>
+
+    <p>어떤 수 N을 a X b로 나타낼 수 있을 것이다. 즉, N = a X b 이고, 이렇게 나타낸 식은 a가 작을수록 b는 커진다는 특징이 있다.</p>
+
+    <p>N이 소수일 때 가능한 a 중 가장 작은 값은 2이므로 N = a X b 가 성립하려면 b는 N/2가 최대이다. 즉, b는 N/2 보다 작거나 같을 수 밖에 없다는 것이다.</p>
+
+    <p>따라서 어떤 수 N의 약수는 2 ~ N/2 사이에만 있을 수 있기 때문에 위 코드에서 2부터 N까지 나누어 보는 것보다 N/2까지만 나누어 보는 것이 더 빠를 것이다!</p>
+
+    <p>하지만 이 방법도 결국에는 O(N/2) = <strong>O(N)</strong> 의 시간복잡도를 갖으므로 시간상 엄청난 차이가 있는 것은 아니다.</p>
+
+    <p>그런데 이것보다 더 빠른 방법이 또 있다! ㅋㅋㅋㅋ</p>
+
+    <p>위에서 한 것처럼 N = a X b로 나타냈을 때 a는 항상 a &lt;= √N 이고 b는 항상 b &gt;= √N  이다.</p>
+
+    <p>왜냐하면 N = a X b를 만족하려면 a &lt;= √N , b &lt;= √N 일 수 없고(a X b &lt;= N 이므로) a &gt;= √N , b &gt;= √N 일 수 없기(a X b &gt;= N 이므로) 때문이다.</p>
+
+    <p>따라서 위 코드에서 2부터 N까지 나누어 보는 것보다 2부터 √N 까지 나누어 보는 것이 더 적은 범위이므로 이렇게 했을 때 시간복잡도가 <strong>O(√N)</strong> 으로 더 빠르게 된다.</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// kotlin
+</span> <span class="c1">// 2 ~ √N 까지 검사
+</span> <span class="k">import</span> <span class="nn">kotlin.math.sqrt</span>
+
+ <span class="k">fun</span> <span class="nf">isPrime</span><span class="p">(</span><span class="n">N</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
+     <span class="k">if</span><span class="p">(</span><span class="n">N</span> <span class="p">&lt;</span> <span class="m">2</span><span class="p">)</span> <span class="p">{</span>
+         <span class="k">return</span> <span class="k">false</span>
+     <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+         <span class="c1">// until 연산자 사용하면 안됨 (루트 값은 소수점을 포함한 값이 나올 수 있으므로!)
+</span>         <span class="c1">// 예를 들면 sqrt(24)는 4.xxx이다. 즉, 4까지 검사해봐야 하는데 until을 사용하면 3까지만 검사함
+</span>         <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">2</span><span class="o">..</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">.</span><span class="n">toDouble</span><span class="p">()).</span><span class="n">toInt</span><span class="p">())</span> <span class="p">{</span>
+             <span class="k">if</span> <span class="p">(</span><span class="n">N</span> <span class="p">%</span> <span class="n">i</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+                 <span class="k">return</span> <span class="k">false</span>
+             <span class="p">}</span>
+         <span class="p">}</span>
+     <span class="p">}</span>
+     <span class="k">return</span> <span class="k">true</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>두 번째 알고리즘 ) N 보다 작거나 같은 자연수 중에서 소수를 모두 찾아내는 알고리즘</strong></p>
+
+    <p>어떤 수 N 보다 작거나 같은 자연수 중에서 소수를 모두 찾아내려면 2 ~ N 까지를 모두 위에서 알아본 isPrime() 함수에 넣어보면 될 것이다.</p>
+
+    <p>이렇게 할 경우 시간복잡도는 <strong>O(N√N)</strong> 이 되는데 이것보다 더 빠른 방법이 존재한다.</p>
+
+    <p>바로 <strong>에라토스테네스의 체</strong> 라는 수학적 개념을 사용하는 방법이다.</p>
+
+    <p>에라토스테네스의 체를 사용하여 어떤 범위 내에 존재하는 모든 소수를 구하는 방법은 <a href="https://choheeis.github.io/newblog//articles/2020-04/%EC%97%90%EB%9D%BC%ED%86%A0%EC%8A%A4%ED%85%8C%EB%84%A4%EC%8A%A4%EC%9D%98%EC%B2%B4">이전 포스팅 - 에라토스테네스의 체</a> 에서 알 수 있다!</p>
+  </li>
+</ol>
+
+<h1 id="끝">끝!</h1>
+
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

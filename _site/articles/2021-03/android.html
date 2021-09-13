@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="  참고 자료  책 - 안드로이드 프로그래밍 Next Step  Android Open Source 사이트 - 안드로이드란 무엇인가  Android Developers 사이트 - Android 플랫폼 아키텍처  Android Youtube 영상 - Android Architectu...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[안드로이드] 안드로이드가 뭐예요?(Android, Android Platform, Android Framework) | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[안드로이드] 안드로이드가 뭐예요?(Android, Android Platform, Android Framework) | choheeis">
+  <meta name="twitter:description" content="  참고 자료  책 - 안드로이드 프로그래밍 Next Step  Android Open Source 사이트 - 안드로이드란 무엇인가  Android Developers 사이트 - Android 플랫폼 아키텍처  Android Youtube 영상 - Android Architectu...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2021-03/android">
+  <meta property="og:title" content="[안드로이드] 안드로이드가 뭐예요?(Android, Android Platform, Android Framework) | choheeis">
+  <meta property="og:description" content="  참고 자료  책 - 안드로이드 프로그래밍 Next Step  Android Open Source 사이트 - 안드로이드란 무엇인가  Android Developers 사이트 - Android 플랫폼 아키텍처  Android Youtube 영상 - Android Architectu...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[안드로이드] 안드로이드가 뭐예요?(Android, Android Platform, Android Framework) | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2021-03/android">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[안드로이드] 안드로이드가 뭐예요?(Android, Android Platform, Android Framework)">[안드로이드] 안드로이드가 뭐예요?(Android, Android Platform, Android Framework)</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        18 MAR 2021
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    4 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <blockquote>
+  <p><strong>참고 자료</strong></p>
+
+  <p><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=110015332">책 - 안드로이드 프로그래밍 Next Step</a></p>
+
+  <p><a href="https://source.android.com/">Android Open Source 사이트 - 안드로이드란 무엇인가</a></p>
+
+  <p><a href="https://developer.android.com/guide/platform?hl=ko">Android Developers 사이트 - Android 플랫폼 아키텍처</a></p>
+
+  <p><a href="https://www.youtube.com/watch?v=QBGfUs9mQYY">Android Youtube 영상 - Android Architecture 개요</a></p>
+
+  <p><a href="https://ko.wikipedia.org/wiki/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C_(%EC%9A%B4%EC%98%81_%EC%B2%B4%EC%A0%9C)">위키백과 - Android(운영체제)</a></p>
+</blockquote>
+
+<p><br /></p>
+
+<h2 id="0️⃣-프롤로그">0️⃣ 프롤로그</h2>
+
+<p>저는 안드로이드 앱 개발의 첫 시작은 ‘안드로이드가 무엇인가?’를 아는 것부터 시작해야 한다고 생각하는 사람 중 하나입니다. 하지만.. 저는 ‘안드로이드가 무엇인가?’ 보다는 안드로이드 앱을 만드려고 하는데 ‘텍스트 뷰는 어떻게 만드는가?’ 부터 공부했던 것 같습니다..</p>
+
+<p>안드로이드 앱 개발을 시작한지 2년이 지나서야 ‘안드로이드가 무엇인가?’를 궁금해하는 이상 현상이 발생했지만 지금이라도 궁금증이 생기고 공부해보려는 의지가 생긴 것에 감사합니다^!^ 휴..</p>
+
+<h2 id="1️⃣-what-is-안드로이드android">1️⃣ What is 안드로이드(Android)?</h2>
+
+<ul>
+  <li>
+    <p><strong>Android가 무엇일까?</strong></p>
+
+    <ul>
+      <li>
+        <p><img width="350" alt="01" src="https://user-images.githubusercontent.com/31889335/111596692-c6bc1000-8810-11eb-8660-22b80e59023f.png" /></p>
+      </li>
+      <li>
+        <p>Android는 휴대할 수 있는 디바이스 기기를 위한 <strong>오픈소스 소프트웨어 스택(Stack)</strong> 입니다. 여기서 ‘스택(Stack)’이라는 것은 컴퓨터공학에서 데이터를 저장할 수 있는 구조(자료구조)의 여러 종류 중 하나입니다. 자료 구조 ‘스택’에 비유하여 Android를 ‘오픈소스 소프트웨어 스택’이라고 부릅니다.</p>
+      </li>
+      <li>
+        <p>(위 그림 참고) <strong>‘소프트웨어 스택’</strong> 이라는 것에만 집중해봅시다. ‘스택’이라는 자료 구조의 모습처럼 무엇인가가 아래에서부터 위로 쌓여있는 모양에 비유했고, 쌓여있는 것이 바로 ‘소프트웨어’라는 의미입니다. 위 그림을 보면 가장 아래에 <strong>리눅스 커널(Linux Kernel)</strong> 라는 소프트웨어가 있고, 그 위에 <strong>HAL/HIDL</strong> 라는 소프트웨어가 쌓여있습니다. 또 그 위에는 <strong>Native Libraries</strong> 라는 소프트웨어가 쌓여 있고 Native Libraries와 같은 층에 <strong>Android Runtime</strong> 라는 소프트웨어가 쌓여있습니다. 그 위에 <strong>Android Framework</strong> 라는 소프트웨어가 쌓여있고 가장 최상단에는 <strong>Apps(안드로이드 앱)</strong> 이 쌓여있는 구조입니다. <strong>이 구조를 통틀어 ‘소프트웨어 스택’이라고 하며 결국 이 구조가 ‘Android’인 것입니다.</strong></p>
+      </li>
+      <li>
+        <p>위에서 Android는 오픈소스 소프트웨어 스택이라고 했습니다. 소프트웨어 스택이라는 것은 바로 위 설명을 통해 이해했을 것입니다. 그렇다면 ‘오픈소스 소프트웨어 스택’라는 것은 무엇일까요? 소프트웨어 스택이 비공개가 아니라 공개되어 있다는 것입니다. 즉, 누구나 Android를 구성하고 있는 각 소프트웨어(스택의 각 층에 존재)의 소스 코드를 볼 수 있다는 것입니다.</p>
+      </li>
+      <li>
+        <p>마지막으로 Android는 <strong>Google이 주도</strong> 하여 관리하고 개발하는 오픈소스 프로젝트이기도 합니다.</p>
+      </li>
+      <li>
+        <p><img width="393" alt="02" src="https://user-images.githubusercontent.com/31889335/111599924-2e278f00-8814-11eb-9a9a-3cc23ec7b166.png" /></p>
+      </li>
+      <li>
+        <p>(위 그림 참고) 위에서 3차원 입체적인 모습으로 소프트웨어 스택을 보여준 그림을 2차원 평면으로 보면 위 그림과 같습니다. 아쉽지만 소프트웨어 스택의 각 층에 존재하는 소프트웨어(Apps, Android Framework, Native Libraries 등등)에 대해서는 이 포스팅에서 다루지 않을 예정입니다.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Android vs Android 플랫폼 vs Android 프레임워크 vs Android 운영체제 vs Android 시스템</strong></p>
+
+    <ul>
+      <li>
+        <p>‘Android’, ‘Android 플랫폼(Platform)’, ‘Android 프레임워크(Framework)’, ‘Android 운영체제(OS)’, ‘Android 시스템’ 이 5가지 용어가 혼동될 수 있습니다.</p>
+      </li>
+      <li>
+        <p>먼저 <strong>Android와 Android 플랫폼은 동일한 말</strong> 입니다. 위에서 Android는 휴대할 수 있는 디바이스 기기를 위한 오픈소스 소프트웨어 스택이라고 설명했지만 이는 ‘스택’이라는 단어를 사용하여 ‘무엇인가가 쌓여있는 구조’를 더 강조한 설명입니다. 따라서 Android를 스택이라는 단어를 사용하지 않고 설명할 때는 Android는 ‘오픈소스 소프트웨어 플랫폼’이라고도 합니다.</p>
+      </li>
+      <li>
+        <p><img width="833" alt="03" src="https://user-images.githubusercontent.com/31889335/111600486-d0e00d80-8814-11eb-93e0-1b1101012a33.png" /></p>
+      </li>
+      <li>
+        <p>(위 그림 참고) 위 그림의 3차원 입체 모양을 보면 위에서부터 2번째에 <strong>Android Framework(안드로이드 프레임워크)</strong> 라는 것이 쌓여 있는 것을 볼 수 있습니다. Android Framework는 <strong>Java API Framework</strong> 라고도 부릅니다. Android Framework는 모든 안드로이드 앱(App)들이 사용하는 toolkit 입니다. 따라서 구글에서 만든 앱이든 나 자신이 만든 앱이든 모든 앱은 같은 Java API들(=Android Framework)을 사용하여 만들어집니다. 또한 이 Android Framework는 모두 Java로 구현되어 있습니다.</p>
+      </li>
+      <li>
+        <p><img width="289" alt="04" src="https://user-images.githubusercontent.com/31889335/111603315-8f049680-8817-11eb-84ae-529217ae6602.png" /></p>
+      </li>
+      <li>
+        <p>(위 그림 참고) ‘그래서 Android Framework가 정확히 뭔데?’라는 추가 질문이 있을 수 있습니다. 이에 답을 하기 위해 Android Framework에 속해 있는 Components(구성요소)들 중 ‘Activity Manager’라는 것에 대해 간단히 알아봅시다. ‘Activity Manager’는 앱의 수명 주기를 관리해주는 곳입니다. 즉, Activity Manager는 Activity를 생성해주고 상황에 맞게 Activity 수명 주기 콜백 메소드를 호출하여 Activity 수명 주기를 관리합니다.(개발자가 Activity의 모든 수명 주기 콜백 메소드를 ‘직접’ 호출해주지 않는 사실을 생각하면 쉽습니다. 개발자는 단지 수명 주기 콜백 메소드를 오버라이드하여 메소드 내에 작업을 추가해주는 것 뿐 입니다.) 또 ‘Activity Manager’는 ‘백 스택(backstack)’이라는 것을 관리하여 사용자가 여러 개의 서로 다른 앱(=프로세스)을 동시에 사용할 때도 자연스러운 사용 경험을 제공할 수 있도록 관리해줍니다.</p>
+      </li>
+      <li>
+        <p><img width="456" alt="05" src="https://user-images.githubusercontent.com/31889335/111607265-6d0d1300-881b-11eb-8c76-48615c1e16e8.png" /></p>
+      </li>
+      <li>
+        <p>(위 그림 참고) <a href="https://android.googlesource.com/platform/frameworks/base/+/742a67127366c376fdf188ff99ba30b27d3bf90c/core/java/android/app/ActivityManager.java">여기</a>를 보면 ActivityManager의 실제 코드 구현을 볼 수 있습니다.(Android는 오픈 소스 소프트웨어 플랫폼이기 때문입니다!) ActivityManager 클래스에 구현되어 있는 moveTaskToFront() 메소드는 ‘인자로 전달된 task ID에 해당하는 task를 stack의 가장 앞으로 이동시켜 사용자의 눈에 해당 task가 보이게 하라’는 메소드입니다. 이렇듯, ActivityManager에는 Activity를 관리하는데 사용되는 모든 것들이 구현되어 있습니다.</p>
+      </li>
+      <li>
+        <p>Activity Manager 외에도 Android Framework는 여러 Manager들로 구성되어 있습니다. 안드로이드 앱 개발자는 Android Framework가 제공하는 API들을 사용하여 사용법에 맞게 코드만 작성해주면 될 뿐입니다. 나머지 내부 동작들은 Android Framework의 몫입니다.</p>
+      </li>
+      <li>
+        <p><strong>Android 운영체제</strong> 라는 말은 ‘Android’를 휴대할 수 있는 디바이스 기기(=모바일 디바이스)의 운영체제로 채택하여 사용하기 때문에 ‘Android 운영체제’라고 부르기도 합니다. 즉, Android를 운영체제라고 하는 것은 Android 플랫폼을 모바일 기기의 운영체제로 사용한다는 의미입니다.</p>
+
+        <ul>
+          <li><strong>운영체제</strong> : <a href="https://choheeis.github.io/newblog//articles/2020-05/OSstart">이 블로그의 다른 포스팅 - 운영체제가 무엇인가</a>를 보면 알 수 있듯이, 운영체제는 컴퓨터에서 하드웨어 자원(CPU, 메인 메모리 등)를 제어 및 관리하고, 사용자가 컴퓨터를 쉽게 사용할 수 있도록 편의성을 제공해주는 것입니다.</li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Android 시스템</strong> 이라는 말은 Android 운영체제와 동일한 말입니다. 운영체제를 영어로 ‘Operating System’ 이라고 하기 때문에 ‘Operating’을 빼고 Android 시스템이라고 부르기도 합니다.</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="끝">끝!</h1>
+
+<p>마지막 수정일 : 2021년 3월 18일</p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="  동빈나 유튜브 영상을 참고하여 공부한 내용!👕 BFS란?BFS는 Breadth First Search 의 약자로 탐색 알고리즘 중 하나이다.BFS는 어떠한 그래프에서 맹목적으로 각 노드를 탐색해야 할 때 주로 사용된다.BFS는 탐색을 할 때 너비를 우선 으로 해서 탐색을 수행하...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[알고리즘] 👕 BFS(너비 우선 탐색) | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[알고리즘] 👕 BFS(너비 우선 탐색) | choheeis">
+  <meta name="twitter:description" content="  동빈나 유튜브 영상을 참고하여 공부한 내용!👕 BFS란?BFS는 Breadth First Search 의 약자로 탐색 알고리즘 중 하나이다.BFS는 어떠한 그래프에서 맹목적으로 각 노드를 탐색해야 할 때 주로 사용된다.BFS는 탐색을 할 때 너비를 우선 으로 해서 탐색을 수행하...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-03/BFS">
+  <meta property="og:title" content="[알고리즘] 👕 BFS(너비 우선 탐색) | choheeis">
+  <meta property="og:description" content="  동빈나 유튜브 영상을 참고하여 공부한 내용!👕 BFS란?BFS는 Breadth First Search 의 약자로 탐색 알고리즘 중 하나이다.BFS는 어떠한 그래프에서 맹목적으로 각 노드를 탐색해야 할 때 주로 사용된다.BFS는 탐색을 할 때 너비를 우선 으로 해서 탐색을 수행하...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[알고리즘] 👕 BFS(너비 우선 탐색) | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-03/BFS">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[알고리즘] 👕 BFS(너비 우선 탐색)">[알고리즘] 👕 BFS(너비 우선 탐색)</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        3 MAR 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    5 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <blockquote>
+  <p><a href="https://www.youtube.com/watch?v=66ZKz-FktXo&amp;list=PLRx0vPvlEmdDHxCvAQS1_6XV4deOwfVrz&amp;index=16">동빈나 유튜브</a> 영상을 참고하여 공부한 내용!</p>
+</blockquote>
+
+<p><br /></p>
+
+<h1 id="-bfs란">👕 BFS란?</h1>
+
+<p>BFS는 <strong>Breadth First Search</strong> 의 약자로 <strong>탐색 알고리즘</strong> 중 하나이다.</p>
+
+<p>BFS는 어떠한 그래프에서 맹목적으로 각 노드를 탐색해야 할 때 주로 사용된다.</p>
+
+<p>BFS는 탐색을 할 때 <strong>너비를 우선</strong> 으로 해서 탐색을 수행하는 탐색 알고리즘이다.</p>
+
+<p>또 BFS는 <strong>최단 경로를 찾아준다는 점</strong> 에서 최단 길이를 보장해야 할 때 많이 사용된다.</p>
+
+<p>BFS를 위해서 필요한 자료구조는 <strong>큐(Queue)</strong> 이다.</p>
+
+<p><br /></p>
+
+<h1 id="-bfs-알고리즘의-작동-원리">👕 BFS 알고리즘의 작동 원리</h1>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/75786550-d3f29200-5da8-11ea-9629-3dcce95b9c49.PNG" alt="02" />
+<img src="https://user-images.githubusercontent.com/31889335/75786545-d228ce80-5da8-11ea-80d0-d474fca2728f.PNG" alt="01" /></p>
+
+<p>위와 같은 그래프에서 각 노드들을 탐색해야 한다고 가정해보자.</p>
+
+<p>이 때, 준비물은 큐이다.</p>
+
+<p>BFS는 맨 먼저 처음 시작 노드를 큐에 삽입하면서 시작한다.</p>
+
+<p>그리고 BFS는 큐에 삽입된 노드는 반드시 방문 처리를 해줘야 한다. 아래 그래프에서 방문처리를 빨간색으로 표시하였다!</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/75786914-4f544380-5da9-11ea-8b7e-444c2a2bc0eb.PNG" alt="03" /></p>
+
+<p>그렇다면 시작 노드인 1이 큐에 제일 먼저 들어가고, 1은 방문처리가 될 것이다.</p>
+
+<p>여기까지 한 후에는 이제 특정한 알고리즘에 따라 BFS가 반복된다.</p>
+
+<ol>
+  <li>
+    <p>큐에서 하나의 노드를 꺼낸다.</p>
+  </li>
+  <li>
+    <p>꺼낸 노드에 연결된 노드 중 아직 방문하지 않은 노드를 방문하고 큐에 차례대로 삽입한다.</p>
+  </li>
+</ol>
+
+<p>이 두 가지 과정을 이제부터 반복해주면 된다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/75787225-bd990600-5da9-11ea-9911-7d75d6b2df61.PNG" alt="04" /></p>
+
+<p>큐에 있는 하나의 노드를 꺼내면 1이 빠져나오게 되고 그 후, 그래프에서 1과 연결된 노드 중 아직 방문하지 않은 노드는 2와 3이므로 2와 3을 차례대로 큐에 넣는다.</p>
+
+<p>그 다음, 큐에 들어갔으니 방문처리를 해준 것 까지가 위의 그림에서 표현되었다.</p>
+
+<p>그 다음은 아래와 같게 될 것이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/75787417-094baf80-5daa-11ea-827a-8976560b8742.PNG" alt="05" /></p>
+
+<p>큐에서 그 다음으로 꺼내지는 노드는 2이다.</p>
+
+<p>2를 꺼낸 후, 2와 연결된 노드 중 아직 방문하지 않은 4와 5 노드를 차례대로 큐에 넣은 후 방문처리를 해준 모습이다.</p>
+
+<p>이 다음은 또 아래와 같게 될 것이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/75787618-5039a500-5daa-11ea-8d8e-465a0e38e77c.PNG" alt="06" /></p>
+
+<p>큐에서 다음으로 꺼내지는 노드인 3을 꺼낸 후, 3과 연결된 노드 중 아직 방문하지 않은 6, 7노드를 차례로 큐에 넣고 방문처리 해준 모습이다.</p>
+
+<p>그 다음은 4를 꺼내는데 4와 연결된 노드 중 모든 노드가 방문했으므로 큐에 넣을 노드가 없기 때문에 단순히 큐에서 4를 꺼내기만 하면 된다.</p>
+
+<p>5, 6, 7도 마찬가지이다.</p>
+
+<p>따라서 결국</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/75787798-98f15e00-5daa-11ea-8109-37d16e188dd7.PNG" alt="07" /></p>
+
+<p>이렇게 모든 노드가 큐에서 꺼내지게 될 것이다.</p>
+
+<p>큐에서 꺼내진 노드들의 순서를 보면 아무렇게나 탐색된 것이 아니라 1에서 <strong>가까운</strong> 노드들부터 탐색이 이루어졌다는 것을 알 수 있다.</p>
+
+<p>즉, 너비 우선 탐색이 성공적으로 이루어졌다는 것을 의미한다.</p>
+
+<p>따라서 너비 우선 탐색(BFS)은 어떤 특정 노드가 있을 때 그 노드에서 가까운 것부터 차례대로 탐색해나가는 알고리즘이다.</p>
+
+<p><br /></p>
+
+<h1 id="-bfs-알고리즘을-c로-작성하기">👕 BFS 알고리즘을 C++로 작성하기</h1>
+
+<p>BFS는 큐가 사용되므로 C++ STL Queue를 include 해야 한다는 점을 잊지 말자.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;iostream&gt;
+#include&lt;queue&gt;
+#include&lt;vector&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="n">number</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span> <span class="c1">// 그래프의 노드 개수  
+</span><span class="kt">bool</span> <span class="n">checked</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span> <span class="c1">// 방문처리를 위한 배열 
+</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span> <span class="c1">// 그래프의 각 노드에 연결된 노드들을 표시하기 위함 (노드의 인덱스를 1 ~ 7까지 하려고 vector 8개를 만듬) 
+</span> 
+<span class="cm">/* bfs 알고리즘가 작동되는 함수 */</span> 
+<span class="cm">/* 인자의 start는 시작 노드 */</span>
+<span class="kt">void</span> <span class="n">bfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">start</span><span class="p">){</span>
+	<span class="c1">// 1. 하나의 큐를 생성하고 시작 노드 삽입하기  
+</span>	<span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">myQueue</span><span class="p">;</span>
+	<span class="n">myQueue</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">start</span><span class="p">);</span>
+	<span class="n">checked</span><span class="p">[</span><span class="n">start</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> 
+	
+	<span class="c1">// 2. 두 번의 반복되는 과정 수행하기(큐에 아무 데이터가 없을 때까지 반복) 
+</span>	<span class="c1">// --&gt; 큐에서 맨 앞에 있는 노드 하나를 꺼낸다. 
+</span>	<span class="c1">// --&gt; 그 노드와 연결된 노드 중 방문하지 않은 노드를 큐에 넣은 후 방문처리 해준다.
+</span>	<span class="k">while</span><span class="p">(</span><span class="n">myQueue</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">!=</span> <span class="nb">true</span><span class="p">){</span>
+		<span class="kt">int</span> <span class="n">one</span> <span class="o">=</span> <span class="n">myQueue</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+		<span class="n">myQueue</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">one</span><span class="o">&lt;&lt;</span><span class="sc">' '</span><span class="p">;</span> <span class="c1">// 꺼내진 노드 출력하기  
+</span>		
+		<span class="c1">// 현재 큐에서 꺼낸 one에 인접한 모든 노드를 검사  
+</span>		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">vec</span><span class="p">[</span><span class="n">one</span><span class="p">].</span><span class="n">size</span><span class="p">()</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+			<span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">vec</span><span class="p">[</span><span class="n">one</span><span class="p">][</span><span class="n">i</span><span class="p">];</span> <span class="c1">// one와 인접한 노드 한 개를 tmp에 대입  
+</span>			<span class="k">if</span><span class="p">(</span><span class="n">checked</span><span class="p">[</span><span class="n">tmp</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nb">false</span><span class="p">){</span>
+				<span class="c1">// 인접한 노드가 아직 방문처리가 안된 노드일 경우
+</span>				<span class="n">myQueue</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span> <span class="c1">// 큐에 삽입하고 
+</span>				<span class="n">checked</span><span class="p">[</span><span class="n">tmp</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span><span class="c1">// 방문처리해주기  
+</span>			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span> 
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+	<span class="c1">// 노드 1과 연결되어 있는 노드들 추가  
+</span>	<span class="n">vec</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="c1">// 그래프에서 노드 1은 노드 2와 3과 연결되어 있음 
+</span>	<span class="n">vec</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+	
+	<span class="c1">// 노드 2와 연결되어 있는 노드들 추가 
+</span>	<span class="n">vec</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> 
+	<span class="n">vec</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+	<span class="n">vec</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+	<span class="n">vec</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+	
+	<span class="c1">// 노드 3과 연결되어 있는 노드들 추가  
+</span>	<span class="n">vec</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+	<span class="n">vec</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+	<span class="n">vec</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span>
+	<span class="n">vec</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
+	
+	<span class="c1">// 노드 4와 연결되어 있는 노드들 추가
+</span>	<span class="n">vec</span><span class="p">[</span><span class="mi">4</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> 
+	<span class="n">vec</span><span class="p">[</span><span class="mi">4</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span> 
+	
+	<span class="c1">// 노드 5와 연결되어 있는 노드들 추가 
+</span>	<span class="n">vec</span><span class="p">[</span><span class="mi">5</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> 
+	<span class="n">vec</span><span class="p">[</span><span class="mi">5</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span> 
+	
+	<span class="c1">// 노드 6과 연결되어 있는 노드들 추가 
+</span>	<span class="n">vec</span><span class="p">[</span><span class="mi">6</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span> 
+	<span class="n">vec</span><span class="p">[</span><span class="mi">6</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span> 
+	
+	<span class="c1">// 노드 7과 연결되어 있는 노드들 추가 
+</span>	<span class="n">vec</span><span class="p">[</span><span class="mi">7</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span> 
+	<span class="n">vec</span><span class="p">[</span><span class="mi">7</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span>
+	
+	<span class="n">bfs</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// bfs 함수 실행 
+</span>	
+	
+<span class="p">}</span> 
+</code></pre></div></div>
+
+<p>위 코드의 실행결과를 보면</p>
+
+<p><img src="https://user-images.githubusercontent.com/31889335/75790104-0a7edb80-5dae-11ea-9407-3e5e19d60525.PNG" alt="08" /></p>
+
+<p>성공적으로 너비 우선 탐색이 실행된 모습을 볼 수 있다.</p>
+
+<p>BFS 알고리즘은 이 자체로는 별 의미가 없고 다른 알고리즘에 적용된다는 점에서 의미가 있다.</p>
+
+<p><br /></p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

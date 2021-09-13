@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="여기 참고하여 작성1️⃣ 여러가지 for 문      for문 기본형      fun main() {      val names = listOf&lt;String&gt;("Chohee", "Dahee", "Gahee")      for(i in names) {          pr...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[Kotlin] 5️⃣ 코틀린의 반복문들 | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[Kotlin] 5️⃣ 코틀린의 반복문들 | choheeis">
+  <meta name="twitter:description" content="여기 참고하여 작성1️⃣ 여러가지 for 문      for문 기본형      fun main() {      val names = listOf&amp;lt;String&amp;gt;(&quot;Chohee&quot;, &quot;Dahee&quot;, &quot;Gahee&quot;)      for(i in names) {          pr...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-10/kotlinLoop">
+  <meta property="og:title" content="[Kotlin] 5️⃣ 코틀린의 반복문들 | choheeis">
+  <meta property="og:description" content="여기 참고하여 작성1️⃣ 여러가지 for 문      for문 기본형      fun main() {      val names = listOf&amp;lt;String&amp;gt;(&quot;Chohee&quot;, &quot;Dahee&quot;, &quot;Gahee&quot;)      for(i in names) {          pr...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[Kotlin] 5️⃣ 코틀린의 반복문들 | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-10/kotlinLoop">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[Kotlin] 5️⃣ 코틀린의 반복문들">[Kotlin] 5️⃣ 코틀린의 반복문들</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        7 OCT 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    2 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <p><a href="https://kotlinlang.org/docs/tutorials/kotlin-for-py/loops.html">여기</a> 참고하여 작성</p>
+
+<h2 id="1️⃣-여러가지-for-문">1️⃣ 여러가지 for 문</h2>
+
+<ul>
+  <li>
+    <p><strong>for문 기본형</strong></p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">val</span> <span class="py">names</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;(</span><span class="s">"Chohee"</span><span class="p">,</span> <span class="s">"Dahee"</span><span class="p">,</span> <span class="s">"Gahee"</span><span class="p">)</span>
+      <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="n">names</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+      <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>코틀린의 for문은 위와 같이 <strong>in</strong> 연산자를 사용하여 오른쪽에는 반복할 범위를 나타내고 왼쪽에는 반복의 결과인 각 인덱스별 데이터를 나타낸다.</p>
+
+    <p>위와 같은 코드는 names 배열의 index 0 부터 끝까지 각 인덱스를 반복하여 해당 원소를 변수 i에 저장한다.</p>
+
+    <p>출력 결과는 다음과 같다.</p>
+
+    <p><img width="64" alt="01" src="https://user-images.githubusercontent.com/31889335/95757911-b7c1b680-0ce2-11eb-943d-551d67bf6eb0.png" /></p>
+  </li>
+  <li>
+    <p><strong>..연산자 사용하여 반복 범위를 나타내는 for 문</strong></p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0</span><span class="o">..</span><span class="m">10</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+      <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>코틀린 for문에서 in 연산자 오른쪽에는 반복할 범위를 나타낸다고 언급하였다.</p>
+
+    <p>이 반복할 범위를 나타내는 방법으로 <strong>..</strong> 연산자를 사용할 수 있다.</p>
+
+    <p>위 코드처럼 0..10 이라고 반복 범위를 나타냈다면 인덱스 0에서부터 인덱스 10까지를 반복 범위로 한다는 뜻이다. (10이 포함됨을 주의하자!)</p>
+
+    <p>따라서 출력결과는 다음과 같다.</p>
+
+    <p><img width="42" alt="02" src="https://user-images.githubusercontent.com/31889335/95303455-2b685b80-08be-11eb-9b5f-6434065bf50b.png" /></p>
+
+    <p>그렇다면 만약 반복 범위에 마지막 인덱스인 10을 포함하지 않고 싶다면? 바로 아래에 설명한 내용을 보자.</p>
+  </li>
+  <li>
+    <p><strong>until 연산자를 사용하여 반복 범위를 나타내는 for 문</strong></p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0</span> <span class="n">until</span> <span class="m">10</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+      <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>반복할 범위를 나타낼 때 until 연산자를 사용할수도 있다.</p>
+
+    <p>다만 until 연산자는 가장 마지막 인덱스를 포함하지 않고, 가장 마지막 인덱스 -1 까지만 포함한다는 것을 알고 사용해야 한다.</p>
+
+    <p>위 코드처럼 0 until 10 이라고 반복할 범위를 나타냈다면 인덱스 0에서부터 인덱스 9까지를 반복 범위로 한다는 것이다.</p>
+
+    <p>따라서 출력 결과는 다음과 같다.</p>
+
+    <p><img width="36" alt="03" src="https://user-images.githubusercontent.com/31889335/95304059-032d2c80-08bf-11eb-80ef-9e62a27b08bc.png" /></p>
+  </li>
+  <li>
+    <p><strong>downTo 연산자를 사용하여 반복 범위를 나타내는 for 문</strong></p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+      <span class="c1">// 10 부터 0까지 내림차순으로 반복
+</span>      <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">10</span> <span class="n">downTo</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+      <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p><img width="47" alt="04" src="https://user-images.githubusercontent.com/31889335/95757927-ba241080-0ce2-11eb-9e27-29b4c44c6375.png" /></p>
+  </li>
+  <li>
+    <p><strong>step 연산자를 덧붙여서 반복 범위를 나타내는 for 문</strong></p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+      <span class="c1">// 10 부터 0까지 내림차순으로 반복하되 2 간격으로 띄어서 반복
+</span>      <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">10</span> <span class="n">downTo</span> <span class="m">0</span> <span class="n">step</span> <span class="m">2</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+      <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/for-each.html">forEach</a> 함수를 사용하여 반복하기</strong></p>
+
+    <p>이 함수는 kotlin.collections 패키지에 구현되어 있는 함수이다.</p>
+
+    <p><img width="519" alt="05" src="https://user-images.githubusercontent.com/31889335/95757930-babca700-0ce2-11eb-9337-828c775e5c18.png" /></p>
+
+    <p>배열의 처음부터 끝까지에 있는 모든 원소에 접근하여 forEach() 괄호 안의 action을 수행할 때 사용한다.</p>
+
+    <p>배열로써 문자열도 가능하고, 문자열일 경우 각 문자에 대해서 action을 수행한다.</p>
+  </li>
+  <li>
+    <p><strong><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/for-each-indexed.html">forEachIndexed</a> 함수 사용하여 반복하기</strong></p>
+
+    <p>이 함수도 kotlin.collections 패키지에 구현되어 있는 함수이다.</p>
+
+    <p>이 함수는 위에서 언급한 forEach 함수와 똑같은 기능을 하지만 반복할 때 배열의 각 원소 index를 사용할 수 있게 해준다는 차이가 있다.</p>
+  </li>
+</ul>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

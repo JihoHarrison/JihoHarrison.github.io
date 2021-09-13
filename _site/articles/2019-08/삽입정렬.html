@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="  –&gt; 유튜버동빈나 영상 참고!💨 삽입정렬이란?      삽입정렬 영어로 하면?    insertion sort 라고 한다.            삽입정렬의 아이디어    원소를 적절한 위치에 삽입하자!    여기서 적절한 위치라는 것이 어떤 위치일까?    정렬할 수가 3,...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[알고리즘]  💨️ 삽입정렬 | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[알고리즘]  💨️ 삽입정렬 | choheeis">
+  <meta name="twitter:description" content="  –&amp;gt; 유튜버동빈나 영상 참고!💨 삽입정렬이란?      삽입정렬 영어로 하면?    insertion sort 라고 한다.            삽입정렬의 아이디어    원소를 적절한 위치에 삽입하자!    여기서 적절한 위치라는 것이 어떤 위치일까?    정렬할 수가 3,...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2019-08/%EC%82%BD%EC%9E%85%EC%A0%95%EB%A0%AC">
+  <meta property="og:title" content="[알고리즘]  💨️ 삽입정렬 | choheeis">
+  <meta property="og:description" content="  –&amp;gt; 유튜버동빈나 영상 참고!💨 삽입정렬이란?      삽입정렬 영어로 하면?    insertion sort 라고 한다.            삽입정렬의 아이디어    원소를 적절한 위치에 삽입하자!    여기서 적절한 위치라는 것이 어떤 위치일까?    정렬할 수가 3,...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[알고리즘]  💨️ 삽입정렬 | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2019-08/%EC%82%BD%EC%9E%85%EC%A0%95%EB%A0%AC">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[알고리즘]  💨️ 삽입정렬">[알고리즘]  💨️ 삽입정렬</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        21 AUG 2019
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    3 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <blockquote>
+  <p>–&gt; <a href="https://www.youtube.com/watch?v=16I9Z7bS1iM&amp;list=PLRx0vPvlEmdDHxCvAQS1_6XV4deOwfVrz&amp;index=4">유튜버동빈나</a> 영상 참고!</p>
+</blockquote>
+
+<p><br /></p>
+
+<h2 id="-삽입정렬이란">💨 삽입정렬이란?</h2>
+<hr />
+
+<ul>
+  <li>
+    <p><em>삽입정렬 영어로 하면?</em></p>
+
+    <p><strong>insertion sort</strong> 라고 한다.</p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p><em>삽입정렬의 아이디어</em></p>
+
+    <p><strong>원소를 적절한 위치에 삽입하자!</strong></p>
+
+    <p>여기서 적절한 위치라는 것이 어떤 위치일까?</p>
+
+    <p>정렬할 수가 3, 2, 10, 8, 1, 4, 2, 9, 7, 5의 순서로 존재할 경우 아래 그림을 보면서 삽입정렬을 이해해보자.</p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/63441854-0a03a080-c46d-11e9-92c6-1def52653e07.PNG" alt="01" /></p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/63441853-0a03a080-c46d-11e9-920a-cdafac510ba8.PNG" alt="02" /></p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/63441851-096b0a00-c46d-11e9-82ac-754a16702460.PNG" alt="03" /></p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/63441849-096b0a00-c46d-11e9-83f3-0abe6785f8d5.PNG" alt="04" /></p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/63441848-096b0a00-c46d-11e9-93fc-b55b63a33a64.PNG" alt="05" /></p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/63441847-08d27380-c46d-11e9-9eaf-c36f45d7dde0.PNG" alt="06" /></p>
+
+    <p><br /></p>
+
+    <p>위와 같은 방법으로 계속 적절한 위치에 해당 숫자를 삽입하면 된다!</p>
+
+    <p>삽입할 때는 옆 자리에 있는 수와 자리를 바꿔가면서 정확한 자리를 찾아가면 된다.</p>
+
+    <p>삽입정렬에서는 삽입할 대상이 되는 숫자의 왼쪽 수들은 모두 정렬이 되어 있는 것을 볼 수 있다!</p>
+
+    <p><br /></p>
+  </li>
+</ul>
+
+<h2 id="-삽입정렬-알고리즘-코드로-작성하기">💨 삽입정렬 알고리즘 코드로 작성하기</h2>
+<hr />
+
+<p>위 그림을 통해 이해한 내용을 그대로 코드로 구현해내면 된다!</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+	<span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">};</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="p">;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">){</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]){</span>
+				<span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+				<span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+				<span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+			<span class="p">}</span>	
+		<span class="p">}</span>
+	<span class="p">}</span>
+	
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h2 id="-삽입정렬-알고리즘의-시간복잡도">💨 삽입정렬 알고리즘의 시간복잡도</h2>
+<hr />
+
+<p>삽입정렬을 이중 for문이 사용되기 때문에 최악의 경우에는</p>
+
+<p>i = 0 일 때 j 가 1번 실행된다.</p>
+
+<p>i = 1 일 때 j 가 2번 실행된다.</p>
+
+<p>i = 2 일 때 j 가 3번 실행된다.</p>
+
+<p>…</p>
+
+<p>i = 9 일 때 j 가 10번 실행된다.</p>
+
+<p>따라서 최악의 경우에는 N*(N+1)/2 이므로 빅오 표기법으로 나타내면 O(N^2)의 시간복잡도를 가질 수 있다.</p>
+
+<p>하지만, 최악의 경우가 아니라면</p>
+
+<p>옆 자리 원소와 자리를 바꾸는 과정(swap 과정)이 <strong>삽입 대상이 되는 수가 왼쪽 수보다 작을 때만 일어나고,</strong> 왼쪽 수 보다 클 때는 더 이상 자리를 바꾸지 않고, 현재 자리에 삽입된다.</p>
+
+<p>즉, 삽입 정렬에서는 삽입 대상이 되는 수의 왼쪽 수들은 모두 정렬이 되어 있는 상태이기 때문에 왼쪽 수 보다 클 때, 더 이상 자리를 바꾸지 않고 현재 자리에 삽입하여 정렬시킬 수 있는 것이다!!</p>
+
+<p><strong>따라서, 최악의 경우가 아니라면 시간 복잡도는 O(N^2)보다 작다.</strong></p>
+
+<p>그래서 O(N^2)의 시간 복잡도를 갖는 3가지 정렬 알고리즘 중 가장 빠르다고 볼 수 있다.</p>
+
+<blockquote>
+  <p>선택 정렬, 버블 정렬, 삽입 정렬 중 삽입 정렬이 가장 빠름!</p>
+</blockquote>
+
+<p><br /></p>
+
+<p>만약 <strong>거의 정렬이 되어 있는</strong> 수들인 2, 3, 4, 5, 6, 7, 8, 9, 10, 1 을 정렬한다고 가정해보자!</p>
+
+<p>이 경우에는 삽입정렬을 사용하는 것이 굉장히 빠르다는 것을 알 수 있다.</p>
+
+<p>왜냐하면 i 가 0 ~ 8까지 일 때에는 swap 이 실행되지 않고, i = 9 일 때에만 swap 이 실행되기 때문이다!</p>
+
+<blockquote>
+  <p>따라서 거의 정렬된 상태의 수들을 정렬해야 한다면 삽입 정렬이 제일 효율적이다!</p>
+</blockquote>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

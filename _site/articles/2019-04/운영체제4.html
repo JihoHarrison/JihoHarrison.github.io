@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="  서울과학기술대학교 3학년 교과과정으로 배운 “운영체제” 시험 공부 및 정리용 포스팅 😆  4강 - Threads  🙋 4강에서 설명할 수 있어야 할 것들 🙋      프로세스의 문제점    쓰레드란?    싱글쓰레드와 멀티쓰레드  💁 What is 쓰레드?      프로세스의 ...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[OS] 운영체제4 | choheeis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[OS] 운영체제4 | choheeis">
+  <meta name="twitter:description" content="  서울과학기술대학교 3학년 교과과정으로 배운 “운영체제” 시험 공부 및 정리용 포스팅 😆  4강 - Threads  🙋 4강에서 설명할 수 있어야 할 것들 🙋      프로세스의 문제점    쓰레드란?    싱글쓰레드와 멀티쓰레드  💁 What is 쓰레드?      프로세스의 ...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2019-04/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C4">
+  <meta property="og:title" content="[OS] 운영체제4 | choheeis">
+  <meta property="og:description" content="  서울과학기술대학교 3학년 교과과정으로 배운 “운영체제” 시험 공부 및 정리용 포스팅 😆  4강 - Threads  🙋 4강에서 설명할 수 있어야 할 것들 🙋      프로세스의 문제점    쓰레드란?    싱글쓰레드와 멀티쓰레드  💁 What is 쓰레드?      프로세스의 ...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[OS] 운영체제4 | choheeis</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2019-04/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C4">
+  <link rel="alternate" type="application/rss+xml" title="choheeis" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">김초희</a>
+  <span class="author_job">나는야 안드로이드 개발자 꿈나무 🍎</span>
+  <span class="author_bio mbm">구경하러 오신 분들 모두 좋은 하루 되세요 🍉</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('chchgml10@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/chooeeh" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/choheeis" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[OS] 운영체제4">[OS] 운영체제4</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        13 APR 2019
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    3 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <blockquote>
+  <p>서울과학기술대학교 3학년 교과과정으로 배운 “운영체제” 시험 공부 및 정리용 포스팅 😆</p>
+
+  <p><em>4강 - Threads</em></p>
+
+  <p>🙋 4강에서 설명할 수 있어야 할 것들 🙋</p>
+
+  <ul>
+    <li>프로세스의 문제점</li>
+    <li>쓰레드란?</li>
+    <li>싱글쓰레드와 멀티쓰레드</li>
+  </ul>
+</blockquote>
+
+<p><br /></p>
+
+<h2 id="-what-is-쓰레드">💁 What is 쓰레드?</h2>
+<hr />
+
+<ul>
+  <li>
+    <p><em>프로세스의 문제점</em></p>
+
+    <p>프로세스가 생성되면 각 프로세스마다 자신만의 주소 공간이 생기는데 만약 실행되고 있는 프로그램이 너무 많아서 주소 공간이 많아지게 되면 메모리적으로 문제가 된다.</p>
+
+    <p>또 메모리 뿐만 아니라 주소 공간을 만들때마다 타임딜레이(time-delay)가 생겨서 공간적, 시간적인 문제가 발생할 수 있다.</p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p><em>웹 서버</em></p>
+
+    <blockquote>
+      <p>갑자기 이 흐름에서 웹 서버가 왜 나오지?</p>
+    </blockquote>
+
+    <p>웹 서버도 웹 페이지를 전달하는 프로그램이다!</p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/56079775-c4d2c080-5e33-11e9-8f6f-37dc0795d0e2.PNG" alt="운영체제17" /></p>
+
+    <p>위 그림에서 볼 수 있듯이 웹 서버도 CPU 할당을 받아 실행되는 프로그램이다.</p>
+
+    <p>즉, 웹 서버가 작동하면 프로세스가 생성되는 것이다.</p>
+
+    <p>웹 서버는 많은 사람들에게 같은 시간동안 많은 요청과 응답 서비스를 제공해야 한다.</p>
+
+    <p>만약 웹 서버가 한 번에 한 명의 요청에만 응답한다면 어떻게 될까?</p>
+
+    <p>다른 클라이언트의 요청을 동시에 처리할 수 없게 된다!</p>
+
+    <p>즉, 웹 서버 프로세스는 동시적으로 발생하는 서비스들을 잘 처리할 수 있어야 한다.</p>
+
+    <p>또한 유저는 하나의 웹 서버만을 사용하는 것이 아니라 여러 웹 서버를 동시에 사용한다.</p>
+
+    <p>웹 서버 프로세스는 자신의 리소스(CPU 등)를 가지고 있다. 하지만 실행되는 웹 서버 프로세스가 많아질수록 그에 비례하여 필요로 하는 리소스도 많아진다.</p>
+
+    <p>즉, 컴퓨터 입장에서는 메모리에 부담이 발생하고 이에 따라 프로세스를 생성하는데 타임 딜레이가 발생한다.</p>
+
+    <p>또, 웹 서버를 쓰레드로 실행시키면 한 쓰레드를 통해 클라이언트의 다른 요청에 응답할 수 있고, 동시에 다른 쓰레드를 통해 파일을 다운 받는 프로그램을 실행시킬 수 있다.</p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p><em>쓰레드를 사용하자!</em></p>
+
+    <p><strong>쓰레드(Thread)</strong> 라는 것은 프로세스와 텍스트(코드), 데이터, 리소스, 힙 등을 공유하는 존재이다. (하지만 스택, 레지스터, 쓰레드ID는 공유하지 못함)</p>
+
+    <p>따라서 쓰레드를 생성할 때 주소공간의 텍스트, 데이터, 리소스, 힙 공간을 새로 생성할 필요가 없다. 공유되기 때문이다.</p>
+
+    <p>이 모든 것을 각각 따로 만드는 프로세스보다 쓰레드가 메모리 부분에서 훨씬 가볍다. 또 쓰레드를 생성하는 시간도 적게 걸린다.</p>
+
+    <p>이런 이유로 웹 서버를 프로세스로 하지 않고, 쓰레드로 한다면 많은 부분에서 이득을 볼 수 있다.</p>
+
+    <p>즉, 기존에는 새로운 프로그램이 실행된다는 것은 새로운 프로세스가 생성된다는 것이였다.</p>
+
+    <p>하지만 프로세스 대신 쓰레드를 사용하는 시스템에서는 새로운 프로그램이 실행된다는 것을 새로운 쓰레드가 생성된다는 것으로 바뀌는 것이다.</p>
+
+    <p><br /></p>
+  </li>
+</ul>
+
+<h2 id="-그래서-쓰레드의-정의는-뭐야">❓❗ 그래서 쓰레드의 ‘정의’는 뭐야?</h2>
+<hr />
+
+<ul>
+  <li>
+    <p><em>Thread</em></p>
+
+    <p>쓰레드는 CPU 사용률의 기본적인 단위이다. 그리고 각각의 프로세스는 많은 쓰레드를 포함할 수 있다. 즉, 프로세스 안에 여러 개의 쓰레드가 있을 수 있다.</p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p><em>쓰레드가 프로세스와 공유하는 것들</em></p>
+
+    <p>프로그램의 코드, 데이터, 힙, signal handler, 현재 디렉토리, user ID, 파일 열기 등등</p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p><em>쓰레드 자신만이 갖는 것들</em></p>
+
+    <p>스택, 레지스터, 쓰레드 ID</p>
+
+    <p><br /></p>
+  </li>
+</ul>
+
+<h2 id="-싱글쓰레드와-멀티쓰레드">👪 싱글쓰레드와 멀티쓰레드</h2>
+<hr />
+
+<ul>
+  <li>
+    <p><em>말 그대로!</em></p>
+
+    <p>싱글 쓰레드는 한 프로세스가 쓰레드를 하나 포함하고 있는 것이고, 멀티 쓰레드는 한 프로세스가 여러개의 쓰레드를 포함하고 있는 것이다.</p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/56079936-006e8a00-5e36-11e9-8d37-eb9b1972034b.PNG" alt="운영체제18" /></p>
+
+    <p>위 그림에서 싱글 쓰레드를 가진 프로세스와 멀티 쓰레드를 가진 프로세스의 모습을 볼 수 있다.</p>
+
+    <p>멀티 쓰레드를 가진 프로세스를 보면 코드, 데이터, 파일 부분을 공유하고 각각 서로 다른 레지스터와 스택을 갖는 모습을 볼 수 있다.</p>
+
+    <p><br /></p>
+  </li>
+</ul>
+
+<h2 id="-쓰레드-vs-프로세스">💥 쓰레드 vs 프로세스</h2>
+<hr />
+
+<ul>
+  <li>
+    <p><em>fork를 통해 새로운 프로세스를 생성하는 것은 메모리와 시간 비용이 많이 든다.</em></p>
+
+    <p>하지만 상대적으로 쓰레드는 많은 메모리나 시간을 요구하지 않는다. 왜냐하면 기존 프로세스와 공유하는 부분이 많기 때문이다.</p>
+
+    <p>하지만 쓰레드가 메모리와 시간 비용이 전혀 들지 않는다는 것은 절대 아니다!</p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p><em>프로세스를 생성하는 함수와 쓰레드를 생성하는 함수의 차이점</em></p>
+
+    <p>새로운 프로세스는 fork를 통해 만들어지지만 새로운 쓰레드는 <strong>pthread_create()</strong> 라는 함수를 통해 만들어진다.</p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/56080024-c5208b00-5e36-11e9-8609-ba794fbbe814.PNG" alt="운영체제19" /></p>
+
+    <p>위 그림에서 pthread_create()로 생성된 쓰레드는 Stack부분만 새로 생성되는 모습을 볼 수 있다.</p>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<ul>
+  <li>
+    <p><em>경제적 차이</em></p>
+
+    <p>쓰레드는 프로세스에 비해 context switching을 할 때 걸리는 시간이 짧다.</p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p><em>MP 아키텍쳐(구조)에서 유용하다</em></p>
+
+    <p><strong>MP 아키텍쳐</strong> = Multi Process 아키텍쳐(즉, 많은 프로세스들이 병렬적으로 실행되는 구조)</p>
+
+    <p><br /></p>
+  </li>
+</ul>
+
+<h2 id="️-리눅스의-쓰레드">〰️ 리눅스의 쓰레드</h2>
+<hr />
+
+<ul>
+  <li>
+    <p><em>리눅스에서 쓰레드를 생성하는 방법</em></p>
+
+    <p><strong>clone()</strong> 이라는 시스템 콜을 통해 쓰레드를 생성한다.</p>
+
+    <p>리눅스는 프로세스와 쓰레드를 구별하지 않는다.</p>
+
+    <p>clone() 시스템 콜의 첫번째 인자에는 flag라는 것이 들어간다. flag는 생성될 쓰레드는 부모 쓰레드와 자식 쓰레드 간에 얼만큼의 자원 공유를 할 것인지를 정해준다.</p>
+
+    <p><img src="https://user-images.githubusercontent.com/31889335/56294918-db945280-6166-11e9-8fce-425afd6b3c1d.PNG" alt="운영체제34" /></p>
+  </li>
+</ul>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+      repo="choheeis/blog-comments"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 김초희. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>
