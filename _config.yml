@@ -4,10 +4,10 @@
 ####################################
 #
 remote_theme : renyuanz/leonids
-title: choheeis
-email: chchgml10@gmail.com
-description: 안드로이드 개발자를 목표로 달려나가는 김초희의 블로그입니다😍
-url: https://choheeis.github.io/newblog/
+title: JihoKevin
+email: jhshin925@gmail.com
+description: 안드로이드 개발자를 목표로 달려나가는 Kevin의 블로그입니다!
+url: https://JihoKevin.github.io/
 baseurl : ""
 keywords: ["blog", "jekyll"]
 
@@ -36,11 +36,11 @@ kramdown:
 ####################################
 #
 owner:
-  name: 김초희
+  name: 신지호
   avatar: avatar.png
-  job: "나는야 안드로이드 개발자 꿈나무 🍎"
-  bio: "구경하러 오신 분들 모두 좋은 하루 되세요 🍉"
-  email: chchgml10@gmail.com
+  job: "안드로이드 개발자가 되고싶은 소년"
+  bio: "방문해주셔서 갑사합니다!🙇🏻‍♂️"
+  email: jhshin9250@gmail.com
   disqus-shortname:
   twitter: #username
   facebook: #username
@@ -51,13 +51,13 @@ owner:
     ad-client:
     ad-slot:
   bing-verify:
-  github: choheeis
+  github: JihoKevin
   gitlab: #username
   stackoverflow: #123456/username   from a "http://stackoverflow.com/users/123456/username" link
   linkedin: #username
   skype: #username
   xing: #username
-  instagram: chooeeh
+  instagram: jiho_925
   lastfm: #username
   tumblr: #username
   pinterest: #username
