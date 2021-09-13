@@ -3,10 +3,10 @@
   <channel>
     <title>JihoKevin</title>
     <description>안드로이드 개발자를 목표로 달려나가는 Kevin의 블로그입니다!</description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <link>https://JihoKevin.github.io//</link>
+    <atom:link href="https://JihoKevin.github.io//feed.xml" rel="self" type="application/rss+xml"/>
     <pubDate>2021-09-13</pubDate>
-    <lastBuildDate>Mon, 13 Sep 2021 14:54:27 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 13 Sep 2021 14:55:00 +0200</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
@@ -553,8 +553,8 @@
 &lt;p&gt;마지막 수정일 : 2021/08/22&lt;/p&gt;
 </description>
         <pubDate>2021-09-13</pubDate>
-        <link>http://localhost:4000/articles/2021-09/rx-kotlin</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/rx-kotlin</guid>
+        <link>https://JihoKevin.github.io//articles/2021-09/rx-kotlin</link>
+        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/rx-kotlin</guid>
         
         
         <category>RxKotlin</category>
@@ -1105,8 +1105,8 @@
 &lt;p&gt;마지막 수정일 : 2021/08/22&lt;/p&gt;
 </description>
         <pubDate>2021-09-13</pubDate>
-        <link>http://localhost:4000/articles/2021-07/kotlin-object-keyword</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-07/kotlin-object-keyword</guid>
+        <link>https://JihoKevin.github.io//articles/2021-07/kotlin-object-keyword</link>
+        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-07/kotlin-object-keyword</guid>
         
         
         <category>kotlin</category>
@@ -1366,8 +1366,8 @@
 마지막 수정일 : 2021년 7월 7일&lt;/p&gt;
 </description>
         <pubDate>2021-09-13</pubDate>
-        <link>http://localhost:4000/articles/2021-07/kotlin-enum-class</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-07/kotlin-enum-class</guid>
+        <link>https://JihoKevin.github.io//articles/2021-07/kotlin-enum-class</link>
+        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-07/kotlin-enum-class</guid>
         
         
         <category>kotlin</category>
@@ -1508,8 +1508,8 @@
 마지막 수정일 : 2021년 8월 10일&lt;/p&gt;
 </description>
         <pubDate>2021-09-13</pubDate>
-        <link>http://localhost:4000/articles/2021-07/android-studio-keyboard-shortcut</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-07/android-studio-keyboard-shortcut</guid>
+        <link>https://JihoKevin.github.io//articles/2021-07/android-studio-keyboard-shortcut</link>
+        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-07/android-studio-keyboard-shortcut</guid>
         
         
         <category>안드로이드</category>
@@ -1654,8 +1654,8 @@
 마지막 수정일 : 2021년 7월 5일&lt;/p&gt;
 </description>
         <pubDate>2021-09-13</pubDate>
-        <link>http://localhost:4000/articles/2021-07/android-project-structure</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-07/android-project-structure</guid>
+        <link>https://JihoKevin.github.io//articles/2021-07/android-project-structure</link>
+        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-07/android-project-structure</guid>
         
         
         <category>안드로이드</category>
@@ -1766,8 +1766,8 @@
 &lt;p&gt;마지막 수정일 : 2021년 3월 18일&lt;/p&gt;
 </description>
         <pubDate>2021-09-13</pubDate>
-        <link>http://localhost:4000/articles/2021-03/android</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-03/android</guid>
+        <link>https://JihoKevin.github.io//articles/2021-03/android</link>
+        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-03/android</guid>
         
         
         <category>안드로이드</category>
@@ -2062,8 +2062,8 @@ https://developer.android.com/guide/app-compatibility?hl=ko
 &lt;/ul&gt;
 </description>
         <pubDate>2021-09-13</pubDate>
-        <link>http://localhost:4000/articles/2021-03/android-version</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-03/android-version</guid>
+        <link>https://JihoKevin.github.io//articles/2021-03/android-version</link>
+        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-03/android-version</guid>
         
         
         <category>안드로이드</category>
