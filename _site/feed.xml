@@ -6,7 +6,7 @@
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
     <pubDate>2021-09-13</pubDate>
-    <lastBuildDate>Mon, 13 Sep 2021 15:58:37 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 13 Sep 2021 16:42:46 +0200</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
@@ -299,7 +299,7 @@ list처럼 각 인덱스 값이 따로따로 필요하다면 fromIterable()을 �
 &lt;p&gt;interval은 단어 뜻 그대로 시간차 간격을 두고 다음 로직을 처리하는 연산자이다.&lt;/p&gt;
 
 &lt;h1 id=&quot;never&quot;&gt;never&lt;/h1&gt;
-&lt;p&gt;&lt;img src=&quot;/articles/2021-09/img/never.png&quot; alt=&quot;image&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/img/09-13-rxKotlin/never.jpg&quot; alt=&quot;never&quot; width=&quot;50%&quot; height=&quot;50%&quot; /&gt;
 아무런 아이템도 발행하지 않고, 완료도 발행하지 않는 옵저버블을 생성한다.
 결과 값으로는 onNest, onComplete, onSubscribe, onError 이 중에 아무것도 실행되지 않는다.&lt;/p&gt;
 </description>
@@ -360,7 +360,9 @@ for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간
     
       <item>
         <title>[Kotlin] 코틀린의 object 키워드 잘 알고 사용하기(feat. companion object)</title>
-        <description>&lt;blockquote&gt;
+        <description>&lt;p&gt;&lt;img src=&quot;/img/never.jpg&quot; alt=&quot;never&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;참고 자료&lt;/strong&gt;&lt;br /&gt;
 &lt;a href=&quot;https://kotlinlang.org/docs/object-declarations.html&quot;&gt;Kotlin Document - Object expressions and declarations&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://www.youtube.com/watch?v=KUk6k865Vgg&quot;&gt;Youtube Android Developers - Object - Kotlin Vocabulary&lt;/a&gt;&lt;/p&gt;
@@ -376,7 +378,7 @@ for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간
 &lt;a href=&quot;#7&quot;&gt;7. companion object 더 알아보기&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;img src=&quot;/Users/sinjiho/Desktop/KevinBlog/JihoKevin.github.io/Android/rx-kotlin-01/img/never.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/31889335/125470357-c2ffd2d5-b7a3-437b-b3ff-a7b465de7cf2.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 

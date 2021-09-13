@@ -4,6 +4,8 @@ title:  "[Kotlin] 코틀린의 object 키워드 잘 알고 사용하기(feat. co
 categories: [kotlin]
 ---
 
+![never](/img/never.jpg)
+
 > __참고 자료__  
 > [Kotlin Document - Object expressions and declarations](https://kotlinlang.org/docs/object-declarations.html)  
 > [Youtube Android Developers - Object - Kotlin Vocabulary](https://www.youtube.com/watch?v=KUk6k865Vgg)
@@ -19,7 +21,7 @@ categories: [kotlin]
 > [7. companion object 더 알아보기](#7)
 
 
-![img](/Users/sinjiho/Desktop/KevinBlog/JihoKevin.github.io/Android/rx-kotlin-01/img/never.png)
+![img](https://user-images.githubusercontent.com/31889335/125470357-c2ffd2d5-b7a3-437b-b3ff-a7b465de7cf2.png)
 
 <br>
 
