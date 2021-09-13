@@ -3,6 +3,21 @@
   
     
     <url>
+      <loc>http://localhost:4000/articles/2021-09/rx-kotlin</loc>
+      
+        <lastmod>2021-09-13T00:00:00+02:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
       <loc>http://localhost:4000/articles/2021-07/kotlin-object-keyword</loc>
       
         <lastmod>2021-07-13T00:00:00+02:00</lastmod>
@@ -51,51 +66,6 @@
       <loc>http://localhost:4000/articles/2021-07/android-project-structure</loc>
       
         <lastmod>2021-07-05T13:34:10+02:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>http://localhost:4000/articles/2021-06/becoming-a-better-programmer-3</loc>
-      
-        <lastmod>2021-06-18T13:34:10+02:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>http://localhost:4000/articles/2021-04/becoming-a-better-programmer-2</loc>
-      
-        <lastmod>2021-04-28T13:34:10+02:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>http://localhost:4000/articles/2021-03/becoming-a-better-programmer-1</loc>
-      
-        <lastmod>2021-03-30T13:34:10+02:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
