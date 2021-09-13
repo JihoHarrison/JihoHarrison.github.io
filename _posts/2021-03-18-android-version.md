@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[안드로이드] 안드로이드 버전이 뭐예요?(targetSdkVersion, compileSdkVersion, API 레벨)"
-date:   2021-03-18 18:34:10 +0700
+date:   2021-09-13 18:34:10 +0700
 categories: [안드로이드]
 ---
 
@@ -30,10 +30,6 @@ categories: [안드로이드]
 이번 포스팅에서는 '안드로이드 버전'과 관련된 내용을 공부해보겠습니다! 포스팅 내용에 잘못된 개념이나 잘못된 사용법이 작성되어 있다면 댓글로 알려주세요🧚🏻‍♀️
 
 ## 1️⃣ What is 안드로이드 버전?
-
-* __먼저 읽고 오면 좋은 포스팅__
-
-    * [이 블로그의 다른 포스팅 - 안드로이드가 뭐예요?](https://choheeis.github.io/newblog//articles/2021-03/android)를 먼저 읽고 오면 이 포스팅에서 자주 사용할 '안드로이드', '안드로이드 운영체제' 라는 용어에 대해 혼동하지 않고 잘 이해할 수 있을 것입니다 :)
 
 * __Android에도 Version이 있다?__
 
@@ -70,8 +66,6 @@ categories: [안드로이드]
     * 안드로이드 버전의 역사를 볼 수 있었던 위 표에는 'API 레벨' 이라는 항목이 있었습니다. API 레벨은 가장 초창기 안드로이드 플랫폼 버전인 android 1.0 부터 가장 최신 안드로이드 플랫폼 버전까지 1부터 1씩 증가했음을 알 수 있습니다.
 
     * __API 레벨__ 은 Android 플랫폼 버전이 업데이트 될 때마다 수정되는 __Android Framework(안드로이드 프레임워크)의 수정 버전을 고유하게 식별해주는 정수 값__ 입니다.
-
-    * [이 블로그의 다른 포스팅 - 안드로이드가 뭐예요?](https://choheeis.github.io/newblog//articles/2021-03/android)를 읽어보면 'Android Framework'가 무엇인지에 대해서 알 수 있기 때문에 이 포스팅에서는 따로 설명하지 않겠습니다.
 
     * 즉, Android 버전이 업데이트는 Android Framework 업데이트도 포함할 수 있기 때문에 Android Framework의 수정 히스토리를 Android 버전과 별도로 표시하는 것이 API 레벨입니다.
 
