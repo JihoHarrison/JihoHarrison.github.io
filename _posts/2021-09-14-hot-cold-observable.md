@@ -44,7 +44,7 @@ Done<br/>
 Recieved String 1<br/>
 Recieved String 2<br/>
 Recieved String 3<br/>
-Done
+Done<br/>
 
 ---
 
@@ -54,7 +54,7 @@ Done
 
 ## Hot Observable
 
-`Hot Observalbe`은 `old와 반대로 구독을 하기 전 부터 데이터를 내보내기 시작한다.
+`Hot Observalbe`은 old와 반대로 구독을 하기 전 부터 데이터를 내보내기 시작한다.
 `Cold Observable`을 CD나 레코드로 본다면 `Hot Observable`은 TV 채녈의 특징과 비슷하다. 이는 결국 구독을 하지 않아고 데이터를 배출 시키기 때문에 구독을 할 필요가 없다. 여기서 중요한 `Observable`의 개념이 바로 `ConnectableObservable`이다. 이 `Observable`은 `cold`를 `hot`으로 바꿀 수 있기도 하다.
 
 ```kotlin
@@ -90,6 +90,7 @@ subscription 1: 5<br/>
 subscription 2: 5<br/>
 subscription 3: 5<br/>
 ---
+
 위의 출력 결과를 보면 1, 2 구독자가 구독을 한 후 `connect` 한 시점 즉, 데이터가 배출되기 시작한 시점부터 `500ms`를 대기 하면서 총 5개의 데이터를 받게 된다.
 그 5초가 지났을 때 부터 또 다른 3 구독자가 구독하기 시작하면서 다시 `500ms` 간 `delay`를 주게 된다. 이렇게 총 10개의 데이터를 시간 순서에 따라 받아 올 것이고,
 출력 결과과 같이 3번 구독자는 이 전에 1, 2 구독자가 받았던 데이터는 받지 못 한 것을 알 수 있다. 이것이 바로 `Hot Observable`의 개념이다.

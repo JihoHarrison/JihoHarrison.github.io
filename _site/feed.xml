@@ -5,9 +5,109 @@
     <description>안드로이드 개발자를 목표로 달려나가는 Kevin의 블로그입니다!</description>
     <link>https://JihoKevin.github.io//</link>
     <atom:link href="https://JihoKevin.github.io//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2021-09-13</pubDate>
-    <lastBuildDate>Mon, 13 Sep 2021 16:51:39 +0200</lastBuildDate>
+    <pubDate>2021-09-14</pubDate>
+    <lastBuildDate>Tue, 14 Sep 2021 04:48:48 +0200</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
+    
+      <item>
+        <title>[RxKotlin] Hot🔥 &amp; Cold❄️ Observable</title>
+        <description>&lt;h2 id=&quot;hot-observable과-cold-observable의-차이&quot;&gt;Hot Observable과 Cold Observable의 차이&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Reactive Programming&lt;/code&gt;을 배우면서 가장 많이 접한 개념이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flow&lt;/code&gt;가 어떻게 흘러가는지이다.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt;은 우리에게 데이터를 배출 시키는 존재이고, 우리는 이를 &lt;code class=&quot;highlighter-rouge&quot;&gt;subscribe&lt;/code&gt; 함으로써 배출되는 데이터를 얻을 수 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;cold-observable&quot;&gt;Cold Observable&lt;/h2&gt;
+&lt;p&gt;먼저 &lt;code class=&quot;highlighter-rouge&quot;&gt;cold observable&lt;/code&gt;부터 설명하자면, 앞서 다뤘던 기본적인 예제들처럼 동일한 옵저버블을 여러번 구독해도 그 시점에 항상 새로운 데이터 flow를 얻을 수 있었다.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;){&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;observable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;listOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;String 1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;String 2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;String 3&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;toObservable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;observable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Recieved $it&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Error ${it.message}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Done&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    
+        &lt;span class=&quot;n&quot;&gt;observable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Recieved $it&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Error ${it.message}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Done&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;hr /&gt;
+&lt;h3 id=&quot;출력결과&quot;&gt;출력결과&lt;/h3&gt;
+
+&lt;p&gt;Recieved String 1&lt;br /&gt;
+Recieved String 2&lt;br /&gt;
+Recieved String 3&lt;br /&gt;
+Done&lt;br /&gt;
+Recieved String 1&lt;br /&gt;
+Recieved String 2&lt;br /&gt;
+Recieved String 3&lt;br /&gt;
+Done&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;위의 예제처럼 여러번 구독을 하더라도 구독을 한 시점부터는 &lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;의 요소인 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;String 1&quot;, &quot;String 2&quot;, &quot;String 3&quot;&lt;/code&gt; 값을 얻을 수 있었다.
+이러한 특징을 가지고 있는 Observable을 &lt;code class=&quot;highlighter-rouge&quot;&gt;Cold Observable&lt;/code&gt;이라고 한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;hot-observable&quot;&gt;Hot Observable&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Hot Observalbe&lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;old와 반대로 구독을 하기 전 부터 데이터를 내보내기 시작한다.
+&lt;/code&gt;Cold Observable&lt;code class=&quot;highlighter-rouge&quot;&gt;을 CD나 레코드로 본다면 &lt;/code&gt;Hot Observable&lt;code class=&quot;highlighter-rouge&quot;&gt;은 TV 채녈의 특징과 비슷하다. 이는 결국 구독을 하지 않아고 데이터를 배출 시키기 때문에 구독을 할 필요가 없다. 여기서 중요한 &lt;/code&gt;Observable&lt;code class=&quot;highlighter-rouge&quot;&gt;의 개념이 바로 &lt;/code&gt;ConnectableObservable&lt;code class=&quot;highlighter-rouge&quot;&gt;이다. 이 &lt;/code&gt;Observable&lt;code class=&quot;highlighter-rouge&quot;&gt;은 &lt;/code&gt;cold&lt;code class=&quot;highlighter-rouge&quot;&gt;를 &lt;/code&gt;hot`으로 바꿀 수 있기도 하다.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;connectableObservable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;interval&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TimeUnit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MILLISECONDS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;publish&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;connectableObservable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;subscription 1: $it&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;connectableObservable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;subscription 2: $it&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;connectableObservable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;connect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;runBlocking&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;connectableObservable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;subscription 3: $it&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;runBlocking&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;hr /&gt;
+&lt;h3 id=&quot;출력결과-1&quot;&gt;출력결과&lt;/h3&gt;
+
+&lt;p&gt;subscription 1: 0&lt;br /&gt;
+subscription 2: 0&lt;br /&gt;
+subscription 1: 1&lt;br /&gt;
+subscription 2: 1&lt;br /&gt;
+subscription 1: 2&lt;br /&gt;
+subscription 2: 2&lt;br /&gt;
+subscription 1: 3&lt;br /&gt;
+subscription 2: 3&lt;br /&gt;
+subscription 3: 3&lt;br /&gt;
+subscription 1: 4&lt;br /&gt;
+subscription 2: 4&lt;br /&gt;
+subscription 3: 4&lt;br /&gt;
+subscription 1: 5&lt;br /&gt;
+subscription 2: 5&lt;br /&gt;
+subscription 3: 5&lt;br /&gt;
+—
+위의 출력 결과를 보면 1, 2 구독자가 구독을 한 후 &lt;code class=&quot;highlighter-rouge&quot;&gt;connect&lt;/code&gt; 한 시점 즉, 데이터가 배출되기 시작한 시점부터 &lt;code class=&quot;highlighter-rouge&quot;&gt;500ms&lt;/code&gt;를 대기 하면서 총 5개의 데이터를 받게 된다.
+그 5초가 지났을 때 부터 또 다른 3 구독자가 구독하기 시작하면서 다시 &lt;code class=&quot;highlighter-rouge&quot;&gt;500ms&lt;/code&gt; 간 &lt;code class=&quot;highlighter-rouge&quot;&gt;delay&lt;/code&gt;를 주게 된다. 이렇게 총 10개의 데이터를 시간 순서에 따라 받아 올 것이고,
+출력 결과과 같이 3번 구독자는 이 전에 1, 2 구독자가 받았던 데이터는 받지 못 한 것을 알 수 있다. 이것이 바로 &lt;code class=&quot;highlighter-rouge&quot;&gt;Hot Observable&lt;/code&gt;의 개념이다.&lt;/p&gt;
+
+&lt;p&gt;결국 &lt;code class=&quot;highlighter-rouge&quot;&gt;hot observable&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;cold observable&lt;/code&gt;의 차이는 구독 한 시점에 다시 새로운 데이터를 받아오느냐, 이미 지나간 데이터는 받아오지 못하고 중간에 흐름에 껴서 받아오느냐의 차이이다.&lt;/p&gt;
+</description>
+        <pubDate>2021-09-14</pubDate>
+        <link>https://JihoKevin.github.io//articles/2021-09/hot-cold-observable</link>
+        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/hot-cold-observable</guid>
+        
+        
+        <category>RxKotlin</category>
+        
+      </item>
     
       <item>
         <title>[안드로이드] 안드로이드 버전이 뭐예요?(targetSdkVersion, compileSdkVersion, API 레벨)</title>
@@ -286,7 +386,7 @@ https://developer.android.com/guide/app-compatibility?hl=ko
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2021-09-13</pubDate>
+        <pubDate>2021-09-14</pubDate>
         <link>https://JihoKevin.github.io//articles/2021-09/android-version</link>
         <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/android-version</guid>
         
@@ -410,7 +510,7 @@ flatMap 연산자는 내부적으로 merge 연산자를 사용하기 때문에 �
 &lt;h1 id=&quot;repeat-연산자&quot;&gt;repeat 연산자&lt;/h1&gt;
 &lt;p&gt;아이템을 N번 발행한다. 파라미터로 아무 값이 들어가지 않을 시 값을 무한히 발행시킨다.&lt;/p&gt;
 </description>
-        <pubDate>2021-09-13</pubDate>
+        <pubDate>2021-09-14</pubDate>
         <link>https://JihoKevin.github.io//articles/2021-09/rx-kotlin-02</link>
         <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/rx-kotlin-02</guid>
         
@@ -589,7 +689,7 @@ list처럼 각 인덱스 값이 따로따로 필요하다면 fromIterable()을 �
 아무런 아이템도 발행하지 않고, 완료도 발행하지 않는 옵저버블을 생성한다.
 결과 값으로는 onNest, onComplete, onSubscribe, onError 이 중에 아무것도 실행되지 않는다.&lt;/p&gt;
 </description>
-        <pubDate>2021-09-13</pubDate>
+        <pubDate>2021-09-14</pubDate>
         <link>https://JihoKevin.github.io//articles/2021-09/rx-kotlin-01</link>
         <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/rx-kotlin-01</guid>
         
@@ -635,7 +735,7 @@ list처럼 각 인덱스 값이 따로따로 필요하다면 fromIterable()을 �
 &lt;br /&gt;
 for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간 복잡도가 보완됐다는 것을 알 수 있다.&lt;br /&gt;&lt;/p&gt;
 </description>
-        <pubDate>2021-09-13</pubDate>
+        <pubDate>2021-09-14</pubDate>
         <link>https://JihoKevin.github.io//articles/2021-09/bubble-sort</link>
         <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/bubble-sort</guid>
         
@@ -646,9 +746,7 @@ for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간
     
       <item>
         <title>[Kotlin] 코틀린의 object 키워드 잘 알고 사용하기(feat. companion object)</title>
-        <description>&lt;p&gt;&lt;img src=&quot;/img/never.jpg&quot; alt=&quot;never&quot; /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
+        <description>&lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;참고 자료&lt;/strong&gt;&lt;br /&gt;
 &lt;a href=&quot;https://kotlinlang.org/docs/object-declarations.html&quot;&gt;Kotlin Document - Object expressions and declarations&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://www.youtube.com/watch?v=KUk6k865Vgg&quot;&gt;Youtube Android Developers - Object - Kotlin Vocabulary&lt;/a&gt;&lt;/p&gt;
@@ -1191,7 +1289,7 @@ for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간
 
 &lt;p&gt;마지막 수정일 : 2021/08/22&lt;/p&gt;
 </description>
-        <pubDate>2021-09-13</pubDate>
+        <pubDate>2021-09-14</pubDate>
         <link>https://JihoKevin.github.io//articles/2021-07/kotlin-object-keyword</link>
         <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-07/kotlin-object-keyword</guid>
         
@@ -1331,7 +1429,7 @@ for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간
 &lt;p&gt;계속 추가 중 ..&lt;br /&gt;
 마지막 수정일 : 2021년 8월 10일&lt;/p&gt;
 </description>
-        <pubDate>2021-09-13</pubDate>
+        <pubDate>2021-09-14</pubDate>
         <link>https://JihoKevin.github.io//articles/2021-07/android-studio-keyboard-shortcut</link>
         <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-07/android-studio-keyboard-shortcut</guid>
         
@@ -1477,7 +1575,7 @@ for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간
 &lt;p&gt;이렇게 공부해보니.. 지인의 프로젝트 구조에는 여러 개의 library 모듈이 포함되어 있는 것이였다! :)&lt;br /&gt;
 마지막 수정일 : 2021년 7월 5일&lt;/p&gt;
 </description>
-        <pubDate>2021-09-13</pubDate>
+        <pubDate>2021-09-14</pubDate>
         <link>https://JihoKevin.github.io//articles/2021-07/android-project-structure</link>
         <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-07/android-project-structure</guid>
         
@@ -1575,7 +1673,7 @@ for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간
 
 &lt;p&gt;마지막 수정일 : 2021년 3월 18일&lt;/p&gt;
 </description>
-        <pubDate>2021-09-13</pubDate>
+        <pubDate>2021-09-14</pubDate>
         <link>https://JihoKevin.github.io//articles/2021-03/android</link>
         <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-03/android</guid>
         

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Hot Observable과 Cold Observable의 차이Reactive Programming을 배우면서 가장 많이 접한 개념이 Flow가 어떻게 흘러가는지이다.Observable은 우리에게 데이터를 배출 시키는 존재이고, 우리는 이를 subscribe 함으로써 배출되는 데이...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[RxKotlin] Hot🔥 &amp; Cold❄️ Observable | JihoKevin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[RxKotlin] Hot🔥 &amp; Cold❄️ Observable | JihoKevin">
+  <meta name="twitter:description" content="Hot Observable과 Cold Observable의 차이Reactive Programming을 배우면서 가장 많이 접한 개념이 Flow가 어떻게 흘러가는지이다.Observable은 우리에게 데이터를 배출 시키는 존재이고, 우리는 이를 subscribe 함으로써 배출되는 데이...">
+  
+    <meta property="twitter:image" content="https://JihoKevin.github.io//img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="https://JihoKevin.github.io//articles/2021-09/hot-cold-observable">
+  <meta property="og:title" content="[RxKotlin] Hot🔥 &amp; Cold❄️ Observable | JihoKevin">
+  <meta property="og:description" content="Hot Observable과 Cold Observable의 차이Reactive Programming을 배우면서 가장 많이 접한 개념이 Flow가 어떻게 흘러가는지이다.Observable은 우리에게 데이터를 배출 시키는 존재이고, 우리는 이를 subscribe 함으로써 배출되는 데이...">
+  
+    <meta property="og:image" content="https://JihoKevin.github.io//img/leonids-logo.png">
+  
+  <title>[RxKotlin] Hot🔥 & Cold❄️ Observable | JihoKevin</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="https://JihoKevin.github.io//css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://JihoKevin.github.io//css/main.css">
+
+  <link rel="canonical" href="https://JihoKevin.github.io//articles/2021-09/hot-cold-observable">
+  <link rel="alternate" type="application/rss+xml" title="JihoKevin" href="https://JihoKevin.github.io//feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="https://JihoKevin.github.io//favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="https://JihoKevin.github.io//favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="https://JihoKevin.github.io//">
+    <img src="https://JihoKevin.github.io//img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="https://JihoKevin.github.io//" class="author_name">신지호</a>
+  <span class="author_job">안드로이드 개발자가 되고싶은 소년</span>
+  <span class="author_bio mbm">방문해주셔서 갑사합니다!🙇🏻‍♂️</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="https://JihoKevin.github.io//">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="https://JihoKevin.github.io//archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="https://JihoKevin.github.io//categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="https://JihoKevin.github.io//resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="https://JihoKevin.github.io//tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('jhshin9250@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/jiho_925" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/JihoKevin" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "https://JihoKevin.github.io//" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[RxKotlin] Hot🔥 &amp; Cold❄️ Observable">[RxKotlin] Hot🔥 & Cold❄️ Observable</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        14 SEP 2021
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    3 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="hot-observable과-cold-observable의-차이">Hot Observable과 Cold Observable의 차이</h2>
+
+<p><code class="highlighter-rouge">Reactive Programming</code>을 배우면서 가장 많이 접한 개념이 <code class="highlighter-rouge">Flow</code>가 어떻게 흘러가는지이다.
+<code class="highlighter-rouge">Observable</code>은 우리에게 데이터를 배출 시키는 존재이고, 우리는 이를 <code class="highlighter-rouge">subscribe</code> 함으로써 배출되는 데이터를 얻을 수 있다.</p>
+
+<h2 id="cold-observable">Cold Observable</h2>
+<p>먼저 <code class="highlighter-rouge">cold observable</code>부터 설명하자면, 앞서 다뤘던 기본적인 예제들처럼 동일한 옵저버블을 여러번 구독해도 그 시점에 항상 새로운 데이터 flow를 얻을 수 있었다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span> <span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;){</span>
+    <span class="kd">val</span> <span class="py">observable</span> <span class="p">:</span> <span class="n">Observable</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="s">"String 1"</span><span class="p">,</span> <span class="s">"String 2"</span><span class="p">,</span> <span class="s">"String 3"</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">toObservable</span><span class="p">()</span>
+
+    <span class="n">observable</span><span class="p">.</span><span class="n">subscribe</span><span class="p">({</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">"Recieved $it"</span><span class="p">)</span>
+    <span class="p">},</span> <span class="p">{</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">"Error ${it.message}"</span><span class="p">)</span>
+    <span class="p">},</span> <span class="p">{</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">"Done"</span><span class="p">)</span>
+    <span class="p">})</span>
+    
+        <span class="n">observable</span><span class="p">.</span><span class="n">subscribe</span><span class="p">({</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">"Recieved $it"</span><span class="p">)</span>
+    <span class="p">},</span> <span class="p">{</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">"Error ${it.message}"</span><span class="p">)</span>
+    <span class="p">},</span> <span class="p">{</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">"Done"</span><span class="p">)</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<hr />
+<h3 id="출력결과">출력결과</h3>
+
+<p>Recieved String 1<br />
+Recieved String 2<br />
+Recieved String 3<br />
+Done<br />
+Recieved String 1<br />
+Recieved String 2<br />
+Recieved String 3<br />
+Done</p>
+
+<hr />
+
+<p>위의 예제처럼 여러번 구독을 하더라도 구독을 한 시점부터는 <code class="highlighter-rouge">list</code>의 요소인 <code class="highlighter-rouge">"String 1", "String 2", "String 3"</code> 값을 얻을 수 있었다.
+이러한 특징을 가지고 있는 Observable을 <code class="highlighter-rouge">Cold Observable</code>이라고 한다.</p>
+
+<h2 id="hot-observable">Hot Observable</h2>
+
+<p><code class="highlighter-rouge">Hot Observalbe</code>은 <code class="highlighter-rouge">old와 반대로 구독을 하기 전 부터 데이터를 내보내기 시작한다.
+</code>Cold Observable<code class="highlighter-rouge">을 CD나 레코드로 본다면 </code>Hot Observable<code class="highlighter-rouge">은 TV 채녈의 특징과 비슷하다. 이는 결국 구독을 하지 않아고 데이터를 배출 시키기 때문에 구독을 할 필요가 없다. 여기서 중요한 </code>Observable<code class="highlighter-rouge">의 개념이 바로 </code>ConnectableObservable<code class="highlighter-rouge">이다. 이 </code>Observable<code class="highlighter-rouge">은 </code>cold<code class="highlighter-rouge">를 </code>hot`으로 바꿀 수 있기도 하다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">connectableObservable</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">interval</span><span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="n">TimeUnit</span><span class="p">.</span><span class="n">MILLISECONDS</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">publish</span><span class="p">()</span>
+
+    <span class="n">connectableObservable</span><span class="p">.</span><span class="n">subscribe</span><span class="p">({</span> <span class="n">println</span><span class="p">(</span><span class="s">"subscription 1: $it"</span><span class="p">)</span> <span class="p">})</span>
+    <span class="n">connectableObservable</span><span class="p">.</span><span class="n">subscribe</span><span class="p">({</span> <span class="n">println</span><span class="p">(</span><span class="s">"subscription 2: $it"</span><span class="p">)</span> <span class="p">})</span>
+    <span class="n">connectableObservable</span><span class="p">.</span><span class="n">connect</span><span class="p">()</span>
+    <span class="n">runBlocking</span><span class="p">{</span> <span class="n">delay</span><span class="p">(</span><span class="m">500</span><span class="p">)</span> <span class="p">}</span>
+
+    <span class="n">connectableObservable</span><span class="p">.</span><span class="n">subscribe</span><span class="p">({</span> <span class="n">println</span><span class="p">(</span><span class="s">"subscription 3: $it"</span><span class="p">)</span> <span class="p">})</span>
+    <span class="n">runBlocking</span><span class="p">{</span> <span class="n">delay</span><span class="p">(</span><span class="m">500</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<hr />
+<h3 id="출력결과-1">출력결과</h3>
+
+<p>subscription 1: 0<br />
+subscription 2: 0<br />
+subscription 1: 1<br />
+subscription 2: 1<br />
+subscription 1: 2<br />
+subscription 2: 2<br />
+subscription 1: 3<br />
+subscription 2: 3<br />
+subscription 3: 3<br />
+subscription 1: 4<br />
+subscription 2: 4<br />
+subscription 3: 4<br />
+subscription 1: 5<br />
+subscription 2: 5<br />
+subscription 3: 5<br />
+—
+위의 출력 결과를 보면 1, 2 구독자가 구독을 한 후 <code class="highlighter-rouge">connect</code> 한 시점 즉, 데이터가 배출되기 시작한 시점부터 <code class="highlighter-rouge">500ms</code>를 대기 하면서 총 5개의 데이터를 받게 된다.
+그 5초가 지났을 때 부터 또 다른 3 구독자가 구독하기 시작하면서 다시 <code class="highlighter-rouge">500ms</code> 간 <code class="highlighter-rouge">delay</code>를 주게 된다. 이렇게 총 10개의 데이터를 시간 순서에 따라 받아 올 것이고,
+출력 결과과 같이 3번 구독자는 이 전에 1, 2 구독자가 받았던 데이터는 받지 못 한 것을 알 수 있다. 이것이 바로 <code class="highlighter-rouge">Hot Observable</code>의 개념이다.</p>
+
+<p>결국 <code class="highlighter-rouge">hot observable</code>과 <code class="highlighter-rouge">cold observable</code>의 차이는 구독 한 시점에 다시 새로운 데이터를 받아오느냐, 이미 지나간 데이터는 받아오지 못하고 중간에 흐름에 껴서 받아오느냐의 차이이다.</p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+        repo="JihoKevin/blog-comments"
+        issue-term="pathname"
+        label="comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 신지호. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://JihoKevin.github.io//js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="https://JihoKevin.github.io//js/main.js"></script>
+
+
+</body>
+</html>
