@@ -3,10 +3,10 @@
   <channel>
     <title>JihoKevin</title>
     <description>안드로이드 개발자를 목표로 달려나가는 Kevin의 블로그입니다!</description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <link>https://JihoKevin.github.io//</link>
+    <atom:link href="https://JihoKevin.github.io//feed.xml" rel="self" type="application/rss+xml"/>
     <pubDate>2021-09-14</pubDate>
-    <lastBuildDate>Tue, 14 Sep 2021 17:11:11 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 14 Sep 2021 17:12:53 +0200</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
@@ -102,8 +102,8 @@ subscription 3: 5&lt;br /&gt;
 &lt;p&gt;결국 &lt;code class=&quot;highlighter-rouge&quot;&gt;hot observable&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;cold observable&lt;/code&gt;의 차이는 구독 한 시점에 다시 새로운 데이터를 받아오느냐, 이미 지나간 데이터는 받아오지 못하고 중간에 흐름에 껴서 받아오느냐의 차이이다.&lt;/p&gt;
 </description>
         <pubDate>2021-09-14</pubDate>
-        <link>http://localhost:4000/articles/2021-09/hot-cold-observable</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/hot-cold-observable</guid>
+        <link>https://JihoKevin.github.io//articles/2021-09/hot-cold-observable</link>
+        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/hot-cold-observable</guid>
         
         
         <category>RxKotlin</category>
@@ -184,8 +184,8 @@ subscription 3: 5&lt;br /&gt;
 &lt;p&gt;정말 어렵고 복잡하다.. 안드로이드 고수가 되는 그날까지 최선을 다해보자..!&lt;/p&gt;
 </description>
         <pubDate>2021-09-14</pubDate>
-        <link>http://localhost:4000/articles/2021-09/behavior-processor</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/behavior-processor</guid>
+        <link>https://JihoKevin.github.io//articles/2021-09/behavior-processor</link>
+        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/behavior-processor</guid>
         
         
         <category>안드로이드</category>
@@ -470,8 +470,8 @@ https://developer.android.com/guide/app-compatibility?hl=ko
 &lt;/ul&gt;
 </description>
         <pubDate>2021-09-14</pubDate>
-        <link>http://localhost:4000/articles/2021-09/android-version</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/android-version</guid>
+        <link>https://JihoKevin.github.io//articles/2021-09/android-version</link>
+        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/android-version</guid>
         
         
         <category>안드로이드</category>
@@ -594,8 +594,8 @@ flatMap 연산자는 내부적으로 merge 연산자를 사용하기 때문에 �
 &lt;p&gt;아이템을 N번 발행한다. 파라미터로 아무 값이 들어가지 않을 시 값을 무한히 발행시킨다.&lt;/p&gt;
 </description>
         <pubDate>2021-09-14</pubDate>
-        <link>http://localhost:4000/articles/2021-09/rx-kotlin-02</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/rx-kotlin-02</guid>
+        <link>https://JihoKevin.github.io//articles/2021-09/rx-kotlin-02</link>
+        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/rx-kotlin-02</guid>
         
         
         <category>RxKotlin</category>
@@ -773,8 +773,8 @@ list처럼 각 인덱스 값이 따로따로 필요하다면 fromIterable()을 �
 결과 값으로는 onNest, onComplete, onSubscribe, onError 이 중에 아무것도 실행되지 않는다.&lt;/p&gt;
 </description>
         <pubDate>2021-09-14</pubDate>
-        <link>http://localhost:4000/articles/2021-09/rx-kotlin-01</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/rx-kotlin-01</guid>
+        <link>https://JihoKevin.github.io//articles/2021-09/rx-kotlin-01</link>
+        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/rx-kotlin-01</guid>
         
         
         <category>RxKotlin</category>
@@ -819,8 +819,8 @@ list처럼 각 인덱스 값이 따로따로 필요하다면 fromIterable()을 �
 for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간 복잡도가 보완됐다는 것을 알 수 있다.&lt;br /&gt;&lt;/p&gt;
 </description>
         <pubDate>2021-09-14</pubDate>
-        <link>http://localhost:4000/articles/2021-09/bubble-sort</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/bubble-sort</guid>
+        <link>https://JihoKevin.github.io//articles/2021-09/bubble-sort</link>
+        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/bubble-sort</guid>
         
         
         <category>Algorithm</category>
@@ -1373,8 +1373,8 @@ for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간
 &lt;p&gt;마지막 수정일 : 2021/08/22&lt;/p&gt;
 </description>
         <pubDate>2021-09-14</pubDate>
-        <link>http://localhost:4000/articles/2021-07/kotlin-object-keyword</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-07/kotlin-object-keyword</guid>
+        <link>https://JihoKevin.github.io//articles/2021-07/kotlin-object-keyword</link>
+        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-07/kotlin-object-keyword</guid>
         
         
         <category>kotlin</category>
@@ -1513,8 +1513,8 @@ for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간
 마지막 수정일 : 2021년 8월 10일&lt;/p&gt;
 </description>
         <pubDate>2021-09-14</pubDate>
-        <link>http://localhost:4000/articles/2021-07/android-studio-keyboard-shortcut</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-07/android-studio-keyboard-shortcut</guid>
+        <link>https://JihoKevin.github.io//articles/2021-07/android-studio-keyboard-shortcut</link>
+        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-07/android-studio-keyboard-shortcut</guid>
         
         
         <category>안드로이드</category>
@@ -1659,8 +1659,8 @@ for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간
 마지막 수정일 : 2021년 7월 5일&lt;/p&gt;
 </description>
         <pubDate>2021-09-14</pubDate>
-        <link>http://localhost:4000/articles/2021-07/android-project-structure</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-07/android-project-structure</guid>
+        <link>https://JihoKevin.github.io//articles/2021-07/android-project-structure</link>
+        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-07/android-project-structure</guid>
         
         
         <category>안드로이드</category>
@@ -1757,8 +1757,8 @@ for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간
 &lt;p&gt;마지막 수정일 : 2021년 3월 18일&lt;/p&gt;
 </description>
         <pubDate>2021-09-14</pubDate>
-        <link>http://localhost:4000/articles/2021-03/android</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-03/android</guid>
+        <link>https://JihoKevin.github.io//articles/2021-03/android</link>
+        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-03/android</guid>
         
         
         <category>안드로이드</category>
