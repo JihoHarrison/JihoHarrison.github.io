@@ -3,10 +3,10 @@
   <channel>
     <title>JihoKevin</title>
     <description>안드로이드 개발자를 목표로 달려나가는 Kevin의 블로그입니다!</description>
-    <link>https://JihoKevin.github.io//</link>
-    <atom:link href="https://JihoKevin.github.io//feed.xml" rel="self" type="application/rss+xml"/>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
     <pubDate>2021-09-14</pubDate>
-    <lastBuildDate>Tue, 14 Sep 2021 04:48:48 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 14 Sep 2021 17:11:11 +0200</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
@@ -50,7 +50,7 @@ Done&lt;br /&gt;
 Recieved String 1&lt;br /&gt;
 Recieved String 2&lt;br /&gt;
 Recieved String 3&lt;br /&gt;
-Done&lt;/p&gt;
+Done&lt;br /&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -59,8 +59,8 @@ Done&lt;/p&gt;
 
 &lt;h2 id=&quot;hot-observable&quot;&gt;Hot Observable&lt;/h2&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Hot Observalbe&lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;old와 반대로 구독을 하기 전 부터 데이터를 내보내기 시작한다.
-&lt;/code&gt;Cold Observable&lt;code class=&quot;highlighter-rouge&quot;&gt;을 CD나 레코드로 본다면 &lt;/code&gt;Hot Observable&lt;code class=&quot;highlighter-rouge&quot;&gt;은 TV 채녈의 특징과 비슷하다. 이는 결국 구독을 하지 않아고 데이터를 배출 시키기 때문에 구독을 할 필요가 없다. 여기서 중요한 &lt;/code&gt;Observable&lt;code class=&quot;highlighter-rouge&quot;&gt;의 개념이 바로 &lt;/code&gt;ConnectableObservable&lt;code class=&quot;highlighter-rouge&quot;&gt;이다. 이 &lt;/code&gt;Observable&lt;code class=&quot;highlighter-rouge&quot;&gt;은 &lt;/code&gt;cold&lt;code class=&quot;highlighter-rouge&quot;&gt;를 &lt;/code&gt;hot`으로 바꿀 수 있기도 하다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Hot Observalbe&lt;/code&gt;은 old와 반대로 구독을 하기 전 부터 데이터를 내보내기 시작한다.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Cold Observable&lt;/code&gt;을 CD나 레코드로 본다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;Hot Observable&lt;/code&gt;은 TV 채녈의 특징과 비슷하다. 이는 결국 구독을 하지 않아고 데이터를 배출 시키기 때문에 구독을 할 필요가 없다. 여기서 중요한 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt;의 개념이 바로 &lt;code class=&quot;highlighter-rouge&quot;&gt;ConnectableObservable&lt;/code&gt;이다. 이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;cold&lt;/code&gt;를 &lt;code class=&quot;highlighter-rouge&quot;&gt;hot&lt;/code&gt;으로 바꿀 수 있기도 하다.&lt;/p&gt;
 
 &lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;connectableObservable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;interval&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TimeUnit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MILLISECONDS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -93,19 +93,102 @@ subscription 3: 4&lt;br /&gt;
 subscription 1: 5&lt;br /&gt;
 subscription 2: 5&lt;br /&gt;
 subscription 3: 5&lt;br /&gt;
-—
-위의 출력 결과를 보면 1, 2 구독자가 구독을 한 후 &lt;code class=&quot;highlighter-rouge&quot;&gt;connect&lt;/code&gt; 한 시점 즉, 데이터가 배출되기 시작한 시점부터 &lt;code class=&quot;highlighter-rouge&quot;&gt;500ms&lt;/code&gt;를 대기 하면서 총 5개의 데이터를 받게 된다.
+—&lt;/p&gt;
+
+&lt;p&gt;위의 출력 결과를 보면 1, 2 구독자가 구독을 한 후 &lt;code class=&quot;highlighter-rouge&quot;&gt;connect&lt;/code&gt; 한 시점 즉, 데이터가 배출되기 시작한 시점부터 &lt;code class=&quot;highlighter-rouge&quot;&gt;500ms&lt;/code&gt;를 대기 하면서 총 5개의 데이터를 받게 된다.
 그 5초가 지났을 때 부터 또 다른 3 구독자가 구독하기 시작하면서 다시 &lt;code class=&quot;highlighter-rouge&quot;&gt;500ms&lt;/code&gt; 간 &lt;code class=&quot;highlighter-rouge&quot;&gt;delay&lt;/code&gt;를 주게 된다. 이렇게 총 10개의 데이터를 시간 순서에 따라 받아 올 것이고,
 출력 결과과 같이 3번 구독자는 이 전에 1, 2 구독자가 받았던 데이터는 받지 못 한 것을 알 수 있다. 이것이 바로 &lt;code class=&quot;highlighter-rouge&quot;&gt;Hot Observable&lt;/code&gt;의 개념이다.&lt;/p&gt;
 
 &lt;p&gt;결국 &lt;code class=&quot;highlighter-rouge&quot;&gt;hot observable&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;cold observable&lt;/code&gt;의 차이는 구독 한 시점에 다시 새로운 데이터를 받아오느냐, 이미 지나간 데이터는 받아오지 못하고 중간에 흐름에 껴서 받아오느냐의 차이이다.&lt;/p&gt;
 </description>
         <pubDate>2021-09-14</pubDate>
-        <link>https://JihoKevin.github.io//articles/2021-09/hot-cold-observable</link>
-        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/hot-cold-observable</guid>
+        <link>http://localhost:4000/articles/2021-09/hot-cold-observable</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/hot-cold-observable</guid>
         
         
         <category>RxKotlin</category>
+        
+      </item>
+    
+      <item>
+        <title>[안드로이드] 네비게이션 메뉴에 적용한 BehaviorProcessor의 Flowable 🔀</title>
+        <description>&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;RxKotlin&lt;/code&gt;을 계속 공부하다보니 항상 Rx의 메커니즘을 어떻게 안드로이드에 적용 시킬지 고민하며 프로젝트를 진행하는 것 같다.
+답은 명확한데 답을 찾아내기까지 정말 많은 시간이 걸렸던 부분 중 하나이다. 바로 &lt;code class=&quot;highlighter-rouge&quot;&gt;BehaviorProcessor&lt;/code&gt;이다.&lt;/p&gt;
+
+&lt;h2 id=&quot;0️⃣-behaviorprocessor-behaviorsubject&quot;&gt;0️⃣ BehaviorProcessor? BehaviorSubject?&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;BehaviorProcessor&lt;/code&gt;를 다루기 전에, &lt;code class=&quot;highlighter-rouge&quot;&gt;BehaviorSubject&lt;/code&gt;라는 형식을 많이 들어 보았을 것이다.
+이 둘의 차이점은 매우 단순했다.. 반환하는 형식이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;인지와 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt;인지의 차이다.
+간략하게 설명하자면 &lt;code class=&quot;highlighter-rouge&quot;&gt;BackPressure&lt;/code&gt;를 default로 가지고 있는지와 없는지로 구분되는데 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;이 &lt;code class=&quot;highlighter-rouge&quot;&gt;BackPressure&lt;/code&gt;를 기본적으로 가지고 있는 녀석이고 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt;은 다른 방식으로 구현을 해 주어야 한다. &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt;의 차이는 아래 글에서 확인 하도록 하자.&amp;lt;/br&amp;gt;
+&lt;a href=&quot;2021-09-15-flowable-observable.md&quot;&gt;Flowable과 Observable의 차이&lt;/a&gt;&amp;lt;/br&amp;gt;&lt;/p&gt;
+
+&lt;p&gt;이제 &lt;code class=&quot;highlighter-rouge&quot;&gt;BehaviorProcessor&lt;/code&gt;가 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;을 반환 해 준다는 것을 알았다. 그럼 이렇게 반환되는 흐름을 &lt;code class=&quot;highlighter-rouge&quot;&gt;subscribe&lt;/code&gt; 함으로써 제어를 할 수 있을 것이다.
+하지만 이 &lt;code class=&quot;highlighter-rouge&quot;&gt;flow&lt;/code&gt;에 값을 넘겨주고 꺼내 쓸 수 있어야 하는데 어떤식으로 값을 &lt;code class=&quot;highlighter-rouge&quot;&gt;flow&lt;/code&gt;에 넣어주고 넣어준 값에 따라 흐름을 제어할 수 있는지 알아보자.
+이를 알기 위해서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;BehaviorProcessor&lt;/code&gt; 클래스의 내부를 들여다 봐야 한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;BehaviorProcessor&lt;/code&gt; 타입으로 만들어진 변수명에 .을 찍어보면 &lt;code class=&quot;highlighter-rouge&quot;&gt;value&lt;/code&gt;라는 형식을 찾을 수 있다.
+&lt;img src=&quot;/img/09-14-android/behavior-processor-value-01.png&quot; alt=&quot;value&quot; /&gt;
+이 &lt;code class=&quot;highlighter-rouge&quot;&gt;value&lt;/code&gt;라는 타입은 &lt;code class=&quot;highlighter-rouge&quot;&gt;BehaviorProcessor&lt;/code&gt; 클래스 내부에서 다음과 같은 전역변수로 선언되어있다.
+&lt;img src=&quot;/img/09-14-android/behavior-processor-value-02.png&quot; alt=&quot;value&quot; /&gt;
+이렇게 선언되어있는 &lt;code class=&quot;highlighter-rouge&quot;&gt;value&lt;/code&gt;는 또 클래스 내부에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;setCurrent&lt;/code&gt;라는 메서드가 호출될 때 다음과 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;lazy&lt;/code&gt;하게 초기화되고,
+&lt;img src=&quot;/img/09-14-android/behavior-processor-value-03.png&quot; alt=&quot;value&quot; /&gt;
+이 &lt;code class=&quot;highlighter-rouge&quot;&gt;setCurrent&lt;/code&gt; 메서드는 offer가 호출될 때 불려지게 된다.
+&lt;img src=&quot;/img/09-14-android/behavior-processor-value-04.png&quot; alt=&quot;value&quot; /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;offer&lt;/code&gt;라고..? 맞다. &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;에서 값을 배출시키는 바로 그 익숙한 연산자이다. 결국 결론적으로는, &lt;code class=&quot;highlighter-rouge&quot;&gt;value&lt;/code&gt;라는 변수는 타고 타고 타서 우리가 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;의 데이터들을 배출하기 시작할 때 그 값이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Parameter&lt;/code&gt;로 전달되는 것이다..!&lt;/p&gt;
+
+&lt;p&gt;다음과 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;subscribable&lt;/code&gt;이라는 flow를 외부에서 접근할 수 있게 해 주는 선언이 있다.&lt;/p&gt;
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;behaviorProcessor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BehaviorProcessor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Animal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;BehaviorProcessor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;createDefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Animal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CAT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// createDefault는 말 그대로 초기 값 세팅.. null 값이 올 수 없기 때문..
+&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;subscribable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flowable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Animal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;behaviorProcessor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;distinctUntilChanged&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;이 변수를 가진 클래스 내에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;behaviorProcessor&lt;/code&gt;라는 변수로 접근 할 것이고, 이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;은 외부에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;subscribable&lt;/code&gt;이라는 변수명으로 접근을 하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;을 제어 할 것이다. 결국 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt; 형태로 &lt;code class=&quot;highlighter-rouge&quot;&gt;BehaviorProcessor&lt;/code&gt;를 받는 변수 &lt;code class=&quot;highlighter-rouge&quot;&gt;subscribable&lt;/code&gt;을 &lt;code class=&quot;highlighter-rouge&quot;&gt;offer&lt;/code&gt;하고, 그 &lt;code class=&quot;highlighter-rouge&quot;&gt;flow&lt;/code&gt;를 구독하는 녀석들에게 제어권이 넘어가게 된다.&lt;/p&gt;
+
+&lt;h2 id=&quot;1️⃣-안드로이드에서는-어떻게-적용-해-볼까&quot;&gt;1️⃣ 안드로이드에서는 어떻게 적용 해 볼까..?&lt;/h2&gt;
+&lt;p&gt;간단한 로직을 구현 해 보았다.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;navigateToDogFragment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;behaviorProcessor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;offer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Animal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;이 함수는 바로 위 코드 블럭에서 사용했던 &lt;code class=&quot;highlighter-rouge&quot;&gt;behaviorProcessor&lt;/code&gt;를 사용한다. 보이는 그대로 이 함수가 어딘가로 호출될 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;CAT 프래그먼트&lt;/code&gt;에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;DOG 프래그먼트&lt;/code&gt;로 화면의 전환이 일어나게 구현 해 볼 것이다. 다음을 살펴봅시다!&lt;/p&gt;
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 뷰 단에서 호출되는 함수들 구현
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;bindViewModels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;viewModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subscribable&lt;/span&gt;
+       &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;observeOnMain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+       &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subscribeWithErrorLogger&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+           &lt;span class=&quot;n&quot;&gt;navigate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+       &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+       &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addToDisposables&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;navigate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;step&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Animal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;fragment&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;step&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+       &lt;span class=&quot;n&quot;&gt;Animal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOG&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DogFragment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+       &lt;span class=&quot;n&quot;&gt;Animal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LION&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LionFragment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+   &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;currentFragment&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;supportFragmentManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;primaryNavigationFragment&lt;/span&gt;
+
+   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;currentFragment&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;currentFragment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;javaClass&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fragment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;javaClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+       &lt;span class=&quot;n&quot;&gt;supportFragmentManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beginTransaction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+           &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fragment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+           &lt;span class=&quot;c1&quot;&gt;// add를 쓰게 되면 덮어진 View가 파괴되지 않아 클릭되는 등 버그를 발생 시키므로 replace 사용
+&lt;/span&gt;           &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;setPrimaryNavigationFragment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fragment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+           &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addToBackStack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fragment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;javaClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;simpleName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+           &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;commit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;함수 두 개를 구현 해 놓았다. &lt;code class=&quot;highlighter-rouge&quot;&gt;navigate()&lt;/code&gt; 함수는 &lt;code class=&quot;highlighter-rouge&quot;&gt;bindViewModels()&lt;/code&gt; 함수에서 IO 스레드 내에서 구독이 되고 있고, 위에서 구현했던 &lt;code class=&quot;highlighter-rouge&quot;&gt;navigateToDogFragment()&lt;/code&gt;가 어떠한 뷰나 액티비티 또는 프래그먼트로 호출됐을 시 &lt;code class=&quot;highlighter-rouge&quot;&gt;offer&lt;/code&gt;로 &lt;code class=&quot;highlighter-rouge&quot;&gt;Dog&lt;/code&gt;라는 이름의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Enum&lt;/code&gt; 값이 전달 되면서 값을 방출시킬 것이고 이 방출된 값 즉 DOG라는 이름은 뷰 부분의 &lt;code class=&quot;highlighter-rouge&quot;&gt;bindViewModels()&lt;/code&gt; 함수 안에 구독처리가 되어 &lt;code class=&quot;highlighter-rouge&quot;&gt;it&lt;/code&gt;의 값으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;navigate()&lt;/code&gt; 함수의 인자를 결정짓게 되는 것이다. 그럼 &lt;code class=&quot;highlighter-rouge&quot;&gt;navigate()&lt;/code&gt; 함수는 이 배출된 DOG라는 값을 받아서 &lt;code class=&quot;highlighter-rouge&quot;&gt;DogFragment()&lt;/code&gt;를 &lt;code class=&quot;highlighter-rouge&quot;&gt;fragment&lt;/code&gt; 변수에 넣어 줄 것이고, &lt;code class=&quot;highlighter-rouge&quot;&gt;supportFragmentManager&lt;/code&gt;를 통하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;navigation&lt;/code&gt;이 일어나게 된다.&lt;/p&gt;
+
+&lt;p&gt;정말 어렵고 복잡하다.. 안드로이드 고수가 되는 그날까지 최선을 다해보자..!&lt;/p&gt;
+</description>
+        <pubDate>2021-09-14</pubDate>
+        <link>http://localhost:4000/articles/2021-09/behavior-processor</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/behavior-processor</guid>
+        
+        
+        <category>안드로이드</category>
         
       </item>
     
@@ -387,8 +470,8 @@ https://developer.android.com/guide/app-compatibility?hl=ko
 &lt;/ul&gt;
 </description>
         <pubDate>2021-09-14</pubDate>
-        <link>https://JihoKevin.github.io//articles/2021-09/android-version</link>
-        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/android-version</guid>
+        <link>http://localhost:4000/articles/2021-09/android-version</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/android-version</guid>
         
         
         <category>안드로이드</category>
@@ -511,8 +594,8 @@ flatMap 연산자는 내부적으로 merge 연산자를 사용하기 때문에 �
 &lt;p&gt;아이템을 N번 발행한다. 파라미터로 아무 값이 들어가지 않을 시 값을 무한히 발행시킨다.&lt;/p&gt;
 </description>
         <pubDate>2021-09-14</pubDate>
-        <link>https://JihoKevin.github.io//articles/2021-09/rx-kotlin-02</link>
-        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/rx-kotlin-02</guid>
+        <link>http://localhost:4000/articles/2021-09/rx-kotlin-02</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/rx-kotlin-02</guid>
         
         
         <category>RxKotlin</category>
@@ -690,8 +773,8 @@ list처럼 각 인덱스 값이 따로따로 필요하다면 fromIterable()을 �
 결과 값으로는 onNest, onComplete, onSubscribe, onError 이 중에 아무것도 실행되지 않는다.&lt;/p&gt;
 </description>
         <pubDate>2021-09-14</pubDate>
-        <link>https://JihoKevin.github.io//articles/2021-09/rx-kotlin-01</link>
-        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/rx-kotlin-01</guid>
+        <link>http://localhost:4000/articles/2021-09/rx-kotlin-01</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/rx-kotlin-01</guid>
         
         
         <category>RxKotlin</category>
@@ -736,8 +819,8 @@ list처럼 각 인덱스 값이 따로따로 필요하다면 fromIterable()을 �
 for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간 복잡도가 보완됐다는 것을 알 수 있다.&lt;br /&gt;&lt;/p&gt;
 </description>
         <pubDate>2021-09-14</pubDate>
-        <link>https://JihoKevin.github.io//articles/2021-09/bubble-sort</link>
-        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/bubble-sort</guid>
+        <link>http://localhost:4000/articles/2021-09/bubble-sort</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/bubble-sort</guid>
         
         
         <category>Algorithm</category>
@@ -1290,8 +1373,8 @@ for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간
 &lt;p&gt;마지막 수정일 : 2021/08/22&lt;/p&gt;
 </description>
         <pubDate>2021-09-14</pubDate>
-        <link>https://JihoKevin.github.io//articles/2021-07/kotlin-object-keyword</link>
-        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-07/kotlin-object-keyword</guid>
+        <link>http://localhost:4000/articles/2021-07/kotlin-object-keyword</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-07/kotlin-object-keyword</guid>
         
         
         <category>kotlin</category>
@@ -1430,8 +1513,8 @@ for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간
 마지막 수정일 : 2021년 8월 10일&lt;/p&gt;
 </description>
         <pubDate>2021-09-14</pubDate>
-        <link>https://JihoKevin.github.io//articles/2021-07/android-studio-keyboard-shortcut</link>
-        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-07/android-studio-keyboard-shortcut</guid>
+        <link>http://localhost:4000/articles/2021-07/android-studio-keyboard-shortcut</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-07/android-studio-keyboard-shortcut</guid>
         
         
         <category>안드로이드</category>
@@ -1576,8 +1659,8 @@ for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간
 마지막 수정일 : 2021년 7월 5일&lt;/p&gt;
 </description>
         <pubDate>2021-09-14</pubDate>
-        <link>https://JihoKevin.github.io//articles/2021-07/android-project-structure</link>
-        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-07/android-project-structure</guid>
+        <link>http://localhost:4000/articles/2021-07/android-project-structure</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-07/android-project-structure</guid>
         
         
         <category>안드로이드</category>
@@ -1674,8 +1757,8 @@ for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간
 &lt;p&gt;마지막 수정일 : 2021년 3월 18일&lt;/p&gt;
 </description>
         <pubDate>2021-09-14</pubDate>
-        <link>https://JihoKevin.github.io//articles/2021-03/android</link>
-        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-03/android</guid>
+        <link>http://localhost:4000/articles/2021-03/android</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-03/android</guid>
         
         
         <category>안드로이드</category>

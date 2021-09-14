@@ -3,7 +3,7 @@
   
     
     <url>
-      <loc>https://JihoKevin.github.io//articles/2021-09/hot-cold-observable</loc>
+      <loc>http://localhost:4000/articles/2021-09/hot-cold-observable</loc>
       
         <lastmod>2021-09-14T00:00:00+02:00</lastmod>
       
@@ -18,7 +18,22 @@
   
     
     <url>
-      <loc>https://JihoKevin.github.io//articles/2021-09/android-version</loc>
+      <loc>http://localhost:4000/articles/2021-09/behavior-processor</loc>
+      
+        <lastmod>2021-09-14T00:00:00+02:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>http://localhost:4000/articles/2021-09/android-version</loc>
       
         <lastmod>2021-09-13T13:34:10+02:00</lastmod>
       
@@ -33,7 +48,7 @@
   
     
     <url>
-      <loc>https://JihoKevin.github.io//articles/2021-09/rx-kotlin-02</loc>
+      <loc>http://localhost:4000/articles/2021-09/rx-kotlin-02</loc>
       
         <lastmod>2021-09-13T00:00:00+02:00</lastmod>
       
@@ -48,7 +63,7 @@
   
     
     <url>
-      <loc>https://JihoKevin.github.io//articles/2021-09/rx-kotlin-01</loc>
+      <loc>http://localhost:4000/articles/2021-09/rx-kotlin-01</loc>
       
         <lastmod>2021-09-13T00:00:00+02:00</lastmod>
       
@@ -63,7 +78,7 @@
   
     
     <url>
-      <loc>https://JihoKevin.github.io//articles/2021-09/bubble-sort</loc>
+      <loc>http://localhost:4000/articles/2021-09/bubble-sort</loc>
       
         <lastmod>2021-09-13T00:00:00+02:00</lastmod>
       
@@ -78,7 +93,7 @@
   
     
     <url>
-      <loc>https://JihoKevin.github.io//articles/2021-07/kotlin-object-keyword</loc>
+      <loc>http://localhost:4000/articles/2021-07/kotlin-object-keyword</loc>
       
         <lastmod>2021-07-13T00:00:00+02:00</lastmod>
       
@@ -93,7 +108,7 @@
   
     
     <url>
-      <loc>https://JihoKevin.github.io//articles/2021-07/android-studio-keyboard-shortcut</loc>
+      <loc>http://localhost:4000/articles/2021-07/android-studio-keyboard-shortcut</loc>
       
         <lastmod>2021-07-05T13:34:10+02:00</lastmod>
       
@@ -108,7 +123,7 @@
   
     
     <url>
-      <loc>https://JihoKevin.github.io//articles/2021-07/android-project-structure</loc>
+      <loc>http://localhost:4000/articles/2021-07/android-project-structure</loc>
       
         <lastmod>2021-07-05T13:34:10+02:00</lastmod>
       
@@ -123,7 +138,7 @@
   
     
     <url>
-      <loc>https://JihoKevin.github.io//articles/2021-03/android</loc>
+      <loc>http://localhost:4000/articles/2021-03/android</loc>
       
         <lastmod>2021-03-18T12:34:10+01:00</lastmod>
       
