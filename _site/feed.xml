@@ -3,11 +3,52 @@
   <channel>
     <title>JihoKevin</title>
     <description>안드로이드 개발자를 목표로 달려나가는 Kevin의 블로그입니다!</description>
-    <link>https://JihoKevin.github.io//</link>
-    <atom:link href="https://JihoKevin.github.io//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2021-09-14</pubDate>
-    <lastBuildDate>Tue, 14 Sep 2021 17:12:53 +0200</lastBuildDate>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>2021-09-15</pubDate>
+    <lastBuildDate>Wed, 15 Sep 2021 07:46:47 +0200</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
+    
+      <item>
+        <title>[RxKotlin] 🌊 Flowable과 Observable 그리고 BackPressureStrategy</title>
+        <description>&lt;h2 id=&quot;프롤로그&quot;&gt;프롤로그&lt;/h2&gt;
+&lt;p&gt;사내 서비스 유지 보수를 해 가며 &lt;code class=&quot;highlighter-rouge&quot;&gt;RxKotlin&lt;/code&gt;을 집중적으로 학습하다보니 문득 &lt;code class=&quot;highlighter-rouge&quot;&gt;BehaviorProcessor&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;BehaviorSubject&lt;/code&gt;의 차이가 궁급해졌고, 이를 탐구하며 들어와보니 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt;의 차이를 알아야 했다. 열심히 구글링을 해 가며 알게 된 것이 바로 &lt;code class=&quot;highlighter-rouge&quot;&gt;BackPressure&lt;/code&gt; 즉, 배압의 내장 유무였다.&lt;/p&gt;
+
+&lt;h2 id=&quot;배압-backpressure&quot;&gt;배압 (BackPressure)&lt;/h2&gt;
+&lt;h3 id=&quot;reactivex에서-배압이-발생-할-조건&quot;&gt;ReactiveX에서 배압이 발생 할 조건&lt;/h3&gt;
+&lt;p&gt;데이터를 발행하는 속도와 구독하는 자가 처리하는 속도의 차이가 있을 때 발생한다.&lt;/p&gt;
+
+&lt;p&gt;이 말은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observer&lt;/code&gt;가 수신 할 수 없을 만큼의 엄청난 양의 데이터를 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt;이 방출 할 때 나타난다는 말이다. 이 경우에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Out of Memory Error&lt;/code&gt;가 발생하게 된다.
+이러한 경우에 대한 예외 처리가 필요한데 이를 &lt;code class=&quot;highlighter-rouge&quot;&gt;BackPressureStrategy&lt;/code&gt;라고 한다. &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;은 결국 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt;의 일종이기 때문에, 이 둘은 이러한 차이점만 뺀다면 거의 동일한 형식이라고 봐도 무방하다. 아래의 사이트에서 다음과 같은 부분을 보면 된다. 
+ &lt;a href=&quot;https://medium.com/mindorks/rxjava-types-of-observables-404d75605e35&quot;&gt;링크&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
+&lt;img src=&quot;/img/09-15-backpressure/backpressure.png&quot; alt=&quot;backpressure&quot; width=&quot;800&quot; height=&quot;600&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이론적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;을 사용 할 조건은 대량의 데이터 예를들어, 초당 10000건 이상의 데이터 처리를 해야 할 때, 또는 네트워크 통신이나 DB등의 IO스레드에 접근할 때 라고 말하고, &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt;을 사용 할 조건은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;과 반대되는 상황으로, 소량의 데이터 또는 GUI 이벤트 등을 처리할 때 사용 된다고 한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;flowable의-배압-대응-전략&quot;&gt;Flowable의 배압 대응 전략&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;onBackPressureBuffer()&lt;/code&gt; : 배압 이슈가 발생했을때 별도의 버퍼에 저장한다.&lt;br /&gt;
+ &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt; 클래스는 기본적으로 128개의 버퍼가 있다. 버퍼에 만들고 쌓아두다가 처리한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;onBackPressureDrop()&lt;/code&gt; : 배압 이슈가 발생했을 때 해당 데이터를 무시한다. 배압 이슈 이후의 데이터는 다 무시한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;onBackPressureLatest()&lt;/code&gt; : 처리할 수 없어서 쌓이는 데이터를 무시하면서 최신 데이터만 유지한다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;하지만 모든 데이터 스트림에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;을 사용하는 것은 결코 바람직하지 않은 방법이 될 것이다. 소량이 데이터나 UI 이벤트 처리와 같은 경우는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt; 에서도 데이터 스트림의 시간차 등을 두어 스트림의 양을 조절하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;debounce()&lt;/code&gt;라던지, &lt;code class=&quot;highlighter-rouge&quot;&gt;throttle()&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;sample()&lt;/code&gt; 함수 등이 존재하기 때문에 상황에 따라 적절하게 사용하는 방법을 익히면 될 것 같다.&lt;/p&gt;
+</description>
+        <pubDate>2021-09-15</pubDate>
+        <link>http://localhost:4000/articles/2021-09/flowable-observable</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/flowable-observable</guid>
+        
+        
+        <category>RxKotlin</category>
+        
+      </item>
     
       <item>
         <title>[RxKotlin] Hot🔥 &amp; Cold❄️ Observable</title>
@@ -101,9 +142,9 @@ subscription 3: 5&lt;br /&gt;
 
 &lt;p&gt;결국 &lt;code class=&quot;highlighter-rouge&quot;&gt;hot observable&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;cold observable&lt;/code&gt;의 차이는 구독 한 시점에 다시 새로운 데이터를 받아오느냐, 이미 지나간 데이터는 받아오지 못하고 중간에 흐름에 껴서 받아오느냐의 차이이다.&lt;/p&gt;
 </description>
-        <pubDate>2021-09-14</pubDate>
-        <link>https://JihoKevin.github.io//articles/2021-09/hot-cold-observable</link>
-        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/hot-cold-observable</guid>
+        <pubDate>2021-09-15</pubDate>
+        <link>http://localhost:4000/articles/2021-09/hot-cold-observable</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/hot-cold-observable</guid>
         
         
         <category>RxKotlin</category>
@@ -183,9 +224,9 @@ subscription 3: 5&lt;br /&gt;
 
 &lt;p&gt;정말 어렵고 복잡하다.. 안드로이드 고수가 되는 그날까지 최선을 다해보자..!&lt;/p&gt;
 </description>
-        <pubDate>2021-09-14</pubDate>
-        <link>https://JihoKevin.github.io//articles/2021-09/behavior-processor</link>
-        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/behavior-processor</guid>
+        <pubDate>2021-09-15</pubDate>
+        <link>http://localhost:4000/articles/2021-09/behavior-processor</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/behavior-processor</guid>
         
         
         <category>안드로이드</category>
@@ -469,9 +510,9 @@ https://developer.android.com/guide/app-compatibility?hl=ko
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2021-09-14</pubDate>
-        <link>https://JihoKevin.github.io//articles/2021-09/android-version</link>
-        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/android-version</guid>
+        <pubDate>2021-09-15</pubDate>
+        <link>http://localhost:4000/articles/2021-09/android-version</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/android-version</guid>
         
         
         <category>안드로이드</category>
@@ -593,9 +634,9 @@ flatMap 연산자는 내부적으로 merge 연산자를 사용하기 때문에 �
 &lt;h1 id=&quot;repeat-연산자&quot;&gt;repeat 연산자&lt;/h1&gt;
 &lt;p&gt;아이템을 N번 발행한다. 파라미터로 아무 값이 들어가지 않을 시 값을 무한히 발행시킨다.&lt;/p&gt;
 </description>
-        <pubDate>2021-09-14</pubDate>
-        <link>https://JihoKevin.github.io//articles/2021-09/rx-kotlin-02</link>
-        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/rx-kotlin-02</guid>
+        <pubDate>2021-09-15</pubDate>
+        <link>http://localhost:4000/articles/2021-09/rx-kotlin-02</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/rx-kotlin-02</guid>
         
         
         <category>RxKotlin</category>
@@ -772,9 +813,9 @@ list처럼 각 인덱스 값이 따로따로 필요하다면 fromIterable()을 �
 아무런 아이템도 발행하지 않고, 완료도 발행하지 않는 옵저버블을 생성한다.
 결과 값으로는 onNest, onComplete, onSubscribe, onError 이 중에 아무것도 실행되지 않는다.&lt;/p&gt;
 </description>
-        <pubDate>2021-09-14</pubDate>
-        <link>https://JihoKevin.github.io//articles/2021-09/rx-kotlin-01</link>
-        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/rx-kotlin-01</guid>
+        <pubDate>2021-09-15</pubDate>
+        <link>http://localhost:4000/articles/2021-09/rx-kotlin-01</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/rx-kotlin-01</guid>
         
         
         <category>RxKotlin</category>
@@ -818,9 +859,9 @@ list처럼 각 인덱스 값이 따로따로 필요하다면 fromIterable()을 �
 &lt;br /&gt;
 for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간 복잡도가 보완됐다는 것을 알 수 있다.&lt;br /&gt;&lt;/p&gt;
 </description>
-        <pubDate>2021-09-14</pubDate>
-        <link>https://JihoKevin.github.io//articles/2021-09/bubble-sort</link>
-        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-09/bubble-sort</guid>
+        <pubDate>2021-09-15</pubDate>
+        <link>http://localhost:4000/articles/2021-09/bubble-sort</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/bubble-sort</guid>
         
         
         <category>Algorithm</category>
@@ -1372,9 +1413,9 @@ for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간
 
 &lt;p&gt;마지막 수정일 : 2021/08/22&lt;/p&gt;
 </description>
-        <pubDate>2021-09-14</pubDate>
-        <link>https://JihoKevin.github.io//articles/2021-07/kotlin-object-keyword</link>
-        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-07/kotlin-object-keyword</guid>
+        <pubDate>2021-09-15</pubDate>
+        <link>http://localhost:4000/articles/2021-07/kotlin-object-keyword</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-07/kotlin-object-keyword</guid>
         
         
         <category>kotlin</category>
@@ -1512,9 +1553,9 @@ for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간
 &lt;p&gt;계속 추가 중 ..&lt;br /&gt;
 마지막 수정일 : 2021년 8월 10일&lt;/p&gt;
 </description>
-        <pubDate>2021-09-14</pubDate>
-        <link>https://JihoKevin.github.io//articles/2021-07/android-studio-keyboard-shortcut</link>
-        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-07/android-studio-keyboard-shortcut</guid>
+        <pubDate>2021-09-15</pubDate>
+        <link>http://localhost:4000/articles/2021-07/android-studio-keyboard-shortcut</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-07/android-studio-keyboard-shortcut</guid>
         
         
         <category>안드로이드</category>
@@ -1658,107 +1699,9 @@ for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간
 &lt;p&gt;이렇게 공부해보니.. 지인의 프로젝트 구조에는 여러 개의 library 모듈이 포함되어 있는 것이였다! :)&lt;br /&gt;
 마지막 수정일 : 2021년 7월 5일&lt;/p&gt;
 </description>
-        <pubDate>2021-09-14</pubDate>
-        <link>https://JihoKevin.github.io//articles/2021-07/android-project-structure</link>
-        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-07/android-project-structure</guid>
-        
-        
-        <category>안드로이드</category>
-        
-      </item>
-    
-      <item>
-        <title>[안드로이드] 안드로이드가 뭐예요?(Android, Android Platform, Android Framework)</title>
-        <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;0️⃣-프롤로그&quot;&gt;0️⃣ 프롤로그&lt;/h2&gt;
-
-&lt;p&gt;저는 안드로이드 앱 개발의 첫 시작은 ‘안드로이드가 무엇인가?’를 아는 것부터 시작해야 한다고 생각하는 사람 중 하나입니다. 하지만.. 저는 ‘안드로이드가 무엇인가?’ 보다는 안드로이드 앱을 만드려고 하는데 ‘텍스트 뷰는 어떻게 만드는가?’ 부터 공부했던 것 같습니다..&lt;/p&gt;
-
-&lt;p&gt;안드로이드 앱 개발을 시작한지 2년이 지나서야 ‘안드로이드가 무엇인가?’를 궁금해하는 이상 현상이 발생했지만 지금이라도 궁금증이 생기고 공부해보려는 의지가 생긴 것에 감사합니다^!^ 휴..&lt;/p&gt;
-
-&lt;h2 id=&quot;1️⃣-what-is-안드로이드android&quot;&gt;1️⃣ What is 안드로이드(Android)?&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Android가 무엇일까?&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;img width=&quot;350&quot; alt=&quot;01&quot; src=&quot;https://user-images.githubusercontent.com/31889335/111596692-c6bc1000-8810-11eb-8660-22b80e59023f.png&quot; /&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;Android는 휴대할 수 있는 디바이스 기기를 위한 &lt;strong&gt;오픈소스 소프트웨어 스택(Stack)&lt;/strong&gt; 입니다. 여기서 ‘스택(Stack)’이라는 것은 컴퓨터공학에서 데이터를 저장할 수 있는 구조(자료구조)의 여러 종류 중 하나입니다. 자료 구조 ‘스택’에 비유하여 Android를 ‘오픈소스 소프트웨어 스택’이라고 부릅니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;(위 그림 참고) &lt;strong&gt;‘소프트웨어 스택’&lt;/strong&gt; 이라는 것에만 집중해봅시다. ‘스택’이라는 자료 구조의 모습처럼 무엇인가가 아래에서부터 위로 쌓여있는 모양에 비유했고, 쌓여있는 것이 바로 ‘소프트웨어’라는 의미입니다. 위 그림을 보면 가장 아래에 &lt;strong&gt;리눅스 커널(Linux Kernel)&lt;/strong&gt; 라는 소프트웨어가 있고, 그 위에 &lt;strong&gt;HAL/HIDL&lt;/strong&gt; 라는 소프트웨어가 쌓여있습니다. 또 그 위에는 &lt;strong&gt;Native Libraries&lt;/strong&gt; 라는 소프트웨어가 쌓여 있고 Native Libraries와 같은 층에 &lt;strong&gt;Android Runtime&lt;/strong&gt; 라는 소프트웨어가 쌓여있습니다. 그 위에 &lt;strong&gt;Android Framework&lt;/strong&gt; 라는 소프트웨어가 쌓여있고 가장 최상단에는 &lt;strong&gt;Apps(안드로이드 앱)&lt;/strong&gt; 이 쌓여있는 구조입니다. &lt;strong&gt;이 구조를 통틀어 ‘소프트웨어 스택’이라고 하며 결국 이 구조가 ‘Android’인 것입니다.&lt;/strong&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;위에서 Android는 오픈소스 소프트웨어 스택이라고 했습니다. 소프트웨어 스택이라는 것은 바로 위 설명을 통해 이해했을 것입니다. 그렇다면 ‘오픈소스 소프트웨어 스택’라는 것은 무엇일까요? 소프트웨어 스택이 비공개가 아니라 공개되어 있다는 것입니다. 즉, 누구나 Android를 구성하고 있는 각 소프트웨어(스택의 각 층에 존재)의 소스 코드를 볼 수 있다는 것입니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;마지막으로 Android는 &lt;strong&gt;Google이 주도&lt;/strong&gt; 하여 관리하고 개발하는 오픈소스 프로젝트이기도 합니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;img width=&quot;393&quot; alt=&quot;02&quot; src=&quot;https://user-images.githubusercontent.com/31889335/111599924-2e278f00-8814-11eb-9a9a-3cc23ec7b166.png&quot; /&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;(위 그림 참고) 위에서 3차원 입체적인 모습으로 소프트웨어 스택을 보여준 그림을 2차원 평면으로 보면 위 그림과 같습니다. 아쉽지만 소프트웨어 스택의 각 층에 존재하는 소프트웨어(Apps, Android Framework, Native Libraries 등등)에 대해서는 이 포스팅에서 다루지 않을 예정입니다.&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Android vs Android 플랫폼 vs Android 프레임워크 vs Android 운영체제 vs Android 시스템&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;‘Android’, ‘Android 플랫폼(Platform)’, ‘Android 프레임워크(Framework)’, ‘Android 운영체제(OS)’, ‘Android 시스템’ 이 5가지 용어가 혼동될 수 있습니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;먼저 &lt;strong&gt;Android와 Android 플랫폼은 동일한 말&lt;/strong&gt; 입니다. 위에서 Android는 휴대할 수 있는 디바이스 기기를 위한 오픈소스 소프트웨어 스택이라고 설명했지만 이는 ‘스택’이라는 단어를 사용하여 ‘무엇인가가 쌓여있는 구조’를 더 강조한 설명입니다. 따라서 Android를 스택이라는 단어를 사용하지 않고 설명할 때는 Android는 ‘오픈소스 소프트웨어 플랫폼’이라고도 합니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;img width=&quot;833&quot; alt=&quot;03&quot; src=&quot;https://user-images.githubusercontent.com/31889335/111600486-d0e00d80-8814-11eb-93e0-1b1101012a33.png&quot; /&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;(위 그림 참고) 위 그림의 3차원 입체 모양을 보면 위에서부터 2번째에 &lt;strong&gt;Android Framework(안드로이드 프레임워크)&lt;/strong&gt; 라는 것이 쌓여 있는 것을 볼 수 있습니다. Android Framework는 &lt;strong&gt;Java API Framework&lt;/strong&gt; 라고도 부릅니다. Android Framework는 모든 안드로이드 앱(App)들이 사용하는 toolkit 입니다. 따라서 구글에서 만든 앱이든 나 자신이 만든 앱이든 모든 앱은 같은 Java API들(=Android Framework)을 사용하여 만들어집니다. 또한 이 Android Framework는 모두 Java로 구현되어 있습니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;img width=&quot;289&quot; alt=&quot;04&quot; src=&quot;https://user-images.githubusercontent.com/31889335/111603315-8f049680-8817-11eb-84ae-529217ae6602.png&quot; /&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;(위 그림 참고) ‘그래서 Android Framework가 정확히 뭔데?’라는 추가 질문이 있을 수 있습니다. 이에 답을 하기 위해 Android Framework에 속해 있는 Components(구성요소)들 중 ‘Activity Manager’라는 것에 대해 간단히 알아봅시다. ‘Activity Manager’는 앱의 수명 주기를 관리해주는 곳입니다. 즉, Activity Manager는 Activity를 생성해주고 상황에 맞게 Activity 수명 주기 콜백 메소드를 호출하여 Activity 수명 주기를 관리합니다.(개발자가 Activity의 모든 수명 주기 콜백 메소드를 ‘직접’ 호출해주지 않는 사실을 생각하면 쉽습니다. 개발자는 단지 수명 주기 콜백 메소드를 오버라이드하여 메소드 내에 작업을 추가해주는 것 뿐 입니다.) 또 ‘Activity Manager’는 ‘백 스택(backstack)’이라는 것을 관리하여 사용자가 여러 개의 서로 다른 앱(=프로세스)을 동시에 사용할 때도 자연스러운 사용 경험을 제공할 수 있도록 관리해줍니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;img width=&quot;456&quot; alt=&quot;05&quot; src=&quot;https://user-images.githubusercontent.com/31889335/111607265-6d0d1300-881b-11eb-8c76-48615c1e16e8.png&quot; /&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;(위 그림 참고) &lt;a href=&quot;https://android.googlesource.com/platform/frameworks/base/+/742a67127366c376fdf188ff99ba30b27d3bf90c/core/java/android/app/ActivityManager.java&quot;&gt;여기&lt;/a&gt;를 보면 ActivityManager의 실제 코드 구현을 볼 수 있습니다.(Android는 오픈 소스 소프트웨어 플랫폼이기 때문입니다!) ActivityManager 클래스에 구현되어 있는 moveTaskToFront() 메소드는 ‘인자로 전달된 task ID에 해당하는 task를 stack의 가장 앞으로 이동시켜 사용자의 눈에 해당 task가 보이게 하라’는 메소드입니다. 이렇듯, ActivityManager에는 Activity를 관리하는데 사용되는 모든 것들이 구현되어 있습니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;Activity Manager 외에도 Android Framework는 여러 Manager들로 구성되어 있습니다. 안드로이드 앱 개발자는 Android Framework가 제공하는 API들을 사용하여 사용법에 맞게 코드만 작성해주면 될 뿐입니다. 나머지 내부 동작들은 Android Framework의 몫입니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;strong&gt;Android 운영체제&lt;/strong&gt; 라는 말은 ‘Android’를 휴대할 수 있는 디바이스 기기(=모바일 디바이스)의 운영체제로 채택하여 사용하기 때문에 ‘Android 운영체제’라고 부르기도 합니다. 즉, Android를 운영체제라고 하는 것은 Android 플랫폼을 모바일 기기의 운영체제로 사용한다는 의미입니다.&lt;/p&gt;
-
-        &lt;ul&gt;
-          &lt;li&gt;&lt;strong&gt;운영체제&lt;/strong&gt; : &lt;a href=&quot;https://choheeis.github.io/newblog//articles/2020-05/OSstart&quot;&gt;이 블로그의 다른 포스팅 - 운영체제가 무엇인가&lt;/a&gt;를 보면 알 수 있듯이, 운영체제는 컴퓨터에서 하드웨어 자원(CPU, 메인 메모리 등)를 제어 및 관리하고, 사용자가 컴퓨터를 쉽게 사용할 수 있도록 편의성을 제공해주는 것입니다.&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;strong&gt;Android 시스템&lt;/strong&gt; 이라는 말은 Android 운영체제와 동일한 말입니다. 운영체제를 영어로 ‘Operating System’ 이라고 하기 때문에 ‘Operating’을 빼고 Android 시스템이라고 부르기도 합니다.&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;끝&quot;&gt;끝!&lt;/h1&gt;
-
-&lt;p&gt;마지막 수정일 : 2021년 3월 18일&lt;/p&gt;
-</description>
-        <pubDate>2021-09-14</pubDate>
-        <link>https://JihoKevin.github.io//articles/2021-03/android</link>
-        <guid isPermaLink="true">https://JihoKevin.github.io//articles/2021-03/android</guid>
+        <pubDate>2021-09-15</pubDate>
+        <link>http://localhost:4000/articles/2021-07/android-project-structure</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-07/android-project-structure</guid>
         
         
         <category>안드로이드</category>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="프롤로그사내 서비스 유지 보수를 해 가며 RxKotlin을 집중적으로 학습하다보니 문득 BehaviorProcessor와 BehaviorSubject의 차이가 궁급해졌고, 이를 탐구하며 들어와보니 Flowable과 Observable의 차이를 알아야 했다. 열심히 구글링을 해 가며...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[RxKotlin] 🌊 Flowable과 Observable 그리고 BackPressureStrategy | JihoKevin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[RxKotlin] 🌊 Flowable과 Observable 그리고 BackPressureStrategy | JihoKevin">
+  <meta name="twitter:description" content="프롤로그사내 서비스 유지 보수를 해 가며 RxKotlin을 집중적으로 학습하다보니 문득 BehaviorProcessor와 BehaviorSubject의 차이가 궁급해졌고, 이를 탐구하며 들어와보니 Flowable과 Observable의 차이를 알아야 했다. 열심히 구글링을 해 가며...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2021-09/flowable-observable">
+  <meta property="og:title" content="[RxKotlin] 🌊 Flowable과 Observable 그리고 BackPressureStrategy | JihoKevin">
+  <meta property="og:description" content="프롤로그사내 서비스 유지 보수를 해 가며 RxKotlin을 집중적으로 학습하다보니 문득 BehaviorProcessor와 BehaviorSubject의 차이가 궁급해졌고, 이를 탐구하며 들어와보니 Flowable과 Observable의 차이를 알아야 했다. 열심히 구글링을 해 가며...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[RxKotlin] 🌊 Flowable과 Observable 그리고 BackPressureStrategy | JihoKevin</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2021-09/flowable-observable">
+  <link rel="alternate" type="application/rss+xml" title="JihoKevin" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">신지호</a>
+  <span class="author_job">안드로이드 개발자가 되고싶은 소년</span>
+  <span class="author_bio mbm">방문해주셔서 갑사합니다!🙇🏻‍♂️</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('jhshin9250@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/jiho_925" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/JihoKevin" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[RxKotlin] 🌊 Flowable과 Observable 그리고 BackPressureStrategy">[RxKotlin] 🌊 Flowable과 Observable 그리고 BackPressureStrategy</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        15 SEP 2021
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    1 min read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="프롤로그">프롤로그</h2>
+<p>사내 서비스 유지 보수를 해 가며 <code class="highlighter-rouge">RxKotlin</code>을 집중적으로 학습하다보니 문득 <code class="highlighter-rouge">BehaviorProcessor</code>와 <code class="highlighter-rouge">BehaviorSubject</code>의 차이가 궁급해졌고, 이를 탐구하며 들어와보니 <code class="highlighter-rouge">Flowable</code>과 <code class="highlighter-rouge">Observable</code>의 차이를 알아야 했다. 열심히 구글링을 해 가며 알게 된 것이 바로 <code class="highlighter-rouge">BackPressure</code> 즉, 배압의 내장 유무였다.</p>
+
+<h2 id="배압-backpressure">배압 (BackPressure)</h2>
+<h3 id="reactivex에서-배압이-발생-할-조건">ReactiveX에서 배압이 발생 할 조건</h3>
+<p>데이터를 발행하는 속도와 구독하는 자가 처리하는 속도의 차이가 있을 때 발생한다.</p>
+
+<p>이 말은 <code class="highlighter-rouge">Observer</code>가 수신 할 수 없을 만큼의 엄청난 양의 데이터를 <code class="highlighter-rouge">Observable</code>이 방출 할 때 나타난다는 말이다. 이 경우에 <code class="highlighter-rouge">Out of Memory Error</code>가 발생하게 된다.
+이러한 경우에 대한 예외 처리가 필요한데 이를 <code class="highlighter-rouge">BackPressureStrategy</code>라고 한다. <code class="highlighter-rouge">Flowable</code>은 결국 <code class="highlighter-rouge">Observable</code>의 일종이기 때문에, 이 둘은 이러한 차이점만 뺀다면 거의 동일한 형식이라고 봐도 무방하다. 아래의 사이트에서 다음과 같은 부분을 보면 된다. 
+ <a href="https://medium.com/mindorks/rxjava-types-of-observables-404d75605e35">링크</a><br /><br />
+<img src="/img/09-15-backpressure/backpressure.png" alt="backpressure" width="800" height="600" /></p>
+
+<p>이론적으로 <code class="highlighter-rouge">Flowable</code>을 사용 할 조건은 대량의 데이터 예를들어, 초당 10000건 이상의 데이터 처리를 해야 할 때, 또는 네트워크 통신이나 DB등의 IO스레드에 접근할 때 라고 말하고, <code class="highlighter-rouge">Observable</code>을 사용 할 조건은 <code class="highlighter-rouge">Flowable</code>과 반대되는 상황으로, 소량의 데이터 또는 GUI 이벤트 등을 처리할 때 사용 된다고 한다.</p>
+
+<h2 id="flowable의-배압-대응-전략">Flowable의 배압 대응 전략</h2>
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">onBackPressureBuffer()</code> : 배압 이슈가 발생했을때 별도의 버퍼에 저장한다.<br />
+ <code class="highlighter-rouge">Flowable</code> 클래스는 기본적으로 128개의 버퍼가 있다. 버퍼에 만들고 쌓아두다가 처리한다.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">onBackPressureDrop()</code> : 배압 이슈가 발생했을 때 해당 데이터를 무시한다. 배압 이슈 이후의 데이터는 다 무시한다.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">onBackPressureLatest()</code> : 처리할 수 없어서 쌓이는 데이터를 무시하면서 최신 데이터만 유지한다.</p>
+  </li>
+</ul>
+
+<p>하지만 모든 데이터 스트림에 <code class="highlighter-rouge">Flowable</code>을 사용하는 것은 결코 바람직하지 않은 방법이 될 것이다. 소량이 데이터나 UI 이벤트 처리와 같은 경우는 <code class="highlighter-rouge">Observable</code> 에서도 데이터 스트림의 시간차 등을 두어 스트림의 양을 조절하는 <code class="highlighter-rouge">debounce()</code>라던지, <code class="highlighter-rouge">throttle()</code>, <code class="highlighter-rouge">sample()</code> 함수 등이 존재하기 때문에 상황에 따라 적절하게 사용하는 방법을 익히면 될 것 같다.</p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+        repo="JihoKevin/blog-comments"
+        issue-term="pathname"
+        label="comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 신지호. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>
