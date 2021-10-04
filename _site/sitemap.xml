@@ -166,4 +166,19 @@
     </url>
     
   
+    
+    <url>
+      <loc>http://localhost:4000/articles/2020-05/algorithm-greedy</loc>
+      
+        <lastmod>2020-05-11T00:00:00+02:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
 </urlset>
