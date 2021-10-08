@@ -5,9 +5,109 @@
     <description>안드로이드 개발자를 목표로 달려나가는 Kevin의 블로그입니다!</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2021-10-04</pubDate>
-    <lastBuildDate>Mon, 04 Oct 2021 15:56:18 +0200</lastBuildDate>
+    <pubDate>2021-10-08</pubDate>
+    <lastBuildDate>Fri, 08 Oct 2021 09:07:22 +0200</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
+    
+      <item>
+        <title>[RxKotlin] flatmap과 map, MVVM 패턴에서의 적용 과정</title>
+        <description>&lt;h2 id=&quot;0️⃣-프롤로그&quot;&gt;0️⃣ 프롤로그&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;인턴십을 진행하면서 정말 다양한 rxKotlin 코드를 접해 보는 것 같다. 하지만 항상 매일 반복해서 보는 코드임에도 도저히 이해가 가지 않는 부분들이 너무 많았다.
+그 중에서도 특히 map과 flatmap의 적절성, &lt;strong&gt;Single Steam&lt;/strong&gt; 의 연속적인 분기 등을 계속해서 보고 또 보다 보니 많이 부족하지만 걸음마를 시작하게 되었다..&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;1️⃣-map은-어떨때-사용해야하지&quot;&gt;1️⃣ map은 어떨때 사용해야하지?&lt;/h2&gt;
+&lt;p&gt;map은 다음과 같이 구성되어 있다.
+&lt;img src=&quot;/img/10-06-rxkotlin-map-flatmap/map.png&quot; alt=&quot;map&quot; width=&quot;600&quot; height=&quot;300&quot; /&gt;
+마블 다이어그램에 보이는 것과 같이 이 map이라는 연산자는 받은 요소를 다른 형태로 변환시켜 그 형태 그대로를 내보내 준다.
+예를 들어서 10이라는 정수를 map을 거쳐 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;This is $number.&quot;&lt;/code&gt; 이러한 형태로 감싸서 변형시켜 줄 수 있다.
+다음처럼 간단한 예를 들어보면&lt;/p&gt;
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;){&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;observable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;listOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;toObservable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;observable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;map&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;This is $number&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subscribe&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Recieved $item&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;출력결과&lt;/em&gt;&lt;/strong&gt;&lt;br /&gt;
+Recieved this is 10&lt;br /&gt;
+Recieved this is 9&lt;br /&gt;
+Recieved this is 8&lt;br /&gt;
+Recieved this is 7&lt;br /&gt;
+Recieved this is 6&lt;br /&gt;
+Recieved this is 5&lt;br /&gt;
+Recieved this is 4&lt;br /&gt;
+Recieved this is 3&lt;br /&gt;
+Recieved this is 2&lt;br /&gt;
+Recieved this is 1&lt;br /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;ul&gt;
+  &lt;li&gt;위와 같은 출력 결과를 가질 것이다. 각각의 정수형 요소들이 문자열로 형변환이 진행되었고, &lt;strong&gt;map&lt;/strong&gt; 연산자 안에서 람다를 이용하여 알맞게 가공 된 후 출력이 된다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;2️⃣-flatmap은-어떨때-사용해야하지&quot;&gt;2️⃣ flatmap은 어떨때 사용해야하지?&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;flatmap&lt;/strong&gt; 과 &lt;strong&gt;map&lt;/strong&gt; 의 가장 큰 차이점이라고 하면 &lt;strong&gt;flatMap은 각각의 요소들을 Observable 형태로 변환을 시켜준다.&lt;/strong&gt; 여기서 &lt;strong&gt;Observable__로 변환을 시켜 준다는 소리는 map이 stream에 들어갔던 아이템 그 자체 __1대 1&lt;/strong&gt; 의 개념이라고 생각 한다면 &lt;strong&gt;flatMap은 1대 1 또는 1대 다수&lt;/strong&gt; 라는 형태에 맞게 된다.
+&lt;img src=&quot;/img/10-06-rxkotlin-map-flatmap/flatmap.png&quot; alt=&quot;flatmap&quot; width=&quot;600&quot; height=&quot;300&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;마블 다이어그램을 보면 map처럼 Observable에서 방출된 각각의 아이템들을 변환시키기 위한 목적은 같다.&lt;/li&gt;
+  &lt;li&gt;map같은 경우는 각각의 아이템 자체를 변환시켜 방출한다면 flatmap은 여러개로 나누어 방출시키고, 각각의 방출된 아이템들을 Observable 형태로 방출 시킨다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;n&quot;&gt;flatMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.}.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flatmap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;이러한 형태로 여러 스트림을 이어주는 동작에 유용하다고 볼 수 있다. &lt;strong&gt;flatMap&lt;/strong&gt; 이 위와 같이 여러개로 이어져 있다는 것은 기본적으로 여러개의 &lt;strong&gt;Stream&lt;/strong&gt; 을 다루겠다는 것이고, 하나의 &lt;strong&gt;Stream&lt;/strong&gt; 이 끝난 이후에 그 결과에 따라 다른 스트림을 처리해 준다는 의미이다.
+    &lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;_surveyCheckProcessor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;firstOrError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// _surveyCheckProcessor는 Boolean 형식을 배출하는 BehaviorProcessor이다.
+&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flatMap&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isCheck&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isCheck&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+       &lt;span class=&quot;n&quot;&gt;surveyRepository&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;deleteSurvey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+       &lt;span class=&quot;n&quot;&gt;Single&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;just&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flatMap&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isDeleted&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isDeleted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+       &lt;span class=&quot;n&quot;&gt;Single&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;never&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+       &lt;span class=&quot;n&quot;&gt;surveyRepository&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fetchSurvey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;_surveyCheckProcessor&lt;/strong&gt; 에서 방출되는 결과 값들을 여러번의 분기로 처리하는 간단한 예시이다. &lt;strong&gt;_surveyCheckProcessor&lt;/strong&gt; 는 &lt;strong&gt;ture&lt;/strong&gt; or &lt;strong&gt;false&lt;/strong&gt; 값을 내보낼 것이고, 이 결과에 따라서 첫 번째 조건문에서 기존에 설문 조사 결과가 있는지 없는지를 판별하고, 해당하는 로직을 수행 할 것이다. 이 예시에서는 어찌 되었든 새로운 설문을 시작하면 항상 사용자의 마지막 설문 결과를 지우고 다시 설문 문항들에 해당하는 &lt;strong&gt;List&lt;/strong&gt; 를 &lt;strong&gt;fetch&lt;/strong&gt; 해 와야 하기 때문에 설문 기록이 있다는 true 값을 받았을 때는 기존 설문 결과를 지워주고, 그 true값으로 두 번째 &lt;strong&gt;flatMap&lt;/strong&gt; 에서 &lt;strong&gt;else&lt;/strong&gt; 문으로 들어가 설문 문항을 &lt;strong&gt;fetch&lt;/strong&gt; 해 온다. 다음으로 &lt;strong&gt;_surveyCheckProcessor&lt;/strong&gt; 에서 &lt;strong&gt;false&lt;/strong&gt; 를 받았을 경우에는 &lt;strong&gt;just&lt;/strong&gt; 연산자로 ture 값을 배출 시키고, 두 번째 &lt;strong&gt;isDeleted&lt;/strong&gt; 가 수행될때는 항상 true값을 가지고 조건문으로 들어가게 되므로 설문 문항을 &lt;strong&gt;fetch&lt;/strong&gt; 해 온다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;또 주의해야 할 점은, &lt;strong&gt;flatMap은 순서를 보장하지 않는다는 점이다.&lt;/strong&gt; 좋은 예시가 하나 있다. 넥슨의 게임인 피파온라인4의 API를 이용하여 경기 전적 검색을 해주는 서비스를 개인 프로젝트로 만들던 도중에 이러한 이슈를 마주하게 되었다.
+&lt;img src=&quot;/img/10-06-rxkotlin-map-flatmap/fifaproject.png&quot; alt=&quot;fifaproject&quot; width=&quot;600&quot; height=&quot;300&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;이러한 형태로 여러번의 &lt;strong&gt;Single&lt;/strong&gt; 데이터를 받는 로직이 존재했다. 애초에 이 목록들을 &lt;strong&gt;List&lt;/strong&gt; 형태로 제공 해 주지를 않았고, 이렇게 되다 보니 &lt;strong&gt;adapter&lt;/strong&gt; 에 연결하여 목록을 표시 해 줄 때 배열의 0번째에 모든 데이터가 몰려서 오거나, &lt;strong&gt;LiveData&lt;/strong&gt; 를 이용하여 리스트를 만들어서 &lt;strong&gt;adapter&lt;/strong&gt; 에 연결 해 주어도 경기 결과를 불러올 때 마다 순서가 뒤죽박죽이 되어서 RecyclerView에 들어가는 이슈가 발생했었다.
+ &lt;br /&gt;
+&lt;img align=&quot;left&quot; src=&quot;/img/10-06-rxkotlin-map-flatmap/fifamatch01.png&quot; /&gt; &lt;img align=&quot;left&quot; src=&quot;/img/10-06-rxkotlin-map-flatmap/fifamatch01.png&quot; /&gt;
+ &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;h3 id=&quot;cancatmap&quot;&gt;cancatMap&lt;/h3&gt;
+    &lt;p&gt;&lt;img src=&quot;/img/10-06-rxkotlin-map-flatmap/concatmap.png&quot; alt=&quot;concatmap&quot; width=&quot;600&quot; height=&quot;300&quot; /&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;위와 같이 flatmap의 순서를 보장하지 않는다는 점을 보완하는 연산자가 바로 &lt;strong&gt;concatMap&lt;/strong&gt; 이다.
+보이는 마블 다이어그램과 같이 하나의 &lt;strong&gt;stream&lt;/strong&gt; 이 끝날 때 까지 다음 &lt;strong&gt;stream&lt;/strong&gt; 은 대기를 하고, 순서를 보장하며 순서대로 방출이 되는 것을 확인할 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>2021-10-08</pubDate>
+        <link>http://localhost:4000/articles/2021-10/rx-kotlin-flatmap-dividing</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-10/rx-kotlin-flatmap-dividing</guid>
+        
+        
+        <category>RxKotlin</category>
+        
+      </item>
     
       <item>
         <title>[RxKotlin] 🌊 Flowable과 Observable 그리고 BackPressureStrategy</title>
@@ -41,7 +141,7 @@
 
 &lt;p&gt;하지만 모든 데이터 스트림에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;을 사용하는 것은 결코 바람직하지 않은 방법이 될 것이다. 소량이 데이터나 UI 이벤트 처리와 같은 경우는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt; 에서도 데이터 스트림의 시간차 등을 두어 스트림의 양을 조절하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;debounce()&lt;/code&gt;라던지, &lt;code class=&quot;highlighter-rouge&quot;&gt;throttle()&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;sample()&lt;/code&gt; 함수 등이 존재하기 때문에 상황에 따라 적절하게 사용하는 방법을 익히면 될 것 같다.&lt;/p&gt;
 </description>
-        <pubDate>2021-10-04</pubDate>
+        <pubDate>2021-10-08</pubDate>
         <link>http://localhost:4000/articles/2021-09/flowable-observable</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/flowable-observable</guid>
         
@@ -142,7 +242,7 @@ subscription 3: 5&lt;br /&gt;
 
 &lt;p&gt;결국 &lt;code class=&quot;highlighter-rouge&quot;&gt;hot observable&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;cold observable&lt;/code&gt;의 차이는 구독 한 시점에 다시 새로운 데이터를 받아오느냐, 이미 지나간 데이터는 받아오지 못하고 중간에 흐름에 껴서 받아오느냐의 차이이다.&lt;/p&gt;
 </description>
-        <pubDate>2021-10-04</pubDate>
+        <pubDate>2021-10-08</pubDate>
         <link>http://localhost:4000/articles/2021-09/hot-cold-observable</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/hot-cold-observable</guid>
         
@@ -224,7 +324,7 @@ subscription 3: 5&lt;br /&gt;
 
 &lt;p&gt;정말 어렵고 복잡하다.. 안드로이드 고수가 되는 그날까지 최선을 다해보자..!&lt;/p&gt;
 </description>
-        <pubDate>2021-10-04</pubDate>
+        <pubDate>2021-10-08</pubDate>
         <link>http://localhost:4000/articles/2021-09/behavior-processor</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/behavior-processor</guid>
         
@@ -510,7 +610,7 @@ https://developer.android.com/guide/app-compatibility?hl=ko
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2021-10-04</pubDate>
+        <pubDate>2021-10-08</pubDate>
         <link>http://localhost:4000/articles/2021-09/android-version</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/android-version</guid>
         
@@ -634,7 +734,7 @@ flatMap 연산자는 내부적으로 merge 연산자를 사용하기 때문에 �
 &lt;h1 id=&quot;repeat-연산자&quot;&gt;repeat 연산자&lt;/h1&gt;
 &lt;p&gt;아이템을 N번 발행한다. 파라미터로 아무 값이 들어가지 않을 시 값을 무한히 발행시킨다.&lt;/p&gt;
 </description>
-        <pubDate>2021-10-04</pubDate>
+        <pubDate>2021-10-08</pubDate>
         <link>http://localhost:4000/articles/2021-09/rx-kotlin-02</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/rx-kotlin-02</guid>
         
@@ -813,7 +913,7 @@ list처럼 각 인덱스 값이 따로따로 필요하다면 fromIterable()을 �
 아무런 아이템도 발행하지 않고, 완료도 발행하지 않는 옵저버블을 생성한다.
 결과 값으로는 onNest, onComplete, onSubscribe, onError 이 중에 아무것도 실행되지 않는다.&lt;/p&gt;
 </description>
-        <pubDate>2021-10-04</pubDate>
+        <pubDate>2021-10-08</pubDate>
         <link>http://localhost:4000/articles/2021-09/rx-kotlin-01</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/rx-kotlin-01</guid>
         
@@ -859,7 +959,7 @@ list처럼 각 인덱스 값이 따로따로 필요하다면 fromIterable()을 �
 &lt;br /&gt;
 for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간 복잡도가 보완됐다는 것을 알 수 있다.&lt;br /&gt;&lt;/p&gt;
 </description>
-        <pubDate>2021-10-04</pubDate>
+        <pubDate>2021-10-08</pubDate>
         <link>http://localhost:4000/articles/2021-09/bubble-sort</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/bubble-sort</guid>
         
@@ -1413,7 +1513,7 @@ for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간
 
 &lt;p&gt;마지막 수정일 : 2021/08/22&lt;/p&gt;
 </description>
-        <pubDate>2021-10-04</pubDate>
+        <pubDate>2021-10-08</pubDate>
         <link>http://localhost:4000/articles/2021-07/kotlin-object-keyword</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-07/kotlin-object-keyword</guid>
         
@@ -1547,161 +1647,10 @@ for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간
     &lt;p&gt;(위 그림 참고) 빨간 박스 안의 윗 줄이 바꾸기 전 문자열이고, 아래 줄이 바꾼 후 문자열이다. 즉, 윗 줄의 문자열을 아래 줄의 문자열로 대체(replace)한다는 의미이고 왼쪽 하단 버튼 중 Replace All을 누르면 모두 한 번에 바뀐다.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;h1 id=&quot;끝-아님-&quot;&gt;끝 아님 ~&lt;/h1&gt;
-
-&lt;p&gt;계속 추가 중 ..&lt;br /&gt;
-마지막 수정일 : 2021년 8월 10일&lt;/p&gt;
 </description>
-        <pubDate>2021-10-04</pubDate>
+        <pubDate>2021-10-08</pubDate>
         <link>http://localhost:4000/articles/2021-07/android-studio-keyboard-shortcut</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-07/android-studio-keyboard-shortcut</guid>
-        
-        
-        <category>안드로이드</category>
-        
-      </item>
-    
-      <item>
-        <title>[안드로이드] 안드로이드 프로젝트 구조(Android Project Structure)</title>
-        <description>&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;참고 자료&lt;/strong&gt;&lt;br /&gt;
-&lt;a href=&quot;https://developer.android.com/studio/projects?hl=ko&quot;&gt;Android Developers Document - 프로젝트 개요&lt;/a&gt;&lt;/p&gt;
-
-  &lt;p&gt;&lt;strong&gt;목차&lt;/strong&gt;&lt;br /&gt;
-&lt;a href=&quot;#0&quot;&gt;0. 프롤로그&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#1&quot;&gt;1. 안드로이드 스튜디오에서 프로젝트 구조 보는 두 가지 방법&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#2&quot;&gt;2. 안드로이드 프로젝트를 이해하려면 모듈을 알아야 한다&lt;/a&gt;
-&lt;br /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;0️⃣-프롤로그&quot;&gt;0️⃣ 프롤로그&lt;a id=&quot;0&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;지인 개발자가 개발한 안드로이드 프로젝트를 구경하던 중,, 프로젝트 구조가 신기하게 생긴 것을 보게되었다! 프로젝트 구조에서 app 폴더와 같은 depth에 다른 폴더들이 있는 구조였다. 찾아보니 &lt;strong&gt;라이브러리 모듈&lt;/strong&gt; 이라는 것이었고, 이참에 안드로이드 프로젝트 구조를 공부해서 남겨본다 :)&lt;br /&gt;
-&lt;img width=&quot;292&quot; alt=&quot;스크린샷 2021-07-05 오후 9 10 54&quot; src=&quot;https://user-images.githubusercontent.com/31889335/124469604-88edf200-ddd5-11eb-8190-dcec8cf496e0.png&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;1️⃣-안드로이드-스튜디오에서-프로젝트-구조-보는-두-가지-방법&quot;&gt;1️⃣ 안드로이드 스튜디오에서 프로젝트 구조 보는 두 가지 방법&lt;a id=&quot;1&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Android Studio에서 프로젝트 구조를 볼 수 있는 방법은 두 가지이다. &lt;strong&gt;Android 뷰로 보기&lt;/strong&gt; 와 &lt;strong&gt;Project 뷰로 보기&lt;/strong&gt; 이다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Android 뷰로 보기&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/31889335/124470178-42e55e00-ddd6-11eb-9b74-ec18f0196eac.png&quot; alt=&quot;image&quot; /&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;(위 그림 참고) 하늘색 박스 부분을 Android로 선택해주면, Android 뷰로 프로젝트 구조를 확인할 수 있다. 어떤 프로젝트를 Android Studio로 실행하면 기본적으로 해당 프로젝트의 구조를 Android 뷰로 보여준다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;img width=&quot;292&quot; alt=&quot;스크린샷 2021-07-05 오후 9 10 54&quot; src=&quot;https://user-images.githubusercontent.com/31889335/124471474-db301280-ddd7-11eb-8c48-814b7064e1a2.png&quot; /&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;(위 그림 참고) Android 뷰로 프로젝트 구조를 보게 되면, 해당 프로젝트가 컴퓨터에 연결된 디스크에 실제로 저장되는 구조(계층)와는 다르게 보인다. 하지만 가장 상위 폴더가 모듈별로 보여지기 때문에 프로젝트 구조를 한 눈에 보기 쉬운 장점이 있다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;Android 뷰로 프로젝트 구조를 볼 때의 특징은 프로젝트의 모든 빌드 관련 구성 파일을 &lt;strong&gt;Gradle Scripts&lt;/strong&gt; 라는 최상위 폴더로 묶어서 보여준다는 것이다. 하지만 실제 디스크 상에서는 이렇게 묶여있지 않다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;img width=&quot;292&quot; alt=&quot;&quot; src=&quot;https://user-images.githubusercontent.com/31889335/124473428-4844a780-ddda-11eb-829f-2a48464b6266.png&quot; /&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;(위 그림 참고) 또한 앱 런처 아이콘의 여러 밀도별 대체 리소스가 ic_launcher.png 그룹에 묶여서 보여지는 것처럼, Android 뷰에서는 하나의 파일당 여러 대체 리소스 파일이 존재할 경우 하나의 그룹에 넣어서 보여준다.&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Project 뷰로 보기&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;img width=&quot;239&quot; alt=&quot;03&quot; src=&quot;https://user-images.githubusercontent.com/31889335/124474975-23513400-dddc-11eb-9189-7298220c9e64.png&quot; /&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;(위 그림 참고) 하늘색 박스 부분을 Project로 선택해주면, Project 뷰로 프로젝트 구조를 확인할 수 있다. Android 뷰에서 편의상 숨겨진 모든 파일을 모두 보여주고, 실제 디스크에 저장되는 프로젝트 구조로 보여준다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;Project 뷰에서의 빌드 구성 파일은 하나의 폴더로 묶여있지 않다. App의 빌드 구성 파일은 App 폴더 안에 있으며, 프로젝트 전체의 빌드 구성 파일은 App 폴더와 같은 depth에 위치한다.&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;2️⃣-안드로이드-프로젝트를-이해하려면-모듈을-알아야-한다&quot;&gt;2️⃣ 안드로이드 프로젝트를 이해하려면 모듈을 알아야 한다&lt;a id=&quot;2&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;What is 모듈(Module)?&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;모듈은 소스 파일과 빌드 구성 파일 등으로 구성된 모음집(Collection)이다. 따라서 Project 뷰로 프로젝트 구조를 보았을 때, app 폴더 하위에는 소스 파일과 빌드 구성 파일이 모두 포함되어 있었으므로 app 폴더도 하나의 모듈이 된다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;이러한 모듈을 통해 하나의 프로젝트를 기능 단위로, 여러 개로, &lt;strong&gt;분할&lt;/strong&gt; 할 수 있게 된다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;하나의 프로젝트에는 여러 개의 모듈이 포함될 수 있고, 어떤 하나의 모듈이 다른 모듈을 종속 항목으로 사용할 수도 있다. 또한 각 모듈은 개별적으로 빌드하고 테스트, 디버그할 수 있다!&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;특히, Android Studio에서는 3가지의 서로 다른 Module Type(유형)을 지원한다. -&amp;gt; app 모듈, feature 모듈, library 모듈&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;app 모듈&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;app 모듈은 앱의 소스 코드, 리소스 파일, 빌드 구성 파일, Android Manifest 파일 등을 포함하고 있는 모듈이다. Android Studio에서 새로운 프로젝트를 만들면 기본적으로 app 모듈이 자동으로 생성된다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;feature 모듈&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;feature 모듈은 Google Play에서 지원하는 &lt;a href=&quot;https://developer.android.com/guide/app-bundle/play-feature-delivery?hl=ko&quot;&gt;Play Feature Delivery&lt;/a&gt; 를 사용할 수 있는 모듈이다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;Play Feature Delivery를 간단히 설명해보자면.. 예를 들어, 결제 기능이 있는 앱에 feature 모듈로서 결제 모듈을 만들어 놓았다고 하자. 이 앱을 사용하는 어떤 사용자는 앱을 사용하긴 하지만 유료로 무언가를 결제하지는 않는 성향의 사용자일 수 있다. 또 다른 사용자는 이 앱에서 유료로 무언가를 결제까지 하는 사용자일 수 있다. 이런 경우, Play Feature Delivery를 활용하면 첫 번째 사용자에게는 결제 모듈을 제공하지 않고, 두 번째 사용자에게만 결제 모듈을 제공한다. 즉, 첫 번째 사용자는 사용하지도 않을 결제 모듈을 다운받게 되는 불상사를 당하지 않게 되어 다운로드 받을 총 apk 크기를 줄이는 효과를 얻을 수 있다!&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;library 모듈&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;library 모듈은 구조적으로 app 모듈과 동일한 모듈이다. 그러나 사용 목적이 다른데, library 모듈은 app 모듈에서 종속 항목으로 사용하기 위한 모듈이기도 하고 프로젝트1과 프로젝트2에서 공통으로 사용해야 하는 코드를 library 모듈로 만들어서 어떤 프로젝트에서든지 재사용할 수 있는 코드를 제공하기 위한 모듈이기도 하다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;library 모듈의 중요한 특징은 빌드될 때 APK로 만들어지는 것이 아니라 code archive 파일로 만들어지기 때문에 library 모듈을 안드로이드 기기에 설치할 수는 없다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;Android 프로젝트에 적용할 수 있는 library 모듈은 또 두 가지 종류로 나뉘는데 Android Library와 Java Library이다. 이 둘에 대해서는 나중에 조금 더 자세히 알아보기로 하고 일단 넘어가자 ㅎㅎ..&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;div class=&quot;language-gradle highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;dependencies&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;implementation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;project&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;:my-library-module&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;(위 코드 참고) 위에서 알아본 &lt;strong&gt;모듈&lt;/strong&gt; 이라는 것을 &lt;strong&gt;하위 프로젝트(sub-project)&lt;/strong&gt; 라고도 부른다. 따라서 Gradle 설정에서도 모듈을 프로젝트로 취급한다. 예를 들어, 라이브러리 모듈을 생성하고 app 모듈의 종속 항목으로 추가할 때는 위와 같은 코드를 작성한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;끝-&quot;&gt;끝 ~&lt;/h1&gt;
-
-&lt;p&gt;이렇게 공부해보니.. 지인의 프로젝트 구조에는 여러 개의 library 모듈이 포함되어 있는 것이였다! :)&lt;br /&gt;
-마지막 수정일 : 2021년 7월 5일&lt;/p&gt;
-</description>
-        <pubDate>2021-10-04</pubDate>
-        <link>http://localhost:4000/articles/2021-07/android-project-structure</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-07/android-project-structure</guid>
         
         
         <category>안드로이드</category>
