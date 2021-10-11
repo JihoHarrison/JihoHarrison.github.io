@@ -5,9 +5,104 @@
     <description>안드로이드 개발자를 목표로 달려나가는 Kevin의 블로그입니다!</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2021-10-08</pubDate>
-    <lastBuildDate>Fri, 08 Oct 2021 09:07:22 +0200</lastBuildDate>
+    <pubDate>2021-10-11</pubDate>
+    <lastBuildDate>Mon, 11 Oct 2021 09:58:57 +0200</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
+    
+      <item>
+        <title>[알고리즘] 2020 KAKAO BLIND RECRUITMENT 문자열 압축 🪨</title>
+        <description>&lt;h2 id=&quot;풀이-설명&quot;&gt;풀이 설명&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;알파벳으로 이루어진 문자열이 존재한다. 예를 들어 &lt;strong&gt;“aabbaccc”&lt;/strong&gt; 이런 문자열이 존재한다면 먼저 문자열을 1개 단위로 쪼개서 각각의 다음 문자열들과 비교를 한다. 해당 문자가 다음 문자와 같을 경우 cnt라는 변수의 값을 1 증가시켜서 같은 문자의 맨 앞에 몇 개의 같은 수가 있는지 적는다. 연속되는 문자열이 존재하지 않을 시에는 cnt 값을 증가시키지 않고 해당 문자열을 그대로 적은 다음 다른 문자열로 넘어간다. &lt;strong&gt;“2a2ba3c”&lt;/strong&gt; 이렇게 변하게 될 것이다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;또 다른 예시를 들면, &lt;strong&gt;“ababcdcdababcdcd”&lt;/strong&gt; 의 경우 문자를 1개 단위로 자르면 전혀 압축되지 않지만, 2개 단위로 잘라서 압축한다면 &lt;strong&gt;“2ab2cd2ab2cd”&lt;/strong&gt; 로 표현할 수 있다. 다른 방법으로 8개 단위로 잘라서 압축한다면 &lt;strong&gt;“2ababcdcd”&lt;/strong&gt; 로 표현할 수 있으며, 이때가 가장 짧게 압축하여 표현할 수 있는 방법이 된다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;맨 처음 문제에 접근했을때는, 문자열의 개념을 적용시킬 생각을 하지 못하고 그저 배열로만 접근을 하려고 했었다.
+ 현재 연산되고 있는 문자열을 임시로 가지고 있는 배열과, 오른쪽으로 이동하며 계속해서 비교 대상이 되어줄 배열..
+ 이런 식으로 접근을 하려하니 배열이 늘어날수록 반복문도 늘어나고 정말 비효율적이고 복잡한 코드가 되어갔다.
+ 결국 적용시켜야 하는 개념이 subString으로 두 개의 문자열을 비교하는 방식이였다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;적용-시킨-개념&quot;&gt;적용 시킨 개념&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;subString&lt;/li&gt;
+  &lt;li&gt;equals&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;code&quot;&gt;Code&lt;/h2&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;substring&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cnt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;substring&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;substring&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;cnt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cnt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cnt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;cnt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;1️⃣-왼쪽에서-비교되는-문자열은-총-문자열-길이의-절반-길이-까지만을-캐싱&quot;&gt;1️⃣ 왼쪽에서 비교되는 문자열은 총 문자열 길이의 절반 길이 까지만을 캐싱&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;첫 번째 for문에서는 왼쪽에서 비교 될 문자열을 캐싱하고 있는다. result를 빈 문자열로 초기화 시켜주는 이유는
+ 안쪽에서 모든 연산이 완료되고 나면 result는 해당되는 길이만큼의 문자열을 잘라서 비교 한 결과를 가지고 있게 되고,
+ 이 결과에 대한 문자열의 길이를 다시 초기화 해 줘야 다음 비교 할 문자열을 가질 수 있기 때문이다.
+ 문제에서는 각각의 길이만큼 잘라서 비교를 한 뒤 결과적으로 총 길이가 가장 짧은 문자열의 길이를 return 하라고 하였기 때문이다.
+ 또한 이 문제에서는 subString의 개념에 대해 잘 이해가 되어야 할 것 같다. 인자 두 개를 받을 때, 첫 번째 인자는 자르고 싶은 시작점을 의미하고 두 번째 인자는 자르고싶은 문자 바로 다음 번째 문자를 의미한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;2️⃣-안쪽의-for문에서는-왼쪽-오른쪽-문자열을-캐싱&quot;&gt;2️⃣ 안쪽의 for문에서는 왼쪽, 오른쪽 문자열을 캐싱&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;중첩되는 for문에서는 바로 상위 for문에서 가지고 있는 문자열과 계속 반복해서 비교를 시도한다.
+ 왼쪽의 값(left)은 안쪽에서 문자열 길이가 끝나고 상위 for문이 다시 길이를 늘린 문자열로 비교를 시도할 때 초기화 되고,
+ 비교를 할 때 값이 같다면 cnt 값을 1씩 증가시키고 i 즉, 비교해야하는 문자열의 길이 i 만큼 j를 증가시켜 준 후 그 다음 비교 대상인 right로 넘어가게 된다.
+ j + i가 총 문자열의 길이를 넘게되는 시점은 왼쪽에서 캐싱하고 있는 부분이 오른쪽에 있는 값이랑 길이가 맞지 않을 때 발생한다.
+ 예를 들어, aabbaccc 문자열에서 처음에 abc와 bac를 비교했을 때 값이 같지 않아 left 값이 bac로 초기화 되었을거고, 이 시점에서 남은 right 값은
+ cc 이 문자열이 될 것이다. 또한 j는 6의 값을 가지고 있고 이때 i만큼의 값인 3을 더하게 되면 총 문자열의 길이인 8을 넘게된다. 따라서 이때는 cc라는 문자열이 남아있는 상태에서 for문은 총 문자열의 길이를 초과하였으므로 연산을 수행하지 않게 된다. 이 허점을 막기 위해서 안쪽 for문이 끝나는 시점에 result += left 라는 연산을 추가 해 주어 마지막에 남은 문자열 까지 result에 담아서 캐싱을 할 수 있게 되었다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;3️⃣-비교하는-문자열이-같을-경우와-다를-경우&quot;&gt;3️⃣ 비교하는 문자열이 같을 경우와 다를 경우&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;반복문 안에서 left와 right가 동일할 경우와 다를 경우가 존재한다. 먼저 비교하는 값이 같다면 left 값은 그대로 유지한 채 cnt 값을 증가시키고,
+ 다시 right 값만 인덱스를 i만큼 증가시킨 다음 비교를 진행한다. 비교하는 문자열이 다를 경우에는 지금까지 가지고있던 cnt값을 result에 먼저 누적시켜주고,
+ 그 다음 left 즉, 기준이 되는 문자열을 cnt값이 저장된 result에 붙여줌으로 기준이 되는 문자열(left)이 몇 번 반복이 되었는지 result에 저장 해 준다.
+ 이러한 과정을 반복하면 result에는 문자열의 총 길이의 절반만큼 계속해서 반복이 된 여러가지 경우의 결과 문자열들을 얻을 수 있고
+ 이를 이용하여 result에 누적된 모든 결과들의 각각의 길이를 계산 한 후 원하는 가장 압축이 많이 된 문자열의 길이를 return 받을 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>2021-10-11</pubDate>
+        <link>http://localhost:4000/articles/2021-10/algorithm-string-press</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-10/algorithm-string-press</guid>
+        
+        
+        <category>Algorithm</category>
+        
+      </item>
     
       <item>
         <title>[RxKotlin] flatmap과 map, MVVM 패턴에서의 적용 과정</title>
@@ -87,7 +182,7 @@ Recieved this is 1&lt;br /&gt;&lt;/p&gt;
 &lt;img src=&quot;/img/10-06-rxkotlin-map-flatmap/fifaproject.png&quot; alt=&quot;fifaproject&quot; width=&quot;600&quot; height=&quot;300&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;이러한 형태로 여러번의 &lt;strong&gt;Single&lt;/strong&gt; 데이터를 받는 로직이 존재했다. 애초에 이 목록들을 &lt;strong&gt;List&lt;/strong&gt; 형태로 제공 해 주지를 않았고, 이렇게 되다 보니 &lt;strong&gt;adapter&lt;/strong&gt; 에 연결하여 목록을 표시 해 줄 때 배열의 0번째에 모든 데이터가 몰려서 오거나, &lt;strong&gt;LiveData&lt;/strong&gt; 를 이용하여 리스트를 만들어서 &lt;strong&gt;adapter&lt;/strong&gt; 에 연결 해 주어도 경기 결과를 불러올 때 마다 순서가 뒤죽박죽이 되어서 RecyclerView에 들어가는 이슈가 발생했었다.
  &lt;br /&gt;
-&lt;img align=&quot;left&quot; src=&quot;/img/10-06-rxkotlin-map-flatmap/fifamatch01.png&quot; /&gt; &lt;img align=&quot;left&quot; src=&quot;/img/10-06-rxkotlin-map-flatmap/fifamatch01.png&quot; /&gt;
+&lt;img align=&quot;left&quot; src=&quot;/img/10-06-rxkotlin-map-flatmap/fifamatch01.png&quot; /&gt; &lt;img align=&quot;left&quot; src=&quot;/img/10-06-rxkotlin-map-flatmap/fifamatch02.png&quot; /&gt;
  &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt;&lt;/li&gt;
   &lt;li&gt;
     &lt;h3 id=&quot;cancatmap&quot;&gt;cancatMap&lt;/h3&gt;
@@ -100,7 +195,7 @@ Recieved this is 1&lt;br /&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2021-10-08</pubDate>
+        <pubDate>2021-10-11</pubDate>
         <link>http://localhost:4000/articles/2021-10/rx-kotlin-flatmap-dividing</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-10/rx-kotlin-flatmap-dividing</guid>
         
@@ -141,7 +236,7 @@ Recieved this is 1&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;하지만 모든 데이터 스트림에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;을 사용하는 것은 결코 바람직하지 않은 방법이 될 것이다. 소량이 데이터나 UI 이벤트 처리와 같은 경우는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt; 에서도 데이터 스트림의 시간차 등을 두어 스트림의 양을 조절하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;debounce()&lt;/code&gt;라던지, &lt;code class=&quot;highlighter-rouge&quot;&gt;throttle()&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;sample()&lt;/code&gt; 함수 등이 존재하기 때문에 상황에 따라 적절하게 사용하는 방법을 익히면 될 것 같다.&lt;/p&gt;
 </description>
-        <pubDate>2021-10-08</pubDate>
+        <pubDate>2021-10-11</pubDate>
         <link>http://localhost:4000/articles/2021-09/flowable-observable</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/flowable-observable</guid>
         
@@ -242,7 +337,7 @@ subscription 3: 5&lt;br /&gt;
 
 &lt;p&gt;결국 &lt;code class=&quot;highlighter-rouge&quot;&gt;hot observable&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;cold observable&lt;/code&gt;의 차이는 구독 한 시점에 다시 새로운 데이터를 받아오느냐, 이미 지나간 데이터는 받아오지 못하고 중간에 흐름에 껴서 받아오느냐의 차이이다.&lt;/p&gt;
 </description>
-        <pubDate>2021-10-08</pubDate>
+        <pubDate>2021-10-11</pubDate>
         <link>http://localhost:4000/articles/2021-09/hot-cold-observable</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/hot-cold-observable</guid>
         
@@ -324,7 +419,7 @@ subscription 3: 5&lt;br /&gt;
 
 &lt;p&gt;정말 어렵고 복잡하다.. 안드로이드 고수가 되는 그날까지 최선을 다해보자..!&lt;/p&gt;
 </description>
-        <pubDate>2021-10-08</pubDate>
+        <pubDate>2021-10-11</pubDate>
         <link>http://localhost:4000/articles/2021-09/behavior-processor</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/behavior-processor</guid>
         
@@ -610,7 +705,7 @@ https://developer.android.com/guide/app-compatibility?hl=ko
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2021-10-08</pubDate>
+        <pubDate>2021-10-11</pubDate>
         <link>http://localhost:4000/articles/2021-09/android-version</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/android-version</guid>
         
@@ -734,7 +829,7 @@ flatMap 연산자는 내부적으로 merge 연산자를 사용하기 때문에 �
 &lt;h1 id=&quot;repeat-연산자&quot;&gt;repeat 연산자&lt;/h1&gt;
 &lt;p&gt;아이템을 N번 발행한다. 파라미터로 아무 값이 들어가지 않을 시 값을 무한히 발행시킨다.&lt;/p&gt;
 </description>
-        <pubDate>2021-10-08</pubDate>
+        <pubDate>2021-10-11</pubDate>
         <link>http://localhost:4000/articles/2021-09/rx-kotlin-02</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/rx-kotlin-02</guid>
         
@@ -913,7 +1008,7 @@ list처럼 각 인덱스 값이 따로따로 필요하다면 fromIterable()을 �
 아무런 아이템도 발행하지 않고, 완료도 발행하지 않는 옵저버블을 생성한다.
 결과 값으로는 onNest, onComplete, onSubscribe, onError 이 중에 아무것도 실행되지 않는다.&lt;/p&gt;
 </description>
-        <pubDate>2021-10-08</pubDate>
+        <pubDate>2021-10-11</pubDate>
         <link>http://localhost:4000/articles/2021-09/rx-kotlin-01</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/rx-kotlin-01</guid>
         
@@ -959,7 +1054,7 @@ list처럼 각 인덱스 값이 따로따로 필요하다면 fromIterable()을 �
 &lt;br /&gt;
 for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간 복잡도가 보완됐다는 것을 알 수 있다.&lt;br /&gt;&lt;/p&gt;
 </description>
-        <pubDate>2021-10-08</pubDate>
+        <pubDate>2021-10-11</pubDate>
         <link>http://localhost:4000/articles/2021-09/bubble-sort</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/bubble-sort</guid>
         
@@ -1513,147 +1608,12 @@ for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간
 
 &lt;p&gt;마지막 수정일 : 2021/08/22&lt;/p&gt;
 </description>
-        <pubDate>2021-10-08</pubDate>
+        <pubDate>2021-10-11</pubDate>
         <link>http://localhost:4000/articles/2021-07/kotlin-object-keyword</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-07/kotlin-object-keyword</guid>
         
         
         <category>kotlin</category>
-        
-      </item>
-    
-      <item>
-        <title>[안드로이드] 자주 쓰는 안드로이드 스튜디오 단축키 모음</title>
-        <description>&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;참고 자료&lt;/strong&gt;&lt;br /&gt;
-&lt;a href=&quot;https://developer.android.com/studio/projects?hl=ko&quot;&gt;Android Developers Document - 프로젝트 개요&lt;/a&gt;&lt;/p&gt;
-
-  &lt;p&gt;&lt;strong&gt;목차&lt;/strong&gt;&lt;br /&gt;
-&lt;a href=&quot;#0&quot;&gt;0. 프롤로그&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#1&quot;&gt;1. 프로젝트 모든 파일에서 찾기&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#2&quot;&gt;2. 프로젝트 내에서 원하는 파일 찾기&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#3&quot;&gt;3. 지금 보고 있는 파일이 프로젝트 구조 상 어디에 있는지 확인하기&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#4&quot;&gt;4. 마구잡이로 펼쳐놓은 폴더들 다시 처음 구조로 접기&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;#5&quot;&gt;5. 사용하지 않는 import 삭제하기&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#6&quot;&gt;6. 앱 Run 단축키&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#7&quot;&gt;7. 모든 텍스트 한 번에 변경하기&lt;/a&gt;&lt;br /&gt;
-&lt;br /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;0️⃣-프롤로그&quot;&gt;0️⃣ 프롤로그&lt;a id=&quot;0&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;이 포스팅의 모든 단축키들은 맥북 기준입니다…!&lt;/p&gt;
-
-&lt;h2 id=&quot;1️⃣-프로젝트-모든-파일에서-찾기&quot;&gt;1️⃣ 프로젝트 모든 파일에서 찾기&lt;a id=&quot;1&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;보통 하나의 파일 안에서 특정 문자열을 찾을 때는 command + f 단축키를 누를 것이다! 그런데 문자열을 하나의 파일 내에서가 아니라 프로젝트 모든 파일 안에서 찾고 싶다면?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;command + shift + f&lt;/strong&gt; 단축키 누르기~&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;img width=&quot;500&quot; alt=&quot;스크린샷 2021-07-05 오후 11 24 17&quot; src=&quot;https://user-images.githubusercontent.com/31889335/124486056-2d792f80-dde8-11eb-8d3a-9bb3d8a2bd62.png&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;2️⃣-전체-프로젝트-내에서-원하는-파일-및-메소드-찾기-&quot;&gt;2️⃣ 전체 프로젝트 내에서 원하는 파일 및 메소드 찾기 &lt;a id=&quot;2&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;프로젝트 규모가 별로 크지 않다면 마우스로 폴더를 하나하나 클릭해서 내가 찾고자 하는 파일이 어디에 있는지 찾을 수 있다. 하지만 프로젝트 규모가 너무 크면(폴더도 막 20개 넘고,, 폴더 안에 또 폴더 엄청 많고,,) 마우스로 직접 찾기는 쉽지 않다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;그럴 땐 &lt;strong&gt;shift 두번 누르기&lt;/strong&gt; ~&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;img width=&quot;700&quot; alt=&quot;스크린샷 2021-07-05 오후 11 28 20&quot; src=&quot;https://user-images.githubusercontent.com/31889335/124486589-b728fd00-dde8-11eb-8b46-6833eab2d430.png&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;(위 그림 참고) 검색창에 파일 이름 검색하면 바로 나옴!&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;마찬가지로, 전체 프로젝트 내에서 어떤 특정 메소드가 정의되어 있는 파일을 찾고 싶다면 쉬프트 두 번 누르고 메소드 이름 검색하면 됨~!&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;3️⃣-지금-보고-있는-파일이-프로젝트-구조-상-어디에-있는지-확인하기&quot;&gt;3️⃣ 지금 보고 있는 파일이 프로젝트 구조 상 어디에 있는지 확인하기&lt;a id=&quot;3&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;현재 내가 보고 있는 파일이 Android Studio 왼쪽에 보이는 프로젝트 구조 내에서 어디에 위치하는지 확인하고 싶다면?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;img width=&quot;700&quot; alt=&quot;04&quot; src=&quot;https://user-images.githubusercontent.com/31889335/124487012-2868b000-dde9-11eb-97b5-eead50e3c7b5.png&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;(위 그림 참고) 빨간 박스 부분 클릭 (이거에 대응하는 단축키가 option + F1이라는데.. 왜 내 맥북에선 option + F1이 안 먹지)&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;4️⃣-마구잡이로-펼쳐놓은-폴더들-다시-처음-구조로-접기&quot;&gt;4️⃣ 마구잡이로 펼쳐놓은 폴더들 다시 처음 구조로 접기&lt;a id=&quot;4&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;여러 파일들 이것 저것을 열다보면 여러 폴더들이 열려있게 된다. 그럼 Android Studio의 왼쪽에 보이는 프로젝트 구조가 정리가 안 되어 있게 되는데 이것을 한 번에 원상복귀할 수 있다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;img width=&quot;400&quot; alt=&quot;스크린샷 2021-07-05 오후 11 44 48&quot; src=&quot;https://user-images.githubusercontent.com/31889335/124488598-007a4c00-ddeb-11eb-9762-cedaae29660f.png&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;(위 그림 참고) &lt;strong&gt;빨간 박스 부분 클릭&lt;/strong&gt; 하거나 &lt;strong&gt;command + -&lt;/strong&gt; 단축키 누르기!&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;5️⃣-사용하지-않는-import-삭제하기&quot;&gt;5️⃣ 사용하지 않는 import 삭제하기&lt;a id=&quot;5&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;img width=&quot;482&quot; alt=&quot;02&quot; src=&quot;https://user-images.githubusercontent.com/31889335/125306593-4fcff780-e36a-11eb-9ec5-344790bb2f92.png&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;(위 그림 참고) 개발을 하다보면 사용하지 않는 import 문들이 지저분하게 보여 일일이 삭제하는 경우가 있을 것이다. 지워야할 import 들이 많으면 참 귀찮다! 이럴땐?!&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;control + option + o&lt;/strong&gt; 단축키 누르기~~ 한 방에 사용하지 않는 import 문들이 싹~ 지워진다.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;6️⃣-앱-run-단축키&quot;&gt;6️⃣ 앱 Run 단축키&lt;a id=&quot;6&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;img width=&quot;402&quot; alt=&quot;스크린샷 2021-08-10 오전 12 00 14&quot; src=&quot;https://user-images.githubusercontent.com/31889335/128728072-55752539-599d-4fca-9a38-7bc37d9742d2.png&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;(위 그림 참고) 앱 실행(Run) 버튼 누르기 은근 귀찮다… &lt;strong&gt;control + r&lt;/strong&gt; 누르기~&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;7️⃣-모든-텍스트-한-번에-변경하기&quot;&gt;7️⃣ 모든 텍스트 한 번에 변경하기&lt;a id=&quot;7&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;개발하다 보면 예를 들어, 변수 이름을 textViewTitle 에서 tvTitle로 바꾸고 싶을 때가 있을 것이다.. 클래스 내 코드 상에서 textViewTitle 변수가 한두번 작성되어 있다면 하나하나 찾아가서 바꾸면 되겠지만 만약 100번 이상 작성되어 있다면? 어떻게 100개를 다 tvTitle로 하나하나 고치고 앉아있을까..?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;command + shift + r&lt;/strong&gt; 로 한 번에 바꾸자!&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;img width=&quot;498&quot; alt=&quot;스크린샷 2021-08-10 오전 12 07 22&quot; src=&quot;https://user-images.githubusercontent.com/31889335/128729194-6ff8f451-155b-4358-ba97-a0362901ec6f.png&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;(위 그림 참고) 빨간 박스 안의 윗 줄이 바꾸기 전 문자열이고, 아래 줄이 바꾼 후 문자열이다. 즉, 윗 줄의 문자열을 아래 줄의 문자열로 대체(replace)한다는 의미이고 왼쪽 하단 버튼 중 Replace All을 누르면 모두 한 번에 바뀐다.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>2021-10-08</pubDate>
-        <link>http://localhost:4000/articles/2021-07/android-studio-keyboard-shortcut</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-07/android-studio-keyboard-shortcut</guid>
-        
-        
-        <category>안드로이드</category>
         
       </item>
     
