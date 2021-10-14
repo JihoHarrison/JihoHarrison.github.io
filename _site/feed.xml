@@ -5,25 +5,109 @@
     <description>안드로이드 개발자를 목표로 달려나가는 Kevin의 블로그입니다!</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2021-10-11</pubDate>
-    <lastBuildDate>Mon, 11 Oct 2021 09:58:57 +0200</lastBuildDate>
+    <pubDate>2021-10-14</pubDate>
+    <lastBuildDate>Thu, 14 Oct 2021 06:45:22 +0200</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
-        <title>[알고리즘] 2020 KAKAO BLIND RECRUITMENT 문자열 압축 🪨</title>
-        <description>&lt;h2 id=&quot;풀이-설명&quot;&gt;풀이 설명&lt;/h2&gt;
+        <title>[알고리즘] 2019 KAKAO BLIND RECRUITMENT 오픈채팅방 💬</title>
+        <description>&lt;h2 id=&quot;문제-및-풀이-설명&quot;&gt;문제 및 풀이 설명&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;알파벳으로 이루어진 문자열이 존재한다. 예를 들어 &lt;strong&gt;“aabbaccc”&lt;/strong&gt; 이런 문자열이 존재한다면 먼저 문자열을 1개 단위로 쪼개서 각각의 다음 문자열들과 비교를 한다. 해당 문자가 다음 문자와 같을 경우 cnt라는 변수의 값을 1 증가시켜서 같은 문자의 맨 앞에 몇 개의 같은 수가 있는지 적는다. 연속되는 문자열이 존재하지 않을 시에는 cnt 값을 증가시키지 않고 해당 문자열을 그대로 적은 다음 다른 문자열로 넘어간다. &lt;strong&gt;“2a2ba3c”&lt;/strong&gt; 이렇게 변하게 될 것이다.&lt;/p&gt;
+    &lt;p&gt;이번 문제는 생각보다 쉽게 풀려서 뭔가 당황스러웠다. 2단계도 난이도가 어려운건 확 어렵고 아닌건 쉬운 그런 느낌인가보다..
+ 일단 들었던 생각은 &lt;code class=&quot;highlighter-rouge&quot;&gt;HashMap&lt;/code&gt;을 사용해서 풀어야 겠다는 생각이 바로 들었고, 이를 적용시켜서 한 줄 두 줄 작성해나가다 보니 재미있는 문제였다.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;또 다른 예시를 들면, &lt;strong&gt;“ababcdcdababcdcd”&lt;/strong&gt; 의 경우 문자를 1개 단위로 자르면 전혀 압축되지 않지만, 2개 단위로 잘라서 압축한다면 &lt;strong&gt;“2ab2cd2ab2cd”&lt;/strong&gt; 로 표현할 수 있다. 다른 방법으로 8개 단위로 잘라서 압축한다면 &lt;strong&gt;“2ababcdcd”&lt;/strong&gt; 로 표현할 수 있으며, 이때가 가장 짧게 압축하여 표현할 수 있는 방법이 된다.&lt;/p&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Enter uid1234 Muzi&quot;, &quot;Enter uid4567 Prodo&quot;, &quot;Leave uid1234&quot;, &quot;Enter uid1234 Prodo&quot;, &quot;Change uid4567 Ryan&quot;&lt;/code&gt; 이러한 형태의 문자열이 주어지는데 
+ 공백을 기준으로 항상 첫 번째 문자열은 사용자가 들어오고 나간 기록을 나타내고, 두 번째는 해당 사용자를 식별하기 위한 사용자 고유의 아이디가 제공된다.
+ 문자열의 마지막에 위치한 문자열은 사용자의 닉네임이 되고, 이는 중복을 허용한다. 중복을 허용하기 때문에 각 사용자를 구별 할 때는 두 번째 문자열인 사용자 고유의 아이디로 사용자를 식별한다.
+ 또한 사용자가 채팅방을 나간 기록인 &lt;strong&gt;Leave&lt;/strong&gt; 뒤에는 사용자 고유의 아이디만 존재한다. 즉 다른 문자열들과 달리 공백을 기준으로 두 개의 문자열로 이루어진 형태이다.
+ &lt;code class=&quot;highlighter-rouge&quot;&gt;Enter&lt;/code&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;Leave&lt;/code&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;Change&lt;/code&gt; 각각의 이벤트에 대한 로직들을 for문 안에서 조건문으로 분기 시켜 주었다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;사용자가 입장 했을 때 사용자 고유의 아이디 값을 이용하여 해시테이블 내에서 이미 값이 존재하는 중복된 키 값이 존재 한다면 중복되지 않도록 처리 시켜주고,
+ 처음 입장한 사용자라면 해시테이블에 값을 넣어준다. 복잡해 보이지만 이 모든 로직은 &lt;code class=&quot;highlighter-rouge&quot;&gt;put(key, value);&lt;/code&gt;로 해결된다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;사용자가 채팅방을 나갔을 때는 해시테이블의 값을 지워줘야 하나 생각이 들겠지만, 어차피 다시 들어왔을 때 사용자 고유의 아이디로 판별을 해야하니 채팅방을 나갔다는 문자열만 출력 해 주면 된다고 판단했다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;사용자가 채팅방을 나간 후 닉네임을 변경하고 들어왔을 때는 중복되는 값을 확인하고 해시테이블 내의 키 값을 찾아 교체를 해 주어야 한다. &lt;code class=&quot;highlighter-rouge&quot;&gt;replace(key, value);&lt;/code&gt;를 사용하였다.
+ 한 가지 더 적자면, 굳이 &lt;code class=&quot;highlighter-rouge&quot;&gt;replace&lt;/code&gt;가 아니고 &lt;code class=&quot;highlighter-rouge&quot;&gt;put&lt;/code&gt;을 그대로 사용해도 동일한 로직이 적용되기 때문에 상관 없을 것 같다. 하지만 명칭 상 &lt;code class=&quot;highlighter-rouge&quot;&gt;replace&lt;/code&gt;가 더 어울리기에 적용했다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;이렇게 각각의 상황에서 어떤 로직이 들어가야 하나 정리 해 보았다. 한 가지 추가 된 사항은 이렇게 정리된 로직들이 돌면서 먼저 하나의 완성된 해시 테이블을 완성하고
+ 이 반복문이 종료 된 이후에 다시 다른 반복문으로 넘어가서 완성된 해시테이블 값을 가지고 사용자가 들왔을 경우, 나갔을 경우에는 메세지를 출력 해주고 사용자가 나간 후 이름을 바꿨을 때는 아무런 메세지를 출력 해 주지 않는다는 로직을 수행한다. 그렇게 각각의 저장 된 이벤트 들을 출력 해 주는 문자열도 존재해야 하기 때문에 &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt;라는 변수를 추가하여 메세지를 출력 해 줄 상황에서는 이벤트에 맞는 로직을 수행하고 나중에 &lt;code class=&quot;highlighter-rouge&quot;&gt;HashMap&lt;/code&gt;을 반복해서 돌려줄 만큼의 &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt;값을 1씩 증가시켜 준다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;code&quot;&gt;Code&lt;/h2&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Solution&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;record&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cnt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        
+        &lt;span class=&quot;n&quot;&gt;HashMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HashMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;();&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;record&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;record&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Enter&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 중복되는 값 없게 키 값이 이미 있으면 교체&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;user_name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]);&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 출력이 필요한 만큼 공간을 만들어 주어야 하므로 1씩 증가&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Leave&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 나갔다는 것을 출력은 해 줘야해&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 출력이 필요한 만큼 공간을 만들어 주어야 하므로 1씩 증가&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Change&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;user_name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 얘는 바꾸기만 하고&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// change는 출력 해 줄 필요 없이 해당하는 로직만 수행하여 해시테이블만 갱신시키는 역할&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// j가 증가 된 만큼 메세지를 넣어놓을 배열이 만들어졌을 것이고&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;// 완성된 해시테이블로 출력 작업만 수행 해주면 끝&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;record&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;record&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Enter&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cnt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;님이 들어왔습니다.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Leave&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cnt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;님이 나갔습니다.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;실행-결과&quot;&gt;실행 결과&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/img/10-14-algorithm/result.png&quot; alt=&quot;backpressure&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>2021-10-14</pubDate>
+        <link>http://localhost:4000/articles/2021-10/algorithm-hash-map</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-10/algorithm-hash-map</guid>
+        
+        
+        <category>Algorithm</category>
+        
+      </item>
+    
+      <item>
+        <title>[알고리즘] 2020 KAKAO BLIND RECRUITMENT 문자열 압축 🪨</title>
+        <description>&lt;h2 id=&quot;문제-및-풀이-설명&quot;&gt;문제 및 풀이 설명&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;알파벳으로 이루어진 문자열이 존재한다. 예를 들어 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;aabbaccc&quot;&lt;/code&gt; 이런 문자열이 존재한다면 먼저 문자열을 1개 단위로 쪼개서 각각의 다음 문자열들과 비교를 한다. 해당 문자가 다음 문자와 같을 경우 cnt라는 변수의 값을 1 증가시켜서 같은 문자의 맨 앞에 몇 개의 같은 수가 있는지 적는다. 연속되는 문자열이 존재하지 않을 시에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;cnt&lt;/code&gt; 값을 증가시키지 않고 해당 문자열을 그대로 적은 다음 다른 문자열로 넘어간다. &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;2a2ba3c&quot;&lt;/code&gt; 이렇게 변하게 될 것이다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;또 다른 예시를 들면, &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;ababcdcdababcdcd&quot;&lt;/code&gt; 의 경우 문자를 1개 단위로 자르면 전혀 압축되지 않지만, 2개 단위로 잘라서 압축한다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;2ab2cd2ab2cd&quot;&lt;/code&gt; 로 표현할 수 있다. 다른 방법으로 8개 단위로 잘라서 압축한다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;2ababcdcd&quot;&lt;/code&gt; 로 표현할 수 있으며, 이때가 가장 짧게 압축하여 표현할 수 있는 방법이 된다.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;맨 처음 문제에 접근했을때는, 문자열의 개념을 적용시킬 생각을 하지 못하고 그저 배열로만 접근을 하려고 했었다.
  현재 연산되고 있는 문자열을 임시로 가지고 있는 배열과, 오른쪽으로 이동하며 계속해서 비교 대상이 되어줄 배열..
  이런 식으로 접근을 하려하니 배열이 늘어날수록 반복문도 늘어나고 정말 비효율적이고 복잡한 코드가 되어갔다.
- 결국 적용시켜야 하는 개념이 subString으로 두 개의 문자열을 비교하는 방식이였다.&lt;/p&gt;
+ 결국 적용시켜야 하는 개념이 &lt;code class=&quot;highlighter-rouge&quot;&gt;subString&lt;/code&gt;으로 두 개의 문자열을 비교하는 방식이였다.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -68,34 +152,32 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;h2 id=&quot;1️⃣-왼쪽에서-비교되는-문자열은-총-문자열-길이의-절반-길이-까지만을-캐싱&quot;&gt;1️⃣ 왼쪽에서 비교되는 문자열은 총 문자열 길이의 절반 길이 까지만을 캐싱&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;첫 번째 for문에서는 왼쪽에서 비교 될 문자열을 캐싱하고 있는다. result를 빈 문자열로 초기화 시켜주는 이유는
- 안쪽에서 모든 연산이 완료되고 나면 result는 해당되는 길이만큼의 문자열을 잘라서 비교 한 결과를 가지고 있게 되고,
+  &lt;li&gt;첫 번째 &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt;문에서는 왼쪽에서 비교 될 문자열을 캐싱하고 있는다. &lt;code class=&quot;highlighter-rouge&quot;&gt;result&lt;/code&gt;를 빈 문자열로 초기화 시켜주는 이유는
+ 안쪽에서 모든 연산이 완료되고 나면 &lt;code class=&quot;highlighter-rouge&quot;&gt;result&lt;/code&gt;는 해당되는 길이만큼의 문자열을 잘라서 비교 한 결과를 가지고 있게 되고,
  이 결과에 대한 문자열의 길이를 다시 초기화 해 줘야 다음 비교 할 문자열을 가질 수 있기 때문이다.
- 문제에서는 각각의 길이만큼 잘라서 비교를 한 뒤 결과적으로 총 길이가 가장 짧은 문자열의 길이를 return 하라고 하였기 때문이다.
- 또한 이 문제에서는 subString의 개념에 대해 잘 이해가 되어야 할 것 같다. 인자 두 개를 받을 때, 첫 번째 인자는 자르고 싶은 시작점을 의미하고 두 번째 인자는 자르고싶은 문자 바로 다음 번째 문자를 의미한다.&lt;/li&gt;
+ 문제에서는 각각의 길이만큼 잘라서 비교를 한 뒤 결과적으로 총 길이가 가장 짧은 문자열의 길이를 &lt;code class=&quot;highlighter-rouge&quot;&gt;return&lt;/code&gt; 하라고 하였기 때문이다.
+ 또한 이 문제에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;subString&lt;/code&gt;의 개념에 대해 잘 이해가 되어야 할 것 같다. 인자 두 개를 받을 때, 첫 번째 인자는 자르고 싶은 시작점을 의미하고 두 번째 인자는 자르고싶은 문자 바로 다음 번째 문자를 의미한다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;2️⃣-안쪽의-for문에서는-왼쪽-오른쪽-문자열을-캐싱&quot;&gt;2️⃣ 안쪽의 for문에서는 왼쪽, 오른쪽 문자열을 캐싱&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;중첩되는 for문에서는 바로 상위 for문에서 가지고 있는 문자열과 계속 반복해서 비교를 시도한다.
- 왼쪽의 값(left)은 안쪽에서 문자열 길이가 끝나고 상위 for문이 다시 길이를 늘린 문자열로 비교를 시도할 때 초기화 되고,
- 비교를 할 때 값이 같다면 cnt 값을 1씩 증가시키고 i 즉, 비교해야하는 문자열의 길이 i 만큼 j를 증가시켜 준 후 그 다음 비교 대상인 right로 넘어가게 된다.
- j + i가 총 문자열의 길이를 넘게되는 시점은 왼쪽에서 캐싱하고 있는 부분이 오른쪽에 있는 값이랑 길이가 맞지 않을 때 발생한다.
- 예를 들어, aabbaccc 문자열에서 처음에 abc와 bac를 비교했을 때 값이 같지 않아 left 값이 bac로 초기화 되었을거고, 이 시점에서 남은 right 값은
- cc 이 문자열이 될 것이다. 또한 j는 6의 값을 가지고 있고 이때 i만큼의 값인 3을 더하게 되면 총 문자열의 길이인 8을 넘게된다. 따라서 이때는 cc라는 문자열이 남아있는 상태에서 for문은 총 문자열의 길이를 초과하였으므로 연산을 수행하지 않게 된다. 이 허점을 막기 위해서 안쪽 for문이 끝나는 시점에 result += left 라는 연산을 추가 해 주어 마지막에 남은 문자열 까지 result에 담아서 캐싱을 할 수 있게 되었다.&lt;/li&gt;
+  &lt;li&gt;중첩되는 &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt;문에서는 바로 상위 for문에서 가지고 있는 문자열과 계속 반복해서 비교를 시도한다.
+ 왼쪽의 값(&lt;code class=&quot;highlighter-rouge&quot;&gt;left&lt;/code&gt;)은 안쪽에서 문자열 길이가 끝나고 상위 &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt;문이 다시 길이를 늘린 문자열로 비교를 시도할 때 초기화 되고,
+ 비교를 할 때 값이 같다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;cnt&lt;/code&gt; 값을 1씩 증가시키고 &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; 즉, 비교해야하는 문자열의 길이 &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; 만큼 &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt;를 증가시켜 준 후 그 다음 비교 대상인 &lt;code class=&quot;highlighter-rouge&quot;&gt;right&lt;/code&gt;로 넘어가게 된다. &lt;code class=&quot;highlighter-rouge&quot;&gt;j + i&lt;/code&gt;가 총 문자열의 길이를 넘게되는 시점은 왼쪽에서 캐싱하고 있는 부분이 오른쪽에 있는 값이랑 길이가 맞지 않을 때 발생한다.
+ 예를 들어, &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;aabbaccc&quot;&lt;/code&gt; 문자열에서 처음에 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;abc&quot;&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;bac&quot;&lt;/code&gt;를 비교했을 때 값이 같지 않아 &lt;code class=&quot;highlighter-rouge&quot;&gt;left&lt;/code&gt; 값이 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;bac&quot;&lt;/code&gt;로 초기화 되었을거고, 이 시점에서 남은 &lt;code class=&quot;highlighter-rouge&quot;&gt;right&lt;/code&gt; 값은 &lt;code class=&quot;highlighter-rouge&quot;&gt;cc&lt;/code&gt; 이 문자열이 될 것이다. 또한 &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt;는 6의 값을 가지고 있고 이때 i만큼의 값인 3을 더하게 되면 총 문자열의 길이인 8을 넘게된다. 따라서 이때는 &lt;code class=&quot;highlighter-rouge&quot;&gt;cc&lt;/code&gt;라는 문자열이 남아있는 상태에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt;문은 총 문자열의 길이를 초과하였으므로 연산을 수행하지 않게 된다. 이 허점을 막기 위해서 안쪽 &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt;문이 끝나는 시점에 &lt;code class=&quot;highlighter-rouge&quot;&gt;result += left&lt;/code&gt; 라는 연산을 추가 해 주어 마지막에 남은 문자열 까지 &lt;code class=&quot;highlighter-rouge&quot;&gt;result&lt;/code&gt;에 담아서 캐싱을 할 수 있게 되었다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;3️⃣-비교하는-문자열이-같을-경우와-다를-경우&quot;&gt;3️⃣ 비교하는 문자열이 같을 경우와 다를 경우&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;반복문 안에서 left와 right가 동일할 경우와 다를 경우가 존재한다. 먼저 비교하는 값이 같다면 left 값은 그대로 유지한 채 cnt 값을 증가시키고,
- 다시 right 값만 인덱스를 i만큼 증가시킨 다음 비교를 진행한다. 비교하는 문자열이 다를 경우에는 지금까지 가지고있던 cnt값을 result에 먼저 누적시켜주고,
- 그 다음 left 즉, 기준이 되는 문자열을 cnt값이 저장된 result에 붙여줌으로 기준이 되는 문자열(left)이 몇 번 반복이 되었는지 result에 저장 해 준다.
- 이러한 과정을 반복하면 result에는 문자열의 총 길이의 절반만큼 계속해서 반복이 된 여러가지 경우의 결과 문자열들을 얻을 수 있고
- 이를 이용하여 result에 누적된 모든 결과들의 각각의 길이를 계산 한 후 원하는 가장 압축이 많이 된 문자열의 길이를 return 받을 수 있다.&lt;/li&gt;
+  &lt;li&gt;반복문 안에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;left&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;right&lt;/code&gt;가 동일할 경우와 다를 경우가 존재한다. 먼저 비교하는 값이 같다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;left&lt;/code&gt; 값은 그대로 유지한 채 &lt;code class=&quot;highlighter-rouge&quot;&gt;cnt&lt;/code&gt; 값을 증가시키고,
+ 다시 &lt;code class=&quot;highlighter-rouge&quot;&gt;right&lt;/code&gt; 값만 인덱스를 i만큼 증가시킨 다음 비교를 진행한다. 비교하는 문자열이 다를 경우에는 지금까지 가지고있던 cnt값을 &lt;code class=&quot;highlighter-rouge&quot;&gt;result&lt;/code&gt;에 먼저 누적시켜주고,
+ 그 다음 &lt;code class=&quot;highlighter-rouge&quot;&gt;left&lt;/code&gt; 즉, 기준이 되는 문자열을 &lt;code class=&quot;highlighter-rouge&quot;&gt;cnt&lt;/code&gt;값이 저장된 &lt;code class=&quot;highlighter-rouge&quot;&gt;result&lt;/code&gt;에 붙여줌으로 기준이 되는 문자열(&lt;code class=&quot;highlighter-rouge&quot;&gt;left&lt;/code&gt;)이 몇 번 반복이 되었는지 &lt;code class=&quot;highlighter-rouge&quot;&gt;result&lt;/code&gt;에 저장 해 준다.
+ 이러한 과정을 반복하면 &lt;code class=&quot;highlighter-rouge&quot;&gt;result&lt;/code&gt;에는 문자열의 총 길이의 절반만큼 계속해서 반복이 된 여러가지 경우의 결과 문자열들을 얻을 수 있고
+ 이를 이용하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;result&lt;/code&gt;에 누적된 모든 결과들의 각각의 길이를 계산 한 후 원하는 가장 압축이 많이 된 문자열의 길이를 &lt;code class=&quot;highlighter-rouge&quot;&gt;return&lt;/code&gt; 받을 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 
 </description>
-        <pubDate>2021-10-11</pubDate>
+        <pubDate>2021-10-14</pubDate>
         <link>http://localhost:4000/articles/2021-10/algorithm-string-press</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-10/algorithm-string-press</guid>
         
@@ -195,7 +277,7 @@ Recieved this is 1&lt;br /&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2021-10-11</pubDate>
+        <pubDate>2021-10-14</pubDate>
         <link>http://localhost:4000/articles/2021-10/rx-kotlin-flatmap-dividing</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-10/rx-kotlin-flatmap-dividing</guid>
         
@@ -236,7 +318,7 @@ Recieved this is 1&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;하지만 모든 데이터 스트림에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;을 사용하는 것은 결코 바람직하지 않은 방법이 될 것이다. 소량이 데이터나 UI 이벤트 처리와 같은 경우는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt; 에서도 데이터 스트림의 시간차 등을 두어 스트림의 양을 조절하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;debounce()&lt;/code&gt;라던지, &lt;code class=&quot;highlighter-rouge&quot;&gt;throttle()&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;sample()&lt;/code&gt; 함수 등이 존재하기 때문에 상황에 따라 적절하게 사용하는 방법을 익히면 될 것 같다.&lt;/p&gt;
 </description>
-        <pubDate>2021-10-11</pubDate>
+        <pubDate>2021-10-14</pubDate>
         <link>http://localhost:4000/articles/2021-09/flowable-observable</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/flowable-observable</guid>
         
@@ -337,7 +419,7 @@ subscription 3: 5&lt;br /&gt;
 
 &lt;p&gt;결국 &lt;code class=&quot;highlighter-rouge&quot;&gt;hot observable&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;cold observable&lt;/code&gt;의 차이는 구독 한 시점에 다시 새로운 데이터를 받아오느냐, 이미 지나간 데이터는 받아오지 못하고 중간에 흐름에 껴서 받아오느냐의 차이이다.&lt;/p&gt;
 </description>
-        <pubDate>2021-10-11</pubDate>
+        <pubDate>2021-10-14</pubDate>
         <link>http://localhost:4000/articles/2021-09/hot-cold-observable</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/hot-cold-observable</guid>
         
@@ -419,7 +501,7 @@ subscription 3: 5&lt;br /&gt;
 
 &lt;p&gt;정말 어렵고 복잡하다.. 안드로이드 고수가 되는 그날까지 최선을 다해보자..!&lt;/p&gt;
 </description>
-        <pubDate>2021-10-11</pubDate>
+        <pubDate>2021-10-14</pubDate>
         <link>http://localhost:4000/articles/2021-09/behavior-processor</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/behavior-processor</guid>
         
@@ -705,7 +787,7 @@ https://developer.android.com/guide/app-compatibility?hl=ko
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2021-10-11</pubDate>
+        <pubDate>2021-10-14</pubDate>
         <link>http://localhost:4000/articles/2021-09/android-version</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/android-version</guid>
         
@@ -829,7 +911,7 @@ flatMap 연산자는 내부적으로 merge 연산자를 사용하기 때문에 �
 &lt;h1 id=&quot;repeat-연산자&quot;&gt;repeat 연산자&lt;/h1&gt;
 &lt;p&gt;아이템을 N번 발행한다. 파라미터로 아무 값이 들어가지 않을 시 값을 무한히 발행시킨다.&lt;/p&gt;
 </description>
-        <pubDate>2021-10-11</pubDate>
+        <pubDate>2021-10-14</pubDate>
         <link>http://localhost:4000/articles/2021-09/rx-kotlin-02</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/rx-kotlin-02</guid>
         
@@ -1008,7 +1090,7 @@ list처럼 각 인덱스 값이 따로따로 필요하다면 fromIterable()을 �
 아무런 아이템도 발행하지 않고, 완료도 발행하지 않는 옵저버블을 생성한다.
 결과 값으로는 onNest, onComplete, onSubscribe, onError 이 중에 아무것도 실행되지 않는다.&lt;/p&gt;
 </description>
-        <pubDate>2021-10-11</pubDate>
+        <pubDate>2021-10-14</pubDate>
         <link>http://localhost:4000/articles/2021-09/rx-kotlin-01</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/rx-kotlin-01</guid>
         
@@ -1018,7 +1100,7 @@ list처럼 각 인덱스 값이 따로따로 필요하다면 fromIterable()을 �
       </item>
     
       <item>
-        <title>[Algorithm] 개선된 Bubble Sort💧</title>
+        <title>[알고리즘] 개선된 Bubble Sort💧</title>
         <description>&lt;p&gt;학부 시절 때 부터 정렬에 대한 문제들은 정말 많이 접해보았을 것이다.&lt;br /&gt;
 버블정렬과 이 버블 정렬의 시간 복잡도를 최대로 보완한 로직도 살펴보기로 하자.&lt;br /&gt;
 가장 기본적인 버블정렬 알고리즘에서 파생된 알고리즘이다.&lt;br /&gt;&lt;/p&gt;
@@ -1054,566 +1136,12 @@ list처럼 각 인덱스 값이 따로따로 필요하다면 fromIterable()을 �
 &lt;br /&gt;
 for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간 복잡도가 보완됐다는 것을 알 수 있다.&lt;br /&gt;&lt;/p&gt;
 </description>
-        <pubDate>2021-10-11</pubDate>
+        <pubDate>2021-10-14</pubDate>
         <link>http://localhost:4000/articles/2021-09/bubble-sort</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/bubble-sort</guid>
         
         
         <category>Algorithm</category>
-        
-      </item>
-    
-      <item>
-        <title>[Kotlin] 코틀린의 object 키워드 잘 알고 사용하기(feat. companion object)</title>
-        <description>&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;참고 자료&lt;/strong&gt;&lt;br /&gt;
-&lt;a href=&quot;https://kotlinlang.org/docs/object-declarations.html&quot;&gt;Kotlin Document - Object expressions and declarations&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://www.youtube.com/watch?v=KUk6k865Vgg&quot;&gt;Youtube Android Developers - Object - Kotlin Vocabulary&lt;/a&gt;&lt;/p&gt;
-
-  &lt;p&gt;&lt;strong&gt;목차&lt;/strong&gt;&lt;br /&gt;
-&lt;a href=&quot;#0&quot;&gt;0. 프롤로그&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#1&quot;&gt;1. object expression VS object declaration&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#2&quot;&gt;2. object expression이 뭐예요?&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#3&quot;&gt;3. object expression 더 알아보기&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;#4&quot;&gt;4. object declaration가 뭐예요?&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#5&quot;&gt;5. object declaration 더 알아보기&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#6&quot;&gt;6. companion object가 뭐예요?&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;#7&quot;&gt;7. companion object 더 알아보기&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/31889335/125470357-c2ffd2d5-b7a3-437b-b3ff-a7b465de7cf2.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;-프롤로그&quot;&gt;✍🏻 프롤로그&lt;a id=&quot;0&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;코틀린으로 코드를 작성하다보면(저는 안드로이드 앱 개발을 코틀린으로 합니다) &lt;strong&gt;object&lt;/strong&gt; 라는 키워드를 사용하게 되는 몇 가지 경우가 있다!&lt;br /&gt;
-하지만 그동안 대충 구글링하여 짧은 순간 습득한 지식으로 이해한 후 사용했었는데..(으이구~) 좀 제대로 알고 사용하려는 목적으로 공부해본다..ㅎㅎ&lt;br /&gt;
-(아! 그리고 object 키워드에 대해서 공부하게 된 가장 큰 목적은 companion object를 제대로 이해해보고자 시작하게 된 것이다..ㅋㅋㅋ)&lt;/p&gt;
-
-&lt;h2 id=&quot;-object-expression-vs-object-declaration&quot;&gt;✅ object expression VS object declaration&lt;a id=&quot;1&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;object&lt;/code&gt; 키워드 사용법을 알려면 object expression 이랑 object declaration 라는 걸 구분할 수 있어야 함&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;object&lt;/code&gt; 키워드를 이 두 가지 모두에서 사용하기 때문&lt;/li&gt;
-  &lt;li&gt;용어 한글 번역
-    &lt;ul&gt;
-      &lt;li&gt;object expression = 객체 표현식&lt;/li&gt;
-      &lt;li&gt;object declaration = 객체 선언&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;object expression와 object declaration의 공통점
-    &lt;ul&gt;
-      &lt;li&gt;개발을 하다 보면 A 클래스의 모습에서 아주 살짝만 수정된 모습인 B 클래스를 작성해야 하는 경우가 있을 수 있다. 이런 경우, B 클래스를 만들면 A 클래스와 거의 비슷한 클래스를 하나 더 작성하는 꼴이 되어 비효율적이다.&lt;/li&gt;
-      &lt;li&gt;B 클래스를 새로 작성하지 않고 B 클래스의 객체를 생성할 수 있을까?&lt;/li&gt;
-      &lt;li&gt;코틀린은 딱 이런 상황에서 사용할 수 있도록 object expression와 object declaration라는 것을 지원함&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;-object-expression이-뭐예요&quot;&gt;✅ object expression이 뭐예요?&lt;a id=&quot;2&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;object expression(객체 표현식)는 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;object&lt;/code&gt; 키워드를 사용하여 익명 클래스의 객체를 생성할 때 사용&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;익명 클래스&lt;/code&gt; = 클래스를 작성할 때 클래스 이름이 명시적으로 작성되어 있지 않은 클래스. 즉, 이름이 없는 클래스&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;바로 아래 코드를 보면 무슨 말인지 한 방에 이해됨&lt;/li&gt;
-  &lt;li&gt;
-    &lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;yourName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{
-        &lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LastName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Kim&quot;&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;FirstName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Chohee&quot;&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// object expressions는 내부적으로 코틀린의 Any 클래스를 default 부모 클래스로 상속하고 있기 때문에 toString() 메소드를 오버라이딩할 수 있다!
-&lt;/span&gt;        &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Your name is $LastName $FirstName&quot;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yourName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;object&lt;/code&gt; 키워드 뒤에 나오는 코드를 보면 LastName, FirstName라는 멤버 변수가 선언되어 있고, toString()라는 멤버 메소드를 가지는 익명 클래스가 작성되어 있음&lt;/li&gt;
-      &lt;li&gt;이런 식으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;익명 클래스&lt;/code&gt;를 작성하고 그 앞에 &lt;code class=&quot;highlighter-rouge&quot;&gt;object&lt;/code&gt; 키워드를 붙여주면 그 시점에서 해당 익명 클래스의 &lt;strong&gt;객체가 바로 생성됨&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;객체가 바로 생성된다 = 해당 클래스의 생성자 함수 호출&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;img width=&quot;700&quot; alt=&quot;01&quot; src=&quot;https://user-images.githubusercontent.com/31889335/125470357-c2ffd2d5-b7a3-437b-b3ff-a7b465de7cf2.png&quot; /&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;(위 그림 참고) &lt;code class=&quot;highlighter-rouge&quot;&gt;object&lt;/code&gt; 키워드를 &lt;code class=&quot;highlighter-rouge&quot;&gt;익명 클래스&lt;/code&gt; 앞에 붙여줌으로써 익명 클래스의 객체를 &lt;code class=&quot;highlighter-rouge&quot;&gt;object&lt;/code&gt; 키워드 작성 시점에서 바로 생성함&lt;/li&gt;
-      &lt;li&gt;생성한 객체가 yourName 변수에 할당됨&lt;/li&gt;
-      &lt;li&gt;위 코드의 main 함수를 실행해보면 Your name is Kim Chohee가 출력됨&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;정리
-    &lt;ul&gt;
-      &lt;li&gt;object expression = &lt;code class=&quot;highlighter-rouge&quot;&gt;object&lt;/code&gt; 키워드 뒤에 익명 클래스를 선언하면 그 시점에서 바로 객체화해주는 것&lt;/li&gt;
-      &lt;li&gt;이렇게 특정 코드 라인에서 익명 클래스를 작성하고 바로 객체로 만드는 경우는, 해당 익명 클래스를 프로젝트 내에서 여러번 재사용하지 않고 딱 한 번만 사용해야 하는 경우에 유용&lt;/li&gt;
-      &lt;li&gt;obejct expression에서 사용되는 &lt;code class=&quot;highlighter-rouge&quot;&gt;object&lt;/code&gt; 키워드는 한글 해석한 그대로 &lt;code class=&quot;highlighter-rouge&quot;&gt;객체&lt;/code&gt; 라고 생각하기 = 키워드 작성 시점에서 바로 객체로 생성되므로!&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;생각
-    &lt;ul&gt;
-      &lt;li&gt;왜 이름이 object expression 일까?&lt;/li&gt;
-      &lt;li&gt;object expression = 객체 표현식 인 것을 떠올려보자&lt;/li&gt;
-      &lt;li&gt;프로그래밍 언어 분야에서 “표현식” = “수식” 임&lt;/li&gt;
-      &lt;li&gt;프로그래밍 언어에서 “수식” = 1+2와 같은 수식 / 함수 호출식 / 변수 이름 등 포함&lt;/li&gt;
-      &lt;li&gt;프로그래밍 언어에서 “수식” = 모양과 형태가 다를 수 있지만 모두 하나의 단일 값이 될 수 있는 것을 의미&lt;/li&gt;
-      &lt;li&gt;따라서 익명 클래스를 객체화하는 행위인 object expression도 익명 클래스를 객체화하여 하나의 단일 값으로 만들 수 있기 때문에 object “expression” 라는 이름이라고 추측해 봄&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;-object-expression-더-알아보기&quot;&gt;✅ object expression 더 알아보기&lt;a id=&quot;3&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;object expression은 기본적으로 &lt;a href=&quot;https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/&quot;&gt;Any&lt;/a&gt;라는 코틀린 클래스를 상속함&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Any 클래스 말고도 다른 클래스나 다른 인터페이스를 상속한 익명 클래스도 object expression로 객체화 가능&lt;/li&gt;
-  &lt;li&gt;
-    &lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// Person 인터페이스를 상속하는 익명 클래스를 object expressions 사용해서 객체화시키기
-&lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;yourName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;LastName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;당신은&quot;&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;FirstName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;천재!&quot;&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// Person 인터페이스에 정의된 getYourName 구현
-&lt;/span&gt;        &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getYourName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Your name is $LastName $FirstName&quot;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yourName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getYourName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getYourName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;ul&gt;
-      &lt;li&gt;위 코드처럼 Person 이라는 인터페이스를 하나 만듬&lt;/li&gt;
-      &lt;li&gt;Person 인터페이스를 상속하는 익명 클래스를 object expressions로 객체화 가능&lt;/li&gt;
-      &lt;li&gt;main 함수 실행시키면 Your name is 당신은 천재!가 출력됨&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;안드로이드 앱 개발에서 언제 object expression를 쓰면 좋을까?
-    &lt;ul&gt;
-      &lt;li&gt;&lt;img width=&quot;650&quot; alt=&quot;02&quot; src=&quot;https://user-images.githubusercontent.com/31889335/125475693-b3260e6d-0d4f-4f2f-b50c-5703c9f40a2c.png&quot; /&gt;&lt;/li&gt;
-      &lt;li&gt;XXOnXXXListener() 라는 메소드를 호출할 때 많이 사용함&lt;/li&gt;
-      &lt;li&gt;XXOnXXXListener() 메소드는 인자로 특정 인터페이스를 구현한 클래스의 객체를 넘겨줘야 하는 경우가 많음&lt;/li&gt;
-      &lt;li&gt;위 코드에서는 View.OnClickListener라는 인터페이스를 구현한 클래스의 객체를 setOnClickListener() 메소드의 인자로 넘겨야 함&lt;/li&gt;
-      &lt;li&gt;보통 이럴 때 object expressions을 사용해서(람다로 대체할 수도 있긴 하지만..) 인자로 전달해야 하는 객체를 생성&lt;/li&gt;
-      &lt;li&gt;특정 인터페이스를 구현한 클래스를 더 이상 프로젝트 다른 곳에서 재사용하지 않기 때문에 익명 클래스를 만들어 구현하는 것!&lt;/li&gt;
-      &lt;li&gt;예를 들어, 텍스트 뷰를 클릭한 결과로 실행되어야 하는 작업은 모든 텍스트 뷰에서 동일하지 않을 것이다. 각각 다른 텍스트 뷰의 클릭 리스너를 호출하는 순간 순간마다 각기 다른 작업을 실행하는 코드를 매번 구현해야 하기 때문&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;-object-declaration가-뭐예요&quot;&gt;✅ object declaration가 뭐예요?&lt;a id=&quot;4&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;object declaration는 &lt;strong&gt;소프트웨어 디자인 패턴 중 &lt;a href=&quot;https://en.wikipedia.org/wiki/Singleton_pattern&quot;&gt;싱글톤 패턴&lt;/a&gt;을 만드는 작업을 할 때 사용&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;싱글톤 패턴
-    &lt;ul&gt;
-      &lt;li&gt;객체 지향 언어에서는 필요한 &lt;code class=&quot;highlighter-rouge&quot;&gt;클래스&lt;/code&gt; 들을 만들어놓고 실제로 사용할 때는 클래스를 토대로 만들어지는 &lt;code class=&quot;highlighter-rouge&quot;&gt;객체&lt;/code&gt; 라는 것을 생성해서 메모리에 할당함&lt;/li&gt;
-      &lt;li&gt;이 때, 똑같은 클래스를 토대로 하여 만들어지는 객체를 이곳 저곳에서 여러번 생성한다면?
-        &lt;ul&gt;
-          &lt;li&gt;여러 번 생성된 객체는 모두 따로 따로 메모리 공간을 차지하게 됨&lt;/li&gt;
-          &lt;li&gt;즉, 생성된 객체 수 만큼 따로 따로 메모리에 할당됨&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;하지만 &lt;code class=&quot;highlighter-rouge&quot;&gt;싱글톤 패턴&lt;/code&gt; 으로 클래스를 만들어 놓으면 해당 클래스를 토대로 생성되는 객체는 여러 번 생성할 수 없음&lt;/li&gt;
-      &lt;li&gt;따라서 딱 한 번만 객체로 생성되어 메모리에 할당됨&lt;/li&gt;
-      &lt;li&gt;싱글톤 패턴이 적용된 클래스의 객체를 여러 곳에서 사용하더라도 이 객체는 항상 같은 메모리 주소를 바라봄&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;싱글톤 패턴&lt;/code&gt; 이 적용된 클래스 만드는 기존 방법(자바)&lt;/li&gt;
-  &lt;li&gt;
-    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 자바에서 싱글톤 패턴이 적용된 클래스 만들기&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MySingleTon&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MySingleTon&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INSTANCE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MySingleTon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MySingleTon&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INSTANCE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;INSTANCE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MySingleTon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INSTANCE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Kimchohee&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;ul&gt;
-      &lt;li&gt;자바에서는 싱글톤 패턴이 적용된 클래스를 만들기 위해서 위와 같은 코드를 작성해야 했음&lt;/li&gt;
-      &lt;li&gt;INSTANCE라는 static 변수를 만들어 놓고 이 변수의 값을 null 체크하는 방식&lt;/li&gt;
-      &lt;li&gt;만약 INSTANCE가 null이 아니면(즉, 단 한 번이라도 객체가 생성된 적이 있으면) 기존의 생성되어 있던 객체를 반환해줌으로써 새로운 객체가 여러 번 생성되는 것을 막는 방식&lt;/li&gt;
-      &lt;li&gt;하지만 이 방식은 thread-safe 하지 않았음
-        &lt;ul&gt;
-          &lt;li&gt;쓰레드 A에서 위 코드의 if (INSTANCE == null) 코드줄을 실행하고 있다고 해보자.&lt;/li&gt;
-          &lt;li&gt;쓰레드 A가 이 코드줄을 실행할 시점에서 INSTANCE는 null 이였다고 가정&lt;/li&gt;
-          &lt;li&gt;이 때 갑자기 운영체제에 의해 쓰레드 B에게 제어권이 넘어가게 되었다고 하면 쓰레드 A는 다음 코드줄을 실행하지 못하고 실행을 멈추게 된다.&lt;/li&gt;
-          &lt;li&gt;즉, INSTANE = new MySingleTon(); 을 실행하지 못하고 이 줄에서 멈춤&lt;/li&gt;
-          &lt;li&gt;그런데 쓰레드 B에서도 MySingleTon 클래스의 코드 실행하는 작업이 실행된다면?&lt;/li&gt;
-          &lt;li&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/31889335/130348819-b55a69f1-b353-47d0-89b6-95c6859f5fa7.png&quot; alt=&quot;image&quot; /&gt;&lt;/li&gt;
-          &lt;li&gt;즉, 두 개의 쓰레드가 동시에 MySingleTon 클래스에 접근하게 될 경우임&lt;/li&gt;
-          &lt;li&gt;쓰레드 A가 멈춘 동안 쓰레드 B가 INSTANCE null 체크를 하는 순간에도 INSTANCE는 null이다.(쓰레드 A에서 new MySingleTon(); 이 실행되지 못했으므로)&lt;/li&gt;
-          &lt;li&gt;쓰레드 B에서 INSTANCE = new MySingleTon(); 이 실행되어 INSTANCE에 MySingleTon 클래스의 객체가 할당됨&lt;/li&gt;
-          &lt;li&gt;이 후 다시 쓰레드 A에게 제어권이 돌아오면 쓰레드 A는 실행 멈춤되었던 코드 줄을 실행하기 시작함&lt;/li&gt;
-          &lt;li&gt;쓰레드 A에 의해서 INSTANCE = new MySingleTon(); 이 또 실행되어 결국 두 개의 메모리 주소에 MySingleTon 클래스의 객체가 할당됨&lt;/li&gt;
-          &lt;li&gt;이는 싱글톤 패턴이 아님 (메모리에 한 번만 할당되어야 하기 때문)&lt;/li&gt;
-          &lt;li&gt;thread-safe를 보장하기 위해 위 코드에 쓰레드 여러 개에서 더블 체크하는 경우를 방지하는 코드가 더 추가되게 됨&lt;/li&gt;
-          &lt;li&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/31889335/130349171-b3964d08-3c1b-46c9-be82-69aa6bf1ef39.png&quot; alt=&quot;image&quot; /&gt;&lt;/li&gt;
-          &lt;li&gt;이 외에도 여러 가지 문제를 방지하기 위한 코드가 붙여져 싱글톤 패턴 적용된 클래스를 자바로 작성하는 방법이 복잡해짐&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;자바에서 싱글톤 패턴 클래스 하나 작성하는데 긴 코드를 작성해야 했고, 싱글톤 패턴을 만들 때 마다 반복적으로 작성해야 하는 불편함 발생&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;싱글톤 패턴&lt;/code&gt; 이 적용된 클래스 만드는 쉬운 방법(코틀린)&lt;/li&gt;
-  &lt;li&gt;
-    &lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 코틀린에서 싱글톤 패턴이 적용된 클래스 만들기
-&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MySingleTon&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Kimchohee&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;ul&gt;
-      &lt;li&gt;코틀린에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;싱글톤 패턴&lt;/code&gt; 이 적용된 클래스를 자바보다 더 쉽게 만들 수 있도록 지원해줌&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;object&lt;/code&gt; 키워드를 사용하면 되고, 이러한 행위를 object decalaration라고 부름&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;class&lt;/code&gt; 키워드를 사용하여 클래스를 정의하는 모습과 비슷하지만 class 키워드 대신 &lt;code class=&quot;highlighter-rouge&quot;&gt;object&lt;/code&gt; 키워드를 붙여서 클래스를 생성해주면 싱글톤 패턴이 적용된 클래스가 생성됨&lt;/li&gt;
-      &lt;li&gt;코틀린 언어 내부적으로 이렇게 클래스 생성 시 thread-safe한 싱글톤 패턴이 되도록 처리 다 되어있음&lt;/li&gt;
-      &lt;li&gt;자바보다 훨씬 간단&lt;/li&gt;
-      &lt;li&gt;이렇게 클래스 작성하면 작성 시점에 바로 해당 클래스의 객체를 단 한 개 생성해놓음&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;정리
-    &lt;ul&gt;
-      &lt;li&gt;object declaration = 싱글톤 패턴 적용된 클래스 만들 때 사용하는 것&lt;/li&gt;
-      &lt;li&gt;obejct declaration에서 사용되는 &lt;code class=&quot;highlighter-rouge&quot;&gt;object&lt;/code&gt; 키워드는 한글 해석한 그대로 &lt;code class=&quot;highlighter-rouge&quot;&gt;객체&lt;/code&gt; 라고 생각하기
-        &lt;ul&gt;
-          &lt;li&gt;òbject` 키워드를 붙여 생성한 클래스는 싱글톤 패턴이 적용된 클래스라 딱 한 번만 객체화 되기 때문&lt;/li&gt;
-          &lt;li&gt;또 클래스 작성 시점에 바로 해당 클래스의 객체를 단 한 개 생성하기 때문&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;생각
-    &lt;ul&gt;
-      &lt;li&gt;왜 이름이 object declaration 일까?&lt;/li&gt;
-      &lt;li&gt;declaration = 선언 인 것을 떠올려보자&lt;/li&gt;
-      &lt;li&gt;사용법이 클래스를 “선언”하는 모습과 비슷하기 때문에 object “declaration” 이 아닐까 추측&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;-object-declaration-더-알아보기&quot;&gt;✅ object declaration 더 알아보기&lt;a id=&quot;5&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;싱글톤 패턴&lt;/code&gt; 이 적용된 클래스의 객체 사용법&lt;/li&gt;
-  &lt;li&gt;
-    &lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 코틀린에서 MySingleTon 클래스의 객체 사용하기
-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;mySingleTon&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MySingleTon&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;mySingleTon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;printName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// Kimchohee 출력됨
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  
-&lt;span class=&quot;n&quot;&gt;VS&lt;/span&gt;
-  
-&lt;span class=&quot;c1&quot;&gt;// 자바에서 MySingleTon 클래스의 객체 사용하기
-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;MySingleTon&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mySingleTon&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MySingleTon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;mySingleTon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;printName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Kimchohee 출력됨
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;ul&gt;
-      &lt;li&gt;코틀린에서 싱글톤 패턴이 적용된 클래스의 객체를 사용하기 위해서는 해당 클래스 이름 자체를 사용하면 됨&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;object&lt;/code&gt; 키워드를 사용해 싱글톤 패턴이 적용된 클래스를 만들 때는 부모 클래스 상속도 가능&lt;/li&gt;
-  &lt;li&gt;
-    &lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MySingleTon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SuperClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;superExample&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
-        &lt;span class=&quot;c1&quot;&gt;//...
-&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Kimchohee&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;-companion-object가-뭐예요&quot;&gt;✅ companion object가 뭐예요?&lt;a id=&quot;6&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;companion object = object declaration을 일반 클래스 내부에서 바로 작성하는 것&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;companion&lt;/code&gt; 라는 키워드를 object declaration 앞에 붙여줌&lt;/li&gt;
-  &lt;li&gt;companion 한글 번역 = “동반자”&lt;/li&gt;
-  &lt;li&gt;companion object = “동반자 객체”&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;바로 아래 코드 봐보자!&lt;/li&gt;
-  &lt;li&gt;
-    &lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyClass&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// MySingleTon 이라는 이름 안 써도 됨
-&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;companion&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MySingleTon&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;kimchohee&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-      
-    &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;ul&gt;
-      &lt;li&gt;MyClass라는 일반 클래스 내부에서 바로 싱글톤 패턴이 적용된 MySingleTon 클래스를 작성하는 모습&lt;/li&gt;
-      &lt;li&gt;companion object의 이름은 생략 가능(이름 없어도 됨)&lt;/li&gt;
-      &lt;li&gt;MyClass 안에 작성된 MySingleTon 객체는 작성 시점에서 바로 객체로 생성됨&lt;/li&gt;
-      &lt;li&gt;또 딱 한 번만 생성되어 메모리에 한 번만 할당됨&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;companion object 안에 선언된 멤버 변수/메소드 호출법&lt;/li&gt;
-  &lt;li&gt;
-    &lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// companion object 클래스의 이름이 있는 경우
-&lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;myName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MyClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MySingleTon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;printName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-      
-    &lt;span class=&quot;c1&quot;&gt;// companion object 클래스의 이름이 없는 경우
-&lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;myName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MyClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;printName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;ul&gt;
-      &lt;li&gt;companion object 안에 선언된 변수/메소드 호출할 때는 위 코드와 같이 호출&lt;/li&gt;
-      &lt;li&gt;클래스 이름 자체가 companion object로 작성한 클래스의 객체 참조자 이름으로 사용됨&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;-companion-object-더-알아보기&quot;&gt;✅ companion object 더 알아보기&lt;a id=&quot;7&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;companion object 사용시 주의점
-    &lt;ul&gt;
-      &lt;li&gt;companion object가 자바의 static처럼 보이지만 진정한 static은 아님&lt;/li&gt;
-      &lt;li&gt;자바의 static 변수/메소드
-        &lt;ul&gt;
-          &lt;li&gt;싱글톤 패턴과 비슷한 개념&lt;/li&gt;
-          &lt;li&gt;어떤 클래스의 객체 생성 시 객체가 생성되는 횟수에 상관 없이 static으로 선언된 변수/메소드는 딱 한 번만 생성되어 메모리에 한 번만 할당됨&lt;/li&gt;
-          &lt;li&gt;static 변수는 컴파일 시(런타임 때가 아님) 메모리에 할당됨&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;companion object로 선언한 클래스는 왜 자바의 static처럼 보일까?
-        &lt;ul&gt;
-          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;companion object&lt;/code&gt; 로 선언한 클래스는 작성 시점에서 바로 객체화되고, 단 한 번만 메모리에 할당되기 때문&lt;/li&gt;
-          &lt;li&gt;static 변수와 동일하다고 생각할 수 있음&lt;/li&gt;
-          &lt;li&gt;심지어 자바로 작성된 static 변수를 코틀린 언어으로 변환시키면 companion object 안에 static으로 선언했던 변수들이 선언되어 있는 모습으로 바뀜&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;하지만 companion object와 자바의 static 변수/메소드는 다름&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;자바의 static 변수/메소드 예시&lt;/li&gt;
-  &lt;li&gt;
-    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Example&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// static 변수&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-      
-    &lt;span class=&quot;c1&quot;&gt;// static 메소드&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;companion object의 실체&lt;/li&gt;
-  &lt;li&gt;
-    &lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyClass&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;companion&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Counter&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// 멤버 변수
-&lt;/span&gt;        &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;
-          
-        &lt;span class=&quot;c1&quot;&gt;// 멤버 메소드
-&lt;/span&gt;        &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;++&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;ul&gt;
-      &lt;li&gt;MyClass라는 일반 클래스 내부에 Counter라는 이름의 companion object가 선언되어 있다고 가정&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;위 companion object를 자바로 변환하면 아래와 같음&lt;/li&gt;
-  &lt;li&gt;
-    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyClass&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MyClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Counter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Counter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MyClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Counter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Counter 클래스 생성&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// inner class로 작성되는 Counter 클래스&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Counter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// 첫 번째, 생성자 함수 = private&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Counter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;
-          
-        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;MyClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MyClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-          
-        &lt;span class=&quot;c1&quot;&gt;// 두 번째 생성자 함수 = public&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Counter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DefaultConstructorMarker&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// = Counter();&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;ul&gt;
-      &lt;li&gt;companion object로 선언된 Counter 클래스는 자바에서는 사실 MyClass의 inner class로 작성됨&lt;/li&gt;
-      &lt;li&gt;inner class = 클래스 내에 또 클래스가 작성되는 것&lt;/li&gt;
-      &lt;li&gt;Counter 클래스의 생성자 함수가 private과 public 두 가지로 생성되어 있음&lt;/li&gt;
-      &lt;li&gt;MyClass에서 Counter 클래스의 public 생성자 함수를 호출해 Counter 클래스의 객체를 생성하는 코드가 있음&lt;/li&gt;
-      &lt;li&gt;Counter 클래스의 객체는 static final 변수에 할당됨(final 변수 = 값을 바꿀 수 없음)&lt;/li&gt;
-      &lt;li&gt;static final 변수에 할당되므로 결국 싱글톤 패턴처럼 메모리에 딱 한번 할당되는 것은 맞음&lt;/li&gt;
-      &lt;li&gt;즉, Counter 클래스의 객체는 MyClass 클래스의 객체가 생성될 때 자동으로 생성되는 “객체”임&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;companion object가 자바의 static 변수/메소드와 같지 않은 이유&lt;/li&gt;
-  &lt;li&gt;
-    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyClass&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-      
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;ul&gt;
-      &lt;li&gt;위와 같이 변환되어야 자바의 static 변수/메소드랑 같다고 할 수 있음&lt;/li&gt;
-      &lt;li&gt;static 메소드일 것 같았던 count() 메소드는 Counter 클래스의 멤버 메소드이기 때문에 static과 다름&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;그러나 companion object 작성 시 멤버 메소드에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;@JvmStatic&lt;/code&gt; 어노테이션을 붙이고, 멤버 변수에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;@JvmField&lt;/code&gt; 어노테이션을 붙이면 JVM이 companion object로 선언한 클래스의 멤버 변수/메소드를 진짜 자바의 static 변수/메소드처럼 변환해줌&lt;/li&gt;
-  &lt;li&gt;
-    &lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;companion&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;@JvmStatic&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-          
-        &lt;span class=&quot;n&quot;&gt;@JvmField&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;ul&gt;
-      &lt;li&gt;즉, companion object로 선언한 클래스의 멤버 변수/메소드를 inner class로 만들지 않고 static 변수/메소드와 같은 모습으로 변환함&lt;/li&gt;
-      &lt;li&gt;어노테이션 관련해서는 &lt;a href=&quot;https://kotlinlang.org/docs/java-to-kotlin-interop.html#static-fields&quot;&gt;여기&lt;/a&gt; 보기&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;끝&quot;&gt;끝!&lt;/h1&gt;
-
-&lt;p&gt;마지막 수정일 : 2021/08/22&lt;/p&gt;
-</description>
-        <pubDate>2021-10-11</pubDate>
-        <link>http://localhost:4000/articles/2021-07/kotlin-object-keyword</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-07/kotlin-object-keyword</guid>
-        
-        
-        <category>kotlin</category>
         
       </item>
     

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[Algorithm] 개선된 Bubble Sort💧"
+title:  "[알고리즘] 개선된 Bubble Sort💧"
 categories: [Algorithm]
 ---
 
