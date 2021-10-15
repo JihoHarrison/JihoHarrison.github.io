@@ -170,8 +170,11 @@
 <h2 id="0️⃣-behaviorprocessor-behaviorsubject">0️⃣ BehaviorProcessor? BehaviorSubject?</h2>
 <p><code class="highlighter-rouge">BehaviorProcessor</code>를 다루기 전에, <code class="highlighter-rouge">BehaviorSubject</code>라는 형식을 많이 들어 보았을 것이다.
 이 둘의 차이점은 매우 단순했다.. 반환하는 형식이 <code class="highlighter-rouge">Flowable</code>인지와 <code class="highlighter-rouge">Observable</code>인지의 차이다.
-간략하게 설명하자면 <code class="highlighter-rouge">BackPressure</code>를 default로 가지고 있는지와 없는지로 구분되는데 <code class="highlighter-rouge">Flowable</code>이 <code class="highlighter-rouge">BackPressure</code>를 기본적으로 가지고 있는 녀석이고 <code class="highlighter-rouge">Observable</code>은 다른 방식으로 구현을 해 주어야 한다. <code class="highlighter-rouge">Flowable</code>과 <code class="highlighter-rouge">Observable</code>의 차이는 아래 글에서 확인 하도록 하자.&lt;/br&gt;
-<a href="2021-09-15-flowable-observable.md">Flowable과 Observable의 차이</a>&lt;/br&gt;</p>
+간략하게 설명하자면 <code class="highlighter-rouge">BackPressure</code>를 default로 가지고 있는지와 없는지로 구분되는데 <code class="highlighter-rouge">Flowable</code>이 <code class="highlighter-rouge">BackPressure</code>를 기본적으로 가지고 있는 녀석이고 <code class="highlighter-rouge">Observable</code>은 다른 방식으로 구현을 해 주어야 한다. <code class="highlighter-rouge">Flowable</code>과 <code class="highlighter-rouge">Observable</code>의 차이는 아래 글에서 확인 하도록 하자.</p>
+
+<blockquote>
+  <p><a href="https://jihokevin.github.io//articles/2021-09/flowable-observable">Flowable과 Observable의 차이</a></p>
+</blockquote>
 
 <p>이제 <code class="highlighter-rouge">BehaviorProcessor</code>가 <code class="highlighter-rouge">Flowable</code>을 반환 해 준다는 것을 알았다. 그럼 이렇게 반환되는 흐름을 <code class="highlighter-rouge">subscribe</code> 함으로써 제어를 할 수 있을 것이다.
 하지만 이 <code class="highlighter-rouge">flow</code>에 값을 넘겨주고 꺼내 쓸 수 있어야 하는데 어떤식으로 값을 <code class="highlighter-rouge">flow</code>에 넣어주고 넣어준 값에 따라 흐름을 제어할 수 있는지 알아보자.

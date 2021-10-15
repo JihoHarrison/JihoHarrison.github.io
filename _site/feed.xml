@@ -5,9 +5,67 @@
     <description>안드로이드 개발자를 목표로 달려나가는 Kevin의 블로그입니다!</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2021-10-14</pubDate>
-    <lastBuildDate>Thu, 14 Oct 2021 06:45:22 +0200</lastBuildDate>
+    <pubDate>2021-10-15</pubDate>
+    <lastBuildDate>Fri, 15 Oct 2021 10:35:29 +0200</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
+    
+      <item>
+        <title>[안드로이드] 안드로이드 &amp; RxKotlin을 이용한 MVVM으로의 접근 💡</title>
+        <description>&lt;h2 id=&quot;0️⃣-프롤로그&quot;&gt;0️⃣ 프롤로그&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;rxKotlin &amp;amp; Android&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;MVVM 패턴 학습을 시작하면서 적용될 수 있는 로직들에 대해서 정말 많은 고민을 했다. 나같이 안드로이드에서 이제 막 걸음마를 걷기 시작한 개발자는 분명 coroutine과 rxJava 이 두개의 비동기 처리 방식에 대해 고민을 했을 것이다. 비동기 처리에 대한 고민을 시작했을 때 처음 접했던게 rxJava였다. MVVM이 흥행하기까지 널리 사용되었던 MVC, MVP에 대한 이해도 필요하다고 생각했다.rxJava에 대한 설명은 다음 포스팅에 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://jihokevin.github.io//articles/2021-09/rx-kotlin-01&quot;&gt;rxKotlin_연산자_01&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://jihokevin.github.io//articles/2021-09/rx-kotlin-02&quot;&gt;rxKotlin_연산자_02&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://jihokevin.github.io//articles/2021-09/hot-cold-observable&quot;&gt;Hot and Cold Observable&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;1️⃣-mvc-mvp&quot;&gt;1️⃣ MVC? MVP?&lt;/h2&gt;
+
+&lt;p&gt;MVVM 패턴을 살펴보기 전에 MVC와 MVP에 대한 이해를 할 필요가 분명히 있디고 생각했다.
+ MVC, MVP와 같은 디자인 패턴들은 여러 곳에서 많이 들어보고, 접해보고, 익숙해져 있는 상태이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;MVC&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Activity나 Fragment에서 Controller와 Presentation Login을 한꺼번에 처리하는 구조로, 앱이 커질수록 View기 굉장히 거대해질 수 있는 형태이다. 결국 Controller와 View가 같은 곳에서 놀고있기 때문에 Controller 그 자체에 대한 테스트가 어려운 상황이 발생했다. 안드로이드 View 속에 Controller가 존재했기 때문이다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;MVP&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;그래서 테스트를 위해서 Controller를 분리하자 라고 나온 아키텍쳐가 바로 MVP 라고 하는데 정확한 차이점을 느끼지 못했다. 결국 Controller나 Presenter를 통해서 비즈니스 로직과 프레잰테이션 로직을 분리시키는 것은 똑같은 원리일텐데 정확히 어떤게 다른 점일까 파고들게 되었다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;View와 Model을 연결하는 브릿지가 되어야 하고, Presenter로서 처리해야 할 일들을 명확히 규정해야 했다. 이를 위해서 인터페이스화 된 형태의 View를 담당하는 인터페이스와 Presenter를 담당하는 인터페이스를 구현하여 테스트 환경에서는 데이터에 대한 목업 처리만 진행 해 주면 된다는 의미에서 MVP가 파생되었다. 결국 결론적으로는!&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;테스트 하기 쉽다 = 함수가 잘 나누어져 있다 = 코드가 보기 쉽다 = 유지보수에 좋다&lt;/strong&gt;
+ 라는 의미가 된다..!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;2️⃣-android에서의-mvvm&quot;&gt;2️⃣ Android에서의 MVVM&lt;/h2&gt;
+&lt;p&gt;[마지막 수정 : 2021-10-15, 추후 업데이트 예정]&lt;/p&gt;
+</description>
+        <pubDate>2021-10-15</pubDate>
+        <link>http://localhost:4000/articles/2021-10/android-rxkotlin-mvvm</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-10/android-rxkotlin-mvvm</guid>
+        
+        
+        <category>안드로이드</category>
+        
+      </item>
     
       <item>
         <title>[알고리즘] 2019 KAKAO BLIND RECRUITMENT 오픈채팅방 💬</title>
@@ -84,7 +142,7 @@
 &lt;h2 id=&quot;실행-결과&quot;&gt;실행 결과&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&quot;/img/10-14-algorithm/result.png&quot; alt=&quot;backpressure&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>2021-10-14</pubDate>
+        <pubDate>2021-10-15</pubDate>
         <link>http://localhost:4000/articles/2021-10/algorithm-hash-map</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-10/algorithm-hash-map</guid>
         
@@ -177,7 +235,7 @@
 &lt;/ul&gt;
 
 </description>
-        <pubDate>2021-10-14</pubDate>
+        <pubDate>2021-10-15</pubDate>
         <link>http://localhost:4000/articles/2021-10/algorithm-string-press</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-10/algorithm-string-press</guid>
         
@@ -187,11 +245,11 @@
       </item>
     
       <item>
-        <title>[RxKotlin] flatmap과 map, MVVM 패턴에서의 적용 과정</title>
+        <title>[RxKotlin] flatmap과 map의 적절성 💡</title>
         <description>&lt;h2 id=&quot;0️⃣-프롤로그&quot;&gt;0️⃣ 프롤로그&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;인턴십을 진행하면서 정말 다양한 rxKotlin 코드를 접해 보는 것 같다. 하지만 항상 매일 반복해서 보는 코드임에도 도저히 이해가 가지 않는 부분들이 너무 많았다.
-그 중에서도 특히 map과 flatmap의 적절성, &lt;strong&gt;Single Steam&lt;/strong&gt; 의 연속적인 분기 등을 계속해서 보고 또 보다 보니 많이 부족하지만 걸음마를 시작하게 되었다..&lt;/li&gt;
+  &lt;li&gt;인턴십을 진행하면서 정말 다양한 rxKotlin 코드를 접해 보는 것 같다. 하지만 항상 매일 반복해서 보는 코드임에도 도저히 이해가 가지 않는 부분들이 너무 많았다.&lt;/li&gt;
+  &lt;li&gt;그 중에서도 특히 map과 flatmap의 적절성, &lt;strong&gt;Single Steam&lt;/strong&gt; 의 연속적인 분기 등을 계속해서 보고 또 보다 보니 많이 부족하지만 걸음마를 시작하게 되었다..&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;1️⃣-map은-어떨때-사용해야하지&quot;&gt;1️⃣ map은 어떨때 사용해야하지?&lt;/h2&gt;
@@ -277,7 +335,7 @@ Recieved this is 1&lt;br /&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2021-10-14</pubDate>
+        <pubDate>2021-10-15</pubDate>
         <link>http://localhost:4000/articles/2021-10/rx-kotlin-flatmap-dividing</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-10/rx-kotlin-flatmap-dividing</guid>
         
@@ -318,7 +376,7 @@ Recieved this is 1&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;하지만 모든 데이터 스트림에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;을 사용하는 것은 결코 바람직하지 않은 방법이 될 것이다. 소량이 데이터나 UI 이벤트 처리와 같은 경우는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt; 에서도 데이터 스트림의 시간차 등을 두어 스트림의 양을 조절하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;debounce()&lt;/code&gt;라던지, &lt;code class=&quot;highlighter-rouge&quot;&gt;throttle()&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;sample()&lt;/code&gt; 함수 등이 존재하기 때문에 상황에 따라 적절하게 사용하는 방법을 익히면 될 것 같다.&lt;/p&gt;
 </description>
-        <pubDate>2021-10-14</pubDate>
+        <pubDate>2021-10-15</pubDate>
         <link>http://localhost:4000/articles/2021-09/flowable-observable</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/flowable-observable</guid>
         
@@ -419,7 +477,7 @@ subscription 3: 5&lt;br /&gt;
 
 &lt;p&gt;결국 &lt;code class=&quot;highlighter-rouge&quot;&gt;hot observable&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;cold observable&lt;/code&gt;의 차이는 구독 한 시점에 다시 새로운 데이터를 받아오느냐, 이미 지나간 데이터는 받아오지 못하고 중간에 흐름에 껴서 받아오느냐의 차이이다.&lt;/p&gt;
 </description>
-        <pubDate>2021-10-14</pubDate>
+        <pubDate>2021-10-15</pubDate>
         <link>http://localhost:4000/articles/2021-09/hot-cold-observable</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/hot-cold-observable</guid>
         
@@ -436,8 +494,11 @@ subscription 3: 5&lt;br /&gt;
 &lt;h2 id=&quot;0️⃣-behaviorprocessor-behaviorsubject&quot;&gt;0️⃣ BehaviorProcessor? BehaviorSubject?&lt;/h2&gt;
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;BehaviorProcessor&lt;/code&gt;를 다루기 전에, &lt;code class=&quot;highlighter-rouge&quot;&gt;BehaviorSubject&lt;/code&gt;라는 형식을 많이 들어 보았을 것이다.
 이 둘의 차이점은 매우 단순했다.. 반환하는 형식이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;인지와 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt;인지의 차이다.
-간략하게 설명하자면 &lt;code class=&quot;highlighter-rouge&quot;&gt;BackPressure&lt;/code&gt;를 default로 가지고 있는지와 없는지로 구분되는데 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;이 &lt;code class=&quot;highlighter-rouge&quot;&gt;BackPressure&lt;/code&gt;를 기본적으로 가지고 있는 녀석이고 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt;은 다른 방식으로 구현을 해 주어야 한다. &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt;의 차이는 아래 글에서 확인 하도록 하자.&amp;lt;/br&amp;gt;
-&lt;a href=&quot;2021-09-15-flowable-observable.md&quot;&gt;Flowable과 Observable의 차이&lt;/a&gt;&amp;lt;/br&amp;gt;&lt;/p&gt;
+간략하게 설명하자면 &lt;code class=&quot;highlighter-rouge&quot;&gt;BackPressure&lt;/code&gt;를 default로 가지고 있는지와 없는지로 구분되는데 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;이 &lt;code class=&quot;highlighter-rouge&quot;&gt;BackPressure&lt;/code&gt;를 기본적으로 가지고 있는 녀석이고 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt;은 다른 방식으로 구현을 해 주어야 한다. &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt;의 차이는 아래 글에서 확인 하도록 하자.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://jihokevin.github.io//articles/2021-09/flowable-observable&quot;&gt;Flowable과 Observable의 차이&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;이제 &lt;code class=&quot;highlighter-rouge&quot;&gt;BehaviorProcessor&lt;/code&gt;가 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;을 반환 해 준다는 것을 알았다. 그럼 이렇게 반환되는 흐름을 &lt;code class=&quot;highlighter-rouge&quot;&gt;subscribe&lt;/code&gt; 함으로써 제어를 할 수 있을 것이다.
 하지만 이 &lt;code class=&quot;highlighter-rouge&quot;&gt;flow&lt;/code&gt;에 값을 넘겨주고 꺼내 쓸 수 있어야 하는데 어떤식으로 값을 &lt;code class=&quot;highlighter-rouge&quot;&gt;flow&lt;/code&gt;에 넣어주고 넣어준 값에 따라 흐름을 제어할 수 있는지 알아보자.
@@ -501,7 +562,7 @@ subscription 3: 5&lt;br /&gt;
 
 &lt;p&gt;정말 어렵고 복잡하다.. 안드로이드 고수가 되는 그날까지 최선을 다해보자..!&lt;/p&gt;
 </description>
-        <pubDate>2021-10-14</pubDate>
+        <pubDate>2021-10-15</pubDate>
         <link>http://localhost:4000/articles/2021-09/behavior-processor</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/behavior-processor</guid>
         
@@ -787,7 +848,7 @@ https://developer.android.com/guide/app-compatibility?hl=ko
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2021-10-14</pubDate>
+        <pubDate>2021-10-15</pubDate>
         <link>http://localhost:4000/articles/2021-09/android-version</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/android-version</guid>
         
@@ -911,7 +972,7 @@ flatMap 연산자는 내부적으로 merge 연산자를 사용하기 때문에 �
 &lt;h1 id=&quot;repeat-연산자&quot;&gt;repeat 연산자&lt;/h1&gt;
 &lt;p&gt;아이템을 N번 발행한다. 파라미터로 아무 값이 들어가지 않을 시 값을 무한히 발행시킨다.&lt;/p&gt;
 </description>
-        <pubDate>2021-10-14</pubDate>
+        <pubDate>2021-10-15</pubDate>
         <link>http://localhost:4000/articles/2021-09/rx-kotlin-02</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/rx-kotlin-02</guid>
         
@@ -1090,58 +1151,12 @@ list처럼 각 인덱스 값이 따로따로 필요하다면 fromIterable()을 �
 아무런 아이템도 발행하지 않고, 완료도 발행하지 않는 옵저버블을 생성한다.
 결과 값으로는 onNest, onComplete, onSubscribe, onError 이 중에 아무것도 실행되지 않는다.&lt;/p&gt;
 </description>
-        <pubDate>2021-10-14</pubDate>
+        <pubDate>2021-10-15</pubDate>
         <link>http://localhost:4000/articles/2021-09/rx-kotlin-01</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/rx-kotlin-01</guid>
         
         
         <category>RxKotlin</category>
-        
-      </item>
-    
-      <item>
-        <title>[알고리즘] 개선된 Bubble Sort💧</title>
-        <description>&lt;p&gt;학부 시절 때 부터 정렬에 대한 문제들은 정말 많이 접해보았을 것이다.&lt;br /&gt;
-버블정렬과 이 버블 정렬의 시간 복잡도를 최대로 보완한 로직도 살펴보기로 하자.&lt;br /&gt;
-가장 기본적인 버블정렬 알고리즘에서 파생된 알고리즘이다.&lt;br /&gt;&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;bubbleSort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// k를 0으로 초기화 해 주는 이유는 함수가 처음 실행될 때&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// 전체를 훑으면서 마지막에 교환된 위치를 반환하여&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// 범위를 좁혀줘야 하기 때문이다.&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;//while : 처음 실행 한번 이후에는 k보다 큰 범위로 범위를 좁힌다.&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// 마지막으로 교환된 위치를 저장하는 last&lt;/span&gt;
-        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;last&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// for문은 위치변경이 일어났을 때 &lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// 현재 위치변경이 일어난 우측 방향으로 k값을 정한다.&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;//while문의 범위를 좁혀준다.&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;swap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;last&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;last&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;위 코드를 살펴보면 &lt;code class=&quot;highlighter-rouge&quot;&gt;k&lt;/code&gt;를 0으로 초기화 해 주는 이유는 함수가 처음 실행될 때 전체를 훑으면서 마지막에 교환된 위치를 반환하여 범위를 좁혀줘야 하기 때문이다. &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;while&lt;/code&gt; 문에서는 맨 처음 한 번 실행된 이후에는 비교하고자 하는 인덱스를 &lt;code class=&quot;highlighter-rouge&quot;&gt;k&lt;/code&gt;보다 큰 범위로 범위를 좁힌다.&lt;br /&gt;
-마지막으로 교환된 위치를 저장하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;last&lt;/code&gt;는 k로 넘어가게 되어 &lt;code class=&quot;highlighter-rouge&quot;&gt;k&lt;/code&gt;의 값을 증가시키는 역할을 하게 된다.&lt;br /&gt;
-즉, for문은 &lt;code class=&quot;highlighter-rouge&quot;&gt;k&lt;/code&gt;보다 큰 변수를 항상 &lt;code class=&quot;highlighter-rouge&quot;&gt;last&lt;/code&gt;에 넣어주며 while문의 범위를 좁혀준다.&lt;br /&gt;
-쉽게 말해, &lt;code class=&quot;highlighter-rouge&quot;&gt;k&lt;/code&gt;의 값은 정렬이 될 때 마다 오른쪽으로 이동하게 된다는 것이다.&lt;br /&gt;
-&lt;br /&gt;
-기존에 for문 2개를 사용했을 때는 1개의 for문 요소들을 나머지 안쪽 1개의 for문에 계속해서 넣어줬다는 것을 알 수 있다.&lt;br /&gt;
-&lt;br /&gt;
-for문 2개를 사용하는 일반적인 버블정렬과 비교했을 때 시간 복잡도가 보완됐다는 것을 알 수 있다.&lt;br /&gt;&lt;/p&gt;
-</description>
-        <pubDate>2021-10-14</pubDate>
-        <link>http://localhost:4000/articles/2021-09/bubble-sort</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/bubble-sort</guid>
-        
-        
-        <category>Algorithm</category>
         
       </item>
     

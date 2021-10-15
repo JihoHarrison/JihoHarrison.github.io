@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="0️⃣ 프롤로그rxKotlin &amp; Android  MVVM 패턴 학습을 시작하면서 적용될 수 있는 로직들에 대해서 정말 많은 고민을 했다. 나같이 안드로이드에서 이제 막 걸음마를 걷기 시작한 개발자는 분명 coroutine과 rxJava 이 두개의 비동기 처리 방식에 대해 ...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[안드로이드] 안드로이드 &amp; RxKotlin을 이용한 MVVM으로의 접근 💡 | JihoKevin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[안드로이드] 안드로이드 &amp; RxKotlin을 이용한 MVVM으로의 접근 💡 | JihoKevin">
+  <meta name="twitter:description" content="0️⃣ 프롤로그rxKotlin &amp;amp; Android  MVVM 패턴 학습을 시작하면서 적용될 수 있는 로직들에 대해서 정말 많은 고민을 했다. 나같이 안드로이드에서 이제 막 걸음마를 걷기 시작한 개발자는 분명 coroutine과 rxJava 이 두개의 비동기 처리 방식에 대해 ...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2021-10/android-rxkotlin-mvvm">
+  <meta property="og:title" content="[안드로이드] 안드로이드 &amp; RxKotlin을 이용한 MVVM으로의 접근 💡 | JihoKevin">
+  <meta property="og:description" content="0️⃣ 프롤로그rxKotlin &amp;amp; Android  MVVM 패턴 학습을 시작하면서 적용될 수 있는 로직들에 대해서 정말 많은 고민을 했다. 나같이 안드로이드에서 이제 막 걸음마를 걷기 시작한 개발자는 분명 coroutine과 rxJava 이 두개의 비동기 처리 방식에 대해 ...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[안드로이드] 안드로이드 & RxKotlin을 이용한 MVVM으로의 접근 💡 | JihoKevin</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2021-10/android-rxkotlin-mvvm">
+  <link rel="alternate" type="application/rss+xml" title="JihoKevin" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">신지호</a>
+  <span class="author_job">안드로이드 개발자가 되고싶은 소년</span>
+  <span class="author_bio mbm">방문해주셔서 감사합니다!🙇🏻‍♂️</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('jhshin9250@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/jiho_925" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/JihoKevin" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[안드로이드] 안드로이드 &amp; RxKotlin을 이용한 MVVM으로의 접근 💡">[안드로이드] 안드로이드 & RxKotlin을 이용한 MVVM으로의 접근 💡</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        15 OCT 2021
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    1 min read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="0️⃣-프롤로그">0️⃣ 프롤로그</h2>
+
+<p><strong>rxKotlin &amp; Android</strong></p>
+<ul>
+  <li>MVVM 패턴 학습을 시작하면서 적용될 수 있는 로직들에 대해서 정말 많은 고민을 했다. 나같이 안드로이드에서 이제 막 걸음마를 걷기 시작한 개발자는 분명 coroutine과 rxJava 이 두개의 비동기 처리 방식에 대해 고민을 했을 것이다. 비동기 처리에 대한 고민을 시작했을 때 처음 접했던게 rxJava였다. MVVM이 흥행하기까지 널리 사용되었던 MVC, MVP에 대한 이해도 필요하다고 생각했다.rxJava에 대한 설명은 다음 포스팅에 있다.</li>
+</ul>
+
+<blockquote>
+  <p><a href="https://jihokevin.github.io//articles/2021-09/rx-kotlin-01">rxKotlin_연산자_01</a></p>
+</blockquote>
+
+<blockquote>
+  <p><a href="https://jihokevin.github.io//articles/2021-09/rx-kotlin-02">rxKotlin_연산자_02</a></p>
+</blockquote>
+
+<blockquote>
+  <p><a href="https://jihokevin.github.io//articles/2021-09/hot-cold-observable">Hot and Cold Observable</a></p>
+</blockquote>
+
+<h2 id="1️⃣-mvc-mvp">1️⃣ MVC? MVP?</h2>
+
+<p>MVVM 패턴을 살펴보기 전에 MVC와 MVP에 대한 이해를 할 필요가 분명히 있디고 생각했다.
+ MVC, MVP와 같은 디자인 패턴들은 여러 곳에서 많이 들어보고, 접해보고, 익숙해져 있는 상태이다.</p>
+
+<p><strong>MVC</strong></p>
+<ul>
+  <li>Activity나 Fragment에서 Controller와 Presentation Login을 한꺼번에 처리하는 구조로, 앱이 커질수록 View기 굉장히 거대해질 수 있는 형태이다. 결국 Controller와 View가 같은 곳에서 놀고있기 때문에 Controller 그 자체에 대한 테스트가 어려운 상황이 발생했다. 안드로이드 View 속에 Controller가 존재했기 때문이다.</li>
+</ul>
+
+<p><strong>MVP</strong></p>
+<ul>
+  <li>
+    <p>그래서 테스트를 위해서 Controller를 분리하자 라고 나온 아키텍쳐가 바로 MVP 라고 하는데 정확한 차이점을 느끼지 못했다. 결국 Controller나 Presenter를 통해서 비즈니스 로직과 프레잰테이션 로직을 분리시키는 것은 똑같은 원리일텐데 정확히 어떤게 다른 점일까 파고들게 되었다.</p>
+  </li>
+  <li>
+    <p>View와 Model을 연결하는 브릿지가 되어야 하고, Presenter로서 처리해야 할 일들을 명확히 규정해야 했다. 이를 위해서 인터페이스화 된 형태의 View를 담당하는 인터페이스와 Presenter를 담당하는 인터페이스를 구현하여 테스트 환경에서는 데이터에 대한 목업 처리만 진행 해 주면 된다는 의미에서 MVP가 파생되었다. 결국 결론적으로는!</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p><strong>테스트 하기 쉽다 = 함수가 잘 나누어져 있다 = 코드가 보기 쉽다 = 유지보수에 좋다</strong>
+ 라는 의미가 된다..!</p>
+</blockquote>
+
+<h2 id="2️⃣-android에서의-mvvm">2️⃣ Android에서의 MVVM</h2>
+<p>[마지막 수정 : 2021-10-15, 추후 업데이트 예정]</p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+        repo="JihoKevin/blog-comments"
+        issue-term="pathname"
+        label="comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 신지호. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

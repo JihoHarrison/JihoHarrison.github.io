@@ -10,8 +10,9 @@ categories: [안드로이드]
 ## 0️⃣ BehaviorProcessor? BehaviorSubject?
 `BehaviorProcessor`를 다루기 전에, `BehaviorSubject`라는 형식을 많이 들어 보았을 것이다.
 이 둘의 차이점은 매우 단순했다.. 반환하는 형식이 `Flowable`인지와 `Observable`인지의 차이다.
-간략하게 설명하자면 `BackPressure`를 default로 가지고 있는지와 없는지로 구분되는데 `Flowable`이 `BackPressure`를 기본적으로 가지고 있는 녀석이고 `Observable`은 다른 방식으로 구현을 해 주어야 한다. `Flowable`과 `Observable`의 차이는 아래 글에서 확인 하도록 하자.</br>
-[Flowable과 Observable의 차이](2021-09-15-flowable-observable.md)</br>
+간략하게 설명하자면 `BackPressure`를 default로 가지고 있는지와 없는지로 구분되는데 `Flowable`이 `BackPressure`를 기본적으로 가지고 있는 녀석이고 `Observable`은 다른 방식으로 구현을 해 주어야 한다. `Flowable`과 `Observable`의 차이는 아래 글에서 확인 하도록 하자.
+
+> [Flowable과 Observable의 차이](https://jihokevin.github.io//articles/2021-09/flowable-observable)
 
 이제 `BehaviorProcessor`가 `Flowable`을 반환 해 준다는 것을 알았다. 그럼 이렇게 반환되는 흐름을 `subscribe` 함으로써 제어를 할 수 있을 것이다.
 하지만 이 `flow`에 값을 넘겨주고 꺼내 쓸 수 있어야 하는데 어떤식으로 값을 `flow`에 넣어주고 넣어준 값에 따라 흐름을 제어할 수 있는지 알아보자.

@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "[RxKotlin] flatmap과 map, MVVM 패턴에서의 적용 과정"
+title:  "[RxKotlin] flatmap과 map의 적절성 💡"
 categories: [RxKotlin]
 ---
 
 ## 0️⃣ 프롤로그
  * 인턴십을 진행하면서 정말 다양한 rxKotlin 코드를 접해 보는 것 같다. 하지만 항상 매일 반복해서 보는 코드임에도 도저히 이해가 가지 않는 부분들이 너무 많았다.
-그 중에서도 특히 map과 flatmap의 적절성, __Single Steam__ 의 연속적인 분기 등을 계속해서 보고 또 보다 보니 많이 부족하지만 걸음마를 시작하게 되었다..
+ * 그 중에서도 특히 map과 flatmap의 적절성, __Single Steam__ 의 연속적인 분기 등을 계속해서 보고 또 보다 보니 많이 부족하지만 걸음마를 시작하게 되었다..
 
 ## 1️⃣ map은 어떨때 사용해야하지?
 map은 다음과 같이 구성되어 있다.

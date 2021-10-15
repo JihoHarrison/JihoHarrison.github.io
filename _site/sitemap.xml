@@ -3,6 +3,21 @@
   
     
     <url>
+      <loc>http://localhost:4000/articles/2021-10/android-rxkotlin-mvvm</loc>
+      
+        <lastmod>2021-10-15T00:00:00+02:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
       <loc>http://localhost:4000/articles/2021-10/algorithm-hash-map</loc>
       
         <lastmod>2021-10-14T00:00:00+02:00</lastmod>
