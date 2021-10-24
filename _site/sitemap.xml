@@ -1,120 +1,32 @@
+---
+layout: null
+sitemap:
+  exclude: 'yes'
+---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    
+  {% for post in site.posts %}
+    {% unless post.published == false %}
     <url>
-        <loc>http://localhost:4000/articles/2021-10/algorithm-covid19</loc>
+      <loc>{{ site.url }}{{ post.url }}</loc>
+      {% if post.sitemap.lastmod %}
+        <lastmod>{{ post.sitemap.lastmod | date: "%Y-%m-%d" }}</lastmod>
+      {% elsif post.date %}
+        <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
+      {% else %}
+        <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+      {% endif %}
+      {% if post.sitemap.changefreq %}
+        <changefreq>{{ post.sitemap.changefreq }}</changefreq>
+      {% else %}
+        <changefreq>monthly</changefreq>
+      {% endif %}
+      {% if post.sitemap.priority %}
+        <priority>{{ post.sitemap.priority }}</priority>
+      {% else %}
+        <priority>0.5</priority>
+      {% endif %}
     </url>
-    
-    <url>
-        <loc>http://localhost:4000/articles/2021-10/android-rxkotlin-mvvm</loc>
-    </url>
-    
-    <url>
-        <loc>http://localhost:4000/articles/2021-10/algorithm-hash-map</loc>
-    </url>
-    
-    <url>
-        <loc>http://localhost:4000/articles/2021-10/algorithm-string-press</loc>
-    </url>
-    
-    <url>
-        <loc>http://localhost:4000/articles/2021-10/rx-kotlin-flatmap-dividing</loc>
-    </url>
-    
-    <url>
-        <loc>http://localhost:4000/articles/2021-09/flowable-observable</loc>
-    </url>
-    
-    <url>
-        <loc>http://localhost:4000/articles/2021-09/hot-cold-observable</loc>
-    </url>
-    
-    <url>
-        <loc>http://localhost:4000/articles/2021-09/behavior-processor</loc>
-    </url>
-    
-    <url>
-        <loc>http://localhost:4000/articles/2021-09/android-version</loc>
-    </url>
-    
-    <url>
-        <loc>http://localhost:4000/articles/2021-09/rx-kotlin-02</loc>
-    </url>
-    
-    <url>
-        <loc>http://localhost:4000/articles/2021-09/rx-kotlin-01</loc>
-    </url>
-    
-    <url>
-        <loc>http://localhost:4000/articles/2021-09/bubble-sort</loc>
-    </url>
-    
-    <url>
-        <loc>http://localhost:4000/articles/2021-07/kotlin-object-keyword</loc>
-    </url>
-    
-    <url>
-        <loc>http://localhost:4000/articles/2021-07/android-studio-keyboard-shortcut</loc>
-    </url>
-    
-    <url>
-        <loc>http://localhost:4000/articles/2021-07/android-project-structure</loc>
-    </url>
-    
-    <url>
-        <loc>http://localhost:4000/articles/2021-03/android</loc>
-    </url>
-    
-    <url>
-        <loc>http://localhost:4000/articles/2020-05/algorithm-greedy</loc>
-    </url>
-    
-
-    
-    
-    
-    <url>
-        <loc>http://localhost:4000/archive/</loc>
-    </url>
-    
-    
-    
-    
-    
-    
-    
-    <url>
-        <loc>http://localhost:4000/</loc>
-    </url>
-    
-    
-    
-    
-    
-    <url>
-        <loc>http://localhost:4000/categories/</loc>
-    </url>
-    
-    
-    
-    
-    
-    
-    
-    <url>
-        <loc>http://localhost:4000/resume/</loc>
-    </url>
-    
-    
-    
-    
-    
-    
-    
-    <url>
-        <loc>http://localhost:4000/tags/</loc>
-    </url>
-    
-    
-    
+    {% endunless %}
+  {% endfor %}
 </urlset>
