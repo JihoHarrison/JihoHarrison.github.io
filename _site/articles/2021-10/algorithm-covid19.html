@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="접근 방법      이번 문제는 처음에 접근할 때 너무 어렵게 접근 했던 것 같다. 결국에는 규칙을 찾아내고, 구현을 시도했지만 약 4~5개의 테스트 케이스만 통과하고 다른 테스트 케이스들은 통과하지 못했다. 여러가지 문제점들이 존재했다. 탐색 알고리즘 즉, 재귀를 사용하지 않고 ...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[알고리즘] 2021 카카오 채용연계형 인턴십 거리두기 확인하기 😷 | JihoKevin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[알고리즘] 2021 카카오 채용연계형 인턴십 거리두기 확인하기 😷 | JihoKevin">
+  <meta name="twitter:description" content="접근 방법      이번 문제는 처음에 접근할 때 너무 어렵게 접근 했던 것 같다. 결국에는 규칙을 찾아내고, 구현을 시도했지만 약 4~5개의 테스트 케이스만 통과하고 다른 테스트 케이스들은 통과하지 못했다. 여러가지 문제점들이 존재했다. 탐색 알고리즘 즉, 재귀를 사용하지 않고 ...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2021-10/algorithm-covid19">
+  <meta property="og:title" content="[알고리즘] 2021 카카오 채용연계형 인턴십 거리두기 확인하기 😷 | JihoKevin">
+  <meta property="og:description" content="접근 방법      이번 문제는 처음에 접근할 때 너무 어렵게 접근 했던 것 같다. 결국에는 규칙을 찾아내고, 구현을 시도했지만 약 4~5개의 테스트 케이스만 통과하고 다른 테스트 케이스들은 통과하지 못했다. 여러가지 문제점들이 존재했다. 탐색 알고리즘 즉, 재귀를 사용하지 않고 ...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[알고리즘] 2021 카카오 채용연계형 인턴십 거리두기 확인하기 😷 | JihoKevin</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2021-10/algorithm-covid19">
+  <link rel="alternate" type="application/rss+xml" title="JihoKevin" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">신지호</a>
+  <span class="author_job">안드로이드 개발자가 되고싶은 소년</span>
+  <span class="author_bio mbm">방문해주셔서 감사합니다!🙇🏻‍♂️</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('jhshin9250@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/jiho_925" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/JihoKevin" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[알고리즘] 2021 카카오 채용연계형 인턴십 거리두기 확인하기 😷">[알고리즘] 2021 카카오 채용연계형 인턴십 거리두기 확인하기 😷</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        24 OCT 2021
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    9 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="접근-방법">접근 방법</h2>
+<ul>
+  <li>
+    <p>이번 문제는 처음에 접근할 때 너무 어렵게 접근 했던 것 같다. 결국에는 규칙을 찾아내고, 구현을 시도했지만 약 4~5개의 테스트 케이스만 통과하고 다른 테스트 케이스들은 통과하지 못했다. 여러가지 문제점들이 존재했다. 탐색 알고리즘 즉, 재귀를 사용하지 않고 단순히 기본적인 반복문으로 접근을 하려다 보니 모든 조건들을 알맞게 판별 한 후 마지막 <strong>answer</strong> 에 답을 넣어주는 부분에서 문제가 생겼다.</p>
+  </li>
+  <li>
+    <p>리턴되는 answer 자체의 크기는 5인데 for문을 몇 겹씩 겹치다 보니 5보다 초과되는 인덱스에 1 또는 0이 들어가면서 에러를 뱉어냈고,
+ <strong>1 또는 0</strong> 이 answer에 들어가는 순간 메서드 자체를 리턴시키자니 한 개의 메서드에 구현을 하고있던 터라 반복문 중간에 <strong>return</strong> 을 걸어주는 것도 불가능 해 보였다.</p>
+  </li>
+  <li>
+    <p>약 5일간 사투를 벌인 끝에 결국 해결하지 못한 채로 팀원들과의 스터디 후 답안을 찾아보았다. 이게 왠걸.. <strong>BFS</strong> 를 적용해야했고, 굳이 적용시키지 않더라도 구현되는 개념을 알고 있어야지 기본적인 반복문만 이용하더라도 구현이 가능했다.</p>
+  </li>
+</ul>
+
+<h2 id="문제-설명-및-풀이-방법">문제 설명 및 풀이 방법</h2>
+<p>[[“POOOP”, “OXXOX”, “OPXPX”, “OOXOX”, “POXXP”], [“POOPX”, “OXPXP”, “PXXXO”, “OXXXO”, “OOOPP”], [“PXOPX”, “OXOXP”, “OXPOX”, “OXXOP”, “PXPOX”], [“OOOXX”, “XOOOX”, “OOOXX”, “OXOOX”, “OOOOO”], [“PXPXP”, “XPXPX”, “PXPXP”, “XPXPX”, “PXPXP”]]
+—</p>
+<ul>
+  <li>
+    <p>다음과 같은 2차원 문자열 배열이 주어진다. 최상위 배열 각 요소들 5개는 대기실을 표현하고, 그 요소 안의 하나의 1차원 배열들은 면접 참여자들의 위치를 나타낸다. <strong>맨해튼 거리</strong> 를 이용하라고 나와있는데, 처음에는 Math.abs를 이용하여 절댓값을 판별해야 하는줄 알았지만 <strong>Math 클래스</strong> 를 사용하지 않을 수 있는 규칙을 찾아내었다. 참가자들의 위치는 맨해튼 거리 <strong>2</strong> 밖에 위치해야 하기도 하지만 만약 맨해튼 거리가 대각선으로 2보다 작고 파티션을 사이에 두고 앉아있다면 괜찮다. 하지만 둘 사이의 거리가 <strong>2</strong> 이내인데 파티션이 그 경로에 하나라도 존재하지 않을 경우 거리두기를 지키지 못 한 것으로 판단되어 <strong>answer</strong> 값에는 <strong>0</strong> 이 들어간다.</p>
+  </li>
+  <li>
+    <p>이 말을 내가 찾은 규칙으로 풀어보자면, 해당하는 인덱스가 <strong>“P”__일 경우  상하좌우의 값을 비교한다.
+  만약 그 위치에 __“P”</strong> 가 또 존재한다면, 이는 참가자들이 붙어서 앉아있는 경우 이므로 거리두기를 지키지 못한 것으로 판단한다.</p>
+  </li>
+  <li>
+    <p>인덱스가 <strong>“O”</strong> 일 경우, 역시 상하좌우의 값을 비교한다. 자기 자신의 인덱스가 <strong>“O”</strong> 이고 그 주변 상하좌우에 __“P”__가  두 개 이상 존재한다면, 이는 파티션을 사이에 두고 앉은 경우가 아니므로 거리두기를 지키지 못한 것으로 판단한다.</p>
+  </li>
+  <li>
+    <p>인덱스가 <strong>“X”</strong> 일 경우에는 이미 해당하는 인덱스가 사이에 존재하기 때문에 고려하지 않는다.</p>
+  </li>
+</ul>
+
+<h2 id="첫-번째-풀이">첫 번째 풀이</h2>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">solution</span><span class="o">(</span><span class="n">String</span><span class="o">[][]</span> <span class="n">places</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">answer</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">places</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">String</span><span class="o">[][]</span> <span class="n">cusTable</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="mi">5</span><span class="o">][</span><span class="mi">5</span><span class="o">];</span>
+        <span class="n">String</span><span class="o">[][]</span> <span class="n">newCusTable</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="mi">5</span><span class="o">][</span><span class="mi">5</span><span class="o">];</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">places</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">length</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">cusTable</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">places</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">].</span><span class="na">split</span><span class="o">(</span><span class="s">""</span><span class="o">);</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">;</span> <span class="n">k</span><span class="o">++)</span> <span class="o">{</span> <span class="c1">// 여기가 각 문자열의 요소 반복문</span>
+                <span class="n">newCusTable</span><span class="o">[</span><span class="n">j</span><span class="o">][</span><span class="n">k</span><span class="o">]</span> <span class="o">=</span> <span class="n">cusTable</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">k</span><span class="o">];</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">newCusTable</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">l</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">m</span> <span class="o">&lt;</span> <span class="n">newCusTable</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">length</span><span class="o">;</span> <span class="n">m</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">newCusTable</span><span class="o">[</span><span class="n">l</span><span class="o">][</span><span class="n">m</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="s">"X"</span><span class="o">))</span> <span class="k">continue</span><span class="o">;</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">newCusTable</span><span class="o">[</span><span class="n">l</span><span class="o">][</span><span class="n">m</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="s">"P"</span><span class="o">))</span> <span class="o">{</span>
+                    <span class="n">cnt</span><span class="o">++;</span>
+                <span class="o">}</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">l</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">newCusTable</span><span class="o">[</span><span class="n">l</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="n">m</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="s">"P"</span><span class="o">))</span> <span class="o">{</span>
+                        <span class="n">cnt</span><span class="o">++;</span>
+                    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                        <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">0</span><span class="o">;</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">l</span> <span class="o">&lt;</span> <span class="n">newCusTable</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">newCusTable</span><span class="o">[</span><span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="o">][</span><span class="n">m</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="s">"P"</span><span class="o">))</span> <span class="o">{</span>
+                        <span class="n">cnt</span><span class="o">++;</span>
+                   <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                        <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">0</span><span class="o">;</span>
+                   <span class="o">}</span>
+               <span class="o">}</span>
+               <span class="k">if</span> <span class="o">(</span><span class="n">m</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">newCusTable</span><span class="o">[</span><span class="n">l</span><span class="o">][</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="s">"P"</span><span class="o">))</span> <span class="o">{</span>
+                        <span class="n">cnt</span><span class="o">++;</span>
+                   <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                        <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">0</span><span class="o">;</span>
+                   <span class="o">}</span>
+               <span class="o">}</span>
+               <span class="k">if</span> <span class="o">(</span><span class="n">m</span> <span class="o">&lt;</span> <span class="n">newCusTable</span><span class="o">[</span><span class="n">l</span><span class="o">].</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">newCusTable</span><span class="o">[</span><span class="n">l</span><span class="o">][</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="s">"P"</span><span class="o">))</span> <span class="o">{</span>
+                        <span class="n">cnt</span><span class="o">++;</span>
+                    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                        <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">0</span><span class="o">;</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+           <span class="o">}</span>
+        <span class="o">}</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">cnt</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">answer</span><span class="o">[</span><span class="n">ans</span><span class="o">++]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">answer</span><span class="o">[</span><span class="n">ans</span><span class="o">++]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="k">return</span> <span class="n">answer</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>
+    <p>내가 봐도 정말 답이 없는 풀이 방법이다. for문을 저렇게 겹쳐서 구현 할 생각을 한 것 부터 너무 생각없이 접근했다.
+ 예시 테스트 케이스를 포함한 4~5개의 테스트 케이스를 통과했지만 대다수를 통과하지 못하고 14점 정도를 받은 코드이다.
+ <strong>newCusTable</strong> 이라는 새로운 배열에 값을 복사한 후 비교를 한 이유는 이미 만들어지지 않은 배열에 대해서 연산을 수행 하려하니
+ <strong>NullPointerException</strong> 이 발생해서 해당 이슈를 해결하기 위한 임시방편의 조치이다..</p>
+  </li>
+  <li>정작 문제가 생겼던 부분은 <strong>answer</strong> 에 값을 넣어주는 부분이다.
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">cnt</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+ <span class="n">answer</span><span class="o">[</span><span class="n">ans</span><span class="o">++]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+ <span class="n">answer</span><span class="o">[</span><span class="n">ans</span><span class="o">++]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>이 부분을 보면 값이 잘 넣어지고 있는 듯 보이지만 for문이 5번을 다 돌고난 후 다시 겹쳐진 __for__문이 돌때 또 영향을 받게 된다.</li>
+  <li><strong>“P”</strong> 의 값을 가지고 있는 배열에서는 항상 1의 값을 가지게 된다. <strong>“P”</strong> 의 값이 하나도 존재하지 않는 경우, 이 경우에만 <strong>cnt</strong> 값이 커지지 않아 <strong>0</strong> 이라는 값을 가지게 된다.</li>
+</ul>
+
+<p>## 수정된 해결방법</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">solution</span><span class="o">(</span><span class="n">String</span><span class="o">[][]</span> <span class="n">places</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">answer</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">places</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">answer</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">solutionPractice</span><span class="o">(</span><span class="n">places</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">answer</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">solutionPractice</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">places</span><span class="o">)</span> <span class="o">{</span>
+    
+    <span class="n">String</span><span class="o">[][]</span> <span class="n">table</span> <span class="o">=</span> <span class="n">makeTable</span><span class="o">(</span><span class="n">places</span><span class="o">);</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">table</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">table</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">length</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">table</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="s">"X"</span><span class="o">))</span> <span class="k">continue</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">table</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="s">"P"</span><span class="o">))</span> <span class="o">{</span>
+                <span class="n">cnt</span><span class="o">++;</span>
+            <span class="o">}</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">table</span><span class="o">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="s">"P"</span><span class="o">))</span> <span class="o">{</span>
+                    <span class="n">cnt</span><span class="o">++;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">table</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">table</span><span class="o">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="s">"P"</span><span class="o">))</span> <span class="o">{</span>
+                    <span class="n">cnt</span><span class="o">++;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">table</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="s">"P"</span><span class="o">))</span> <span class="o">{</span>
+                    <span class="n">cnt</span><span class="o">++;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">table</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">table</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="s">"P"</span><span class="o">))</span> <span class="o">{</span>
+                    <span class="n">cnt</span><span class="o">++;</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                    <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">0</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">cnt</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span><span class="o">[][]</span> <span class="nf">makeTable</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">places</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">String</span><span class="o">[][]</span> <span class="n">newCusTable</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="mi">5</span><span class="o">][</span><span class="mi">5</span><span class="o">];</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">places</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">String</span><span class="o">[]</span> <span class="n">str</span> <span class="o">=</span> <span class="n">places</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">split</span><span class="o">(</span><span class="s">""</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">newCusTable</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">str</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">newCusTable</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>
+    <p>맨 아래 <strong>makeTable</strong> 메서드에서는 각 배열을 한 줄씩 연산하는 <strong>places</strong> 배열을 매개변수로 갖는다.
+ 이를 이용해서 한 번에 하나의 대기실에 대해서만 연산을 수행하고 있다.</p>
+  </li>
+  <li>
+    <p><strong>solutionPractice</strong> 에서는 아래서 만든 <strong>makeTable</strong> 을 이용해서 각 요소들의 값을 상하좌우로 비교하며 <strong>cnt__가  2보다 큰지 확인한다.
+ cnt가 2 이상이라는 것은 참가자들의 거리두기가 잘 지켜지지 않는다는 의미이고, 이는 __answer__에 넣어줄 값을 결정해주고 __return</strong> 된다.이렇게 되면 해당하는 대기실에 대해서는 return이 수행되기 때문에 1 또는 0의 값만 넣어주고 더 이상 <strong>answer</strong> 값에 영향을 주지 않게 된다. 위에서 answer에 값을 넣어주는 부분에 대한 문제를 <strong>return</strong> 을 통해서 해결하게 된 것이다.</p>
+  </li>
+  <li>
+    <p>맨 위의 <strong>solution</strong> 을 보면, 이 메서드는 결국 각각의 대기실만 차례대로 <strong>solutionPractice</strong> 에 넣어주면 되기 때문에 for문을 5번만 돌려주면 된다</p>
+  </li>
+</ul>
+
+<p>## 결론
+  <em>탐색 알고리즘을 더 깊이있게 공부하자…</em></p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+        repo="JihoKevin/blog-comments"
+        issue-term="pathname"
+        label="comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 신지호. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

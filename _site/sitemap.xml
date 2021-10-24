@@ -1,244 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
     
     <url>
-      <loc>http://localhost:4000/articles/2021-10/android-rxkotlin-mvvm</loc>
-      
-        <lastmod>2021-10-15T00:00:00+02:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
+        <loc>http://localhost:4000/articles/2021-10/algorithm-covid19</loc>
     </url>
-    
-  
     
     <url>
-      <loc>http://localhost:4000/articles/2021-10/algorithm-hash-map</loc>
-      
-        <lastmod>2021-10-14T00:00:00+02:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
+        <loc>http://localhost:4000/articles/2021-10/android-rxkotlin-mvvm</loc>
     </url>
-    
-  
     
     <url>
-      <loc>http://localhost:4000/articles/2021-10/algorithm-string-press</loc>
-      
-        <lastmod>2021-10-11T00:00:00+02:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
+        <loc>http://localhost:4000/articles/2021-10/algorithm-hash-map</loc>
     </url>
-    
-  
     
     <url>
-      <loc>http://localhost:4000/articles/2021-10/rx-kotlin-flatmap-dividing</loc>
-      
-        <lastmod>2021-10-06T00:00:00+02:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
+        <loc>http://localhost:4000/articles/2021-10/algorithm-string-press</loc>
     </url>
-    
-  
     
     <url>
-      <loc>http://localhost:4000/articles/2021-09/flowable-observable</loc>
-      
-        <lastmod>2021-09-15T00:00:00+02:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
+        <loc>http://localhost:4000/articles/2021-10/rx-kotlin-flatmap-dividing</loc>
     </url>
-    
-  
     
     <url>
-      <loc>http://localhost:4000/articles/2021-09/hot-cold-observable</loc>
-      
-        <lastmod>2021-09-14T00:00:00+02:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
+        <loc>http://localhost:4000/articles/2021-09/flowable-observable</loc>
     </url>
-    
-  
     
     <url>
-      <loc>http://localhost:4000/articles/2021-09/behavior-processor</loc>
-      
-        <lastmod>2021-09-14T00:00:00+02:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
+        <loc>http://localhost:4000/articles/2021-09/hot-cold-observable</loc>
     </url>
-    
-  
     
     <url>
-      <loc>http://localhost:4000/articles/2021-09/android-version</loc>
-      
-        <lastmod>2021-09-13T13:34:10+02:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
+        <loc>http://localhost:4000/articles/2021-09/behavior-processor</loc>
     </url>
-    
-  
     
     <url>
-      <loc>http://localhost:4000/articles/2021-09/rx-kotlin-02</loc>
-      
-        <lastmod>2021-09-13T00:00:00+02:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
+        <loc>http://localhost:4000/articles/2021-09/android-version</loc>
     </url>
-    
-  
     
     <url>
-      <loc>http://localhost:4000/articles/2021-09/rx-kotlin-01</loc>
-      
-        <lastmod>2021-09-13T00:00:00+02:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
+        <loc>http://localhost:4000/articles/2021-09/rx-kotlin-02</loc>
     </url>
-    
-  
     
     <url>
-      <loc>http://localhost:4000/articles/2021-09/bubble-sort</loc>
-      
-        <lastmod>2021-09-13T00:00:00+02:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
+        <loc>http://localhost:4000/articles/2021-09/rx-kotlin-01</loc>
     </url>
-    
-  
     
     <url>
-      <loc>http://localhost:4000/articles/2021-07/kotlin-object-keyword</loc>
-      
-        <lastmod>2021-07-13T00:00:00+02:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
+        <loc>http://localhost:4000/articles/2021-09/bubble-sort</loc>
     </url>
-    
-  
     
     <url>
-      <loc>http://localhost:4000/articles/2021-07/android-studio-keyboard-shortcut</loc>
-      
-        <lastmod>2021-07-05T13:34:10+02:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
+        <loc>http://localhost:4000/articles/2021-07/kotlin-object-keyword</loc>
     </url>
-    
-  
     
     <url>
-      <loc>http://localhost:4000/articles/2021-07/android-project-structure</loc>
-      
-        <lastmod>2021-07-05T13:34:10+02:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
+        <loc>http://localhost:4000/articles/2021-07/android-studio-keyboard-shortcut</loc>
     </url>
-    
-  
     
     <url>
-      <loc>http://localhost:4000/articles/2021-03/android</loc>
-      
-        <lastmod>2021-03-18T12:34:10+01:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
+        <loc>http://localhost:4000/articles/2021-07/android-project-structure</loc>
     </url>
-    
-  
     
     <url>
-      <loc>http://localhost:4000/articles/2020-05/algorithm-greedy</loc>
-      
-        <lastmod>2020-05-11T00:00:00+02:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
+        <loc>http://localhost:4000/articles/2021-03/android</loc>
     </url>
     
-  
+    <url>
+        <loc>http://localhost:4000/articles/2020-05/algorithm-greedy</loc>
+    </url>
+    
+
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/archive/</loc>
+    </url>
+    
+    
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/categories/</loc>
+    </url>
+    
+    
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/resume/</loc>
+    </url>
+    
+    
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tags/</loc>
+    </url>
+    
+    
+    
 </urlset>
