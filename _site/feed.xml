@@ -5,8 +5,8 @@
     <description>안드로이드 개발자를 목표로 달려나가는 Kevin의 블로그입니다!</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2021-10-24</pubDate>
-    <lastBuildDate>Sun, 24 Oct 2021 10:45:32 +0200</lastBuildDate>
+    <pubDate>2021-10-25</pubDate>
+    <lastBuildDate>Mon, 25 Oct 2021 02:09:32 +0200</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
@@ -26,25 +26,26 @@
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;문제-설명-및-풀이-방법&quot;&gt;문제 설명 및 풀이 방법&lt;/h2&gt;
-&lt;p&gt;[[“POOOP”, “OXXOX”, “OPXPX”, “OOXOX”, “POXXP”], [“POOPX”, “OXPXP”, “PXXXO”, “OXXXO”, “OOOPP”], [“PXOPX”, “OXOXP”, “OXPOX”, “OXXOP”, “PXPOX”], [“OOOXX”, “XOOOX”, “OOOXX”, “OXOOX”, “OOOOO”], [“PXPXP”, “XPXPX”, “PXPXP”, “XPXPX”, “PXPXP”]]
-—&lt;/p&gt;
+&lt;p&gt;[[“POOOP”, “OXXOX”, “OPXPX”, “OOXOX”, “POXXP”], [“POOPX”, “OXPXP”, “PXXXO”, “OXXXO”, “OOOPP”], [“PXOPX”, “OXOXP”, “OXPOX”, “OXXOP”, “PXPOX”], [“OOOXX”, “XOOOX”, “OOOXX”, “OXOOX”, “OOOOO”], [“PXPXP”, “XPXPX”, “PXPXP”, “XPXPX”, “PXPXP”]]&lt;/p&gt;
+
+&lt;hr /&gt;
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;다음과 같은 2차원 문자열 배열이 주어진다. 최상위 배열 각 요소들 5개는 대기실을 표현하고, 그 요소 안의 하나의 1차원 배열들은 면접 참여자들의 위치를 나타낸다. &lt;strong&gt;맨해튼 거리&lt;/strong&gt; 를 이용하라고 나와있는데, 처음에는 Math.abs를 이용하여 절댓값을 판별해야 하는줄 알았지만 &lt;strong&gt;Math 클래스&lt;/strong&gt; 를 사용하지 않을 수 있는 규칙을 찾아내었다. 참가자들의 위치는 맨해튼 거리 &lt;strong&gt;2&lt;/strong&gt; 밖에 위치해야 하기도 하지만 만약 맨해튼 거리가 대각선으로 2보다 작고 파티션을 사이에 두고 앉아있다면 괜찮다. 하지만 둘 사이의 거리가 &lt;strong&gt;2&lt;/strong&gt; 이내인데 파티션이 그 경로에 하나라도 존재하지 않을 경우 거리두기를 지키지 못 한 것으로 판단되어 &lt;strong&gt;answer&lt;/strong&gt; 값에는 &lt;strong&gt;0&lt;/strong&gt; 이 들어간다.&lt;/p&gt;
+    &lt;p&gt;다음과 같은 2차원 문자열 배열이 주어진다. 최상위 배열 각 요소들 5개는 대기실을 표현하고, 그 요소 안의 하나의 1차원 배열들은 면접 참여자들의 위치를 나타낸다. &lt;strong&gt;맨해튼 거리&lt;/strong&gt; 를 이용하라고 나와있는데, 처음에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Math.abs&lt;/code&gt;를 이용하여 절댓값을 판별해야 하는줄 알았지만 &lt;strong&gt;Math 클래스&lt;/strong&gt; 를 사용하지 않을 수 있는 규칙을 찾아내었다. 참가자들의 위치는 맨해튼 거리 &lt;strong&gt;2&lt;/strong&gt; 밖에 위치해야 하기도 하지만 만약 맨해튼 거리가 대각선으로 2보다 작고 파티션을 사이에 두고 앉아있다면 괜찮다. 하지만 둘 사이의 거리가 &lt;strong&gt;2&lt;/strong&gt; 이내인데 파티션이 그 경로에 하나라도 존재하지 않을 경우 거리두기를 지키지 못 한 것으로 판단되어 &lt;strong&gt;answer&lt;/strong&gt; 값에는 &lt;strong&gt;0&lt;/strong&gt; 이 들어간다.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;이 말을 내가 찾은 규칙으로 풀어보자면, 해당하는 인덱스가 &lt;strong&gt;“P”__일 경우  상하좌우의 값을 비교한다.
-  만약 그 위치에 __“P”&lt;/strong&gt; 가 또 존재한다면, 이는 참가자들이 붙어서 앉아있는 경우 이므로 거리두기를 지키지 못한 것으로 판단한다.&lt;/p&gt;
+    &lt;p&gt;이 말을 내가 찾은 규칙으로 풀어보자면, 해당하는 인덱스가 &lt;strong&gt;“P”&lt;/strong&gt; 일 경우  상하좌우의 값을 비교한다.
+  만약 그 위치에 &lt;strong&gt;“P”&lt;/strong&gt; 가 또 존재한다면, 이는 참가자들이 붙어서 앉아있는 경우 이므로 거리두기를 지키지 못한 것으로 판단한다.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;인덱스가 &lt;strong&gt;“O”&lt;/strong&gt; 일 경우, 역시 상하좌우의 값을 비교한다. 자기 자신의 인덱스가 &lt;strong&gt;“O”&lt;/strong&gt; 이고 그 주변 상하좌우에 __“P”__가  두 개 이상 존재한다면, 이는 파티션을 사이에 두고 앉은 경우가 아니므로 거리두기를 지키지 못한 것으로 판단한다.&lt;/p&gt;
+    &lt;p&gt;인덱스가 &lt;strong&gt;“O”&lt;/strong&gt; 일 경우, 역시 상하좌우의 값을 비교한다. 자기 자신의 인덱스가 &lt;strong&gt;“O”&lt;/strong&gt; 이고 그 주변 상하좌우에 &lt;strong&gt;“P”&lt;/strong&gt; 가  두 개 이상 존재한다면, 이는 파티션을 사이에 두고 앉은 경우가 아니므로 거리두기를 지키지 못한 것으로 판단한다.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;인덱스가 &lt;strong&gt;“X”&lt;/strong&gt; 일 경우에는 이미 해당하는 인덱스가 사이에 존재하기 때문에 고려하지 않는다.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;첫-번째-풀이&quot;&gt;첫 번째 풀이&lt;/h2&gt;
+&lt;h2 id=&quot;많이-이상한-첫-번째-풀이&quot;&gt;많이 이상한 첫 번째 풀이&lt;/h2&gt;
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[][]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;places&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
     &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ans&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
@@ -120,7 +121,7 @@
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-  &lt;li&gt;이 부분을 보면 값이 잘 넣어지고 있는 듯 보이지만 for문이 5번을 다 돌고난 후 다시 겹쳐진 __for__문이 돌때 또 영향을 받게 된다.&lt;/li&gt;
+  &lt;li&gt;이 부분을 보면 값이 잘 넣어지고 있는 듯 보이지만 for문이 5번을 다 돌고난 후 다시 겹쳐진 &lt;strong&gt;for&lt;/strong&gt; 문이 돌때 또 영향을 받게 된다.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;“P”&lt;/strong&gt; 의 값을 가지고 있는 배열에서는 항상 1의 값을 가지게 된다. &lt;strong&gt;“P”&lt;/strong&gt; 의 값이 하나도 존재하지 않는 경우, 이 경우에만 &lt;strong&gt;cnt&lt;/strong&gt; 값이 커지지 않아 &lt;strong&gt;0&lt;/strong&gt; 이라는 값을 가지게 된다.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -193,18 +194,19 @@
  이를 이용해서 한 번에 하나의 대기실에 대해서만 연산을 수행하고 있다.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;solutionPractice&lt;/strong&gt; 에서는 아래서 만든 &lt;strong&gt;makeTable&lt;/strong&gt; 을 이용해서 각 요소들의 값을 상하좌우로 비교하며 &lt;strong&gt;cnt__가  2보다 큰지 확인한다.
- cnt가 2 이상이라는 것은 참가자들의 거리두기가 잘 지켜지지 않는다는 의미이고, 이는 __answer__에 넣어줄 값을 결정해주고 __return&lt;/strong&gt; 된다.이렇게 되면 해당하는 대기실에 대해서는 return이 수행되기 때문에 1 또는 0의 값만 넣어주고 더 이상 &lt;strong&gt;answer&lt;/strong&gt; 값에 영향을 주지 않게 된다. 위에서 answer에 값을 넣어주는 부분에 대한 문제를 &lt;strong&gt;return&lt;/strong&gt; 을 통해서 해결하게 된 것이다.&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;solutionPractice&lt;/strong&gt; 에서는 아래서 만든 &lt;strong&gt;makeTable&lt;/strong&gt; 을 이용해서 각 요소들의 값을 상하좌우로 비교하며 &lt;strong&gt;cnt&lt;/strong&gt; 가  2보다 큰지 확인한다.
+ cnt가 2 이상이라는 것은 참가자들의 거리두기가 잘 지켜지지 않는다는 의미이고, 이는 &lt;strong&gt;answer&lt;/strong&gt; 에 넣어줄 값을 결정해주고 &lt;strong&gt;return&lt;/strong&gt; 된다.이렇게 되면 해당하는 대기실에 대해서는 return이 수행되기 때문에 1 또는 0의 값만 넣어주고 더 이상 &lt;strong&gt;answer&lt;/strong&gt; 값에 영향을 주지 않게 된다. 위에서 &lt;strong&gt;answer&lt;/strong&gt; 에 값을 넣어주는 부분에 대한 문제를 &lt;strong&gt;return&lt;/strong&gt; 을 통해서 해결하게 된 것이다.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;맨 위의 &lt;strong&gt;solution&lt;/strong&gt; 을 보면, 이 메서드는 결국 각각의 대기실만 차례대로 &lt;strong&gt;solutionPractice&lt;/strong&gt; 에 넣어주면 되기 때문에 for문을 5번만 돌려주면 된다&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;## 결론
-  &lt;em&gt;탐색 알고리즘을 더 깊이있게 공부하자…&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&quot;결론&quot;&gt;결론&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;탐색 알고리즘을 더 깊이있게 공부하자…&lt;/em&gt;&lt;/p&gt;
 </description>
-        <pubDate>2021-10-24</pubDate>
+        <pubDate>2021-10-25</pubDate>
         <link>http://localhost:4000/articles/2021-10/algorithm-covid19</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-10/algorithm-covid19</guid>
         
@@ -262,7 +264,7 @@
 &lt;h2 id=&quot;2️⃣-android에서의-mvvm&quot;&gt;2️⃣ Android에서의 MVVM&lt;/h2&gt;
 &lt;p&gt;[마지막 수정 : 2021-10-15, 추후 업데이트 예정]&lt;/p&gt;
 </description>
-        <pubDate>2021-10-24</pubDate>
+        <pubDate>2021-10-25</pubDate>
         <link>http://localhost:4000/articles/2021-10/android-rxkotlin-mvvm</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-10/android-rxkotlin-mvvm</guid>
         
@@ -346,7 +348,7 @@
 &lt;h2 id=&quot;실행-결과&quot;&gt;실행 결과&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&quot;/img/10-14-algorithm/result.png&quot; alt=&quot;backpressure&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>2021-10-24</pubDate>
+        <pubDate>2021-10-25</pubDate>
         <link>http://localhost:4000/articles/2021-10/algorithm-hash-map</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-10/algorithm-hash-map</guid>
         
@@ -439,7 +441,7 @@
 &lt;/ul&gt;
 
 </description>
-        <pubDate>2021-10-24</pubDate>
+        <pubDate>2021-10-25</pubDate>
         <link>http://localhost:4000/articles/2021-10/algorithm-string-press</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-10/algorithm-string-press</guid>
         
@@ -539,7 +541,7 @@ Recieved this is 1&lt;br /&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2021-10-24</pubDate>
+        <pubDate>2021-10-25</pubDate>
         <link>http://localhost:4000/articles/2021-10/rx-kotlin-flatmap-dividing</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-10/rx-kotlin-flatmap-dividing</guid>
         
@@ -580,7 +582,7 @@ Recieved this is 1&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;하지만 모든 데이터 스트림에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;을 사용하는 것은 결코 바람직하지 않은 방법이 될 것이다. 소량이 데이터나 UI 이벤트 처리와 같은 경우는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt; 에서도 데이터 스트림의 시간차 등을 두어 스트림의 양을 조절하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;debounce()&lt;/code&gt;라던지, &lt;code class=&quot;highlighter-rouge&quot;&gt;throttle()&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;sample()&lt;/code&gt; 함수 등이 존재하기 때문에 상황에 따라 적절하게 사용하는 방법을 익히면 될 것 같다.&lt;/p&gt;
 </description>
-        <pubDate>2021-10-24</pubDate>
+        <pubDate>2021-10-25</pubDate>
         <link>http://localhost:4000/articles/2021-09/flowable-observable</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/flowable-observable</guid>
         
@@ -681,7 +683,7 @@ subscription 3: 5&lt;br /&gt;
 
 &lt;p&gt;결국 &lt;code class=&quot;highlighter-rouge&quot;&gt;hot observable&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;cold observable&lt;/code&gt;의 차이는 구독 한 시점에 다시 새로운 데이터를 받아오느냐, 이미 지나간 데이터는 받아오지 못하고 중간에 흐름에 껴서 받아오느냐의 차이이다.&lt;/p&gt;
 </description>
-        <pubDate>2021-10-24</pubDate>
+        <pubDate>2021-10-25</pubDate>
         <link>http://localhost:4000/articles/2021-09/hot-cold-observable</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/hot-cold-observable</guid>
         
@@ -766,7 +768,7 @@ subscription 3: 5&lt;br /&gt;
 
 &lt;p&gt;정말 어렵고 복잡하다.. 안드로이드 고수가 되는 그날까지 최선을 다해보자..!&lt;/p&gt;
 </description>
-        <pubDate>2021-10-24</pubDate>
+        <pubDate>2021-10-25</pubDate>
         <link>http://localhost:4000/articles/2021-09/behavior-processor</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/behavior-processor</guid>
         
@@ -1052,7 +1054,7 @@ https://developer.android.com/guide/app-compatibility?hl=ko
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2021-10-24</pubDate>
+        <pubDate>2021-10-25</pubDate>
         <link>http://localhost:4000/articles/2021-09/android-version</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/android-version</guid>
         
@@ -1176,7 +1178,7 @@ flatMap 연산자는 내부적으로 merge 연산자를 사용하기 때문에 �
 &lt;h1 id=&quot;repeat-연산자&quot;&gt;repeat 연산자&lt;/h1&gt;
 &lt;p&gt;아이템을 N번 발행한다. 파라미터로 아무 값이 들어가지 않을 시 값을 무한히 발행시킨다.&lt;/p&gt;
 </description>
-        <pubDate>2021-10-24</pubDate>
+        <pubDate>2021-10-25</pubDate>
         <link>http://localhost:4000/articles/2021-09/rx-kotlin-02</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/rx-kotlin-02</guid>
         

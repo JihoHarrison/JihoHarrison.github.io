@@ -179,25 +179,26 @@
 </ul>
 
 <h2 id="문제-설명-및-풀이-방법">문제 설명 및 풀이 방법</h2>
-<p>[[“POOOP”, “OXXOX”, “OPXPX”, “OOXOX”, “POXXP”], [“POOPX”, “OXPXP”, “PXXXO”, “OXXXO”, “OOOPP”], [“PXOPX”, “OXOXP”, “OXPOX”, “OXXOP”, “PXPOX”], [“OOOXX”, “XOOOX”, “OOOXX”, “OXOOX”, “OOOOO”], [“PXPXP”, “XPXPX”, “PXPXP”, “XPXPX”, “PXPXP”]]
-—</p>
+<p>[[“POOOP”, “OXXOX”, “OPXPX”, “OOXOX”, “POXXP”], [“POOPX”, “OXPXP”, “PXXXO”, “OXXXO”, “OOOPP”], [“PXOPX”, “OXOXP”, “OXPOX”, “OXXOP”, “PXPOX”], [“OOOXX”, “XOOOX”, “OOOXX”, “OXOOX”, “OOOOO”], [“PXPXP”, “XPXPX”, “PXPXP”, “XPXPX”, “PXPXP”]]</p>
+
+<hr />
 <ul>
   <li>
-    <p>다음과 같은 2차원 문자열 배열이 주어진다. 최상위 배열 각 요소들 5개는 대기실을 표현하고, 그 요소 안의 하나의 1차원 배열들은 면접 참여자들의 위치를 나타낸다. <strong>맨해튼 거리</strong> 를 이용하라고 나와있는데, 처음에는 Math.abs를 이용하여 절댓값을 판별해야 하는줄 알았지만 <strong>Math 클래스</strong> 를 사용하지 않을 수 있는 규칙을 찾아내었다. 참가자들의 위치는 맨해튼 거리 <strong>2</strong> 밖에 위치해야 하기도 하지만 만약 맨해튼 거리가 대각선으로 2보다 작고 파티션을 사이에 두고 앉아있다면 괜찮다. 하지만 둘 사이의 거리가 <strong>2</strong> 이내인데 파티션이 그 경로에 하나라도 존재하지 않을 경우 거리두기를 지키지 못 한 것으로 판단되어 <strong>answer</strong> 값에는 <strong>0</strong> 이 들어간다.</p>
+    <p>다음과 같은 2차원 문자열 배열이 주어진다. 최상위 배열 각 요소들 5개는 대기실을 표현하고, 그 요소 안의 하나의 1차원 배열들은 면접 참여자들의 위치를 나타낸다. <strong>맨해튼 거리</strong> 를 이용하라고 나와있는데, 처음에는 <code class="highlighter-rouge">Math.abs</code>를 이용하여 절댓값을 판별해야 하는줄 알았지만 <strong>Math 클래스</strong> 를 사용하지 않을 수 있는 규칙을 찾아내었다. 참가자들의 위치는 맨해튼 거리 <strong>2</strong> 밖에 위치해야 하기도 하지만 만약 맨해튼 거리가 대각선으로 2보다 작고 파티션을 사이에 두고 앉아있다면 괜찮다. 하지만 둘 사이의 거리가 <strong>2</strong> 이내인데 파티션이 그 경로에 하나라도 존재하지 않을 경우 거리두기를 지키지 못 한 것으로 판단되어 <strong>answer</strong> 값에는 <strong>0</strong> 이 들어간다.</p>
   </li>
   <li>
-    <p>이 말을 내가 찾은 규칙으로 풀어보자면, 해당하는 인덱스가 <strong>“P”__일 경우  상하좌우의 값을 비교한다.
-  만약 그 위치에 __“P”</strong> 가 또 존재한다면, 이는 참가자들이 붙어서 앉아있는 경우 이므로 거리두기를 지키지 못한 것으로 판단한다.</p>
+    <p>이 말을 내가 찾은 규칙으로 풀어보자면, 해당하는 인덱스가 <strong>“P”</strong> 일 경우  상하좌우의 값을 비교한다.
+  만약 그 위치에 <strong>“P”</strong> 가 또 존재한다면, 이는 참가자들이 붙어서 앉아있는 경우 이므로 거리두기를 지키지 못한 것으로 판단한다.</p>
   </li>
   <li>
-    <p>인덱스가 <strong>“O”</strong> 일 경우, 역시 상하좌우의 값을 비교한다. 자기 자신의 인덱스가 <strong>“O”</strong> 이고 그 주변 상하좌우에 __“P”__가  두 개 이상 존재한다면, 이는 파티션을 사이에 두고 앉은 경우가 아니므로 거리두기를 지키지 못한 것으로 판단한다.</p>
+    <p>인덱스가 <strong>“O”</strong> 일 경우, 역시 상하좌우의 값을 비교한다. 자기 자신의 인덱스가 <strong>“O”</strong> 이고 그 주변 상하좌우에 <strong>“P”</strong> 가  두 개 이상 존재한다면, 이는 파티션을 사이에 두고 앉은 경우가 아니므로 거리두기를 지키지 못한 것으로 판단한다.</p>
   </li>
   <li>
     <p>인덱스가 <strong>“X”</strong> 일 경우에는 이미 해당하는 인덱스가 사이에 존재하기 때문에 고려하지 않는다.</p>
   </li>
 </ul>
 
-<h2 id="첫-번째-풀이">첫 번째 풀이</h2>
+<h2 id="많이-이상한-첫-번째-풀이">많이 이상한 첫 번째 풀이</h2>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">solution</span><span class="o">(</span><span class="n">String</span><span class="o">[][]</span> <span class="n">places</span><span class="o">)</span> <span class="o">{</span>
     <span class="kt">int</span><span class="o">[]</span> <span class="n">answer</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
     <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
@@ -273,7 +274,7 @@
 <span class="o">}</span>
 </code></pre></div>    </div>
   </li>
-  <li>이 부분을 보면 값이 잘 넣어지고 있는 듯 보이지만 for문이 5번을 다 돌고난 후 다시 겹쳐진 __for__문이 돌때 또 영향을 받게 된다.</li>
+  <li>이 부분을 보면 값이 잘 넣어지고 있는 듯 보이지만 for문이 5번을 다 돌고난 후 다시 겹쳐진 <strong>for</strong> 문이 돌때 또 영향을 받게 된다.</li>
   <li><strong>“P”</strong> 의 값을 가지고 있는 배열에서는 항상 1의 값을 가지게 된다. <strong>“P”</strong> 의 값이 하나도 존재하지 않는 경우, 이 경우에만 <strong>cnt</strong> 값이 커지지 않아 <strong>0</strong> 이라는 값을 가지게 된다.</li>
 </ul>
 
@@ -346,16 +347,17 @@
  이를 이용해서 한 번에 하나의 대기실에 대해서만 연산을 수행하고 있다.</p>
   </li>
   <li>
-    <p><strong>solutionPractice</strong> 에서는 아래서 만든 <strong>makeTable</strong> 을 이용해서 각 요소들의 값을 상하좌우로 비교하며 <strong>cnt__가  2보다 큰지 확인한다.
- cnt가 2 이상이라는 것은 참가자들의 거리두기가 잘 지켜지지 않는다는 의미이고, 이는 __answer__에 넣어줄 값을 결정해주고 __return</strong> 된다.이렇게 되면 해당하는 대기실에 대해서는 return이 수행되기 때문에 1 또는 0의 값만 넣어주고 더 이상 <strong>answer</strong> 값에 영향을 주지 않게 된다. 위에서 answer에 값을 넣어주는 부분에 대한 문제를 <strong>return</strong> 을 통해서 해결하게 된 것이다.</p>
+    <p><strong>solutionPractice</strong> 에서는 아래서 만든 <strong>makeTable</strong> 을 이용해서 각 요소들의 값을 상하좌우로 비교하며 <strong>cnt</strong> 가  2보다 큰지 확인한다.
+ cnt가 2 이상이라는 것은 참가자들의 거리두기가 잘 지켜지지 않는다는 의미이고, 이는 <strong>answer</strong> 에 넣어줄 값을 결정해주고 <strong>return</strong> 된다.이렇게 되면 해당하는 대기실에 대해서는 return이 수행되기 때문에 1 또는 0의 값만 넣어주고 더 이상 <strong>answer</strong> 값에 영향을 주지 않게 된다. 위에서 <strong>answer</strong> 에 값을 넣어주는 부분에 대한 문제를 <strong>return</strong> 을 통해서 해결하게 된 것이다.</p>
   </li>
   <li>
     <p>맨 위의 <strong>solution</strong> 을 보면, 이 메서드는 결국 각각의 대기실만 차례대로 <strong>solutionPractice</strong> 에 넣어주면 되기 때문에 for문을 5번만 돌려주면 된다</p>
   </li>
 </ul>
 
-<p>## 결론
-  <em>탐색 알고리즘을 더 깊이있게 공부하자…</em></p>
+<h2 id="결론">결론</h2>
+
+<p><em>탐색 알고리즘을 더 깊이있게 공부하자…</em></p>
 
   </article>
 
