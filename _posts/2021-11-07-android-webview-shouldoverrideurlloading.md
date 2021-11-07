@@ -11,8 +11,8 @@ categories: [안드로이드]
 
  * 평소 웹뷰라는 뷰에 대한 학습을 소홀이 했던 것을 후회하며 천천히 문제점을 찾아 본 결과, __ShouldOverrideUrlLoading__ 함수에서, 웹뷰 내에서 처리되는 url에 대한 예외처리를 해 주지 않아서 발생한 오류였다.
 
-<img src="https://user-images.githubusercontent.com/27722059/140637024-b84ce35c-b008-4cdb-99d1-00513eaf020b.png" width="800" height="600"/>
-<img src="https://user-images.githubusercontent.com/27722059/140637030-24c5cd5d-a742-4ea6-994d-f03548d576e1.png" width="800" height="600"/>
+<img src="https://user-images.githubusercontent.com/27722059/140637024-b84ce35c-b008-4cdb-99d1-00513eaf020b.png" width="600" height="800"/>
+<img src="https://user-images.githubusercontent.com/27722059/140637030-24c5cd5d-a742-4ea6-994d-f03548d576e1.png" width="600" height="800"/>
 
 ## ShouldOverrideUrlLoading
  * 쉽게 말해서 현재 내가 사용하고 있는 웹뷰 내에서 다른 url을 호출하며 돌아다닐 때 제어권(?)을 요청하는 함수이다. 처음 액티비티에 로드 될 때는 문제가 없지만 웹뷰 상에서 페이지 이동이 일어날 경우 디바이스 브라우저로 실행되거나 나처럼 특정 앱의 스키마를 사용해야하는 경우는 페이지를 로드할 수 없다는 에러를 뱉게될 수 있다.
