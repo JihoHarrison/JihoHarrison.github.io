@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="프롤로그      여러가지 안드로이드 프로젝트를 진행하다가 결국 마주하게 되었다.. WebView에 대한 문제를… 발단은 평소 문제없이 진행되던 메드나 서비스의 PASS앱을 통한 사용자 인증 절차 가 웹뷰 내부에서 intent:// 로 시작하는 url로 redirect 될 시 먹통...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[안드로이드] WebView ShouldOverrideUrlLoading | JihoKevin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[안드로이드] WebView ShouldOverrideUrlLoading | JihoKevin">
+  <meta name="twitter:description" content="프롤로그      여러가지 안드로이드 프로젝트를 진행하다가 결국 마주하게 되었다.. WebView에 대한 문제를… 발단은 평소 문제없이 진행되던 메드나 서비스의 PASS앱을 통한 사용자 인증 절차 가 웹뷰 내부에서 intent:// 로 시작하는 url로 redirect 될 시 먹통...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2021-11/android-webview-shouldoverrideurlloading">
+  <meta property="og:title" content="[안드로이드] WebView ShouldOverrideUrlLoading | JihoKevin">
+  <meta property="og:description" content="프롤로그      여러가지 안드로이드 프로젝트를 진행하다가 결국 마주하게 되었다.. WebView에 대한 문제를… 발단은 평소 문제없이 진행되던 메드나 서비스의 PASS앱을 통한 사용자 인증 절차 가 웹뷰 내부에서 intent:// 로 시작하는 url로 redirect 될 시 먹통...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[안드로이드] WebView ShouldOverrideUrlLoading | JihoKevin</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2021-11/android-webview-shouldoverrideurlloading">
+  <link rel="alternate" type="application/rss+xml" title="JihoKevin" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">신지호</a>
+  <span class="author_job">안드로이드 개발자가 되고싶은 소년</span>
+  <span class="author_bio mbm">방문해주셔서 감사합니다!🙇🏻‍♂️</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('jhshin9250@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/jiho_925" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/JihoKevin" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[안드로이드] WebView ShouldOverrideUrlLoading">[안드로이드] WebView ShouldOverrideUrlLoading</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        7 NOV 2021
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    3 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="프롤로그">프롤로그</h2>
+
+<ul>
+  <li>
+    <p>여러가지 안드로이드 프로젝트를 진행하다가 결국 마주하게 되었다.. WebView에 대한 문제를… 발단은 평소 문제없이 진행되던 메드나 서비스의 <strong>PASS앱을 통한 사용자 인증 절차</strong> 가 웹뷰 내부에서 <strong>intent://</strong> 로 시작하는 url로 redirect 될 시 먹통이 되었다.</p>
+  </li>
+  <li>
+    <p>평소 웹뷰라는 뷰에 대한 학습을 소홀이 했던 것을 후회하며 천천히 문제점을 찾아 본 결과, <strong>ShouldOverrideUrlLoading</strong> 함수에서, 웹뷰 내에서 처리되는 url에 대한 예외처리를 해 주지 않아서 발생한 오류였다.</p>
+  </li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td><img align="right" src="https://user-images.githubusercontent.com/27722059/140637024-b84ce35c-b008-4cdb-99d1-00513eaf020b.png" width="370" height="790" /></td>
+      <td><img align="left" src="https://user-images.githubusercontent.com/27722059/140637030-24c5cd5d-a742-4ea6-994d-f03548d576e1.png" width="370" height="790" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="shouldoverrideurlloading">ShouldOverrideUrlLoading</h2>
+<ul>
+  <li>쉽게 말해서 현재 내가 사용하고 있는 웹뷰 내에서 다른 url을 호출하며 돌아다닐 때 제어권(?)을 요청하는 함수이다. 처음 액티비티에 로드 될 때는 문제가 없지만 웹뷰 상에서 페이지 이동이 일어날 경우 디바이스 브라우저로 실행되거나 나처럼 특정 앱의 스키마를 사용해야하는 경우는 페이지를 로드할 수 없다는 에러를 뱉게될 수 있다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/27722059/140636493-5738d772-53ae-47b2-b842-d4cacd03940d.png" alt="ShouldOverrideUrlLoadingDeprecated" />
+<img src="https://user-images.githubusercontent.com/27722059/140636518-39c6bc85-19de-4329-8d2b-8220104b93ea.png" alt="ShouldOverrideUrlLoading" /></p>
+
+<ul>
+  <li>기존에 사용되고 있었던 <strong>ShouldOverrideUrlLoading</strong> 은 <strong>deprecated</strong> 되었다. 하지만 업데이트 된 새로운 함수를 찾아보니 기존 함수와 동일한 이름의 함수였고, 차이점이라 하면 매개변수로 받고있는 String 형식의 url이 <strong>WebResourceRequest</strong> 형식의 <strong>request</strong> 로 바뀌었다는 점이다. 기존에 매개변수의 url을 직접 사용했던 부분은 <strong>request.url</strong> 을 통해서 가져올 수 있다.</li>
+</ul>
+
+<h2 id="문제가-됐던-기존-형식">문제가 됐던 기존 형식</h2>
+<p><img src="https://user-images.githubusercontent.com/27722059/140636772-a129061e-cd1f-463e-b861-98f2afa6d9cd.png" alt="image" /></p>
+<ul>
+  <li>문제가 되었던 기존 코드의 형태이다. 보이는 것과 같이 <strong>shouldOverrideUrlLoading</strong> 함수 내에서 <strong>request.url</strong> 로 url을 호출하고 있지만 해당 url에 대한 예외처리 등을 처리해주는 부분이 없던 것이다.</li>
+  <li>PASS 앱을 통한 사용자 인증 절차가 수행되는 url의 형식은 <strong>intent://</strong> 로 시작된다. 웹뷰 내에서 또 다른 앱을 불러오는 형식이다. <strong>http, https</strong> 형식이라면 새로운 브라우저 창을 실행시키던가 해서 어떻게든 실행이 되겠지만 전화 기능과 연결시키는 <strong>tel:, 또는 mailTo:, sms:</strong> 와 같이 새로운 앱 또는 기능을 띄워주는 형식은 <strong>shouldOverrideUrlLoading</strong> 에서 각각의 url에 대한 처리를 진행 해 주어야 한다.</li>
+</ul>
+
+<h2 id="intent의-행동-처리">intent://의 행동 처리</h2>
+
+<ul>
+  <li>다음과 같이 <strong>intent://</strong> 로 시작하는 url에 대한 예외 처리를 진행 해 주었고 설치되어있지 않을 시 <strong>package name</strong> 을 추출하여 market으로 이동하는 로직을 구현 해 주었다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">override</span> <span class="n">fun</span> <span class="nf">shouldOverrideUrlLoading</span><span class="o">(</span>
+      <span class="nl">view:</span> <span class="n">WebView</span><span class="o">,</span>
+      <span class="nl">request:</span> <span class="n">WebResourceRequest</span><span class="o">?</span>
+  <span class="o">):</span> <span class="n">Boolean</span> <span class="o">{</span>
+      <span class="n">val</span> <span class="nl">url:</span> <span class="n">String</span> <span class="o">=</span> <span class="n">request</span><span class="o">?.</span><span class="na">url</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">url</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"intent://"</span><span class="o">))</span> <span class="o">{</span>
+        <span class="n">var</span> <span class="nl">intent:</span> <span class="n">Intent</span><span class="o">?</span> <span class="o">=</span> <span class="kc">null</span>
+        <span class="k">return</span> <span class="k">try</span> <span class="o">{</span>
+            <span class="n">intent</span> <span class="o">=</span> <span class="n">Intent</span><span class="o">.</span><span class="na">parseUri</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">Intent</span><span class="o">.</span><span class="na">URI_INTENT_SCHEME</span><span class="o">)</span>
+            <span class="n">val</span> <span class="n">uri</span> <span class="o">=</span> <span class="n">Uri</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">intent</span><span class="o">.</span><span class="na">dataString</span><span class="o">)</span>
+            <span class="n">startActivity</span><span class="o">(</span><span class="n">Intent</span><span class="o">(</span><span class="n">Intent</span><span class="o">.</span><span class="na">ACTION_VIEW</span><span class="o">,</span> <span class="n">uri</span><span class="o">))</span>
+            <span class="kc">true</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nl">ex:</span> <span class="n">URISyntaxException</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kc">false</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nl">e:</span> <span class="n">ActivityNotFoundException</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">intent</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span>
+            <span class="n">val</span> <span class="n">packageName</span> <span class="o">=</span> <span class="n">intent</span><span class="o">.</span><span class="na">getPackage</span><span class="o">()</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">packageName</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">startActivity</span><span class="o">(</span>
+                <span class="n">Intent</span><span class="o">(</span>
+                    <span class="n">Intent</span><span class="o">.</span><span class="na">ACTION_VIEW</span><span class="o">,</span>
+                    <span class="n">Uri</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"market://details?id=$packageName"</span><span class="o">)</span>
+                <span class="o">)</span>
+            <span class="o">)</span>
+            <span class="k">return</span> <span class="kc">true</span>
+        <span class="o">}</span>
+        <span class="kc">false</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="n">view</span><span class="o">.</span><span class="na">loadUrl</span><span class="o">(</span><span class="n">url</span><span class="o">)</span>
+    <span class="k">return</span> <span class="kc">false</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<table>
+  <tbody>
+    <tr>
+      <td><img align="right" src="https://user-images.githubusercontent.com/27722059/140638325-eb2db37c-3060-424d-b8ad-b7a639ea18f6.png" width="370" height="790" /></td>
+      <td><img align="left" src="https://user-images.githubusercontent.com/27722059/140638345-7001ddd5-9193-498b-aae0-aff231f1777a.png" width="370" height="790" /></td>
+    </tr>
+  </tbody>
+</table>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+        repo="JihoKevin/blog-comments"
+        issue-term="pathname"
+        label="comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 신지호. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

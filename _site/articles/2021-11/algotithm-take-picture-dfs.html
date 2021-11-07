@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="문제 설명      하나의 문자열 배열에 대한 모든 경우의 수를 구하고 두 가지의 조건을 만족하는 값이 있는지 조건 판별해야 한다.        모든 경우의 수를 구하고 그 중에서 만족하는 조건이 있는지 판별해야 하기 때문에 dfs의 개념을 적용시켰다.  dfs()      재귀로...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[알고리즘] 2017 카카오코드 본선 단체사진 찍기 📷 | JihoKevin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[알고리즘] 2017 카카오코드 본선 단체사진 찍기 📷 | JihoKevin">
+  <meta name="twitter:description" content="문제 설명      하나의 문자열 배열에 대한 모든 경우의 수를 구하고 두 가지의 조건을 만족하는 값이 있는지 조건 판별해야 한다.        모든 경우의 수를 구하고 그 중에서 만족하는 조건이 있는지 판별해야 하기 때문에 dfs의 개념을 적용시켰다.  dfs()      재귀로...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2021-11/algotithm-take-picture-dfs">
+  <meta property="og:title" content="[알고리즘] 2017 카카오코드 본선 단체사진 찍기 📷 | JihoKevin">
+  <meta property="og:description" content="문제 설명      하나의 문자열 배열에 대한 모든 경우의 수를 구하고 두 가지의 조건을 만족하는 값이 있는지 조건 판별해야 한다.        모든 경우의 수를 구하고 그 중에서 만족하는 조건이 있는지 판별해야 하기 때문에 dfs의 개념을 적용시켰다.  dfs()      재귀로...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[알고리즘] 2017 카카오코드 본선 단체사진 찍기 📷 | JihoKevin</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2021-11/algotithm-take-picture-dfs">
+  <link rel="alternate" type="application/rss+xml" title="JihoKevin" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">신지호</a>
+  <span class="author_job">안드로이드 개발자가 되고싶은 소년</span>
+  <span class="author_bio mbm">방문해주셔서 감사합니다!🙇🏻‍♂️</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('jhshin9250@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/jiho_925" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/JihoKevin" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[알고리즘] 2017 카카오코드 본선 단체사진 찍기 📷">[알고리즘] 2017 카카오코드 본선 단체사진 찍기 📷</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        5 NOV 2021
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    4 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="문제-설명">문제 설명</h2>
+
+<ul>
+  <li>
+    <p>하나의 문자열 배열에 대한 모든 경우의 수를 구하고 두 가지의 조건을 만족하는 값이 있는지 조건 판별해야 한다.</p>
+  </li>
+  <li>
+    <p>모든 경우의 수를 구하고 그 중에서 만족하는 조건이 있는지 판별해야 하기 때문에 dfs의 개념을 적용시켰다.</p>
+  </li>
+</ul>
+
+<h2 id="dfs">dfs()</h2>
+
+<ul>
+  <li>
+    <p>재귀로 동작하는 메서드이다.</p>
+  </li>
+  <li>
+    <p>dfs 메서드에는 names라는 문자열을 받게 되는데 이 곳을 통해서 모든 경우의 수의 배열을 한 글자씩 받게된다. 보통 이 부분에 문자열 배열을 통해서 한 글자씩 받아온다고 설계할 수 도 있다. (내가 그랬다)
+ 재귀에 필요한, 값을 증가시키면서 재귀를 수행시킬 매개변수로 배열의 인덱스를 받는다고 할 수도 있다. 함수가 호출될 때 dfs 메서드는 최초로 빈 문자열을 받고, kakaoExample[i]를 통해서 총 8개의 문자열을 순서대로 가지게 된다. 이 때 계속해서 재귀를 수행하며 필요한 문자열의 갯수가 만족되면 check 메서드를 호출하여 완성된 하나의 문자열을 넣어주고, 해당 문자열에 대한 조건 판별을 시작하게 된다.</p>
+  </li>
+</ul>
+
+<h2 id="check">check()</h2>
+
+<ul>
+  <li>
+    <p>dfs() 메서드에서 전달받은 하나의 완성된 문자열에 대한 조건 판별을 해주는 메서드이다.</p>
+  </li>
+  <li>
+    <p>indexOf 연산자로 카카오 프렌즈 이름 배열에서 subString() 연산을 수행 한 각각의 요소를 가져온다.</p>
+  </li>
+  <li>
+    <p>각각의 분리된 문자열 또는 문자들로 조건식에 넣어서 각 세 개의 연산별로 분리해준다.</p>
+  </li>
+  <li>
+    <p>하나의 완성된 카카오 프렌즈 이름 배열로 datas 배열의 크기만큼 입려된 조건을 검사하면서 수행되기 때문에 data의 연산을 판별하는 동안 false를 만나지 않는다면 당연하게도 true가 리턴된다. 이는 곧 false가 걸리지 않은 datas의 두 가지 조건을 만족한다는 뜻이고, totalCnt를 1씩 증가시키는 조건을 만족하게 된다. 이 로직으로 dfs로 수행되는 모든 경우의 수에 대해 조건을 검사하게 된다.</p>
+  </li>
+</ul>
+
+<h2 id="풀이">풀이!</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TakePicture</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">totalCnt</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span><span class="o">[]</span> <span class="n">kakaoFriendNames</span> <span class="o">=</span> <span class="o">{</span><span class="s">"A"</span><span class="o">,</span> <span class="s">"C"</span><span class="o">,</span> <span class="s">"F"</span><span class="o">,</span> <span class="s">"J"</span><span class="o">,</span> <span class="s">"M"</span><span class="o">,</span> <span class="s">"N"</span><span class="o">,</span> <span class="s">"R"</span><span class="o">,</span> <span class="s">"T"</span><span class="o">}</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">String</span><span class="o">[]</span> <span class="n">data1</span> <span class="o">=</span> <span class="o">{</span><span class="s">"N~F=0"</span><span class="o">,</span> <span class="s">"R~T&gt;2"</span><span class="o">};</span>
+    <span class="n">String</span><span class="o">[]</span> <span class="n">data2</span> <span class="o">=</span> <span class="o">{</span><span class="s">"M~C&lt;2"</span><span class="o">,</span> <span class="s">"C~M&gt;1"</span><span class="o">};</span>  
+    <span class="n">solution</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">data1</span><span class="o">);</span>
+  <span class="o">}</span> 
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="n">String</span><span class="o">[]</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">boolean</span><span class="o">[]</span> <span class="n">isVisited</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="mi">8</span><span class="o">];</span>
+    <span class="n">dfs</span><span class="o">(</span><span class="s">""</span><span class="o">,</span> <span class="n">isVisited</span><span class="o">,</span> <span class="n">data</span><span class="o">);</span>
+    <span class="kt">int</span> <span class="n">answer</span> <span class="o">=</span> <span class="n">totalCnt</span><span class="o">;</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">answer</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">answer</span><span class="o">;</span>
+  <span class="o">}</span> 
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">dfs</span><span class="o">(</span><span class="n">String</span> <span class="n">names</span><span class="o">,</span> <span class="kt">boolean</span><span class="o">[]</span> <span class="n">isVisited</span><span class="o">,</span> <span class="n">String</span><span class="o">[]</span> <span class="n">datas</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">names</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="n">kakaoFriendNames</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">(</span><span class="n">names</span><span class="o">,</span> <span class="n">datas</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">totalCnt</span><span class="o">++;</span>
+        <span class="o">}</span>
+        <span class="k">return</span><span class="o">;</span>
+      <span class="o">}</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">isVisited</span><span class="o">[</span><span class="n">i</span><span class="o">])</span> <span class="o">{</span>
+            <span class="n">isVisited</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">names</span> <span class="o">+</span> <span class="n">kakaoFriendNames</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+            <span class="n">dfs</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">isVisited</span><span class="o">,</span> <span class="n">datas</span><span class="o">);</span>
+            <span class="n">isVisited</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span> 
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">check</span><span class="o">(</span><span class="n">String</span> <span class="n">searchExample</span><span class="o">,</span> <span class="n">String</span><span class="o">[]</span> <span class="n">datas</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">datas</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">sugPos</span> <span class="o">=</span> <span class="n">searchExample</span><span class="o">.</span><span class="na">indexOf</span><span class="o">(</span><span class="n">datas</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">substring</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">));</span>
+        <span class="kt">int</span> <span class="n">othPos</span> <span class="o">=</span> <span class="n">searchExample</span><span class="o">.</span><span class="na">indexOf</span><span class="o">(</span><span class="n">datas</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">substring</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">));</span>
+        <span class="n">String</span> <span class="n">op</span> <span class="o">=</span> <span class="n">datas</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">substring</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">datas</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">charAt</span><span class="o">(</span><span class="mi">4</span><span class="o">)</span> <span class="o">-</span> <span class="sc">'0'</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">resultPos</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">sugPos</span> <span class="o">-</span> <span class="n">othPos</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">op</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"="</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(!(</span><span class="n">resultPos</span> <span class="o">==</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">op</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"&gt;"</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(!(</span><span class="n">resultPos</span> <span class="o">&gt;</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">op</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"&lt;"</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(!(</span><span class="n">resultPos</span> <span class="o">&lt;</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+        repo="JihoKevin/blog-comments"
+        issue-term="pathname"
+        label="comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 신지호. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

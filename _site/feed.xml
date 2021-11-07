@@ -5,9 +5,219 @@
     <description>안드로이드 개발자를 목표로 달려나가는 Kevin의 블로그입니다!</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2021-11-02</pubDate>
-    <lastBuildDate>Tue, 02 Nov 2021 07:12:07 +0100</lastBuildDate>
+    <pubDate>2021-11-07</pubDate>
+    <lastBuildDate>Sun, 07 Nov 2021 14:01:43 +0100</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
+    
+      <item>
+        <title>[안드로이드] WebView ShouldOverrideUrlLoading</title>
+        <description>&lt;h2 id=&quot;프롤로그&quot;&gt;프롤로그&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;여러가지 안드로이드 프로젝트를 진행하다가 결국 마주하게 되었다.. WebView에 대한 문제를… 발단은 평소 문제없이 진행되던 메드나 서비스의 &lt;strong&gt;PASS앱을 통한 사용자 인증 절차&lt;/strong&gt; 가 웹뷰 내부에서 &lt;strong&gt;intent://&lt;/strong&gt; 로 시작하는 url로 redirect 될 시 먹통이 되었다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;평소 웹뷰라는 뷰에 대한 학습을 소홀이 했던 것을 후회하며 천천히 문제점을 찾아 본 결과, &lt;strong&gt;ShouldOverrideUrlLoading&lt;/strong&gt; 함수에서, 웹뷰 내에서 처리되는 url에 대한 예외처리를 해 주지 않아서 발생한 오류였다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img align=&quot;right&quot; src=&quot;https://user-images.githubusercontent.com/27722059/140637024-b84ce35c-b008-4cdb-99d1-00513eaf020b.png&quot; width=&quot;370&quot; height=&quot;790&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;img align=&quot;left&quot; src=&quot;https://user-images.githubusercontent.com/27722059/140637030-24c5cd5d-a742-4ea6-994d-f03548d576e1.png&quot; width=&quot;370&quot; height=&quot;790&quot; /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;shouldoverrideurlloading&quot;&gt;ShouldOverrideUrlLoading&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;쉽게 말해서 현재 내가 사용하고 있는 웹뷰 내에서 다른 url을 호출하며 돌아다닐 때 제어권(?)을 요청하는 함수이다. 처음 액티비티에 로드 될 때는 문제가 없지만 웹뷰 상에서 페이지 이동이 일어날 경우 디바이스 브라우저로 실행되거나 나처럼 특정 앱의 스키마를 사용해야하는 경우는 페이지를 로드할 수 없다는 에러를 뱉게될 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/27722059/140636493-5738d772-53ae-47b2-b842-d4cacd03940d.png&quot; alt=&quot;ShouldOverrideUrlLoadingDeprecated&quot; /&gt;
+&lt;img src=&quot;https://user-images.githubusercontent.com/27722059/140636518-39c6bc85-19de-4329-8d2b-8220104b93ea.png&quot; alt=&quot;ShouldOverrideUrlLoading&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;기존에 사용되고 있었던 &lt;strong&gt;ShouldOverrideUrlLoading&lt;/strong&gt; 은 &lt;strong&gt;deprecated&lt;/strong&gt; 되었다. 하지만 업데이트 된 새로운 함수를 찾아보니 기존 함수와 동일한 이름의 함수였고, 차이점이라 하면 매개변수로 받고있는 String 형식의 url이 &lt;strong&gt;WebResourceRequest&lt;/strong&gt; 형식의 &lt;strong&gt;request&lt;/strong&gt; 로 바뀌었다는 점이다. 기존에 매개변수의 url을 직접 사용했던 부분은 &lt;strong&gt;request.url&lt;/strong&gt; 을 통해서 가져올 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;문제가-됐던-기존-형식&quot;&gt;문제가 됐던 기존 형식&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/27722059/140636772-a129061e-cd1f-463e-b861-98f2afa6d9cd.png&quot; alt=&quot;image&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;문제가 되었던 기존 코드의 형태이다. 보이는 것과 같이 &lt;strong&gt;shouldOverrideUrlLoading&lt;/strong&gt; 함수 내에서 &lt;strong&gt;request.url&lt;/strong&gt; 로 url을 호출하고 있지만 해당 url에 대한 예외처리 등을 처리해주는 부분이 없던 것이다.&lt;/li&gt;
+  &lt;li&gt;PASS 앱을 통한 사용자 인증 절차가 수행되는 url의 형식은 &lt;strong&gt;intent://&lt;/strong&gt; 로 시작된다. 웹뷰 내에서 또 다른 앱을 불러오는 형식이다. &lt;strong&gt;http, https&lt;/strong&gt; 형식이라면 새로운 브라우저 창을 실행시키던가 해서 어떻게든 실행이 되겠지만 전화 기능과 연결시키는 &lt;strong&gt;tel:, 또는 mailTo:, sms:&lt;/strong&gt; 와 같이 새로운 앱 또는 기능을 띄워주는 형식은 &lt;strong&gt;shouldOverrideUrlLoading&lt;/strong&gt; 에서 각각의 url에 대한 처리를 진행 해 주어야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;intent의-행동-처리&quot;&gt;intent://의 행동 처리&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;다음과 같이 &lt;strong&gt;intent://&lt;/strong&gt; 로 시작하는 url에 대한 예외 처리를 진행 해 주었고 설치되어있지 않을 시 &lt;strong&gt;package name&lt;/strong&gt; 을 추출하여 market으로 이동하는 로직을 구현 해 주었다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;shouldOverrideUrlLoading&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;view:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WebView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;request:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WebResourceRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;url:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;startsWith&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;intent://&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;intent:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Intent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;intent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Intent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parseUri&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Intent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;URI_INTENT_SCHEME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;uri&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Uri&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;intent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dataString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;startActivity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Intent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Intent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ACTION_VIEW&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;uri&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+            &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;ex:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;URISyntaxException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;e:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ActivityNotFoundException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;intent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;packageName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;intent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getPackage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;packageName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;startActivity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;Intent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;Intent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ACTION_VIEW&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;Uri&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;market://details?id=$packageName&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;loadUrl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img align=&quot;right&quot; src=&quot;https://user-images.githubusercontent.com/27722059/140638325-eb2db37c-3060-424d-b8ad-b7a639ea18f6.png&quot; width=&quot;370&quot; height=&quot;790&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;img align=&quot;left&quot; src=&quot;https://user-images.githubusercontent.com/27722059/140638345-7001ddd5-9193-498b-aae0-aff231f1777a.png&quot; width=&quot;370&quot; height=&quot;790&quot; /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        <pubDate>2021-11-07</pubDate>
+        <link>http://localhost:4000/articles/2021-11/android-webview-shouldoverrideurlloading</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-11/android-webview-shouldoverrideurlloading</guid>
+        
+        
+        <category>안드로이드</category>
+        
+      </item>
+    
+      <item>
+        <title>[알고리즘] 2017 카카오코드 본선 단체사진 찍기 📷</title>
+        <description>&lt;h2 id=&quot;문제-설명&quot;&gt;문제 설명&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;하나의 문자열 배열에 대한 모든 경우의 수를 구하고 두 가지의 조건을 만족하는 값이 있는지 조건 판별해야 한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;모든 경우의 수를 구하고 그 중에서 만족하는 조건이 있는지 판별해야 하기 때문에 dfs의 개념을 적용시켰다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;dfs&quot;&gt;dfs()&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;재귀로 동작하는 메서드이다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;dfs 메서드에는 names라는 문자열을 받게 되는데 이 곳을 통해서 모든 경우의 수의 배열을 한 글자씩 받게된다. 보통 이 부분에 문자열 배열을 통해서 한 글자씩 받아온다고 설계할 수 도 있다. (내가 그랬다)
+ 재귀에 필요한, 값을 증가시키면서 재귀를 수행시킬 매개변수로 배열의 인덱스를 받는다고 할 수도 있다. 함수가 호출될 때 dfs 메서드는 최초로 빈 문자열을 받고, kakaoExample[i]를 통해서 총 8개의 문자열을 순서대로 가지게 된다. 이 때 계속해서 재귀를 수행하며 필요한 문자열의 갯수가 만족되면 check 메서드를 호출하여 완성된 하나의 문자열을 넣어주고, 해당 문자열에 대한 조건 판별을 시작하게 된다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;check&quot;&gt;check()&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;dfs() 메서드에서 전달받은 하나의 완성된 문자열에 대한 조건 판별을 해주는 메서드이다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;indexOf 연산자로 카카오 프렌즈 이름 배열에서 subString() 연산을 수행 한 각각의 요소를 가져온다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;각각의 분리된 문자열 또는 문자들로 조건식에 넣어서 각 세 개의 연산별로 분리해준다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;하나의 완성된 카카오 프렌즈 이름 배열로 datas 배열의 크기만큼 입려된 조건을 검사하면서 수행되기 때문에 data의 연산을 판별하는 동안 false를 만나지 않는다면 당연하게도 true가 리턴된다. 이는 곧 false가 걸리지 않은 datas의 두 가지 조건을 만족한다는 뜻이고, totalCnt를 1씩 증가시키는 조건을 만족하게 된다. 이 로직으로 dfs로 수행되는 모든 경우의 수에 대해 조건을 검사하게 된다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;풀이&quot;&gt;풀이!&lt;/h2&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TakePicture&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;totalCnt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kakaoFriendNames&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;C&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;F&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;J&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;M&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;N&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;R&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;T&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;N~F=0&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;R~T&amp;gt;2&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;M~C&amp;lt;2&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;C~M&amp;gt;1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;  
+    &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; 
+
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isVisited&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;dfs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isVisited&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;totalCnt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; 
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;dfs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;names&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isVisited&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;names&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kakaoFriendNames&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;check&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;names&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;totalCnt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isVisited&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;isVisited&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;names&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kakaoFriendNames&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;dfs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isVisited&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;isVisited&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; 
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;check&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;searchExample&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sugPos&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;searchExample&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;indexOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;substring&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;othPos&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;searchExample&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;indexOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;substring&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;op&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;substring&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;charAt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'0'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resultPos&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;abs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sugPos&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;othPos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;=&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(!(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resultPos&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(!(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resultPos&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&amp;lt;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(!(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resultPos&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>2021-11-07</pubDate>
+        <link>http://localhost:4000/articles/2021-11/algotithm-take-picture-dfs</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2021-11/algotithm-take-picture-dfs</guid>
+        
+        
+        <category>Algorithm</category>
+        
+      </item>
     
       <item>
         <title>[알고리즘] 2017 카카오코드 예선 카카오 컬러링북 📕</title>
@@ -139,7 +349,7 @@
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>2021-11-02</pubDate>
+        <pubDate>2021-11-07</pubDate>
         <link>http://localhost:4000/articles/2021-11/algorithm-coloring-book</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-11/algorithm-coloring-book</guid>
         
@@ -345,7 +555,7 @@
 
 &lt;p&gt;&lt;em&gt;탐색 알고리즘을 더 깊이있게 공부하자…&lt;/em&gt;&lt;/p&gt;
 </description>
-        <pubDate>2021-11-02</pubDate>
+        <pubDate>2021-11-07</pubDate>
         <link>http://localhost:4000/articles/2021-10/algorithm-covid19</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-10/algorithm-covid19</guid>
         
@@ -403,7 +613,7 @@
 &lt;h2 id=&quot;2️⃣-android에서의-mvvm&quot;&gt;2️⃣ Android에서의 MVVM&lt;/h2&gt;
 &lt;p&gt;[마지막 수정 : 2021-10-15, 추후 업데이트 예정]&lt;/p&gt;
 </description>
-        <pubDate>2021-11-02</pubDate>
+        <pubDate>2021-11-07</pubDate>
         <link>http://localhost:4000/articles/2021-10/android-rxkotlin-mvvm</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-10/android-rxkotlin-mvvm</guid>
         
@@ -487,7 +697,7 @@
 &lt;h2 id=&quot;실행-결과&quot;&gt;실행 결과&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&quot;/img/10-14-algorithm/result.png&quot; alt=&quot;backpressure&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>2021-11-02</pubDate>
+        <pubDate>2021-11-07</pubDate>
         <link>http://localhost:4000/articles/2021-10/algorithm-hash-map</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-10/algorithm-hash-map</guid>
         
@@ -580,7 +790,7 @@
 &lt;/ul&gt;
 
 </description>
-        <pubDate>2021-11-02</pubDate>
+        <pubDate>2021-11-07</pubDate>
         <link>http://localhost:4000/articles/2021-10/algorithm-string-press</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-10/algorithm-string-press</guid>
         
@@ -680,7 +890,7 @@ Recieved this is 1&lt;br /&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2021-11-02</pubDate>
+        <pubDate>2021-11-07</pubDate>
         <link>http://localhost:4000/articles/2021-10/rx-kotlin-flatmap-dividing</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-10/rx-kotlin-flatmap-dividing</guid>
         
@@ -721,7 +931,7 @@ Recieved this is 1&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;하지만 모든 데이터 스트림에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;을 사용하는 것은 결코 바람직하지 않은 방법이 될 것이다. 소량이 데이터나 UI 이벤트 처리와 같은 경우는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt; 에서도 데이터 스트림의 시간차 등을 두어 스트림의 양을 조절하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;debounce()&lt;/code&gt;라던지, &lt;code class=&quot;highlighter-rouge&quot;&gt;throttle()&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;sample()&lt;/code&gt; 함수 등이 존재하기 때문에 상황에 따라 적절하게 사용하는 방법을 익히면 될 것 같다.&lt;/p&gt;
 </description>
-        <pubDate>2021-11-02</pubDate>
+        <pubDate>2021-11-07</pubDate>
         <link>http://localhost:4000/articles/2021-09/flowable-observable</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/flowable-observable</guid>
         
@@ -822,383 +1032,12 @@ subscription 3: 5&lt;br /&gt;
 
 &lt;p&gt;결국 &lt;code class=&quot;highlighter-rouge&quot;&gt;hot observable&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;cold observable&lt;/code&gt;의 차이는 구독 한 시점에 다시 새로운 데이터를 받아오느냐, 이미 지나간 데이터는 받아오지 못하고 중간에 흐름에 껴서 받아오느냐의 차이이다.&lt;/p&gt;
 </description>
-        <pubDate>2021-11-02</pubDate>
+        <pubDate>2021-11-07</pubDate>
         <link>http://localhost:4000/articles/2021-09/hot-cold-observable</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/hot-cold-observable</guid>
         
         
         <category>RxKotlin</category>
-        
-      </item>
-    
-      <item>
-        <title>[안드로이드] 네비게이션 메뉴에 적용한 BehaviorProcessor의 Flowable 🔀</title>
-        <description>&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;RxKotlin&lt;/code&gt;을 계속 공부하다보니 항상 Rx의 메커니즘을 어떻게 안드로이드에 적용 시킬지 고민하며 프로젝트를 진행하는 것 같다.
-답은 명확한데 답을 찾아내기까지 정말 많은 시간이 걸렸던 부분 중 하나이다. 바로 &lt;code class=&quot;highlighter-rouge&quot;&gt;BehaviorProcessor&lt;/code&gt;이다.&lt;/p&gt;
-
-&lt;h2 id=&quot;0️⃣-behaviorprocessor-behaviorsubject&quot;&gt;0️⃣ BehaviorProcessor? BehaviorSubject?&lt;/h2&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;BehaviorProcessor&lt;/code&gt;를 다루기 전에, &lt;code class=&quot;highlighter-rouge&quot;&gt;BehaviorSubject&lt;/code&gt;라는 형식을 많이 들어 보았을 것이다.
-이 둘의 차이점은 매우 단순했다.. 반환하는 형식이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;인지와 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt;인지의 차이다.
-간략하게 설명하자면 &lt;code class=&quot;highlighter-rouge&quot;&gt;BackPressure&lt;/code&gt;를 default로 가지고 있는지와 없는지로 구분되는데 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;이 &lt;code class=&quot;highlighter-rouge&quot;&gt;BackPressure&lt;/code&gt;를 기본적으로 가지고 있는 녀석이고 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt;은 다른 방식으로 구현을 해 주어야 한다. &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt;의 차이는 아래 글에서 확인 하도록 하자.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;https://jihokevin.github.io//articles/2021-09/flowable-observable&quot;&gt;Flowable과 Observable의 차이&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;이제 &lt;code class=&quot;highlighter-rouge&quot;&gt;BehaviorProcessor&lt;/code&gt;가 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;을 반환 해 준다는 것을 알았다. 그럼 이렇게 반환되는 흐름을 &lt;code class=&quot;highlighter-rouge&quot;&gt;subscribe&lt;/code&gt; 함으로써 제어를 할 수 있을 것이다.
-하지만 이 &lt;code class=&quot;highlighter-rouge&quot;&gt;flow&lt;/code&gt;에 값을 넘겨주고 꺼내 쓸 수 있어야 하는데 어떤식으로 값을 &lt;code class=&quot;highlighter-rouge&quot;&gt;flow&lt;/code&gt;에 넣어주고 넣어준 값에 따라 흐름을 제어할 수 있는지 알아보자.
-이를 알기 위해서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;BehaviorProcessor&lt;/code&gt; 클래스의 내부를 들여다 봐야 한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;BehaviorProcessor&lt;/code&gt; 타입으로 만들어진 변수명에 .을 찍어보면 &lt;code class=&quot;highlighter-rouge&quot;&gt;value&lt;/code&gt;라는 형식을 찾을 수 있다.
-&lt;img src=&quot;/img/09-14-android/behavior-processor-value-01.png&quot; alt=&quot;value&quot; /&gt;
-이 &lt;code class=&quot;highlighter-rouge&quot;&gt;value&lt;/code&gt;라는 타입은 &lt;code class=&quot;highlighter-rouge&quot;&gt;BehaviorProcessor&lt;/code&gt; 클래스 내부에서 다음과 같은 전역변수로 선언되어있다.
-&lt;img src=&quot;/img/09-14-android/behavior-processor-value-02.png&quot; alt=&quot;value&quot; /&gt;
-이렇게 선언되어있는 &lt;code class=&quot;highlighter-rouge&quot;&gt;value&lt;/code&gt;는 또 클래스 내부에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;setCurrent&lt;/code&gt;라는 메서드가 호출될 때 다음과 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;lazy&lt;/code&gt;하게 초기화되고,
-&lt;img src=&quot;/img/09-14-android/behavior-processor-value-03.png&quot; alt=&quot;value&quot; /&gt;
-이 &lt;code class=&quot;highlighter-rouge&quot;&gt;setCurrent&lt;/code&gt; 메서드는 offer가 호출될 때 불려지게 된다.
-&lt;img src=&quot;/img/09-14-android/behavior-processor-value-04.png&quot; alt=&quot;value&quot; /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;offer&lt;/code&gt;라고..? 맞다. &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;에서 값을 배출시키는 바로 그 익숙한 연산자이다. 결국 결론적으로는, &lt;code class=&quot;highlighter-rouge&quot;&gt;value&lt;/code&gt;라는 변수는 타고 타고 타서 우리가 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;의 데이터들을 배출하기 시작할 때 그 값이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Parameter&lt;/code&gt;로 전달되는 것이다..!&lt;/p&gt;
-
-&lt;p&gt;다음과 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;subscribable&lt;/code&gt;이라는 flow를 외부에서 접근할 수 있게 해 주는 선언이 있다.&lt;/p&gt;
-&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;behaviorProcessor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BehaviorProcessor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Animal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;BehaviorProcessor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;createDefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Animal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CAT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// createDefault는 말 그대로 초기 값 세팅.. null 값이 올 수 없기 때문..
-&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;subscribable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flowable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Animal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;behaviorProcessor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;distinctUntilChanged&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;이 변수를 가진 클래스 내에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;behaviorProcessor&lt;/code&gt;라는 변수로 접근 할 것이고, 이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;은 외부에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;subscribable&lt;/code&gt;이라는 변수명으로 접근을 하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;을 제어 할 것이다. 결국 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt; 형태로 &lt;code class=&quot;highlighter-rouge&quot;&gt;BehaviorProcessor&lt;/code&gt;를 받는 변수 &lt;code class=&quot;highlighter-rouge&quot;&gt;subscribable&lt;/code&gt;을 &lt;code class=&quot;highlighter-rouge&quot;&gt;offer&lt;/code&gt;하고, 그 &lt;code class=&quot;highlighter-rouge&quot;&gt;flow&lt;/code&gt;를 구독하는 녀석들에게 제어권이 넘어가게 된다.&lt;/p&gt;
-
-&lt;h2 id=&quot;1️⃣-안드로이드에서는-어떻게-적용-해-볼까&quot;&gt;1️⃣ 안드로이드에서는 어떻게 적용 해 볼까..?&lt;/h2&gt;
-&lt;p&gt;간단한 로직을 구현 해 보았다.&lt;/p&gt;
-
-&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;navigateToDogFragment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;behaviorProcessor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;offer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Animal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;이 함수는 바로 위 코드 블럭에서 사용했던 &lt;code class=&quot;highlighter-rouge&quot;&gt;behaviorProcessor&lt;/code&gt;를 사용한다. 보이는 그대로 이 함수가 어딘가로 호출될 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;CAT 프래그먼트&lt;/code&gt;에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;DOG 프래그먼트&lt;/code&gt;로 화면의 전환이 일어나게 구현 해 볼 것이다. 다음을 살펴봅시다!&lt;/p&gt;
-&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 뷰 단에서 호출되는 함수들 구현
-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;bindViewModels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;n&quot;&gt;viewModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subscribable&lt;/span&gt;
-       &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;observeOnMain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-       &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subscribeWithErrorLogger&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-           &lt;span class=&quot;n&quot;&gt;navigate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-       &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-       &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addToDisposables&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;navigate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;step&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Animal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;fragment&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;step&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-       &lt;span class=&quot;n&quot;&gt;Animal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOG&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DogFragment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-       &lt;span class=&quot;n&quot;&gt;Animal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LION&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LionFragment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-   &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;currentFragment&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;supportFragmentManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;primaryNavigationFragment&lt;/span&gt;
-
-   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;currentFragment&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;currentFragment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;javaClass&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fragment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;javaClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-       &lt;span class=&quot;n&quot;&gt;supportFragmentManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beginTransaction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-           &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fragment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-           &lt;span class=&quot;c1&quot;&gt;// add를 쓰게 되면 덮어진 View가 파괴되지 않아 클릭되는 등 버그를 발생 시키므로 replace 사용
-&lt;/span&gt;           &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;setPrimaryNavigationFragment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fragment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-           &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addToBackStack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fragment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;javaClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;simpleName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-           &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;commit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;함수 두 개를 구현 해 놓았다. &lt;code class=&quot;highlighter-rouge&quot;&gt;navigate()&lt;/code&gt; 함수는 &lt;code class=&quot;highlighter-rouge&quot;&gt;bindViewModels()&lt;/code&gt; 함수에서 IO 스레드 내에서 구독이 되고 있고, 위에서 구현했던 &lt;code class=&quot;highlighter-rouge&quot;&gt;navigateToDogFragment()&lt;/code&gt;가 어떠한 뷰나 액티비티 또는 프래그먼트로 호출됐을 시 &lt;code class=&quot;highlighter-rouge&quot;&gt;offer&lt;/code&gt;로 &lt;code class=&quot;highlighter-rouge&quot;&gt;Dog&lt;/code&gt;라는 이름의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Enum&lt;/code&gt; 값이 전달 되면서 값을 방출시킬 것이고 이 방출된 값 즉 DOG라는 이름은 뷰 부분의 &lt;code class=&quot;highlighter-rouge&quot;&gt;bindViewModels()&lt;/code&gt; 함수 안에 구독처리가 되어 &lt;code class=&quot;highlighter-rouge&quot;&gt;it&lt;/code&gt;의 값으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;navigate()&lt;/code&gt; 함수의 인자를 결정짓게 되는 것이다. 그럼 &lt;code class=&quot;highlighter-rouge&quot;&gt;navigate()&lt;/code&gt; 함수는 이 배출된 DOG라는 값을 받아서 &lt;code class=&quot;highlighter-rouge&quot;&gt;DogFragment()&lt;/code&gt;를 &lt;code class=&quot;highlighter-rouge&quot;&gt;fragment&lt;/code&gt; 변수에 넣어 줄 것이고, &lt;code class=&quot;highlighter-rouge&quot;&gt;supportFragmentManager&lt;/code&gt;를 통하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;navigation&lt;/code&gt;이 일어나게 된다.&lt;/p&gt;
-
-&lt;p&gt;정말 어렵고 복잡하다.. 안드로이드 고수가 되는 그날까지 최선을 다해보자..!&lt;/p&gt;
-</description>
-        <pubDate>2021-11-02</pubDate>
-        <link>http://localhost:4000/articles/2021-09/behavior-processor</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/behavior-processor</guid>
-        
-        
-        <category>안드로이드</category>
-        
-      </item>
-    
-      <item>
-        <title>[안드로이드] 안드로이드 버전이 뭐예요?(targetSdkVersion, compileSdkVersion, API 레벨)</title>
-        <description>&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;참고 자료&lt;/strong&gt;&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=110015332&quot;&gt;책 - 안드로이드 프로그래밍 Next Step&lt;/a&gt;&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;https://developer.android.com/guide/topics/manifest/uses-sdk-element&quot;&gt;Android Developers 사이트 - API 레벨이란?&lt;/a&gt;&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;https://developer.android.com/guide/practices/compatibility?hl=ko#Versions&quot;&gt;Android Developers 사이트 - &amp;lt;uses-sdk&amp;gt;&lt;/a&gt;&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;https://developer.android.com/training/basics/supporting-devices/platforms?hl=ko&quot;&gt;Android Developers 사이트 - 다양한 플랫폼 버전 지원&lt;/a&gt;&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;https://developer.android.com/distribute/best-practices/develop/target-sdk?hl=ko#why-target&quot;&gt;Android Developers 사이트 - 최신 SDK를 타겟팅해야 하는 이유&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;0️⃣-프롤로그&quot;&gt;0️⃣ 프롤로그&lt;/h2&gt;
-
-&lt;p&gt;기억 상 중학교 1학년 시절부터 스마트폰을 썼던 것 같습니다.. 갤럭시 노트 1이 처음 나왔을 때 큰 화면과 노트 펜을 보고 너무 가지고 싶었죠^^.. ㅋㅋㅋ 부모님을 졸라 손에 넣은 갤럭시 노트 1!! 1년 정도 쓰다가 변기통에 빠뜨려 사망하고 말았습니다..&lt;/p&gt;
-
-&lt;p&gt;그 때 갤럭시 노트 1에 탑재된 안드로이드 운영체제 버전이 아마 진저브레드였던 것 같습니다.&lt;/p&gt;
-
-&lt;p&gt;안드로이드 운영체제가 탑재된 모바일 디바이스를 사용하다보면 몇 년에 한 번씩 안드로이드 운영체제 버전이 업그레이드 되어 업데이트하면 더 세련된 화면들로 바뀌는 현상을 경험했을 것입니다.&lt;/p&gt;
-
-&lt;p&gt;이번 포스팅에서는 ‘안드로이드 버전’과 관련된 내용을 공부해보겠습니다! 포스팅 내용에 잘못된 개념이나 잘못된 사용법이 작성되어 있다면 댓글로 알려주세요🧚🏻‍♀️&lt;/p&gt;
-
-&lt;h2 id=&quot;1️⃣-what-is-안드로이드-버전&quot;&gt;1️⃣ What is 안드로이드 버전?&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Android에도 Version이 있다?&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;img width=&quot;826&quot; alt=&quot;01&quot; src=&quot;https://user-images.githubusercontent.com/31889335/111580326-ac773780-87fa-11eb-8367-27e5890b38fa.png&quot; /&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;(위 그림 참고) &lt;a href=&quot;https://developer.android.com/about?hl=ko&quot;&gt;Android Developers 사이트의 플랫폼 개요&lt;/a&gt;만 들어가도 최신 Android Version에 대해 소개하고 홍보하는 글을 볼 수 있습니다. 2021년 3월 기준 최신 버전은 Android 11 이네요!&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;img width=&quot;200&quot; alt=&quot;02&quot; src=&quot;https://user-images.githubusercontent.com/31889335/111580561-12fc5580-87fb-11eb-987e-b31e21092e0c.png&quot; /&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;(위 그림 참고) &lt;a href=&quot;https://developer.android.com/about/versions/11?hl=ko&quot;&gt;Android Developers 사이트의 플랫폼 출시&lt;/a&gt;에서 볼 수 있는 버전 리스트를 보면 ‘롤리팝’, ‘마시멜로우’, ‘누가’, ‘오레오’, ‘파이’ 등 예전에 출시되었던 안드로이드 버전들에 대한 설명도 볼 수 있습니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;앱 개발자는 앱을 처음 출시한 후 지속적으로 새로운 기능을 추가하거나 기존 기능을 개선하여 새로운 버전으로 업그레이드하는 경우가 많습니다. 따라서 해당 앱을 설치하여 사용하고 있던 사용자들은 앱이 제공하는 새로운 기능을 사용하기 위해 새로운 버전으로 업데이트하는 경우가 대부분 입니다. 안드로이드 앱만 봐도 지속적으로 새로운 버전이 등장하는 것처럼 ‘안드로이드 자체’도 새로운 기능과 개선된 기능을 포함한 NEW Version이 지속적으로 출시되고 있습니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;즉, 안드로이드 운영체제는 계속해서 발전해가고 있다는 것입니다.&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Android Version을 한 눈에 볼 수 있는 표&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;img width=&quot;946&quot; alt=&quot;03&quot; src=&quot;https://user-images.githubusercontent.com/31889335/111586467-37a8fb00-8804-11eb-8c7f-f9273767561e.png&quot; /&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;(위 그림 참고 - &lt;a href=&quot;https://developer.android.com/guide/topics/manifest/uses-sdk-element.html#ApiLevels&quot;&gt;출처 : Android Devlopers 사이트&lt;/a&gt;) 위 표는 안드로이드의 버전을 최신순부터 쭉~ 한 눈에 정리해놓은 표입니다. 앞으로 새로운 안드로이드 버전이 계속 출시된다면 이 표도 계속 업데이트 될 것입니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;(위 그림 참고) 위 표를 보면 일반 사람들에게 익숙한 ‘롤리팝(LOLLIPOP)’, ‘젤리빈(JELLY_BEAN)’, ‘아이스크림 샌드위치(ICE_CREAEM_SANDWICH)’ 등의 이름들이 &lt;strong&gt;버전 코드(Version Code)&lt;/strong&gt; 라는 항목에 작성되어 있습니다. &lt;strong&gt;버전 코드라는 것은 숫자로 표시된 버전명을 문자열로 바꾸어 나타낸 것&lt;/strong&gt; 입니다. 예를 들어, 안드로이드 버전 ‘5.0’를 ‘LOLLIPOP’이라는 문자열로 바꾸어 부르는 것입니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;(위 그림 참고) 위 표를 보면 버전 코드 외에도 &lt;strong&gt;플랫폼 버전&lt;/strong&gt; 과 &lt;strong&gt;API 레벨&lt;/strong&gt; 이라는 항목이 있습니다. 심지어 하나의 API 레벨에 여러 개의 플랫폼 버전이 존재하기도 합니다. 예를 들어, 위 표를 보면 API 레벨 14에 해당하는 플랫폼 버전은 android 4.0, android 4.0.1, android 4.0.2 3개가 존재합니다. ‘플랫폼’ 이라는 것에 대해서는 &lt;a href=&quot;https://choheeis.github.io/newblog//articles/2021-03/android&quot;&gt;이 블로그의 다른 포스팅 - 안드로이드가 뭐예요?&lt;/a&gt;에서 설명하고 있습니다. 이 포스팅을 보고 온다면 ‘플랫폼’이 ‘안드로이드’를 말하는 것이며 동시에 ‘안드로이드 플랫폼’을 말하고 있음을 알 수 있을 것입니다. 따라서 ‘플랫폼 버전’은 ‘안드로이드 버전’을 나타냅니다. 플랫폼 버전 중 android 4.0 버전을 보면 처음엔 android 4.0이 출시되었다가 조금 더 개선하여 android 4.0.1 으로 버전 업그레이드를 했고, 마지막으로 android 4.0.2로 추가 업그레이드된 것입니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;(위 그림 참고) 또 안드로이드는 각 플랫폼 버전에 대응되는 &lt;strong&gt;플랫폼 명(안드로이드 버전 명)&lt;/strong&gt; 을 만들어 일반 사람들에게 쉽게 안드로이드 버전을 소개합니다. 그러나 이러한 플랫폼 명과 API 레벨, 플랫폼 버전 등이 일대일 매칭이 되지 않아 혼동되는 경우가 많습니다. 혼동될 경우 위 표를 봅시다!&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;안드로이드 버전 별로 등장한 새로운 기능 및 개선된 기능을 자세히 알아보고 싶다면 &lt;a href=&quot;https://developer.android.com/about/versions?hl=ko&quot;&gt;여기&lt;/a&gt; 를 참고하면 됩니다.&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;2️⃣-what-is-api-레벨&quot;&gt;2️⃣ What is API 레벨?&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;API 레벨(API LEVEL)이 무엇인가?&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;안드로이드 버전의 역사를 볼 수 있었던 위 표에는 ‘API 레벨’ 이라는 항목이 있었습니다. API 레벨은 가장 초창기 안드로이드 플랫폼 버전인 android 1.0 부터 가장 최신 안드로이드 플랫폼 버전까지 1부터 1씩 증가했음을 알 수 있습니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;strong&gt;API 레벨&lt;/strong&gt; 은 Android 플랫폼 버전이 업데이트 될 때마다 수정되는 &lt;strong&gt;Android Framework(안드로이드 프레임워크)의 수정 버전을 고유하게 식별해주는 정수 값&lt;/strong&gt; 입니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;즉, Android 버전이 업데이트는 Android Framework 업데이트도 포함할 수 있기 때문에 Android Framework의 수정 히스토리를 Android 버전과 별도로 표시하는 것이 API 레벨입니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;img width=&quot;946&quot; alt=&quot;03&quot; src=&quot;https://user-images.githubusercontent.com/31889335/111586467-37a8fb00-8804-11eb-8c7f-f9273767561e.png&quot; /&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;(위 그림 참고) 위 표를 보면 Android 플랫폼 최초 출시 버전인 android 1.0 버전은 API Level 1을 제공했음을 알 수 있습니다. android 1.0 버전부터 계속 후속 릴리즈 버전이 나오면서 API 레벨도 1씩 증가했습니다. 또한 각 Android 플랫폼 버전별로 지원하는 API 레벨이 지정되어 있습니다.&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;3️⃣-android-앱-개발-시-앱이-어떤-안드로이드-버전에서-동작할-것인지-지정해야-한다&quot;&gt;3️⃣ Android 앱 개발 시 앱이 어떤 안드로이드 버전에서 동작할 것인지 지정해야 한다!&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Android 앱 개발 시 앱이 어떤 안드로이드 버전(플랫폼 버전)에서 동작할 것인지 지정해줘야 하는 이유?&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;위에서 알아본 것처럼 안드로이드는 시간이 지날수록 새로운 기능과 개선된 기능이 추가되어 업데이트되고 발전해갑니다. 이러한 특징 때문에 개발자가 앱 개발 시 사용한 API 레벨이 모든 앱에서 동일하다는 보장이 없습니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;한 가지 예를 들어봅시다. 예를 들어, 달력 기능과 관련된 API인 &lt;a href=&quot;https://developer.android.com/guide/topics/providers/calendar-provider?hl=ko&quot;&gt;CalendarProvider&lt;/a&gt; API는 android 4.0(API 레벨 14)버전이 출시될 때 새로 나온 API 입니다. 만약 내가 만든 앱이 달력 관련 기능을 제공하기 위해 CalendarProvider API를 사용했다면 이 앱은 android 4.0 이후 버전이 설치된 디바이스 기기에서만 설치되도록 해야 합니다. 만약 android 4.0 이전 버전이 설치된 디바이스에서 내가 만든 앱을 설치하여 실행한 경우, android 4.0 이전에는 CalendarProvider API가 존재하지 않기 때문에 앱이 정상적으로 실행되지 않을 것입니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;이러한 문제에 대응하기 위해 안드로이드 프로젝트의 build.gradle 파일에 존재하는 minSdkVersion(최소 Sdk 버전)이라는 설정의 값을 14(API 레벨)로 지정해줘야 합니다. 이는 이 앱을 실행하려면 디바이스 기기에 최소한 API 레벨 14는 설치되어 있어야 함을 의미합니다. 다른 말로는, 이 앱이 API 레벨 14가 존재하는 디바이스 기기까지와는 &lt;strong&gt;호환&lt;/strong&gt; 된다고 말할 수 있습니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;Android 플랫폼의 버전이 계속 발전하고 있는 상황에서 &lt;strong&gt;앱 호환성&lt;/strong&gt; 이라는 것은 중요한 요소가 되었습니다.&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;앱 호환성이란?&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/31889335/112323966-9d5e2100-8cf5-11eb-8dcc-225f0fd2d43b.png&quot; alt=&quot;05&quot; /&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;(위 그림 참고 - &lt;a href=&quot;https://developer.android.com/about/versions/11?hl=ko&quot;&gt;출처&lt;/a&gt;) Android에서 말하는 &lt;strong&gt;앱 호환성은 앱이 Android 플랫폼 버전의 특정 버전에서 올바르게 실행되는 것&lt;/strong&gt; 을 말합니다. 새로운 Android 플랫폼 버전이 출시되었다는 것은 이전 버전에 비해 개선된 사항들이 새 버전에 추가되었다는 것입니다. 위 그림에서 볼 수 있듯이, 새 버전에는 ‘개인 정보 보호’와 ‘보안 향상’에 관련된 변경 사항이 추가될 수도 있고, Android 운영체제 전반에 걸쳐 사용자 환경을 개선하는 변경 사항이 추가될 수도 있습니다. 또 아예 기존에 없었던 새로운 기능이 추가될 수도 있습니다. 이러한 변경 사항은 앱에 영향을 줄 수 있습니다. 따라서 새로운 Android 플랫폼 버전이 출시되면 개발자는 출시 버전에 포함된 변경 사항을 살펴보고 해당 버전에서 앱이 잘 동작하는지 테스트한 다음, 사용자를 위해 호환성 업데이트를 하는 것이 중요합니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;또한 일반적으로 Android 플랫폼 버전이 새로 출시되면 사용자들은 이에 관심과 흥미를 가지고 자신의 기기에 Android 플랫폼을 업데이트하는 경우가 많습니다. 또 새 변경 사항을 자신이 사용하는 앱에서 경험해 보고 싶어 합니다. 사용자의 이러한 특성을 파악하고 개발자는 Android 플랫폼 버전이 새로 출시되면 앱이 새 버전에서 비정상적으로 동작하는 부분은 없는지 테스트하는 것이 좋습니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;img width=&quot;915&quot; alt=&quot;06&quot; src=&quot;https://user-images.githubusercontent.com/31889335/112324373-12315b00-8cf6-11eb-8812-5fbdfc4e9e21.png&quot; /&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;(위 그림 참고 - &lt;a href=&quot;https://developer.android.com/about/versions/12?hl=ko&quot;&gt;출처&lt;/a&gt;) 따라서 Google은 Android 플랫폼 최신 버전이 공식적으로 출시되기 전에 개발자 프리뷰(preview) 및 베터 버전을 먼저 출시하여 개발자들에게 테스트 기간을 주고 있습니다.&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;minSdkVersion 지정하기&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;minSdkVersion은 &lt;strong&gt;앱을 실행하려면 필요한 최소 API 레벨&lt;/strong&gt; 을 의미합니다. 즉, ‘이 앱을 실행하려는 디바이스 기기에는 최소한 몇 API 레벨을 제공하는 Android 플랫폼 버전이 설치되어 있어야 한다’ 라는 의미입니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;만약 어떤 디바이스 기기에서 A라는 앱을 설치하려고 하는 상황을 가정해봅시다. 만약 이 디바이스 기기의 Android 플랫폼 버전이 A앱에 설정된 minSdkVersion보다 낮은 버전의 API 레벨을 제공한다면 Android 시스템은 자동으로 앱 설치를 방지합니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;minSdkVersion은 항상 지정해줘야 합니다. 만약 이 설정을 지정해주지 않을 경우 기본 값으로 API 레벨 1이 minSdkVersion으로 지정됩니다. API 레벨 1이 설정되었다는 것은 해당 앱이 모든 Android 버전과 호환된다는 의미입니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;만약 API 레벨 14부터 지원하는 CalendarProvider API를 사용한 앱의 minSdkVersion이 1일 경우(=minSdkVersion을 지정하지 않았을 경우) 해당 앱은 런타임 시 작동이 중단될 수 있습니다. API 레벨 14를 지원하지 않는 디바이스 기기에서도 이 앱을 설치할 수 있지만 정상적인 앱 작동에 필수인 CalendarProvider API를 제공하지 않기 때문입니다. 이렇게 minSdkVersion이 적절하지 않게 설정되면 앱이 중단될 수 있기 때문에 앱에 사용한 API 레벨을 고려하여 적절한 minSdkVersion을 지정해줘야 합니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;앱의 minSdkVersion을 설정할 수 있게 된 것은 API 레벨 4 이후였습니다.(애초에 minSdkVersion이라는 기능이 API 레벨 4 때 처음 추가되었기 때문)&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;일반적인 Android 앱은 Android 플랫폼의 신규 버전과 호환된다!&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;새로운 Android 플랫폼 버전이 출시되면 Android Framework API에 관한 변경도 존재할 수 있습니다. 하지만 신규 Android 플랫폼 버전에 포함된 API 변경 사항은 이전 버전의 API를 Android Framework에서 완전히 삭제한 후 그것을 대체하는 것이 아닙니다. 이전 버전이 제공하는 API는 그대로 두고 거기에 추가로 새로운 API도 제공되는 것입니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;따라서 이미 이전 API 레벨을 사용하여 개발된 Android 앱이 최신 Android 플랫폼 버전을 설치한 디바이스 기기(최신 API 레벨을 제공)에서 실행된다고 하더라도 앱 실행에 있어서 문제가 되지 않습니다. 왜냐하면 최신 API 레벨은 바로 이전 API 레벨이 제공하는 API도 제공하고, 새롭게 추가된 API도 제공하기 때문입니다.  &lt;strong&gt;즉, 어떠한 이유나 이슈 발생으로  Android Framework에서 완전히 삭제된 API를 사용한 앱이 아니라면, 일반적인 Android 앱은 Android 플랫폼의 이후 버전 및 상위 API 레벨과 호환됩니다.&lt;/strong&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;추가로 예를 들어 보자면, 사용자가 API 레벨 29를 사용하여 개발된 Android 앱을 설치하여 잘 사용하고 있었습니다. 그런데 API 레벨 30을 제공하는 새로운 Android 플랫폼 버전이 등장하여 이 사용자는 디바이스 기기에 설치된 Android 플랫폼 버전을 업데이트 설치했습니다. 이러한 경우는 어떻게 되는 걸까요? Android 플랫폼 업데이트가 정상적으로 설치되면 이 앱은 API 레벨 29와 새 시스템 기능을 가진 환경의 새로운 런타임 버전에서 실행됩니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/31889335/112164521-4a229a80-8c31-11eb-8264-c90e479d30ef.png&quot; alt=&quot;04&quot; /&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;(위 사진 참고) 하지만 위에서 설명한 CalendarProvider API 예시처럼, 경우에 따라서는 어떤 Android 플랫폼 버전에서는 앱이 잘 동작하는데 어떤 Android 플랫폼 버전에서는 앱이 잘 동작하지 않는 경우가 있을 수 있습니다. 이러한 문제에 대응하기 위해 개발자는 다양한 Android 플랫폼에서 앱을 테스트해 볼 필요가 있습니다. 위 그림 처럼 Android SDK는 개발자가 여러 플랫폼 버전을 선택적으로 다운로드할 수 있게 제공되므로 필요한 버전을 다운로드하여 테스트해보면 됩니다.&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;그러나 신규 API 레벨 버전을 사용한 앱을 Android 플랫폼 이전 버전에서 실행하면 100% 호환되지 않는다.&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;이전 API 레벨 버전을 사용하여 개발된 앱을 새로운 Android 플랫폼에서 실행시키는 것은 문제가 되지 않는다고 위에서 설명했습니다. 그러나 반대로 신규 API 레벨 버전을 사용한 앱을 이전 Android 플랫폼에서 실행시킬 경우, 이전 플랫폼은 신규 API를 제공하지 않기 때문에 앱이 제대로 동작하지 않을 수 있습니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;디바이스 기기에 설치된 Android 플랫폼을 최신 버전으로 업데이트한 후에는 이전 플랫폼 버전으로 다운 그레이드될 가능성이 없습니다. 하지만 개발자는 항상 최신 버전으로 업데이트하지 않은 기기가 있을 수 있다는 인식을 해야 합니다.(실제로 제 주변 지인도 귀찮아서 Android 플랫폼 버전을 두 개 버전이 새로 출시될 동안 업데이트 안 한 사람이 있습니다^^..)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;즉, 신규 API 레벨을 사용하여 앱을 개발한 후 배포했을 때, 이전 플랫폼 버전이 설치된 기기에서는 제대로 동작하지 않을 수 있습니다.&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;새로운 Android 플랫폼 버전이 출시되었을 때, 앱에 영향을 주는 변경 사항의 두 가지 유형&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;새로운 Android 플랫폼 버전이 출시되면 반드시 이전 버전보다 개선된 사항들이 존재합니다.(‘개선된 사항’이라는 단어를 앞으로 ‘변경 사항’이라고 언급하겠습니다)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;새로운 Android 플랫폼 버전이 제공하는 변경 사항의 유형은 두 가지로 나뉩니다. &lt;strong&gt;모든 앱에 적용되는 변경 사항&lt;/strong&gt; 과 &lt;strong&gt;타겟팅된 앱에 적용되는 변경 사항&lt;/strong&gt; 으로 나뉩니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/31889335/112330622-8c181300-8cfb-11eb-90cf-f4d9f1d9b5f0.png&quot; alt=&quot;07&quot; /&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;(위 그림 참고 - &lt;a href=&quot;https://developer.android.com/about/versions/11/behavior-changes-all?hl=ko&quot;&gt;출처&lt;/a&gt;) 위 그림은 2021년 3월 기준 가장 최신 Android 플랫폼 버전인 11 에서 제공하는 변경 사항 중 ‘모든 앱’에 적용되는 변경 사항을 소개하는 글입니다. 즉, Android 11이 설치된 디바이스 기기에서 실행되는 모든 앱에 적용되는 변경 사항인 것입니다. 그림의 출처 사이트에 접속해보면 어떤 변경 사항들이 ‘모든 앱’에 적용되는 변경 사항인지 알 수 있습니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;위 그림의 내용에서 빨간색 박스 부분을 보면 ‘targetSdkVersion에 관계없이’라는 말이 있습니다. 아직 targetSdkVersion이라는 것이 무엇인지 설명하지는 않았지만 분홍색 박스 부분을 추가로 봐봅시다. ‘Android 11을 타겟팅하는 앱에만 영향을 주는 변경 사항을 검토해야 한다’는 말이 적혀있습니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;파란색 박스 부분과 분홍색 박스 부분을 통해 대충 유추해보자면.. 특정 Android 플랫폼 버전을 타겟팅하는 앱이 존재하는 것 같고, targetSdkVersion이라는 설정으로 타겟팅할 버전을 지정하는 것 같죠? &amp;gt;.&amp;lt; (targetSdkVersion에 대해서는 조금 아래에서 설명할 예정입니다)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/31889335/112331866-a43c6200-8cfc-11eb-83bb-3b8808778266.png&quot; alt=&quot;08&quot; /&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;(위 그림 참고 - &lt;a href=&quot;https://developer.android.com/about/versions/11/behavior-changes-11?hl=ko&quot;&gt;출처&lt;/a&gt;) 위 그림의 내용에서 파란색 박스 부분을 보면 Android 11 이상을 타겟팅하는 앱에만 적용되는 변경 사항들이 존재한다는 것을 알 수 있습니다. 또 Android 11을 타겟팅하는 앱은 targetSdkVersion라는 것을 30으로 설정한 앱이라는 것도 알 수 있습니다. 만약 내가 개발한 앱의 targetSdkVersion을 30으로 설정했다면 이 앱이 Android 11에서 변경된 사항들을 반영하도록 수정해야 합니다.(Android 플랫폼 버전 11이 제공하는 API 레벨은 30입니다)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;이처럼 새로운 Android 플랫폼 버전이 제공하는 변경 사항의 유형은 ‘모든 앱에 적용되는 변경 사항’ 과 ‘타겟팅된 앱에 적용되는 변경 사항’으로 두 가지 유형이 존재한다는 것을 알 수 있습니다.&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;targetSdkVersion 지정하기&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;targetSdkVersion은 &lt;strong&gt;앱의 타겟 API 레벨&lt;/strong&gt; 을 지정하는 정수입니다. ‘타겟’이라는 말의 의미처럼 해당 앱이 타겟으로 하고 있는 API 레벨이라는 뜻입니다. 만약 targetSdkVersion이 30로 지정되어 있으면 개발자는 API 레벨 30이 제공되는 환경에서 해당 앱 테스트를 완료했고 앱을 실행하는데 문제가 없다는 의미입니다. 즉, &lt;a href=&quot;https://mrgamza.tistory.com/615&quot;&gt;이 블로그&lt;/a&gt;의 말을 인용하자면 “우리가 최종적으로 호환성을 맞춘 버전이 이 버전이다.” 라고 선언하는 것이 targetSdkVersion 입니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;strong&gt;정리 )&lt;/strong&gt; minSdkVersion은 앱이 호환되는 가장 낮은 API 레벨을 말하고, targetSdkVersion은 앱을 개발하고 테스트한 가장 높은 API 레벨을 말합니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;만약 targetSdkVersion을 설정하지 않을 경우 minSdkVersion과 동일한 값으로 설정됩니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;신규 Android 플랫폼 버전이 제공하는 변경 사항 중 ‘타겟팅된 앱에만 적용되는 변경 사항’이 있다는 것을 위에서 언급했습니다. 이러한 변경 사항은 targetSdkVersion에 설정된 값을 보고 변경 사항을 적용할지 말지 결정됩니다.&lt;/p&gt;
-        &lt;blockquote&gt;
-          &lt;p&gt;이 위에서부터 다시 하자. 호환성 프레임워크 도구 부터 읽자.&lt;/p&gt;
-        &lt;/blockquote&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;blockquote&gt;
-      &lt;p&gt;minsdkversion 어디서 작성하는지 , Android 11과 앱의 호환성 테스트(새로운 기능 출시됨)
-https://developer.android.com/guide/topics/manifest/uses-sdk-element#ApiLevels
-https://developer.android.com/training/basics/supporting-devices/platforms?hl=ko
-https://developer.android.com/distribute/best-practices/develop/target-sdk?hl=ko
-https://developer.android.com/about/versions/11/test-changes?hl=ko#list
-https://developer.android.com/guide/app-compatibility/test-debug?hl=ko
-https://developer.android.com/guide/app-compatibility?hl=ko
-얘네 참고 문서에 없는 것 추가하기&lt;/p&gt;
-    &lt;/blockquote&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;안드로이드 앱을 조회할 수 있고 설치할 수 있도록 해주는 &lt;a href=&quot;https://play.google.com/store?utm_source=apac_med&amp;amp;utm_medium=hasem&amp;amp;utm_content=Jan0421&amp;amp;utm_campaign=Evergreen&amp;amp;pcampaignid=MKT-EDR-apac-kr-1003227-med-hasem-py-Evergreen-Jan0421-Text_Search_BKWS-BKWS%7cONSEM_kwid_43700058439438031_creativeid_477136209046_device_c&amp;amp;gclid=CjwKCAjw9MuCBhBUEiwAbDZ-7oqhHVcoSbCI_MqISe9w1YogduL5vR2-m_9-9tKDaEleYvQBQKuBwBoCfx8QAvD_BwE&amp;amp;gclsrc=aw.ds&quot;&gt;Google Play&lt;/a&gt;에는 &lt;a href=&quot;https://developer.android.com/google/play/filters&quot;&gt;Google Play 필터&lt;/a&gt; 라는 기능이 적용되어 있습니다. Google Play는 Google Play Store에 업로드된 모든 앱의 minSdkVersion과 targetSdkVersion을 확인하여 각 앱이 요구하는 Android 버전을 파악합니다. 앱이 요구하는 버전과 맞지 않는 디바이스 기기를 가진 사용자가 Google Play Store를 실행하여 앱을 조회할 경우, Google Play는 해당 앱을 앱 리스트에 아예 표시하지 않습니다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>2021-11-02</pubDate>
-        <link>http://localhost:4000/articles/2021-09/android-version</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-09/android-version</guid>
-        
-        
-        <category>안드로이드</category>
         
       </item>
     
