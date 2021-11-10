@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "[RxKotlin] flatmap과 map의 적절성 💡"
+date: 2021-10-06 18:34:10 +0700
 categories: [RxKotlin]
 ---
 

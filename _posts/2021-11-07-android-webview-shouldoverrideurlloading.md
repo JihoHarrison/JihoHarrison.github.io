@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "[안드로이드] WebView ShouldOverrideUrlLoading"
-date:   2021-11-07 15:34:10 +0700
+title: "[안드로이드] WebView ShouldOverrideUrlLoading"
+date: 2021-11-07 15:34:10 +0700
 categories: [안드로이드]
 ---
 

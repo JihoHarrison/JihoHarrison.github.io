@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "[알고리즘] 개선된 Bubble Sort💧"
+date: 2021-09-13 18:34:10 +0700
 categories: [Algorithm]
 ---
 

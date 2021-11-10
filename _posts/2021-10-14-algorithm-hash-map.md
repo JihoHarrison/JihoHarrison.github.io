@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "[알고리즘] 2019 KAKAO BLIND RECRUITMENT 오픈채팅방 💬"
+date: 2021-10-14 18:34:10 +0700
 categories: [Algorithm]
 ---
 

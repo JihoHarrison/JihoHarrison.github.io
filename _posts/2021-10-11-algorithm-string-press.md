@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "[알고리즘] 2020 KAKAO BLIND RECRUITMENT 문자열 압축 🪨"
+date: 2021-10-11 18:34:10 +0700
 categories: [Algorithm]
 ---
 

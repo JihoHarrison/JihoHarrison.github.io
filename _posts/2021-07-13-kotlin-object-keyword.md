@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "[Kotlin] 코틀린의 object 키워드 잘 알고 사용하기(feat. companion object)"
+date: 2021-07-13 16:34:10 +0700
 categories: [kotlin]
 ---
 

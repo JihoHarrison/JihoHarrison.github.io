@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "[알고리즘] 그리디 알고리즘 (Greedy Algorithm)🤑"
+date: 2020-05-11 16:34:10 +0700
 categories: [Algorithm]
 ---
 # 0️⃣ Intro
