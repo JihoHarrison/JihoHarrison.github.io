@@ -1,9 +1,9 @@
----
+<!-- ---
 layout: post
-title:  "[안드로이드] 안드로이드 버전이 뭐예요?(targetSdkVersion, compileSdkVersion, API 레벨)"
-date:   2021-09-13 18:34:10 +0700
+title: "[안드로이드] 안드로이드 버전이 뭐예요?(targetSdkVersion, compileSdkVersion, API 레벨)"
+date: 2021-09-13 18:34:10 +0700
 categories: [안드로이드]
----
+--- -->
 
 > __참고 자료__
 >

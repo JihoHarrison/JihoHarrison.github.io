@@ -1,9 +1,9 @@
----
+<!-- ---
 layout: post
 title: "[안드로이드] 안드로이드 프로젝트 구조(Android Project Structure)"
 date: 2021-07-05 18:34:10 +0700
 categories: [안드로이드]
----
+--- -->
 
 > __참고 자료__  
 > [Android Developers Document - 프로젝트 개요](https://developer.android.com/studio/projects?hl=ko)

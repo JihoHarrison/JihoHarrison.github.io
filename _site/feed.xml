@@ -5,8 +5,8 @@
     <description>안드로이드 개발자를 목표로 달려나가는 Kevin의 블로그입니다!</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2021-11-10</pubDate>
-    <lastBuildDate>Wed, 10 Nov 2021 04:01:37 +0100</lastBuildDate>
+    <pubDate>2021-11-15</pubDate>
+    <lastBuildDate>Mon, 15 Nov 2021 12:44:51 +0100</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
@@ -99,7 +99,7 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 </description>
-        <pubDate>2021-11-10</pubDate>
+        <pubDate>2021-11-15</pubDate>
         <link>http://localhost:4000/articles/2021-11/android-webview-shouldoverrideurlloading</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-11/android-webview-shouldoverrideurlloading</guid>
         
@@ -210,7 +210,7 @@
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>2021-11-10</pubDate>
+        <pubDate>2021-11-15</pubDate>
         <link>http://localhost:4000/articles/2021-11/algotithm-take-picture-dfs</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-11/algotithm-take-picture-dfs</guid>
         
@@ -349,7 +349,7 @@
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>2021-11-10</pubDate>
+        <pubDate>2021-11-15</pubDate>
         <link>http://localhost:4000/articles/2021-11/algorithm-coloring-book</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-11/algorithm-coloring-book</guid>
         
@@ -555,7 +555,7 @@
 
 &lt;p&gt;&lt;em&gt;탐색 알고리즘을 더 깊이있게 공부하자…&lt;/em&gt;&lt;/p&gt;
 </description>
-        <pubDate>2021-11-10</pubDate>
+        <pubDate>2021-11-15</pubDate>
         <link>http://localhost:4000/articles/2021-10/algorithm-covid19</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-10/algorithm-covid19</guid>
         
@@ -613,7 +613,7 @@
 &lt;h2 id=&quot;2️⃣-android에서의-mvvm&quot;&gt;2️⃣ Android에서의 MVVM&lt;/h2&gt;
 &lt;p&gt;[마지막 수정 : 2021-10-15, 추후 업데이트 예정]&lt;/p&gt;
 </description>
-        <pubDate>2021-11-10</pubDate>
+        <pubDate>2021-11-15</pubDate>
         <link>http://localhost:4000/articles/2021-10/android-rxkotlin-mvvm</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-10/android-rxkotlin-mvvm</guid>
         
@@ -697,7 +697,7 @@
 &lt;h2 id=&quot;실행-결과&quot;&gt;실행 결과&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&quot;/img/10-14-algorithm/result.png&quot; alt=&quot;backpressure&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>2021-11-10</pubDate>
+        <pubDate>2021-11-15</pubDate>
         <link>http://localhost:4000/articles/2021-10/algorithm-hash-map</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-10/algorithm-hash-map</guid>
         
@@ -790,7 +790,7 @@
 &lt;/ul&gt;
 
 </description>
-        <pubDate>2021-11-10</pubDate>
+        <pubDate>2021-11-15</pubDate>
         <link>http://localhost:4000/articles/2021-10/algorithm-string-press</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-10/algorithm-string-press</guid>
         
@@ -890,7 +890,7 @@ Recieved this is 1&lt;br /&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2021-11-10</pubDate>
+        <pubDate>2021-11-15</pubDate>
         <link>http://localhost:4000/articles/2021-10/rx-kotlin-flatmap-dividing</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-10/rx-kotlin-flatmap-dividing</guid>
         
@@ -931,7 +931,7 @@ Recieved this is 1&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;하지만 모든 데이터 스트림에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;을 사용하는 것은 결코 바람직하지 않은 방법이 될 것이다. 소량이 데이터나 UI 이벤트 처리와 같은 경우는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Observable&lt;/code&gt; 에서도 데이터 스트림의 시간차 등을 두어 스트림의 양을 조절하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;debounce()&lt;/code&gt;라던지, &lt;code class=&quot;highlighter-rouge&quot;&gt;throttle()&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;sample()&lt;/code&gt; 함수 등이 존재하기 때문에 상황에 따라 적절하게 사용하는 방법을 익히면 될 것 같다.&lt;/p&gt;
 </description>
-        <pubDate>2021-11-10</pubDate>
+        <pubDate>2021-11-15</pubDate>
         <link>http://localhost:4000/articles/2021-09/flowable-observable</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/flowable-observable</guid>
         
@@ -1016,7 +1016,7 @@ Recieved this is 1&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;정말 어렵고 복잡하다.. 안드로이드 고수가 되는 그날까지 최선을 다해보자..!&lt;/p&gt;
 </description>
-        <pubDate>2021-11-10</pubDate>
+        <pubDate>2021-11-15</pubDate>
         <link>http://localhost:4000/articles/2021-09/behavior-processor</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-09/behavior-processor</guid>
         
