@@ -27,7 +27,7 @@ categories: [kotlin]
   - B 클래스를 새로 작성하지 않고 B 클래스의 객체를 생성할 수 있을까?
   - 코틀린은 딱 이런 상황에서 사용할 수 있도록 object expression와 object declaration라는 것을 지원함
 
-## ✅ object expression이 뭐예요?<a id="2"></a>
+## ✅ object expression?<a id="2"></a>
 
 - object expression(객체 표현식)는 __`object` 키워드를 사용하여 익명 클래스의 객체를 생성할 때 사용__
 - `익명 클래스` = 클래스를 작성할 때 클래스 이름이 명시적으로 작성되어 있지 않은 클래스. 즉, 이름이 없는 클래스
@@ -109,7 +109,7 @@ categories: [kotlin]
   - 특정 인터페이스를 구현한 클래스를 더 이상 프로젝트 다른 곳에서 재사용하지 않기 때문에 익명 클래스를 만들어 구현하는 것!
   - 예를 들어, 텍스트 뷰를 클릭한 결과로 실행되어야 하는 작업은 모든 텍스트 뷰에서 동일하지 않을 것이다. 각각 다른 텍스트 뷰의 클릭 리스너를 호출하는 순간 순간마다 각기 다른 작업을 실행하는 코드를 매번 구현해야 하기 때문
 
-## ✅ object declaration가 뭐예요?<a id="4"></a>
+## ✅ object declaration?<a id="4"></a>
 
 - object declaration는 __소프트웨어 디자인 패턴 중 [싱글톤 패턴](https://en.wikipedia.org/wiki/Singleton_pattern)을 만드는 작업을 할 때 사용__
 - 싱글톤 패턴
@@ -232,7 +232,7 @@ categories: [kotlin]
   }
   ~~~
 
-## ✅ companion object가 뭐예요?<a id="6"></a>
+## ✅ companion object?<a id="6"></a>
 
 - companion object = object declaration을 일반 클래스 내부에서 바로 작성하는 것
 - `companion` 라는 키워드를 object declaration 앞에 붙여줌
