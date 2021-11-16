@@ -64,12 +64,12 @@ public User(String firstName, String lastName, int age, String phone, String add
 [객체 생성]
 
 ```java
-User user1 = new User("ssafy", "Kim", 6, "02-666-6666", "서울시 강남구 테헤란로 212 멀티캠퍼스");
-User user2 = new User("ssafy", "Lee", 5, null, null);
+User user1 = new User("Jiho", "Kevin", 6, "010-4640-9435", "서울시 은평구 우리집~~");
+User user2 = new User("Tony", "Choi", 5, null, null);
 
 User user3 = new User();
-user3.setFirstName("ssafy");
-user3.setLastName("Choi");
+user3.setFirstName("Jin");
+user3.setLastName("Lee");
 ```
 
 #### 2. 생성자를 사용한 생성 방법
