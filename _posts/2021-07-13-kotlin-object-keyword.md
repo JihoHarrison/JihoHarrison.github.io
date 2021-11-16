@@ -10,7 +10,6 @@ categories: [kotlin]
 > [Youtube Android Developers - Object - Kotlin Vocabulary](https://www.youtube.com/watch?v=KUk6k865Vgg)
 >
 > __목차__  
-> [0. 프롤로그](#0)  
 > [1. object expression VS object declaration](#1)  
 > [2. object expression이 뭐예요?](#2)  
 > [3. object expression 더 알아보기](#3)   
@@ -20,15 +19,9 @@ categories: [kotlin]
 > [7. companion object 더 알아보기](#7)
 
 
-![img](https://user-images.githubusercontent.com/31889335/125470357-c2ffd2d5-b7a3-437b-b3ff-a7b465de7cf2.png)
+![img](https://user-images.githubusercontent.com/27722059/141948703-040393b6-4299-4e52-a240-4cc2c26bc709.png)
 
 <br>
-
-## ✍🏻 프롤로그<a id="0"></a>
-
-코틀린으로 코드를 작성하다보면(저는 안드로이드 앱 개발을 코틀린으로 합니다) __object__ 라는 키워드를 사용하게 되는 몇 가지 경우가 있다!  
-하지만 그동안 대충 구글링하여 짧은 순간 습득한 지식으로 이해한 후 사용했었는데..(으이구~) 좀 제대로 알고 사용하려는 목적으로 공부해본다..ㅎㅎ  
-(아! 그리고 object 키워드에 대해서 공부하게 된 가장 큰 목적은 companion object를 제대로 이해해보고자 시작하게 된 것이다..ㅋㅋㅋ)
 
 ## ✅ object expression VS object declaration<a id="1"></a>
 
@@ -53,8 +46,8 @@ categories: [kotlin]
 - ~~~kotlin
   fun main() {
       val yourName = object {
-          val LastName = "Kim"
-          val FirstName = "Chohee"
+          val LastName = "Shin"
+          val FirstName = "Jiho"
 
           // object expressions는 내부적으로 코틀린의 Any 클래스를 default 부모 클래스로 상속하고 있기 때문에 toString() 메소드를 오버라이딩할 수 있다!
           override fun toString() = "Your name is $LastName $FirstName"
@@ -69,11 +62,11 @@ categories: [kotlin]
 
 <br>
 
-- <img width="700" alt="01" src="https://user-images.githubusercontent.com/31889335/125470357-c2ffd2d5-b7a3-437b-b3ff-a7b465de7cf2.png">
+- <img width="700" alt="01" src="https://user-images.githubusercontent.com/27722059/141948703-040393b6-4299-4e52-a240-4cc2c26bc709.png">
 
   - (위 그림 참고) `object` 키워드를 `익명 클래스` 앞에 붙여줌으로써 익명 클래스의 객체를 `object` 키워드 작성 시점에서 바로 생성함
   - 생성한 객체가 yourName 변수에 할당됨
-  - 위 코드의 main 함수를 실행해보면 Your name is Kim Chohee가 출력됨
+  - 위 코드의 main 함수를 실행해보면 Your name is Jiho Shin이 출력됨
 
 <br>
 
@@ -103,8 +96,8 @@ categories: [kotlin]
   fun main() {
       // Person 인터페이스를 상속하는 익명 클래스를 object expressions 사용해서 객체화시키기
       val yourName = object: Person {
-          val LastName = "당신은"
-          val FirstName = "천재!"
+          val LastName = "Hello"
+          val FirstName = "World!"
 
           // Person 인터페이스에 정의된 getYourName 구현
           override fun getYourName(): String = "Your name is $LastName $FirstName"
@@ -119,12 +112,12 @@ categories: [kotlin]
   ~~~
   - 위 코드처럼 Person 이라는 인터페이스를 하나 만듬 
   - Person 인터페이스를 상속하는 익명 클래스를 object expressions로 객체화 가능
-  - main 함수 실행시키면 Your name is 당신은 천재!가 출력됨
+  - main 함수 실행시키면 Your name is Hello World!가 출력됨
 
 <br>
 
 - 안드로이드 앱 개발에서 언제 object expression를 쓰면 좋을까?
-  - <img width="650" alt="02" src="https://user-images.githubusercontent.com/31889335/125475693-b3260e6d-0d4f-4f2f-b50c-5703c9f40a2c.png">
+  - <img width="650" alt="02" src="https://user-images.githubusercontent.com/27722059/141952641-ae373a4e-4e6f-4b64-a757-4ac27e9a5126.png">
   - XXOnXXXListener() 라는 메소드를 호출할 때 많이 사용함
   - XXOnXXXListener() 메소드는 인자로 특정 인터페이스를 구현한 클래스의 객체를 넘겨줘야 하는 경우가 많음
   - 위 코드에서는 View.OnClickListener라는 인터페이스를 구현한 클래스의 객체를 setOnClickListener() 메소드의 인자로 넘겨야 함
@@ -162,7 +155,7 @@ categories: [kotlin]
       }
 
       public void printName() {
-          System.out.println("Kimchohee");
+          System.out.println("JihoKevin");
       }
   }
   ~~~
@@ -194,7 +187,7 @@ categories: [kotlin]
   // 코틀린에서 싱글톤 패턴이 적용된 클래스 만들기
   object MySingleTon {
       fun printName() {
-          println("Kimchohee")
+          println("JihoKevin")
       }
   }
   ~~~
@@ -227,7 +220,7 @@ categories: [kotlin]
   // 코틀린에서 MySingleTon 클래스의 객체 사용하기
   fun main() {
       val mySingleTon = MySingleTon
-      mySingleTon.printName()// Kimchohee 출력됨
+      mySingleTon.printName()// JihoShin 출력됨
   }
   
   VS
@@ -235,7 +228,7 @@ categories: [kotlin]
   // 자바에서 MySingleTon 클래스의 객체 사용하기
   public static void main(String[] args){
       MySingleTon mySingleTon = MySingleTon.getInstance();
-      mySingleTon.printName(); // Kimchohee 출력됨
+      mySingleTon.printName(); // JihoShin 출력됨
   }
   ~~~
   - 코틀린에서 싱글톤 패턴이 적용된 클래스의 객체를 사용하기 위해서는 해당 클래스 이름 자체를 사용하면 됨
@@ -250,7 +243,7 @@ categories: [kotlin]
       }
 
       fun printName() {
-          println("Kimchohee")
+          println("JihoKevin")
       }
   }
   ~~~
@@ -270,7 +263,7 @@ categories: [kotlin]
       // MySingleTon 이라는 이름 안 써도 됨
       companion object MySingleTon {
           fun printName() {
-              println("kimchohee")
+              println("JihoKevin")
           }
       }
       
