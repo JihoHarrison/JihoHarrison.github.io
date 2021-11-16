@@ -9,14 +9,6 @@ categories: [kotlin]
 > [Kotlin Document - Object expressions and declarations](https://kotlinlang.org/docs/object-declarations.html)  
 > [Youtube Android Developers - Object - Kotlin Vocabulary](https://www.youtube.com/watch?v=KUk6k865Vgg)
 >
-> __목차__  
-> [1. object expression VS object declaration](#1)  
-> [2. object expression이 뭐예요?](#2)  
-> [3. object expression 더 알아보기](#3)   
-> [4. object declaration가 뭐예요?](#4)  
-> [5. object declaration 더 알아보기](#5)  
-> [6. companion object가 뭐예요?](#6)  
-> [7. companion object 더 알아보기](#7)
 
 
 ![img](https://user-images.githubusercontent.com/27722059/141948703-040393b6-4299-4e52-a240-4cc2c26bc709.png)
@@ -76,14 +68,6 @@ categories: [kotlin]
   - obejct expression에서 사용되는 `object` 키워드는 한글 해석한 그대로 `객체` 라고 생각하기 = 키워드 작성 시점에서 바로 객체로 생성되므로!
 
 <br>
-
-- 생각
-  - 왜 이름이 object expression 일까?
-  - object expression = 객체 표현식 인 것을 떠올려보자
-  - 프로그래밍 언어 분야에서 "표현식" = "수식" 임
-  - 프로그래밍 언어에서 "수식" = 1+2와 같은 수식 / 함수 호출식 / 변수 이름 등 포함
-  - 프로그래밍 언어에서 "수식" = 모양과 형태가 다를 수 있지만 모두 하나의 단일 값이 될 수 있는 것을 의미
-  - 따라서 익명 클래스를 객체화하는 행위인 object expression도 익명 클래스를 객체화하여 하나의 단일 값으로 만들 수 있기 때문에 object "expression" 라는 이름이라고 추측해 봄
 
 ## ✅ object expression 더 알아보기<a id="3"></a>
 
@@ -220,7 +204,7 @@ categories: [kotlin]
   // 코틀린에서 MySingleTon 클래스의 객체 사용하기
   fun main() {
       val mySingleTon = MySingleTon
-      mySingleTon.printName()// JihoShin 출력됨
+      mySingleTon.printName()// Jiho Shin 출력됨
   }
   
   VS
@@ -228,7 +212,7 @@ categories: [kotlin]
   // 자바에서 MySingleTon 클래스의 객체 사용하기
   public static void main(String[] args){
       MySingleTon mySingleTon = MySingleTon.getInstance();
-      mySingleTon.printName(); // JihoShin 출력됨
+      mySingleTon.printName(); // Jiho Shin 출력됨
   }
   ~~~
   - 코틀린에서 싱글톤 패턴이 적용된 클래스의 객체를 사용하기 위해서는 해당 클래스 이름 자체를 사용하면 됨
