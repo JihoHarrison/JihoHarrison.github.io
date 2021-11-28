@@ -161,7 +161,7 @@ class FranceShoesStore extends ShoesStore {
 
 팩토리 메소드 패턴의 클래스들은 크게 생산자 클래스와 제품 클래스로 구분할 수 있다.
 
-이제 생산자 클래스인 ShoesStore 클래스에서 사용될 제품 클래스 Shoes 클래스를 작성해 보자.
+생산자 클래스인 ShoesStore 클래스에서 사용될 제품 클래스 Shoes 클래스는 다음과 같이 작성될 수 있다.
 
 > Shoes.java
 
