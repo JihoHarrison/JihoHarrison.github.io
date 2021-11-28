@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="  참고 자료Kotlin Document - Object expressions and declarationsYoutube Android Developers - Object - Kotlin Vocabulary  목차0. 프롤로그1. object expression VS object ...">
+  <meta name="description" content="  참고 자료Kotlin Document - Object expressions and declarationsYoutube Android Developers - Object - Kotlin Vocabulary✅ object expression VS object declaration ...">
   <meta name="keywords" content="blog and jekyll">
   <meta name="author" content="[Kotlin] 코틀린의 object 키워드 잘 알고 사용하기(feat. companion object) | JihoKevin">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@
   <!-- Twitter Tags -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="[Kotlin] 코틀린의 object 키워드 잘 알고 사용하기(feat. companion object) | JihoKevin">
-  <meta name="twitter:description" content="  참고 자료Kotlin Document - Object expressions and declarationsYoutube Android Developers - Object - Kotlin Vocabulary  목차0. 프롤로그1. object expression VS object ...">
+  <meta name="twitter:description" content="  참고 자료Kotlin Document - Object expressions and declarationsYoutube Android Developers - Object - Kotlin Vocabulary✅ object expression VS object declaration ...">
   
     <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
   
@@ -26,7 +26,7 @@
   <meta property="og:type" content="blog">
   <meta property="og:url" content="http://localhost:4000/articles/2021-07/kotlin-object-keyword">
   <meta property="og:title" content="[Kotlin] 코틀린의 object 키워드 잘 알고 사용하기(feat. companion object) | JihoKevin">
-  <meta property="og:description" content="  참고 자료Kotlin Document - Object expressions and declarationsYoutube Android Developers - Object - Kotlin Vocabulary  목차0. 프롤로그1. object expression VS object ...">
+  <meta property="og:description" content="  참고 자료Kotlin Document - Object expressions and declarationsYoutube Android Developers - Object - Kotlin Vocabulary✅ object expression VS object declaration ...">
   
     <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
   
@@ -155,7 +155,7 @@
       <span class="read-time" title="Estimated read time">
   
   
-    15 mins read
+    14 mins read
   
 </span>
 
@@ -169,26 +169,11 @@
 <a href="https://kotlinlang.org/docs/object-declarations.html">Kotlin Document - Object expressions and declarations</a><br />
 <a href="https://www.youtube.com/watch?v=KUk6k865Vgg">Youtube Android Developers - Object - Kotlin Vocabulary</a></p>
 
-  <p><strong>목차</strong><br />
-<a href="#0">0. 프롤로그</a><br />
-<a href="#1">1. object expression VS object declaration</a><br />
-<a href="#2">2. object expression이 뭐예요?</a><br />
-<a href="#3">3. object expression 더 알아보기</a> <br />
-<a href="#4">4. object declaration가 뭐예요?</a><br />
-<a href="#5">5. object declaration 더 알아보기</a><br />
-<a href="#6">6. companion object가 뭐예요?</a><br />
-<a href="#7">7. companion object 더 알아보기</a></p>
 </blockquote>
 
-<p><img src="https://user-images.githubusercontent.com/31889335/125470357-c2ffd2d5-b7a3-437b-b3ff-a7b465de7cf2.png" alt="img" /></p>
+<p><img src="https://user-images.githubusercontent.com/27722059/141948703-040393b6-4299-4e52-a240-4cc2c26bc709.png" alt="img" /></p>
 
 <p><br /></p>
-
-<h2 id="-프롤로그">✍🏻 프롤로그<a id="0"></a></h2>
-
-<p>코틀린으로 코드를 작성하다보면(저는 안드로이드 앱 개발을 코틀린으로 합니다) <strong>object</strong> 라는 키워드를 사용하게 되는 몇 가지 경우가 있다!<br />
-하지만 그동안 대충 구글링하여 짧은 순간 습득한 지식으로 이해한 후 사용했었는데..(으이구~) 좀 제대로 알고 사용하려는 목적으로 공부해본다..ㅎㅎ<br />
-(아! 그리고 object 키워드에 대해서 공부하게 된 가장 큰 목적은 companion object를 제대로 이해해보고자 시작하게 된 것이다..ㅋㅋㅋ)</p>
 
 <h2 id="-object-expression-vs-object-declaration">✅ object expression VS object declaration<a id="1"></a></h2>
 
@@ -210,7 +195,7 @@
   </li>
 </ul>
 
-<h2 id="-object-expression이-뭐예요">✅ object expression이 뭐예요?<a id="2"></a></h2>
+<h2 id="-object-expression">✅ object expression?<a id="2"></a></h2>
 
 <ul>
   <li>object expression(객체 표현식)는 <strong><code class="highlighter-rouge">object</code> 키워드를 사용하여 익명 클래스의 객체를 생성할 때 사용</strong></li>
@@ -224,8 +209,8 @@
   <li>
     <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">val</span> <span class="py">yourName</span> <span class="p">=</span> <span class="kd">object</span> <span class="err">{
-        </span><span class="nc">val</span> <span class="n">LastName</span> <span class="p">=</span> <span class="s">"Kim"</span>
-        <span class="kd">val</span> <span class="py">FirstName</span> <span class="p">=</span> <span class="s">"Chohee"</span>
+        </span><span class="nc">val</span> <span class="n">LastName</span> <span class="p">=</span> <span class="s">"Shin"</span>
+        <span class="kd">val</span> <span class="py">FirstName</span> <span class="p">=</span> <span class="s">"Jiho"</span>
 
         <span class="c1">// object expressions는 내부적으로 코틀린의 Any 클래스를 default 부모 클래스로 상속하고 있기 때문에 toString() 메소드를 오버라이딩할 수 있다!
 </span>        <span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">()</span> <span class="p">=</span> <span class="s">"Your name is $LastName $FirstName"</span>
@@ -246,12 +231,12 @@
 
 <ul>
   <li>
-    <p><img width="700" alt="01" src="https://user-images.githubusercontent.com/31889335/125470357-c2ffd2d5-b7a3-437b-b3ff-a7b465de7cf2.png" /></p>
+    <p><img width="700" alt="01" src="https://user-images.githubusercontent.com/27722059/141948703-040393b6-4299-4e52-a240-4cc2c26bc709.png" /></p>
 
     <ul>
       <li>(위 그림 참고) <code class="highlighter-rouge">object</code> 키워드를 <code class="highlighter-rouge">익명 클래스</code> 앞에 붙여줌으로써 익명 클래스의 객체를 <code class="highlighter-rouge">object</code> 키워드 작성 시점에서 바로 생성함</li>
       <li>생성한 객체가 yourName 변수에 할당됨</li>
-      <li>위 코드의 main 함수를 실행해보면 Your name is Kim Chohee가 출력됨</li>
+      <li>위 코드의 main 함수를 실행해보면 Your name is Jiho Shin이 출력됨</li>
     </ul>
   </li>
 </ul>
@@ -270,19 +255,6 @@
 
 <p><br /></p>
 
-<ul>
-  <li>생각
-    <ul>
-      <li>왜 이름이 object expression 일까?</li>
-      <li>object expression = 객체 표현식 인 것을 떠올려보자</li>
-      <li>프로그래밍 언어 분야에서 “표현식” = “수식” 임</li>
-      <li>프로그래밍 언어에서 “수식” = 1+2와 같은 수식 / 함수 호출식 / 변수 이름 등 포함</li>
-      <li>프로그래밍 언어에서 “수식” = 모양과 형태가 다를 수 있지만 모두 하나의 단일 값이 될 수 있는 것을 의미</li>
-      <li>따라서 익명 클래스를 객체화하는 행위인 object expression도 익명 클래스를 객체화하여 하나의 단일 값으로 만들 수 있기 때문에 object “expression” 라는 이름이라고 추측해 봄</li>
-    </ul>
-  </li>
-</ul>
-
 <h2 id="-object-expression-더-알아보기">✅ object expression 더 알아보기<a id="3"></a></h2>
 
 <ul>
@@ -297,8 +269,8 @@
     <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// Person 인터페이스를 상속하는 익명 클래스를 object expressions 사용해서 객체화시키기
 </span>    <span class="kd">val</span> <span class="py">yourName</span> <span class="p">=</span> <span class="k">object</span><span class="p">:</span> <span class="n">Person</span> <span class="p">{</span>
-        <span class="kd">val</span> <span class="py">LastName</span> <span class="p">=</span> <span class="s">"당신은"</span>
-        <span class="kd">val</span> <span class="py">FirstName</span> <span class="p">=</span> <span class="s">"천재!"</span>
+        <span class="kd">val</span> <span class="py">LastName</span> <span class="p">=</span> <span class="s">"Hello"</span>
+        <span class="kd">val</span> <span class="py">FirstName</span> <span class="p">=</span> <span class="s">"World!"</span>
 
         <span class="c1">// Person 인터페이스에 정의된 getYourName 구현
 </span>        <span class="k">override</span> <span class="k">fun</span> <span class="nf">getYourName</span><span class="p">():</span> <span class="n">String</span> <span class="p">=</span> <span class="s">"Your name is $LastName $FirstName"</span>
@@ -314,7 +286,7 @@
     <ul>
       <li>위 코드처럼 Person 이라는 인터페이스를 하나 만듬</li>
       <li>Person 인터페이스를 상속하는 익명 클래스를 object expressions로 객체화 가능</li>
-      <li>main 함수 실행시키면 Your name is 당신은 천재!가 출력됨</li>
+      <li>main 함수 실행시키면 Your name is Hello World!가 출력됨</li>
     </ul>
   </li>
 </ul>
@@ -324,7 +296,7 @@
 <ul>
   <li>안드로이드 앱 개발에서 언제 object expression를 쓰면 좋을까?
     <ul>
-      <li><img width="650" alt="02" src="https://user-images.githubusercontent.com/31889335/125475693-b3260e6d-0d4f-4f2f-b50c-5703c9f40a2c.png" /></li>
+      <li><img width="650" alt="02" src="https://user-images.githubusercontent.com/27722059/141952641-ae373a4e-4e6f-4b64-a757-4ac27e9a5126.png" /></li>
       <li>XXOnXXXListener() 라는 메소드를 호출할 때 많이 사용함</li>
       <li>XXOnXXXListener() 메소드는 인자로 특정 인터페이스를 구현한 클래스의 객체를 넘겨줘야 하는 경우가 많음</li>
       <li>위 코드에서는 View.OnClickListener라는 인터페이스를 구현한 클래스의 객체를 setOnClickListener() 메소드의 인자로 넘겨야 함</li>
@@ -335,7 +307,7 @@
   </li>
 </ul>
 
-<h2 id="-object-declaration가-뭐예요">✅ object declaration가 뭐예요?<a id="4"></a></h2>
+<h2 id="-object-declaration">✅ object declaration?<a id="4"></a></h2>
 
 <ul>
   <li>object declaration는 <strong>소프트웨어 디자인 패턴 중 <a href="https://en.wikipedia.org/wiki/Singleton_pattern">싱글톤 패턴</a>을 만드는 작업을 할 때 사용</strong></li>
@@ -374,7 +346,7 @@
     <span class="o">}</span>
 
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">printName</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Kimchohee"</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"JihoKevin"</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div>    </div>
@@ -414,7 +386,7 @@
     <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 코틀린에서 싱글톤 패턴이 적용된 클래스 만들기
 </span><span class="kd">object</span> <span class="nc">MySingleTon</span> <span class="p">{</span>
     <span class="k">fun</span> <span class="nf">printName</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">println</span><span class="p">(</span><span class="s">"Kimchohee"</span><span class="p">)</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">"JihoKevin"</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>    </div>
@@ -465,7 +437,7 @@
     <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 코틀린에서 MySingleTon 클래스의 객체 사용하기
 </span><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">val</span> <span class="py">mySingleTon</span> <span class="p">=</span> <span class="n">MySingleTon</span>
-    <span class="n">mySingleTon</span><span class="p">.</span><span class="n">printName</span><span class="p">()</span><span class="c1">// Kimchohee 출력됨
+    <span class="n">mySingleTon</span><span class="p">.</span><span class="n">printName</span><span class="p">()</span><span class="c1">// Jiho Shin 출력됨
 </span><span class="p">}</span>
   
 <span class="n">VS</span>
@@ -473,7 +445,7 @@
 <span class="c1">// 자바에서 MySingleTon 클래스의 객체 사용하기
 </span><span class="k">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">){</span>
     <span class="n">MySingleTon</span> <span class="n">mySingleTon</span> <span class="p">=</span> <span class="n">MySingleTon</span><span class="p">.</span><span class="n">getInstance</span><span class="p">();</span>
-    <span class="n">mySingleTon</span><span class="p">.</span><span class="n">printName</span><span class="p">();</span> <span class="c1">// Kimchohee 출력됨
+    <span class="n">mySingleTon</span><span class="p">.</span><span class="n">printName</span><span class="p">();</span> <span class="c1">// Jiho Shin 출력됨
 </span><span class="p">}</span>
 </code></pre></div>    </div>
     <ul>
@@ -493,14 +465,14 @@
 </span>    <span class="p">}</span>
 
     <span class="k">fun</span> <span class="nf">printName</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">println</span><span class="p">(</span><span class="s">"Kimchohee"</span><span class="p">)</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">"JihoKevin"</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>    </div>
   </li>
 </ul>
 
-<h2 id="-companion-object가-뭐예요">✅ companion object가 뭐예요?<a id="6"></a></h2>
+<h2 id="-companion-object">✅ companion object?<a id="6"></a></h2>
 
 <ul>
   <li>companion object = object declaration을 일반 클래스 내부에서 바로 작성하는 것</li>
@@ -518,7 +490,7 @@
     <span class="c1">// MySingleTon 이라는 이름 안 써도 됨
 </span>    <span class="k">companion</span> <span class="k">object</span> <span class="n">MySingleTon</span> <span class="p">{</span>
         <span class="k">fun</span> <span class="nf">printName</span><span class="p">()</span> <span class="p">{</span>
-            <span class="n">println</span><span class="p">(</span><span class="s">"kimchohee"</span><span class="p">)</span>
+            <span class="n">println</span><span class="p">(</span><span class="s">"JihoKevin"</span><span class="p">)</span>
         <span class="p">}</span>
     <span class="p">}</span>
       

@@ -3,6 +3,36 @@
   
     
     <url>
+      <loc>http://localhost:4000/articles/2021-11/cs-factory-method</loc>
+      
+        <lastmod>2021-11-16T04:34:10+01:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>http://localhost:4000/articles/2021-11/cs-design-pattern</loc>
+      
+        <lastmod>2021-11-16T03:34:10+01:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
       <loc>http://localhost:4000/articles/2021-11/android-webview-shouldoverrideurlloading</loc>
       
         <lastmod>2021-11-07T09:34:10+01:00</lastmod>
@@ -213,6 +243,21 @@
   
     
     <url>
+      <loc>http://localhost:4000/articles/2021-08/android-project-structure</loc>
+      
+        <lastmod>2021-08-05T13:34:10+02:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
       <loc>http://localhost:4000/articles/2021-07/kotlin-object-keyword</loc>
       
         <lastmod>2021-07-13T11:34:10+02:00</lastmod>
@@ -229,21 +274,6 @@
     
     <url>
       <loc>http://localhost:4000/articles/2021-07/android-studio-keyboard-shortcut</loc>
-      
-        <lastmod>2021-07-05T00:00:00+02:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>http://localhost:4000/articles/2021-07/android-project-structure</loc>
       
         <lastmod>2021-07-05T00:00:00+02:00</lastmod>
       

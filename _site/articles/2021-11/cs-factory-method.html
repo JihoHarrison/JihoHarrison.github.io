@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="0️⃣ 프롤로그  빌더 패턴에 이어서 팩토리 패턴에 대한 정리 내용이다.  안드로이드 MVVM 구조 중에서 AAC의 뷰모델 클래스를 사용하여 개발을 할 때 Hilt와 같은 의존성 주입 라이브러리를 사용하지 않는 이상 항상 ViewModelFractory를 구현 해 주어야 했다.1️...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[CS] Factory 패턴 (Design Pattern) | JihoKevin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[CS] Factory 패턴 (Design Pattern) | JihoKevin">
+  <meta name="twitter:description" content="0️⃣ 프롤로그  빌더 패턴에 이어서 팩토리 패턴에 대한 정리 내용이다.  안드로이드 MVVM 구조 중에서 AAC의 뷰모델 클래스를 사용하여 개발을 할 때 Hilt와 같은 의존성 주입 라이브러리를 사용하지 않는 이상 항상 ViewModelFractory를 구현 해 주어야 했다.1️...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2021-11/cs-factory-method">
+  <meta property="og:title" content="[CS] Factory 패턴 (Design Pattern) | JihoKevin">
+  <meta property="og:description" content="0️⃣ 프롤로그  빌더 패턴에 이어서 팩토리 패턴에 대한 정리 내용이다.  안드로이드 MVVM 구조 중에서 AAC의 뷰모델 클래스를 사용하여 개발을 할 때 Hilt와 같은 의존성 주입 라이브러리를 사용하지 않는 이상 항상 ViewModelFractory를 구현 해 주어야 했다.1️...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[CS] Factory 패턴 (Design Pattern) | JihoKevin</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2021-11/cs-factory-method">
+  <link rel="alternate" type="application/rss+xml" title="JihoKevin" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">신지호</a>
+  <span class="author_job">안드로이드 개발자가 되고싶은 소년</span>
+  <span class="author_bio mbm">방문해주셔서 감사합니다!🙇🏻‍♂️</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('jhshin9250@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/jiho_925" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/JihoKevin" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[CS] Factory 패턴 (Design Pattern)">[CS] Factory 패턴 (Design Pattern)</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        16 NOV 2021
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    9 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="0️⃣-프롤로그">0️⃣ 프롤로그</h2>
+<ul>
+  <li>빌더 패턴에 이어서 팩토리 패턴에 대한 정리 내용이다.</li>
+  <li>안드로이드 MVVM 구조 중에서 AAC의 뷰모델 클래스를 사용하여 개발을 할 때 Hilt와 같은 의존성 주입 라이브러리를 사용하지 않는 이상 항상 ViewModelFractory를 구현 해 주어야 했다.</li>
+</ul>
+
+<h2 id="1️⃣-뷰모델의-팩토리-패턴">1️⃣ 뷰모델의 팩토리 패턴?</h2>
+<ul>
+  <li>
+    <p>기본적으로 ViewModel은 View의 상태 변화 즉, configuration change가 발생하는 시점에도 가지고 있는 데이터가 살아남도록 설계가 되어있다. 그 역할을 담당하는 부분이 바로 ViewModelStore라는 클래스이다.</p>
+  </li>
+  <li>
+    <p>ViewMmodelProvider의 인자로 ViewModelFactory를 넘겨주지 않을 시 다음과 같은 default ViewModelFactory를 호출하게 되고, default만을 가지고 ViewModelFactory로 각 configuration에 맞춰지지 않은 ViewModel을 가지게 된다.
+<img src="https://user-images.githubusercontent.com/27722059/141942023-e95321f2-882b-4ef7-ac4c-6b4d7c456979.png" alt="defauleViewModelFactory" /></p>
+    <blockquote>
+      <p>이는 곧 Memory Leak을 유발시키는 원인이 되고, 앞으로 안드로이드를 개발하면서 이러한 문제를 유발하지 않도록 팩토리 패턴에 대한 이해가 필요하다고 판단했다.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h2 id="2️⃣-factory-method">2️⃣ Factory Method</h2>
+<h4 id="팩토리-메소드-패턴factory-method-pattern이란-상위-클래스에-알려지지-않은-구현-클래스를-생성하는-패턴이다">팩토리 메소드 패턴(Factory Method Pattern)이란 상위 클래스에 알려지지 않은 구현 클래스를 생성하는 패턴이다.</h4>
+<h4 id="또한-하위-클래스가-어떤-객체를-생성할지-결정하도록-하는-패턴이기도-하다-그리고-상위-클래스-코드에-구체적인-클래스-이름을-감추기-위한-방법으로도-사용한다">또한 하위 클래스가 어떤 객체를 생성할지 결정하도록 하는 패턴이기도 하다. 그리고 상위 클래스 코드에 구체적인 클래스 이름을 감추기 위한 방법으로도 사용한다.</h4>
+
+<p>팩토리는 공장이란 뜻이다. 따라서 팩토리 패턴도 무언가를 가공하기 위한 공장이라고 보면 된다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 이름을 통해 신발을 주문 받음</span>
+<span class="n">Shoes</span> <span class="nf">orderShoes</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// 해당 이름의 신발을 찾아서 특정 구상 객체 생성</span>
+    <span class="n">Shoes</span> <span class="n">shoes</span><span class="o">;</span>
+    
+    <span class="k">if</span> <span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"blackShoes"</span><span class="o">))</span>     <span class="n">shoes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BlackShoes</span><span class="o">();</span>
+    <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"brownShoes"</span><span class="o">))</span><span class="n">shoes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BrownShoes</span><span class="o">();</span>
+    <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"redShoes"</span><span class="o">))</span>  <span class="n">shoes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RedShoes</span><span class="o">();</span>
+    
+    <span class="c1">// 신발을 준비하고 포장하는 메소드</span>
+    <span class="c1">// 모든 신발 공용 메소드</span>
+    <span class="n">shoes</span><span class="o">.</span><span class="na">prepare</span><span class="o">();</span> 
+    <span class="n">shoes</span><span class="o">.</span><span class="na">packing</span><span class="o">();</span> 
+ 
+    <span class="k">return</span> <span class="n">shoes</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>현재 이 신발 매장에는 3개의 신발만 팔고 있다. 그리고 앞으로 판매되는 제품이 늘어나거나 지금 있는 제품이 더 이상 판매 되지 않을 수도 있다. 이 부분은 언제나 변경이 가능 한 부분이다.</p>
+
+<p>그러나 밑에 있는 prepare()과 packing() 두 메소드는 제품에 변화가 생기더라도 변하지 않는 부분이다.</p>
+
+<p>위 코드를 간단하게 캡슐화하여 ShoesFactory라는 클래스로 만들면</p>
+
+<blockquote>
+  <p>ShoesFactory.java</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ShoesFactory</span> <span class="o">{</span>
+ 
+    <span class="kd">public</span> <span class="n">Shoes</span> <span class="nf">makeShoes</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+ 
+       <span class="n">Shoes</span> <span class="n">shoes</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+       <span class="k">if</span> <span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"blackShoes"</span><span class="o">))</span>     <span class="n">shoes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BlackShoes</span><span class="o">();</span>
+       <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"brownShoes"</span><span class="o">))</span><span class="n">shoes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BrownShoes</span><span class="o">();</span>
+       <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"redShoes"</span><span class="o">))</span>  <span class="n">shoes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RedShoes</span><span class="o">();</span>
+       
+       <span class="k">return</span> <span class="n">shoes</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위 코드처럼 만들 수 있다. 그리고 사용은 아래처럼 할 수 있다.</p>
+
+<blockquote>
+  <p>ShoesStore.java</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ShoesStore</span> <span class="o">{</span>
+     
+    <span class="n">ShoesFactory</span> <span class="n">factory</span><span class="o">;</span>
+ 
+    <span class="kd">public</span> <span class="nf">ShoesStore</span><span class="o">(</span><span class="n">ShoesFactory</span> <span class="n">factory</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">factory</span> <span class="o">=</span> <span class="n">factory</span><span class="o">;</span>
+    <span class="o">}</span>
+   
+    <span class="n">Shoes</span> <span class="nf">orderShoes</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Shoes</span> <span class="n">shoes</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="na">makeShoes</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+        <span class="n">shoes</span><span class="o">.</span><span class="na">prepare</span><span class="o">();</span> 
+        <span class="n">shoes</span><span class="o">.</span><span class="na">packing</span><span class="o">();</span> 
+ 
+        <span class="k">return</span> <span class="n">shoes</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>고객에게 특정 신발에 대한 주문이 들어 왔을 때 매장에서는 공장에 해당 신발 오더를 넣고 받으면 되고, 판매하는 신발이 늘어나거나 단종되면 신발 매장이 아닌 신발 공장에서 그 변화를 처리할 수 있다.</p>
+
+<p>위에서 봤던 신반 매장은 점점 성장하여 다른 나라로 진출하기 시작했다. 일본과 프랑스에도 진출을 하여 매장을 지었다고 하자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="n">JapanShoesStore</span> <span class="n">jpStore</span><span class="o">=</span> <span class="k">new</span> <span class="n">JapanShoeStore</span> <span class="o">(</span><span class="k">new</span> <span class="n">JapanShoesFactory</span><span class="o">());</span>
+   <span class="n">jpStore</span><span class="o">.</span><span class="na">order</span><span class="o">(</span><span class="s">"blackShoes"</span><span class="o">);</span>
+    
+   <span class="n">FranceShoesStore</span>  <span class="n">frStore</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FranceShoesStore</span> <span class="o">(</span><span class="k">new</span> <span class="n">FranceShoesFactory</span><span class="o">());</span>
+   <span class="n">frStore</span><span class="o">.</span><span class="na">order</span><span class="o">(</span><span class="s">"blackShoes"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>그런데 이 해외 매장들이 본사에서 준 가이드라인 그대로 똑같이 만들지 않고, 현지 상황에 맞춰 일본에서는 약간 굽을 높게 만들고 프랑스에서는 신발 옆에 패턴을 넣기 시작했다. 
+뿐 만 아니라 포장까지도 자기 마음대로 하였다.</p>
+
+<p>그래서 본사는 매장과 신발 생산 과정 전체를 묶어주는 아래와 같은 프레임 워크를 만들어 모든 매장에서 이를 따르게 하였다.</p>
+
+<blockquote>
+  <p>ShoesStore.java</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">ShoesStore</span> <span class="o">{</span>
+ 
+    <span class="kd">public</span> <span class="n">ShoesStore</span> <span class="nf">orderShoes</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Shoes</span> <span class="n">shoes</span> <span class="o">=</span> <span class="n">makeShoes</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+        <span class="n">shoes</span><span class="o">.</span><span class="na">prepare</span><span class="o">();</span>
+        <span class="n">shoes</span><span class="o">.</span><span class="na">packing</span><span class="o">();</span>
+ 
+        <span class="k">return</span> <span class="n">shoes</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">abstract</span> <span class="n">Shoes</span> <span class="nf">makeShoes</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>ShoesStore 추상 클래스를 선언하면, 달라지는 부분은 추상메소드인 신발 제작 뿐이다.</p>
+
+<p>각 현지 상황메 맞춰 makeShoes 메소드를 오버라이드하여 일본에서는 약간 굽을 높게 만들고, 프랑스에서는 패턴을 넣어 신발을 제작하면 된다.</p>
+
+<p>그대신 제작, 준비, 포장하는 공정은 ShoesStore를 상속하는 전 세계 모든 매장들에서 똑같은 시스템이 적용 될 수 있다.</p>
+
+<blockquote>
+  <p>JapanShoesStore.java</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">JapanShoesStore</span> <span class="kd">extends</span> <span class="n">ShoesStore</span> <span class="o">{</span>
+ 
+    <span class="nd">@Override</span>
+    <span class="n">Shoes</span> <span class="nf">makeShoes</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"blackShoes"</span><span class="o">))</span> <span class="k">return</span> <span class="k">new</span> <span class="n">JPStyleBlackShoes</span><span class="o">();</span>  
+        <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"brownShoes"</span><span class="o">))</span> <span class="k">return</span> <span class="k">new</span> <span class="n">JPStyleBrownShoes</span><span class="o">();</span>
+        <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"redShoes"</span><span class="o">))</span> <span class="k">return</span> <span class="k">new</span> <span class="n">JPStyleRedShoes</span><span class="o">();</span>
+        <span class="k">else</span> <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>FranceShoesStore.java</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">FranceShoesStore</span> <span class="kd">extends</span> <span class="n">ShoesStore</span> <span class="o">{</span>
+ 
+    <span class="nd">@Override</span>
+    <span class="n">Shoes</span> <span class="nf">makeShoes</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"blackShoes"</span><span class="o">))</span> <span class="k">return</span> <span class="k">new</span> <span class="n">FRStyleBlackShoes</span><span class="o">();</span>  
+        <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"brownShoes"</span><span class="o">))</span> <span class="k">return</span> <span class="k">new</span> <span class="n">FRStyleBrownShoes</span><span class="o">();</span>
+        <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"redShoes"</span><span class="o">))</span> <span class="k">return</span> <span class="k">new</span> <span class="n">FRStyleRedShoes</span><span class="o">();</span>
+        <span class="k">else</span> <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>여기서 가장 중요한 점은 하위 클래스에서 메소드를 오버라이딩 하였기 때문에, 슈퍼클래스에 있는 orderShoes 메소드에서는 어떤 신발이 만들어 지는지 전혀 모르고 있다는 것이다. 
+동적 바인딩되는 그 메소드에서 주는 신발을 받아서 준비하고 포장할 뿐 이다.</p>
+
+<h4 id="신발을-주문받고-생산하는-생산자-클래스-생산자-클래스에서-생산되는-제품-클래스">신발을 주문받고 생산하는 생산자 클래스, 생산자 클래스에서 생산되는 제품 클래스</h4>
+
+<p>팩토리 메소드 패턴의 클래스들은 크게 생산자 클래스와 제품 클래스로 구분할 수 있다.</p>
+
+<p>생산자 클래스인 ShoesStore 클래스에서 사용될 제품 클래스 Shoes 클래스는 다음과 같이 작성될 수 있다.</p>
+
+<blockquote>
+  <p>Shoes.java</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Shoes</span> <span class="o">{</span>
+ 
+    <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">bottom</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">leather</span><span class="o">;</span>
+    <span class="kt">boolean</span> <span class="n">hasPattern</span><span class="o">;</span>
+ 
+    <span class="kt">void</span> <span class="nf">prepare</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"주문하신 신발을 준비중입니다."</span><span class="o">);</span>
+    <span class="o">}</span>
+ 
+    <span class="kt">void</span> <span class="nf">packing</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"준비 완료된 신발을 포장중입니다."</span><span class="o">);</span>
+    <span class="o">}</span>
+ 
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>JPStyleBlackShoes.java</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">JPStyleBlackShoes</span> <span class="kd">extends</span> <span class="n">Shoes</span> <span class="o">{</span>
+ 
+    <span class="kd">public</span> <span class="nf">JPStyleBlackShoes</span><span class="o">()</span> <span class="o">{</span> 
+        <span class="n">name</span> <span class="o">=</span> <span class="s">"일본 스타일의 검은 구두"</span><span class="o">;</span>
+        <span class="n">bottom</span> <span class="o">=</span> <span class="s">"굽이 높은 밑창"</span><span class="o">;</span>
+        <span class="n">leather</span> <span class="o">=</span> <span class="s">"스웨이드"</span><span class="o">;</span>
+        <span class="n">hasPattern</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<blockquote>
+  <p>FRStyleBlackShoes.java</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">FRStyleBlackShoes</span> <span class="kd">extends</span> <span class="n">Shoes</span> <span class="o">{</span>
+ 
+    <span class="kd">public</span> <span class="nf">FRStyleBlackShoes</span><span class="o">()</span> <span class="o">{</span> 
+        <span class="n">name</span> <span class="o">=</span> <span class="s">"프랑스 스타일의 검은 구두"</span><span class="o">;</span>
+        <span class="n">bottom</span> <span class="o">=</span> <span class="s">"일반 굽높이 밑창"</span><span class="o">;</span>
+        <span class="n">leather</span> <span class="o">=</span> <span class="s">"스웨이드"</span><span class="o">;</span>
+        <span class="n">hasPattern</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+ 
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>추상 클래스로 Shoes 클래스를 설계하고, JPStyleBlackShoes, FRStyleBlackShoes에서 멤버변수를 초기화하며 구현해주었다.</p>
+
+<blockquote>
+  <p><strong>추상 메소드가 없는 추상 클래스가 여기서 등장한다.</strong></p>
+
+  <p>Shoes 클래스는 추상 메소드가 존재하지 않지만 추상 클래스로 선언되었기 때문에 new Shoes();로 직접 객체 생성은 불가능하고,</p>
+
+  <p>Shoes 클래스를 상속받는 클래스에서 Shoes를 참조변수로하여 객체 생성을 할 수 있다.</p>
+
+  <p>추상 메소드 존재 O -&gt; 무조건 클래스도 추상 클래스로 선언</p>
+
+  <p>추상 메소드 존재 X -&gt; 현재 클래스로 다이렉트 객체 생성을 막고 싶을 때, 추상 클래스로 선언</p>
+</blockquote>
+
+<p>여기까지 UML에 설계된 클래스들의 구현이 마무리 되었다. 
+이제 메인 클래스에서 위에서 설계한 팩토리 메소드 패턴이 어떻게 사용되는지 살펴 보자.</p>
+
+<blockquote>
+  <p>Main.java</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+ 
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        
+        <span class="c1">// 일본과 프랑스에 현지 트렌드에 맞춰 매장을 열었음</span>
+        <span class="n">ShoesStore</span> <span class="n">jpStore</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JapanShoesStore</span><span class="o">();</span>
+        <span class="n">ShoesStore</span> <span class="n">frStore</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FranceShoesStore</span><span class="o">();</span>
+      
+        <span class="c1">// 일본 매장에서 검은 신발 주문</span>
+        <span class="n">Shoes</span> <span class="n">shoes</span> <span class="o">=</span> <span class="n">jpStore</span><span class="o">.</span><span class="na">orderShoes</span><span class="o">(</span><span class="s">"blackShoes"</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"일본 매장에서 주문한 검은 신발 : "</span> <span class="o">+</span> <span class="n">shoes</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+        
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+        
+        <span class="c1">// 프랑스 매장에서 검은 신발 주문</span>
+        <span class="n">shoes</span> <span class="o">=</span> <span class="n">frStore</span><span class="o">.</span><span class="na">orderShoes</span><span class="o">(</span><span class="s">"blackShoes"</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"프랑스 매장에서 주문한 검은 신발  : "</span> <span class="o">+</span> <span class="n">shoes</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+ 
+    <span class="o">}</span>
+ 
+<span class="o">}</span>
+</code></pre></div></div>
+<p>위 코드를 실행해보면 아래와 같이 출력될 것이다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; 주문하신 신발을 준비중입니다.
+&gt; 준비 완료된 신발을 포장중입니다.
+&gt; 일본 매장에서 주문한 검은 신발 : 일본 스타일의 검은 구두
+&gt; 
+&gt; 주문하신 신발을 준비중입니다.
+&gt; 준비 완료된 신발을 포장중입니다.
+&gt; 프랑스 매장에서 주문한 검은 신발 : 프랑스 스타일의 검은 구두
+</code></pre></div></div>
+
+<p>위 메인 메소드의 프로세스는 아래와 같다. 참고로 일본 매장과 프랑스 매장에서의 프로세스는 동일하니 공통적인 프로세스로 묶이게 된다.</p>
+
+<ol>
+  <li>현지 신발 매장이 문을 열었음. (ShoesStore를 참조변수로 하는 현지 ShoesStore 객체 생성)</li>
+  <li>매장에 신발 종류를 통해 신발을 주문함. (ShoesStore의 orderShoes메소드)</li>
+  <li>ShoesStore의 orderShoes 내부에서 생성된 객체에 맞게 동적바인딩되어 오버라이딩된 makeShoes 메소드가 실행됨</li>
+  <li>오버라이딩된 makeShoes 메소드에서 주문에 맞는 신발객체를 호출된 orderShoes메소드로 리턴함</li>
+  <li>prepare(), packing() 메소드가 실행됨</li>
+  <li>make, prepare, packing이 완료된 Shoes 객체를 리턴함</li>
+  <li>주문한 신발이 어떤 객체인지 출력하여 확인</li>
+</ol>
+
+<p><strong>결론적으로, 팩토리 메소드 패턴은 객체를 만들어내는 부분을 자식 클래스에 위임하는 패턴이다.</strong></p>
+
+<p>new 키워드를 호출하는 부분을 서브 클래스에 위임하였기 때문에, 상위 클래스인 ShoesStore 클래스 내부에는 new 라는 키워드가 존재하지 않는다.</p>
+
+<p>즉, 상위 클래스가 아닌 하위 클래스에서 어떤 형태의 클래스를 만들지 결정하게 하도록 하는 것이다.</p>
+
+<p>하위 클래스에서 추상 메소드인 makeShoes메소드를 오버라이딩 하였기 때문에, 상위 클래스에 있는 orderShoes 메소드에서는 어떤 신발이 만들어 지는지 전혀 모르고 있다.</p>
+
+<p>동적 바인딩된 그 메소드에서 주는 신발을 받아서 준비하고 포장해서 내놓을 뿐 이다.</p>
+
+<p>이상 안드로이드 개발을 하며 궁금했던 팩토리 패턴에 대한 정리였다.</p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+        repo="JihoKevin/blog-comments"
+        issue-term="pathname"
+        label="comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 신지호. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

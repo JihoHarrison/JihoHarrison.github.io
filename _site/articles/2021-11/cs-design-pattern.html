@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="0️⃣ 프롤로그  인턴십을 진행하기 전부터 디자인 패턴에 대한 이해가 필요하다는 것을 절실히 느끼고 공부하다가 이번에 프로젝트 내용들을 블로그에 정리 하면서 긴 포스팅을 남겨볼까 한다. 특히 안드로이드 개발을 진행하면서1️⃣ Builder Pattern이란?복잡한 객체에 대해 생성...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[CS] Builder 패턴 (Design Pattern) | JihoKevin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[CS] Builder 패턴 (Design Pattern) | JihoKevin">
+  <meta name="twitter:description" content="0️⃣ 프롤로그  인턴십을 진행하기 전부터 디자인 패턴에 대한 이해가 필요하다는 것을 절실히 느끼고 공부하다가 이번에 프로젝트 내용들을 블로그에 정리 하면서 긴 포스팅을 남겨볼까 한다. 특히 안드로이드 개발을 진행하면서1️⃣ Builder Pattern이란?복잡한 객체에 대해 생성...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2021-11/cs-design-pattern">
+  <meta property="og:title" content="[CS] Builder 패턴 (Design Pattern) | JihoKevin">
+  <meta property="og:description" content="0️⃣ 프롤로그  인턴십을 진행하기 전부터 디자인 패턴에 대한 이해가 필요하다는 것을 절실히 느끼고 공부하다가 이번에 프로젝트 내용들을 블로그에 정리 하면서 긴 포스팅을 남겨볼까 한다. 특히 안드로이드 개발을 진행하면서1️⃣ Builder Pattern이란?복잡한 객체에 대해 생성...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[CS] Builder 패턴 (Design Pattern) | JihoKevin</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2021-11/cs-design-pattern">
+  <link rel="alternate" type="application/rss+xml" title="JihoKevin" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">신지호</a>
+  <span class="author_job">안드로이드 개발자가 되고싶은 소년</span>
+  <span class="author_bio mbm">방문해주셔서 감사합니다!🙇🏻‍♂️</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('jhshin9250@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/jiho_925" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/JihoKevin" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[CS] Builder 패턴 (Design Pattern)">[CS] Builder 패턴 (Design Pattern)</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        16 NOV 2021
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    8 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h1 id="0️⃣-프롤로그">0️⃣ 프롤로그</h1>
+<ul>
+  <li>인턴십을 진행하기 전부터 디자인 패턴에 대한 이해가 필요하다는 것을 절실히 느끼고 공부하다가 이번에 프로젝트 내용들을 블로그에 정리 하면서 긴 포스팅을 남겨볼까 한다.
+ 특히 안드로이드 개발을 진행하면서</li>
+</ul>
+
+<h2 id="1️⃣-builder-pattern이란">1️⃣ Builder Pattern이란?</h2>
+
+<p>복잡한 객체에 대해 <code class="highlighter-rouge">생성(contruction)과 표현(representation)을 분리</code>함으로써 <strong>똑같은 생성 과정으로 서로 다른 객체 표현</strong>을 가능하게 하는 생성 디자인 패턴</p>
+
+<p><br /></p>
+
+<h2 id="2️⃣-builder-패턴을-사용해야하는-이유">2️⃣ Builder 패턴을 사용해야하는 이유</h2>
+
+<ol>
+  <li><code class="highlighter-rouge">Immutability</code> - 객체의 불변성을 유지할 수 있음</li>
+  <li><code class="highlighter-rouge">Named Parameter with Chaining</code> - 체이닝을 통한 명명된 매개변수 사용으로 가독성 증진</li>
+  <li><code class="highlighter-rouge">Design Flexibility</code> - 필수적인 변수와 선택적인 변수를 각각 생성 가능</li>
+  <li><code class="highlighter-rouge">Easy Maintenance</code> - 새로운 멤버가 추가되더라도 기존의 객체 생성 코드를 수정할 필요 없음</li>
+  <li><code class="highlighter-rouge">Avoid RuntimeException</code> - 객체 생성 과정에서 유효성 검사를 통해 논리적인 에러를 막을 수 있음</li>
+</ol>
+
+<blockquote>
+  <p>💡 불변적인 객체로 구현해야하는 이유</p>
+  <ul>
+    <li>불변성(<code class="highlighter-rouge">Immutability</code>)이란? 객체가 초기에 한번 생성된 이후에는 절대 상태를 바꾸지 않는 것을 말한다. 객체 생성시에 모든 정보가 주어지고 객체의 생애 주기 동안에는 상태가 바뀌지 않는 것이 특징이다.</li>
+    <li>사용이 쉽다</li>
+    <li>Thread Safe 하다. 동기화할 필요가 없다.</li>
+    <li>자유롭게 공유할 수 있다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="3️⃣-builder-패턴의-한계">3️⃣ Builder 패턴의 한계</h2>
+
+<p>코드를 2배정도 많이 사용하게 된다. 따라서 설정해야 할 매개변수가 적을 경우에는 일반 생성자를 통한 생성이 더욱 편할 수도 있다.</p>
+
+<p><br /></p>
+
+<h2 id="4️⃣-구현">4️⃣ 구현</h2>
+
+<h3 id="builder-패턴-적용-전">Builder 패턴 적용 전</h3>
+
+<p>일반적으로는 생성자(Constructor)를 통해 객체를 생성할 것이다. 생성자를 사용할 경우 멤버를 선택적으로 생성하기 어렵다.</p>
+
+<h4 id="1-생성자를-사용한-생성---자바빈즈-패턴javabeans-pattern">1. 생성자를 사용한 생성 - 자바빈즈 패턴(JavaBeans Pattern)</h4>
+
+<p>매개변수가 없는 기본 생성자를 통해 객체를 생성한 뒤, <strong>Setter 메서드</strong>를 통해 멤버를 설정하는 방식이다.</p>
+
+<p>[클래스 정의]</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nf">User</span><span class="o">()</span> <span class="o">{</span>
+
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="nf">User</span><span class="o">(</span><span class="n">String</span> <span class="n">firstName</span><span class="o">,</span> <span class="n">String</span> <span class="n">lastName</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">,</span> <span class="n">String</span> <span class="n">phone</span><span class="o">,</span> <span class="n">String</span> <span class="n">address</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">firstName</span> <span class="o">=</span> <span class="n">firstName</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">lastName</span> <span class="o">=</span> <span class="n">lastName</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">phone</span> <span class="o">=</span> <span class="n">phone</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">address</span> <span class="o">=</span> <span class="n">address</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>[객체 생성]</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">User</span> <span class="n">user1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">(</span><span class="s">"Jiho"</span><span class="o">,</span> <span class="s">"Kevin"</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="s">"010-4640-9435"</span><span class="o">,</span> <span class="s">"서울시 은평구 우리집~~"</span><span class="o">);</span>
+<span class="n">User</span> <span class="n">user2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">(</span><span class="s">"Tony"</span><span class="o">,</span> <span class="s">"Choi"</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+
+<span class="n">User</span> <span class="n">user3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">();</span>
+<span class="n">user3</span><span class="o">.</span><span class="na">setFirstName</span><span class="o">(</span><span class="s">"Jin"</span><span class="o">);</span>
+<span class="n">user3</span><span class="o">.</span><span class="na">setLastName</span><span class="o">(</span><span class="s">"Lee"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h4 id="2-생성자를-사용한-생성-방법">2. 생성자를 사용한 생성 방법</h4>
+
+<p>필수 매개변수만을 가진 생성자를 만들고 선택 매개변수를 하나씩 추가한 생성자를 만든다. 수많은 <strong>생성자 오버로딩</strong>을 통해 원하는 형태의 객체를 생성하도록 하는 방식이다.</p>
+
+<p>[객체 생성]</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nf">User</span> <span class="o">(</span><span class="n">String</span> <span class="n">firstName</span><span class="o">,</span> <span class="n">String</span> <span class="n">lastName</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">firstName</span> <span class="o">=</span> <span class="n">firstName</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">lastName</span> <span class="o">=</span> <span class="n">lastName</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">phone</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">address</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="nf">User</span> <span class="o">(</span><span class="n">String</span> <span class="n">firstName</span><span class="o">,</span> <span class="n">String</span> <span class="n">lastName</span><span class="o">,</span> <span class="kt">int</span> <span class="n">phone</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">firstName</span> <span class="o">=</span> <span class="n">firstName</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">lastName</span> <span class="o">=</span> <span class="n">lastName</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">phone</span> <span class="o">=</span> <span class="n">phone</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">address</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>위 예제와 같이 생성자를 통한 객체 생성 시 필수 매개변수와 선택 매개변수를 구분하여 구현하기가 어렵다. 특히 매개변수가 많아진다면 일일히 setter를 부르는 일도, 매개변수 자리를 세주는 것도 일이다. 생성자를 경우의 수 별로 구현하는 것은 더욱 끔찍할 것이다.</p>
+</blockquote>
+
+<h3 id="builder-패턴-적용-후">Builder 패턴 적용 후</h3>
+
+<p>[클래스 정의]</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 클래스를 Final로 설정하여 확장이 불가능하며 불변성이 유지됨</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">User</span> 
+<span class="o">{</span>
+    <span class="c1">// 불변성을 유지하기 위해 private final로 설정</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">firstName</span><span class="o">;</span>     <span class="c1">// 필수 변수</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">lastName</span><span class="o">;</span>      <span class="c1">// 필수 변수</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>              <span class="c1">// 선택 변수</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">phone</span><span class="o">;</span>         <span class="c1">// 선택 변수</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">address</span><span class="o">;</span>       <span class="c1">// 선택 변수</span>
+
+    <span class="kd">private</span> <span class="nf">User</span><span class="o">(</span><span class="n">UserBuilder</span> <span class="n">builder</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">firstName</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="na">firstName</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">lastName</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="na">lastName</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="na">age</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">phone</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="na">phone</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">address</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="na">address</span><span class="o">;</span>
+    <span class="o">}</span>
+ 
+    <span class="c1">// Setter를 구현하지 않음으로써 불변성 유지</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getFirstName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">firstName</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getLastName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">lastName</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getPhone</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">phone</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getAddress</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">address</span><span class="o">;</span>
+    <span class="o">}</span>
+ 
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"User: "</span><span class="o">+</span><span class="k">this</span><span class="o">.</span><span class="na">firstName</span><span class="o">+</span><span class="s">", "</span><span class="o">+</span><span class="k">this</span><span class="o">.</span><span class="na">lastName</span><span class="o">+</span><span class="s">", "</span><span class="o">+</span><span class="k">this</span><span class="o">.</span><span class="na">age</span><span class="o">+</span><span class="s">", "</span><span class="o">+</span><span class="k">this</span><span class="o">.</span><span class="na">phone</span><span class="o">+</span><span class="s">", "</span><span class="o">+</span><span class="k">this</span><span class="o">.</span><span class="na">address</span><span class="o">;</span>
+    <span class="o">}</span>
+ 
+    <span class="c1">// 객체 내부에 Builder 정의(중첩 클래스)</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">UserBuilder</span> 
+    <span class="o">{</span>
+        <span class="c1">// 필수적인 변수만 final로 설정</span>
+        <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">firstName</span><span class="o">;</span>     <span class="c1">// 필수 변수</span>
+        <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">lastName</span><span class="o">;</span>      <span class="c1">// 필수 변수</span>
+        <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>                    <span class="c1">// 선택 변수</span>
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">phone</span><span class="o">;</span>               <span class="c1">// 선택 변수</span>
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">address</span><span class="o">;</span>             <span class="c1">// 선택 변수</span>
+
+        <span class="c1">// Builder 생성자 매개변수는 필수 변수만을 포함</span>
+        <span class="kd">public</span> <span class="nf">UserBuilder</span><span class="o">(</span><span class="n">String</span> <span class="n">firstName</span><span class="o">,</span> <span class="n">String</span> <span class="n">lastName</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">firstName</span> <span class="o">=</span> <span class="n">firstName</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">lastName</span> <span class="o">=</span> <span class="n">lastName</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="c1">// 선택적인 변수는 추가적인 메서드를 구현하여 생성</span>
+        <span class="kd">public</span> <span class="n">UserBuilder</span> <span class="nf">age</span><span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+            <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">UserBuilder</span> <span class="nf">phone</span><span class="o">(</span><span class="n">String</span> <span class="n">phone</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">phone</span> <span class="o">=</span> <span class="n">phone</span><span class="o">;</span>
+            <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">UserBuilder</span> <span class="nf">address</span><span class="o">(</span><span class="n">String</span> <span class="n">address</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">address</span> <span class="o">=</span> <span class="n">address</span><span class="o">;</span>
+            <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="c1">// Builder로 생성된 객체 반환</span>
+        <span class="kd">public</span> <span class="n">User</span> <span class="nf">build</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">User</span> <span class="n">user</span> <span class="o">=</span>  <span class="k">new</span> <span class="n">User</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="n">validateUserName</span><span class="o">(</span><span class="n">user</span><span class="o">))</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">NoNameException</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="n">validateUserAge</span><span class="o">(</span><span class="n">user</span><span class="o">))</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">InvalidAgeException</span><span class="o">();</span>
+            <span class="k">return</span> <span class="n">user</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">validateUserName</span><span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">firstName</span><span class="o">==</span><span class="kc">null</span> <span class="o">||</span> <span class="n">user</span><span class="o">.</span><span class="na">lastName</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">age</span><span class="o">!=</span><span class="kc">null</span> <span class="o">||</span> <span class="n">user</span><span class="o">.</span><span class="na">phone</span><span class="o">!=</span><span class="kc">null</span> <span class="o">||</span> <span class="n">user</span><span class="o">.</span><span class="na">address</span><span class="o">!=</span><span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">validateUserAge</span><span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">age</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>[객체 생성]</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">User</span> <span class="n">user1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">.</span><span class="na">UserBuilder</span><span class="o">(</span><span class="s">"jiho"</span><span class="o">,</span> <span class="s">"Kevin"</span><span class="o">)</span>
+                     <span class="o">.</span><span class="na">age</span><span class="o">(</span><span class="mi">26</span><span class="o">)</span>
+                     <span class="o">.</span><span class="na">phone</span><span class="o">(</span><span class="s">"010-4640-9435"</span><span class="o">)</span>
+                     <span class="o">.</span><span class="na">address</span><span class="o">(</span><span class="s">"서울시 은평구 우리집 ~~"</span><span class="o">)</span>
+                     <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">User</span> <span class="n">user2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">.</span><span class="na">UserBuilder</span><span class="o">(</span><span class="s">"Tony"</span><span class="o">,</span> <span class="s">"Choi"</span><span class="o">)</span>
+                     <span class="o">.</span><span class="na">age</span><span class="o">(</span><span class="mi">25</span><span class="o">)</span>
+                     <span class="c1">// no phone</span>
+                     <span class="c1">// no address</span>
+                     <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">User</span> <span class="n">user3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">.</span><span class="na">UserBuilder</span><span class="o">(</span><span class="s">"Jin"</span><span class="o">,</span> <span class="s">"Lee"</span><span class="o">)</span>
+                     <span class="c1">// no age</span>
+                     <span class="c1">// no phone</span>
+                     <span class="c1">// no address</span>
+                     <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>빌더 패턴을 이용해 위와 같이 하나의 생성자만으로 여러 상태의 객체를 생성할 수 있게되었다.</p>
+</blockquote>
+
+<ul>
+  <li>멤버를 <code class="highlighter-rouge">final</code>로 설정하여 불변성을 유지할 수 있다.</li>
+  <li>선택적인 변수의 경우 <code class="highlighter-rouge">null</code>로 설정할 필요가 없다. 또한 생성자 오버로딩을 하지 않아 선택적인 변수를 가진 객체도 동일한 방법으로 생성할 수 있다.</li>
+  <li>각 변수의 이름에 해당하는 메서드를 chaining 방식으로 접근하여 초기화할 수 있다. 따라서 <strong>생성자의 매개변수 순서를 기억할 필요가 없고, 생성 과정에서의 가독성이 훨씬 좋아진다</strong>.</li>
+  <li>만약 <strong>새로운 멤버 변수가 추가되더라도 기존 객체 생성 코드를 수정하지 않아도 된다</strong>. 새롭게 추가된 멤버 변수도 선택적인 매개변수와 동일하게 처리하기 때문이다.</li>
+  <li>추가적으로 <strong>빌더 클래스 내부에 유효성 검사 메서드를 추가</strong>한다면 멤버 생성 과정에서의 논리적인 에러를 사전에 차단할 수 있다.</li>
+</ul>
+
+<hr />
+
+<h4 id="references">References</h4>
+
+<p><a href="https://howtodoinjava.com/design-patterns/creational/builder-pattern-in-java/">howtodoinjava Builder Pattern</a><br />
+<a href="https://dzone.com/articles/immutability-with-builder-design-pattern">dzone Immutability and Builder Pattern</a><br />
+<a href="https://softwareengineering.stackexchange.com/questions/380397/why-do-we-need-a-builder-class-when-implementing-a-builder-pattern">StackExchange Why do we need a builder class</a></p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+        repo="JihoKevin/blog-comments"
+        issue-term="pathname"
+        label="comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 신지호. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

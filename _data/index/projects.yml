@@ -2,13 +2,13 @@
   descr: "사용자에게 날씨 정보를 제공하고 해당 날씨에 따른 옷차림을 추천 해 주는 모바일 앱 서비스 입니다. 안드로이드를 스스로 개발하기 시작했을 당시 참여했던 프로젝트여서 특정 아키텍처는 적용하지 못하던 수준이였습니다. 구글 스토어에 출시했었고, 현재 제공되는 API 및 정책상의 문제로 리팩토링 작업 중에 있습니다. 개발 기간은 약 3개월 정도로, 학생 신분의 안드로이드 개발 팀원 5명이 참여하였으며 전 인원이 프로젝트의 모든 부분에 관여하였습니다. "
   github: https://github.com/WearWeather/WearWeather_Android
 
-- name: RxKotlin을 적용시킨 Github Repository Search! 📂
-  descr: "개발자들이 흔히 접하는 깃허브 레포지토리를 검색하는 아주 간단한 서비스 입니다. Github API3를 사용하였고, Coroutine과 RxKotlin 이 두 개의 백그라운드 처리를 고민 해보던 중에 RxKotlin을 적용 시켜 보았습니다. 리액티브 프로그래밍에 대한 이해도를 높여주는 프로젝트였습니다!"
-  github: https://github.com/JihoKevin/GithubRepoMvvm
+- name: 헬스케어 솔루션, 맟춤형 티캡슐 추천 서비스! 메디프레소 Medna ☕️
+  descr: "메디프레소라는 기업의 메드나 라는 안드로이드 서비스를 개발하여 플레이 스토어에 배포했던 경험이 있습니다. 공동인증서 인증을 통해 사용자의 검진 정보를 알맞은 UI로 보여주고 해당 데이터를 바탕으로 맟춤형 티캡슐을 제공하는 정기 결제 구독 서비스를 제공하고 있습니다. 비동기 처리로는 RxKotlin을 이용하였으며 현업 디자이너, 경영진, 마케팅, 백엔드 팀과 협업이 수행되었습니다."
+  website: https://play.google.com/store/apps/details?id=com.medipresso.medna
 
-#- name: 노인을 위한 음성인식 키오스크 앱 👩🏻‍💻
-#  descr: "무인 주문기 키오스크의 가게 도입율이 60%를 차지하면서 무인 주문기에 익숙하지 않은 분들이 계실 것이라고 생각했습니다. 음성인식을 통해 대화를 주고 받으며 주문할 수 있는 키오스크 앱 서비스입니다. 실시간 음성인식 및 대화를 구현하기 위해 Naver AI Cloud Platform에서 제공하는 CSR, CPV 기술과 ChatBot 기술을 적용하였습니다. Naver AI Burning Day 해커톤에 참가하여 2박 3일간 개발하였고, 외부 AI API를 사용하여 안드로이드 앱 서비스에 AI 기술을 적용해본 뜻 깊은 경험이였습니다."
-#  github: https://github.com/Naver-AI-Burning-Day/andriod_kiosk
+# - name: RxKotlin을 적용시킨 Github Repository Search! 📂
+#   descr: "개발자들이 흔히 접하는 깃허브 레포지토리를 검색하는 아주 간단한 서비스 입니다. Github API3를 사용하였고, Coroutine과 RxKotlin 이 두 개의 백그라운드 처리를 고민 해보던 중에 RxKotlin을 적용 시켜 보았습니다. 리액티브 프로그래밍에 대한 이해도를 높여주는 프로젝트였습니다!"
+#   github: https://github.com/JihoKevin/GithubRepoMvvm
 
 #- name: 서울시 창업 멤버 매칭 및 장려 어플리케이션, 스타트픽 ✅
 #  descr: "창업 멤버를 찾고, 함께 창업하기를 독려하는 모바일 앱 서비스입니다. 2019 서울시 모바일 앱 공모전에 출전하였고, 안드로이드 개발자로서 처음으로 디자인파트, 서버파트와 협업하였습니다."
