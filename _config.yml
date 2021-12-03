@@ -74,3 +74,6 @@ owner:
   codepen: #username
   reddit: #username
   telegram: #username
+
+plugins : 
+  - jekyll-sitemap

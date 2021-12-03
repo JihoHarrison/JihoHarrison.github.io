@@ -33,6 +33,10 @@ categories: [안드로이드]
  라는 의미가 된다..!
 
 ## 2️⃣ Android에서의 MVVM
- * Model에 데이터가 존재하면 ViewModel이 가져와서 가공하고, View는 그 ViewModel을 바라보고 있다가 데이터 변경이 발생하면 
+ * Model에 데이터가 존재하면 ViewModel이 가져와서 가공하고, View는 그 ViewModel을 바라보고 있다가 데이터 변경이 발생하면 UI를 변경 시켜주는 형태이다.
+ `Model` : 어플리케이션에서 사용되는 데이터와 그 데이터를 처리하는 부분 -> Repository라고 보면 되겠다.
+ `View` : 
+ `ViewModel`
+
 
 [마지막 수정 : 2021-10-15, 추후 업데이트 예정]
