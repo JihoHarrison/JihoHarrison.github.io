@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="접근 방법  dfs로 접근해야 하는 문제이다.  주어진 2차원 배열의 모든 정점에 대하여 탐색을 진행해야 한다. 이를 위해 상하좌우를 비교할 때 많이 사용되는 형식인 다음 두 배열을 전역으로 선언하여 사용한다.          static int[] dx = {0, -1, 0, 1...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[알고리즘] 백준 2210번 숫자판 점프 🔢 | JihoKevin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[알고리즘] 백준 2210번 숫자판 점프 🔢 | JihoKevin">
+  <meta name="twitter:description" content="접근 방법  dfs로 접근해야 하는 문제이다.  주어진 2차원 배열의 모든 정점에 대하여 탐색을 진행해야 한다. 이를 위해 상하좌우를 비교할 때 많이 사용되는 형식인 다음 두 배열을 전역으로 선언하여 사용한다.          static int[] dx = {0, -1, 0, 1...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2021-11/algorithm-bok-2210">
+  <meta property="og:title" content="[알고리즘] 백준 2210번 숫자판 점프 🔢 | JihoKevin">
+  <meta property="og:description" content="접근 방법  dfs로 접근해야 하는 문제이다.  주어진 2차원 배열의 모든 정점에 대하여 탐색을 진행해야 한다. 이를 위해 상하좌우를 비교할 때 많이 사용되는 형식인 다음 두 배열을 전역으로 선언하여 사용한다.          static int[] dx = {0, -1, 0, 1...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[알고리즘] 백준 2210번 숫자판 점프 🔢 | JihoKevin</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2021-11/algorithm-bok-2210">
+  <link rel="alternate" type="application/rss+xml" title="JihoKevin" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">신지호</a>
+  <span class="author_job">안드로이드 개발자가 되고싶은 소년</span>
+  <span class="author_bio mbm">방문해주셔서 감사합니다!🙇🏻‍♂️</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('jhshin9250@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/jiho_925" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/JihoKevin" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[알고리즘] 백준 2210번 숫자판 점프 🔢">[알고리즘] 백준 2210번 숫자판 점프 🔢</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        28 NOV 2021
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    3 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="접근-방법">접근 방법</h2>
+<ul>
+  <li>dfs로 접근해야 하는 문제이다.</li>
+  <li>주어진 2차원 배열의 모든 정점에 대하여 탐색을 진행해야 한다. 이를 위해 상하좌우를 비교할 때 많이 사용되는 형식인 다음 두 배열을 전역으로 선언하여 사용한다.
+    <blockquote>
+      <p>static int[] dx = {0, -1, 0, 1};
+static int[] dy = {-1, 0, 1, 0};</p>
+    </blockquote>
+  </li>
+  <li>또한 BufferedReader를 이용하여 입출력의 효율을 개선시켰다.</li>
+  <li>가능한 모든 요소들의 중복을 제거하기 위해서 HashSet을 사용하려다가 ArrayList의 isContain을 사용하여 해결했다.</li>
+</ul>
+
+<h2 id="dfs">dfs()</h2>
+<ul>
+  <li>역시 자주 쓰던 그 dfs다. 중복 없는 결과를 가져오기 위해서 처음에 백트래킹을 적용 시켰다가 삽질했다. 그러다 방문했던 정점을 다시 방문할 수 있다는 조건을 뒤늦게 다시 알아차렸고 접근 방법에서 말했던 것 처럼 dfs의 기저 조건을 판별하는 부분에서 중복 제거를 수행 해 주었다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BOK2210</span> <span class="o">{</span>
+   <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">dx</span> <span class="o">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">};</span>
+   <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">dy</span> <span class="o">=</span> <span class="o">{-</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">};</span>
+
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">5</span><span class="o">][</span><span class="mi">5</span><span class="o">];</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span> <span class="n">answer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
+
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+
+       <span class="n">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">));</span>
+       <span class="n">StringTokenizer</span> <span class="n">st</span><span class="o">;</span>
+
+       <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+           <span class="c1">// 공백 포함 읽어주기</span>
+           <span class="n">st</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringTokenizer</span><span class="o">(</span><span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">());</span>
+           <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+               <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">st</span><span class="o">.</span><span class="na">nextToken</span><span class="o">());</span>
+           <span class="o">}</span>
+       <span class="o">}</span>
+
+       <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+           <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+               <span class="c1">// 배열의 모든 요소에 대해 탐색 진행</span>
+               <span class="n">dfs</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">j</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+           <span class="o">}</span>
+       <span class="o">}</span>
+   <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">dfs</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">depth</span><span class="o">,</span> <span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
+
+       <span class="c1">// 6번 이동했을 때</span>
+       <span class="k">if</span> <span class="o">(</span><span class="n">depth</span> <span class="o">==</span> <span class="mi">6</span><span class="o">)</span> <span class="o">{</span>
+           <span class="c1">// 중복 제거</span>
+           <span class="k">if</span> <span class="o">(!</span><span class="n">answer</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">str</span><span class="o">))</span> <span class="o">{</span>
+               <span class="n">answer</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+               <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+           <span class="o">}</span>
+           <span class="k">return</span><span class="o">;</span>
+       <span class="o">}</span>
+
+       <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+           <span class="kt">int</span> <span class="n">nowX</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dx</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+           <span class="kt">int</span> <span class="n">nowY</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dy</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+           <span class="c1">// 주어진 형식의 범위 벗어나면 안됨</span>
+            <span class="k">if</span> <span class="o">(</span><span class="mi">0</span> <span class="o">&gt;</span> <span class="n">nowX</span> <span class="o">||</span> <span class="n">nowX</span> <span class="o">&gt;=</span> <span class="mi">5</span> <span class="o">||</span> <span class="mi">0</span> <span class="o">&gt;</span> <span class="n">nowY</span> <span class="o">||</span> <span class="n">nowY</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="o">)</span> <span class="o">{</span>
+               <span class="k">continue</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="n">dfs</span><span class="o">(</span><span class="n">nowX</span><span class="o">,</span> <span class="n">nowY</span><span class="o">,</span> <span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">str</span> <span class="o">+</span> <span class="n">arr</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]);</span>
+       <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+        repo="JihoKevin/blog-comments"
+        issue-term="pathname"
+        label="comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 신지호. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

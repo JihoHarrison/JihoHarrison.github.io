@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="0️⃣ 프롤로그  안드로이드 개발을 하면서 Context 타입을 정말 많이 사용한다. 이 형식을 잘못 사용하면 ANR이 발생하거나 메모리 Leak이 발생하기도 한다. 안드로이드의 핵심이라고도 할 수 있는 이 Context에 대해서 자세하게 공부 해 보았다.1️⃣ 공식 문서에서 설명...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="Android Context | JihoKevin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Android Context | JihoKevin">
+  <meta name="twitter:description" content="0️⃣ 프롤로그  안드로이드 개발을 하면서 Context 타입을 정말 많이 사용한다. 이 형식을 잘못 사용하면 ANR이 발생하거나 메모리 Leak이 발생하기도 한다. 안드로이드의 핵심이라고도 할 수 있는 이 Context에 대해서 자세하게 공부 해 보았다.1️⃣ 공식 문서에서 설명...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2021-11/android-context">
+  <meta property="og:title" content="Android Context | JihoKevin">
+  <meta property="og:description" content="0️⃣ 프롤로그  안드로이드 개발을 하면서 Context 타입을 정말 많이 사용한다. 이 형식을 잘못 사용하면 ANR이 발생하거나 메모리 Leak이 발생하기도 한다. 안드로이드의 핵심이라고도 할 수 있는 이 Context에 대해서 자세하게 공부 해 보았다.1️⃣ 공식 문서에서 설명...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>Android Context | JihoKevin</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2021-11/android-context">
+  <link rel="alternate" type="application/rss+xml" title="JihoKevin" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">신지호</a>
+  <span class="author_job">안드로이드 개발자가 되고싶은 소년</span>
+  <span class="author_bio mbm">방문해주셔서 감사합니다!🙇🏻‍♂️</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('jhshin9250@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/jiho_925" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/JihoKevin" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="Android Context">Android Context</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        29 NOV 2021
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    1 min read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <!-- ---
+layout: post
+title: "[안드로이드] Context가 뭐죠?"
+date: 2021-11-29 15:34:10 +0700
+categories: [안드로이드]
+--- -->
+
+<h2 id="0️⃣-프롤로그">0️⃣ 프롤로그</h2>
+<ul>
+  <li>안드로이드 개발을 하면서 Context 타입을 정말 많이 사용한다. 이 형식을 잘못 사용하면 ANR이 발생하거나 메모리 Leak이 발생하기도 한다. 안드로이드의 핵심이라고도 할 수 있는 이 Context에 대해서 자세하게 공부 해 보았다.</li>
+</ul>
+
+<h2 id="1️⃣-공식-문서에서-설명하는-context는">1️⃣ 공식 문서에서 설명하는 Context는?</h2>
+<blockquote>
+  <p>Interface to global information about an application environment. This is an abstract class whose implementation is provided by the Android system. It allows access to application-specific resources and classes, as well as up-calls for application-level operations such as launching activities, broadcasting and receiving intents, etc.</p>
+</blockquote>
+
+<ul>
+  <li>Context는 어플리케이션 환경에 대한 글로벌 정보를 갖는 인터페이스이다. Context는 Android 시스템에서 구현체를 제공하는 추상 클래스로, 애플리케이션 별 리소스 및 클래스 접근에 사용되며, 액티비티 실행, 브로드캐스트, 인탠트 수신 등과 같은 애플리케이션 수준 작업에 사용된다.
+ <a href="developer.android.com/reference/android/content/Context">android developer context</a></li>
+  <li>context는 영어의 뜻 그대로 현재 상태의 맥락이라는 의미를 가진다. 컨텍스트는 새로 생긴 객체가 지금 어떤 상태인지 알 수 있도록 해준다.</li>
+  <li>Activity와 Application의 정보를 얻기 위해 사용할 수 있다. 또한 Resource, DB, Shared Preference 등에 접근하기 위해 사용된다. 내가 이해하기로는 현재 상태 즉, 각각의 생명 주기에 따라서 생성되고 소멸되는 시점을 명확히 하고 이를 활용하여 메모리 누수를 방지한다는 것이다.</li>
+</ul>
+
+<h2 id="2️⃣-context의-종류">2️⃣ Context의 종류</h2>
+<p>### Application Context</p>
+<ul>
+  <li>가장 최상위 층의 context라고 생각하면 된다. getApplicationContext</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/27722059/143963200-ebeaf089-130d-4235-beac-b5c87901bbfe.png" alt="getApplicationContext" /></p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+        repo="JihoKevin/blog-comments"
+        issue-term="pathname"
+        label="comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 신지호. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>
