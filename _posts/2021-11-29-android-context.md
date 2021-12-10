@@ -7,7 +7,7 @@ categories: [안드로이드]
 
 ## 0️⃣ 프롤로그
  * 안드로이드 개발을 하면서 Context 타입을 정말 많이 사용한다. 이 형식을 잘못 사용하면 ANR이 발생하거나 메모리 Leak이 발생하기도 한다. 안드로이드의 핵심이라고도 할 수 있는 이 Context에 대해서 자세하게 공부 해 보았다.
- > ![Android Devloper Context](https://developer.android.com/reference/android/content/Context)
+ > ![https://developer.android.com/reference/android/content/Context]
 
 ## 1️⃣ 공식 문서에서 설명하는 Context는?
 > Interface to global information about an application environment. This is an abstract class whose implementation is provided by the Android system. It allows access to application-specific resources and classes, as well as up-calls for application-level operations such as launching activities, broadcasting and receiving intents, etc.
