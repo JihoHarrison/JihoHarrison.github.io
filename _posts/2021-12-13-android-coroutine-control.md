@@ -109,4 +109,61 @@ println(msg) // 첫번째 블록 결과인 result1 출력
  ```
  * 하지만 여기서 주의해야 할 점은 바로 여러개의 async 코루틴 블록에 같은 Deferred 객체를 사용할경우 await() 함수 호출시 전달되는 최종적인 결과값은 첫번째 async 코루틴 블록의 결과값 만을 전달한다는 것이다.
 
+ ## 2️⃣ 지연 실행(LAZY)
+ * 이 지연실행이라는 개념은 launch와 async 코루틴 블록 둘 다 모두에게 적용된다. 코루틴 블록의 처리 시점을 미룰 수 있다는 점이다. 각 코루틴 블록 함수의 start 인자에 CoroutineStart.LAZY 라는 값을 넣어주면 그 코루틴 블록은 지연되어 실행된다.
  
+ ```kotlin
+val job = launch (start = CoroutineStart.LAZY) {
+    ...
+}
+ ```
+
+OR
+
+  ```kotlin
+val deferred = async (start = CoroutineStart.LAZY) {
+    ...
+}
+ ```
+ 
+ * 이렇게 각각의 코루틴 블록들을 지연 실행시켜 준다면 Deferred 클래스는 해당 코루틴 블록을 실행시키려면 deferred.start() 함수나 deferred.await() 함수를 호출하는 시점에 코루틴 블록이 실행된다.
+ * 반대로 launch() 함수로 만들어진, Job 객체를 반환하는 코루틴 블록에 대해서는 job.start() 함수나 job.join() 함수를 호출하는 시점에 launch 코루틴 블록이 실행된다.
+
+ ### 지연된 async 코루틴 블록의 경우 start() 함수는 async 코루틴 블록을 실행 시키지만 블록의 수행 결과를 반환하지 않는다. 또한, await() 함수와 다르게 코루틴 블록이 완료되는 시점을 기다리지 않는다.
+
+ ```kotlin
+ 
+println("start")
+
+ val deferred = async(start = CoroutineStart.LAZY) {
+     var i = 0
+     while (i < 5) {
+         delay(500)
+         println("lazy async $i")
+         i++
+     }
+ }
+
+ deferred.await()
+
+ println("end")
+ ```
+ * 위 코드의 실행 결과로는 await() 함수를 적용하였기 때문에 다음고 같은 실행 결과를 얻을 수 있다.
+ >start
+lazy async 0
+lazy async 1
+lazy async 2
+lazy async 3
+lazy async 4
+end
+
+* 하지만 deferred.start() 로 바꾸면 출력 결과는 다음과 같다. end 는 start 가 출력 되자 마자 출력되고, 코루틴 블록이 수행된다.
+>start
+end
+lazy async 0
+lazy async 1
+lazy async 2
+lazy async 3
+lazy async 4
+
+_2021.12.14 최종 수정. 지속 업데이트 예정_
