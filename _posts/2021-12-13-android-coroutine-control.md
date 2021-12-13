@@ -6,9 +6,11 @@ categories: [안드로이드]
 ---
 
  ## 0️⃣ 프롤로그
+
  * 코루틴을 공부하면서 Coroutine에는 어떠한 주요 키워드 들이 있고, 제어를 하기 위해서는 어떻게 해야하는지, 코루틴 블록을 어떻게 생성하는지 등을 학습해왔다. 저번에 배웠던 개념에서 Job 객체, Deferred, runBlocking 등이 있었는데 더 자세히 짚고 넘어가기 위해 이렇게 정리를 진행하게 되었다.
 
  ## 1️⃣ Launch() -> Job
+ 
  ```kotlin
  val job : Job = launch {
      ...
