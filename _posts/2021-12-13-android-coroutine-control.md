@@ -60,7 +60,7 @@ categories: [안드로이드]
 
  * 여기서 launch 함수로 코루틴 블록을 생성했을 때, 코루틴 블록은 그 즉시 실행되며, 반환받은 Job 객체로 해당 블록을 제어한다. 말 그대로 제어만 할 수 있지 블록이 수행 된 결과를 반환받는 것은 아니다. 그렇다면 수행 된 결과를 반환받기 위해서는 어떻게 해야는지 알아보았다.
 
- ### Async() -> Deferred
+### Async() -> Deferred
  * 바로 async()라는 함수를 launch 대신 사용하면 된다. 이렇게 async() 함수로 시작된 코루틴 블록은 Deferred 객체를 반환한다.
  ```kotlin
  val deferred : Deferred<T> = async {
@@ -131,7 +131,7 @@ val deferred = async (start = CoroutineStart.LAZY) {
  * 이렇게 각각의 코루틴 블록들을 지연 실행시켜 준다면 Deferred 클래스는 해당 코루틴 블록을 실행시키려면 deferred.start() 함수나 deferred.await() 함수를 호출하는 시점에 코루틴 블록이 실행된다.
  * 반대로 launch() 함수로 만들어진, Job 객체를 반환하는 코루틴 블록에 대해서는 job.start() 함수나 job.join() 함수를 호출하는 시점에 launch 코루틴 블록이 실행된다.
 
- ### 지연된 async 코루틴 블록의 경우 start() 함수는 async 코루틴 블록을 실행 시키지만 블록의 수행 결과를 반환하지 않는다. 또한, await() 함수와 다르게 코루틴 블록이 완료되는 시점을 기다리지 않는다.
+### 지연된 async 코루틴 블록의 경우 start() 함수는 async 코루틴 블록을 실행 시키지만 블록의 수행 결과를 반환하지 않는다. 또한, await() 함수와 다르게 코루틴 블록이 완료되는 시점을 기다리지 않는다.
 
  ```kotlin
  
