@@ -86,6 +86,7 @@ categories: [안드로이드]
  * await() 함수를 통해서 async() 함수로 실행됐었던 코루틴 블록이 끝날 때 까지 기다려지고, 끝 마치는 순간 결과값이 반환되어 출력되는 형식이다.
  * launch() 함수를 실행했을 때 joinAll() 함수를 통해서 모든 코루틴 블록을 한꺼번에 대기 시키는 부분을 보았을 것이다. Deferred 객체도 마찬가지로 awaitAll() 함수를 이용하여 모든 async 코루틴 블록이 완료될 때 까지 기다릴 수 있다.
  * 또한 다음과 같이 첫번째 async 코루틴 블록에서 반환받은 Deferred 객체를 두번째 async() 함수의 인자로 사용하면, 동일한 Deferred 객체로 두개의 코루틴 블록을 모두 제어 할수 있다.
+
  ```kotlin
 val deferred = async {
     var i = 0
@@ -109,6 +110,7 @@ val deferred = async {
 val msg = deferred.await()
 println(msg) // 첫번째 블록 결과인 result1 출력
  ```
+
  * 하지만 여기서 주의해야 할 점은 바로 여러개의 async 코루틴 블록에 같은 Deferred 객체를 사용할경우 await() 함수 호출시 전달되는 최종적인 결과값은 첫번째 async 코루틴 블록의 결과값 만을 전달한다는 것이다.
 
 ## 2️⃣ 지연 실행(LAZY)
@@ -151,21 +153,21 @@ println("start")
  println("end")
  ```
  * 위 코드의 실행 결과로는 await() 함수를 적용하였기 때문에 다음고 같은 실행 결과를 얻을 수 있다.
- >start
-lazy async 0
-lazy async 1
-lazy async 2
-lazy async 3
-lazy async 4
+ >start   
+lazy async 0   
+lazy async 1   
+lazy async 2   
+lazy async 3   
+lazy async 4   
 end
 
 * 하지만 deferred.start() 로 바꾸면 출력 결과는 다음과 같다. end 는 start 가 출력 되자 마자 출력되고, 코루틴 블록이 수행된다.
->start
-end
-lazy async 0
-lazy async 1
-lazy async 2
-lazy async 3
-lazy async 4
+>start   
+end   
+lazy async 0   
+lazy async 1   
+lazy async 2   
+lazy async 3   
+lazy async 4   
 
 _2021.12.14 최종 수정. 지속 업데이트 예정_
