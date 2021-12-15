@@ -152,7 +152,7 @@ println("start")
 
  println("end")
  ```
- * 위 코드의 실행 결과로는 await() 함수를 적용하였기 때문에 다음고 같은 실행 결과를 얻을 수 있다.
+ * 위 코드의 실행 결과로는 await() 함수를 적용하였기 때문에 다음과 같은 실행 결과를 얻을 수 있다.
  >start   
 lazy async 0   
 lazy async 1   
@@ -170,4 +170,37 @@ lazy async 2
 lazy async 3   
 lazy async 4   
 
-_2021.12.14 최종 수정. 지속 업데이트 예정_
+## 3️⃣ 동기 처리는 Handler로 해결 할 수 있지 않을까?
+ * 안드로이드를 개발하는 사람이면 Handler와 Looper에 관해서 많은 학습을 해 보았을 것이고, 나도 이번 인턴십에서 RxBus 형식을 이용한 로그아웃 기능을 구현 할 때 Hander와 Looper를 사용 해 봤던 기억이 난다. 여튼 이런 Hander로 delay 값을 지정하여 임의로 몇 초 늦췄다가 명령어를 실행하도록 하는 방법을 생각 해 봤다.
+ ```kotlin
+ loadDB() // 내부 DB를 조회하여 결과를 가져오는 함수
+ 
+val handler = Handler() // Handler Object
+handler.postDelayed({ // postDelayed 함수로 임의 10초 Delay 지정
+    fetchRecycler() // RecyclerView를 새로 고침
+}, 1000)
+ ```
+
+ 어떤 점이 문제인지 확연히 보인다.
+
+ 1. 항상 똑같은 시간만큼 기다려야 하고, 처리해야 하는 데이터의 양이 적으면 해당 작업이 끝나는대로 새로고침을 진행 할 수 있는데도 불구하고 지정해둔 시간만큼 기다렸다가 다음 명령어를 실행해야 한다는 것이다.
+
+ 2. 데이터의 처리량이 많아지는 것도 문제가 된다. 당연히 처리 시간이 임의의 시간보다 커지면 DB를 조회하기도 전에 다음 명령어가 실행이 될 것이고, 무척이나 NULL 처리에 민감한 코틀린과 안드로이드의 조합에서는 정말 치명적인 오류를 불러오게 된다.
+
+* 이러한 문제점들을 토대로 봤을 때 Handler는 결코 좋은 해결책이 될 수가 없다. 이 때, 우리는 코루틴을 사용하면 된다. 아래의 글에서 안드로이드에서 사용되는 코루틴의 개념들을 정리 해 놓았다. 간략하게 예시를 만들어 보자면
+
+```kotlin
+CoroutineScope(Dispatchers.Main).launch {
+    val temp = CoroutineScope(Dispatchers.Default).async {
+        loadDB()
+    }.await()
+ 
+    fetchRecycler()
+}
+```
+
+* 다음과 같이 최종적으로 View를 업데이트 해 주어야 하기 때문에 Dispatchers.Main의 코루틴 블록으로 감싸주고, 해당 코루틴 블록 안에서 DB 작업 코루틴 블록을 따로 생성 해 준다(Dispatchers.Default). 이 내부 코루틴 블록은 await() 함수로 해당 작업이 끝날 때 까지 기다리고, 처리가 완료되는대로 다시 Dispatchers.Main 블록으로 빠져나와 RecyclerView에 대한 처리를 해 준다.
+
+[[안드로이드] 안드로이드와 코루틴 🌀](https://jihokevin.github.io//articles/2021-12/android-coroutine)
+
+_2021.12.16 최종 수정. 지속 업데이트 예정_
