@@ -69,15 +69,15 @@ categories: [안드로이드]
 
 ![AAC](https://user-images.githubusercontent.com/27722059/146218480-45cb7ae8-89ae-49af-81fe-c2fe0c3de353.png)
 * ### ViewModel
- - 화면 변화 시에도 변하거나 소멸되지 않는 데이터를 가지고 있다.
+    * 화면 변화 시에도 변하거나 소멸되지 않는 데이터를 가지고 있다.
 
 * ### LiveData
- - __View__ 가 __ViewModel__ 을 관찰할 때, 그 관찰 대상이 되는 데이터 타입이다. __LiveData__ 는 __Activity__ 및 __Fragment__ 의 __LifeCycle__ 을 인지하지 못하므로, 화면이 활성화 되어 있을 때만 동작하여 메모리 릭을 줄여준다.
+    * __View__ 가 __ViewModel__ 을 관찰할 때, 그 관찰 대상이 되는 데이터 타입이다. __LiveData__ 는 __Activity__ 및 __Fragment__ 의 __LifeCycle__ 을 인지하지 못하므로, 화면이 활성화 되어 있을 때만 동작하여 메모리 릭을 줄여준다.
 
 * ### Repository
- - __ViewModel__ 과 데이터를 주고받기 위해, 데이터 __API__ 를 포함하는 클래스다. 사용자 동작에 따라 필요한 데이터나 외부 백엔드 서버 등에서 데이터를 가져오게 된다. __Repository__ 의 존재 덕분에 __ViewModel__ 이 데이터를 관리할 필요가 없게 된다.
+    * __ViewModel__ 과 데이터를 주고받기 위해, 데이터 __API__ 를 포함하는 클래스다. 사용자 동작에 따라 필요한 데이터나 외부 백엔드 서버 등에서 데이터를 가져오게 된다. __Repository__ 의 존재 덕분에 __ViewModel__ 이 데이터를 관리할 필요가 없게 된다.
 
 * ### RoomDatabase
- - __Room__ 은 __SQLite__ 를 사용함에 있어 별도의 __Query문__ 작성없이 간편하게 __Insert, Delete__ 등의 동작을 할 수 있게끔 도와주는 __ORM 라이브러리__ 이다.
+    * __Room__ 은 __SQLite__ 를 사용함에 있어 별도의 __Query문__ 작성없이 간편하게 __Insert, Delete__ 등의 동작을 할 수 있게끔 도와주는 __ORM 라이브러리__ 이다.
 
-_[마지막 수정 : 2021-10-15, 추후 업데이트 예정]_
+_[마지막 수정 : 2021-12-16, 추후 업데이트 예정]_
