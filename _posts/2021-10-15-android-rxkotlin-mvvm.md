@@ -41,29 +41,44 @@ categories: [안드로이드]
 
  `ViewModel` : 개인적인 개발 과정에서의 경험으로는 __Model과 View를 연결시켜주는 다리__ 가 되기도 하고, __Model__ 에서 끌고 올라온 데이터를 __View__ 에 알맞게 표현하기 위해 가공시켜주는 역할도 한다. 주로 AAC의 ViewModel 클래스를 사용한다. Coroutine을 사용하면 __LiveData__ 를 통해 __View__ 와 소통되며, __RxKotlin__ 을 사용 할 경우 나의 경우는 __Processor, Subject__ 를 통하여 __Flowable, Observable, Single__ 등의로 적절한 return 타입을 잡아주면서 개발에 참여했다.
 
+
 > ### View
+
 1. Activity나 Fragment가 View의 역할을 한다.
+
 2. 사용자의 이벤트를 받는 부분이다.
+
 3. __ViewModel__ 의 데이터를 관찰하며 상태 변화가 생길 시 UI를 즉각 갱신한다.
 
+
 > ### ViewModel
+
 1. __View__ 에서 발생한 이벤트로부터 전달된 __데이터를 Model로 요청하는 중간 다리 역할.__
+
 2. __Model__ 로 부터 요청한 데이터를 받아오는 중간 다리 역할.
 
+
 > ### Model
+
 1. __ViewModel__ 이 요청한 데이터를 넘겨준다.
+
 2. 주로 __Repository__ 라는 부분을 포함하면서 불리우며, __Web Service에서 데이터를 요청하는 부분__ 까지 일컫는 부분이다.
+
 3. __Room, Realm, Retrofit__ 등의 __DB 사용__ 이나 __백엔드 API 호출__ 등의 작업을 담당한다. (데이터의 창고같은 역할)
 
 * 결국 __View__ 가 필요로 하는 데이터는 __ViewModel__ 이 쥐고 있고, __View__ 는 그것을 필요로 하기 때문에 __ViewModel__ 이 쥐고 있는 데이터를 관찰 __(Observing)__ 한다. 때문에 __MVC__ 패턴과 다르게, __View__ 가 DB 에 직접 접근하는 것이 아닌 __UI 업데이트에만 집중한다.__
 
 * 또한 관찰하고 있는 만큼 데이터 변화에 더욱 능동적으로 움직이게 된다.
 
+
 ## 3️⃣ MVVM 패턴은 다음과 같은 장점을 가진다.
 
 1. __View__ 가 __ViewModel__ 의 __Data__ 를 관찰하고 있으므로 __UI 업데이트가 간편__
+
 2. __ViewModel__ 이 데이터를 Hold(?)하고 있으므로 잘못 사용하지 않는 이상 __Memory Leak 발생 가능성 이 낮다.__ (View 가 직접 Model 에 접근하지 않아 가져온 데이터는 __Activity__ 나 __Fragment__ 생명주기에 의존하지 않기 때문이다.)
+
 3. 기능별 모듈화가 잘 되어 유지 보수에 용이 (View와 ViewModel은 1:N의 관계를 가질 수 있기 때문에 __한 번 만들어 놓은 viewModel은 다른 View에서도 재사용이 매우 용이__ 하다.)
+
 
 ## 4️⃣ AAC (Android Architecture Component)
 
