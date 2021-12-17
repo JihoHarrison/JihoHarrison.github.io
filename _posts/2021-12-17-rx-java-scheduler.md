@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[RxJava] RxKotlin 말고 RxJava! 💡"
+title:  "[RxKotlin] RxKotlin 말고 RxJava! 💡"
 date: 2021-12-17 18:03:10 +0700
 categories: [RxKotlin]
 ---
