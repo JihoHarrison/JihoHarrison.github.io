@@ -3,6 +3,21 @@
   
     
     <url>
+      <loc>http://localhost:4000/articles/2021-12/rx-java-scheduler</loc>
+      
+        <lastmod>2021-12-17T12:03:10+01:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
       <loc>http://localhost:4000/articles/2021-12/android-coroutine-control</loc>
       
         <lastmod>2021-12-13T17:45:01+01:00</lastmod>
@@ -336,6 +351,21 @@
       <loc>http://localhost:4000/articles/2021-07/kotlin-object-keyword</loc>
       
         <lastmod>2021-07-13T11:34:10+02:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>http://localhost:4000/articles/2021-07/kotlin-extension-function</loc>
+      
+        <lastmod>2021-07-13T09:11:10+02:00</lastmod>
       
       
         <changefreq>monthly</changefreq>

@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="0️⃣ 프롤로그  RxKotlin을 학습하다보니 RxJava에 대한 형식도 적용 시켜보고 싶었다.. 그래서… 공부했다… 밤새.. 너무 힘들다.. 하하…. 헛소리 그만하고 RxJava를 정리 해 보겠습니다.. RxKotlin과 비교했을 때 정말 다른 점이 없어보이지만 그래도 기초부터...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[RxJava] RxKotlin 말고 RxJava! 💡 | JihoKevin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[RxJava] RxKotlin 말고 RxJava! 💡 | JihoKevin">
+  <meta name="twitter:description" content="0️⃣ 프롤로그  RxKotlin을 학습하다보니 RxJava에 대한 형식도 적용 시켜보고 싶었다.. 그래서… 공부했다… 밤새.. 너무 힘들다.. 하하…. 헛소리 그만하고 RxJava를 정리 해 보겠습니다.. RxKotlin과 비교했을 때 정말 다른 점이 없어보이지만 그래도 기초부터...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2021-12/rx-java-scheduler">
+  <meta property="og:title" content="[RxJava] RxKotlin 말고 RxJava! 💡 | JihoKevin">
+  <meta property="og:description" content="0️⃣ 프롤로그  RxKotlin을 학습하다보니 RxJava에 대한 형식도 적용 시켜보고 싶었다.. 그래서… 공부했다… 밤새.. 너무 힘들다.. 하하…. 헛소리 그만하고 RxJava를 정리 해 보겠습니다.. RxKotlin과 비교했을 때 정말 다른 점이 없어보이지만 그래도 기초부터...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[RxJava] RxKotlin 말고 RxJava! 💡 | JihoKevin</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2021-12/rx-java-scheduler">
+  <link rel="alternate" type="application/rss+xml" title="JihoKevin" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">신지호</a>
+  <span class="author_job">안드로이드 개발자가 되고싶은 소년</span>
+  <span class="author_bio mbm">방문해주셔서 감사합니다!🙇🏻‍♂️</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('jhshin9250@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/jiho_925" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/JihoKevin" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[RxJava] RxKotlin 말고 RxJava! 💡">[RxJava] RxKotlin 말고 RxJava! 💡</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        17 DEC 2021
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    26 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="0️⃣-프롤로그">0️⃣ 프롤로그</h2>
+<ul>
+  <li>RxKotlin을 학습하다보니 RxJava에 대한 형식도 적용 시켜보고 싶었다.. 그래서… 공부했다… 밤새.. 너무 힘들다.. 하하…. 헛소리 그만하고 RxJava를 정리 해 보겠습니다.. RxKotlin과 비교했을 때 정말 다른 점이 없어보이지만 그래도 기초부터 다시 잡는다는 마음으로! 특히 스레드 지정에 관한 Scheduler에 집중하여 학습했습니다. 후반부에 OpenWeather API를 사용한 부분이 보일텐데, 블로그 메인 화면에 WearWeather 프로젝트에 사용된 API 이다.</li>
+</ul>
+
+<h3 id="1️⃣-스케줄러란">1️⃣ 스케줄러란?</h3>
+
+<p>: 주로 비동기 프로그래밍에서 사용, RxJava코드를 어느 스레드에서 실행할지 지정할 수 있다.</p>
+
+<blockquote>
+  <dl>
+    <dt><strong>subscribeOn()</strong></dt>
+    <dd>
+      <p>구독자가 Observable에 subscribe()함수를 호출하여 <strong>구독할 때 실행되는 스레드를 지정</strong></p>
+    </dd>
+  </dl>
+</blockquote>
+
+<blockquote>
+  <dl>
+    <dt><strong>observeOn()</strong></dt>
+    <dd>
+      <p><strong>이후 추가적인 연산에 대한 작업 스레드를 설정</strong></p>
+    </dd>
+  </dl>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span><span class="o">[]</span> <span class="n">objs</span> <span class="o">=</span> <span class="o">{</span><span class="s">"1-S"</span><span class="o">,</span> <span class="s">"2-T"</span><span class="o">,</span> <span class="s">"3-P"</span><span class="o">};</span>
+        <span class="n">Observable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">source</span> <span class="o">=</span> <span class="n">Observable</span><span class="o">.</span><span class="na">fromArray</span><span class="o">(</span><span class="n">objs</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">doOnNext</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">Log</span><span class="o">.</span><span class="na">v</span><span class="o">(</span><span class="s">"Original data = "</span><span class="o">+</span><span class="n">data</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">newThread</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">observeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">newThread</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">Shape:</span><span class="o">:</span><span class="n">flip</span><span class="o">);</span>
+        <span class="n">source</span><span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">i</span><span class="o">);</span>
+        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">500</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RxNewThreadScheduler-1 | Original data = 1-S
+RxNewThreadScheduler-1 | Original data = 2-T
+RxNewThreadScheduler-1 | Original data = 3-P
+RxNewThreadScheduler-2 | value = (flipped)1-S
+RxNewThreadScheduler-2 | value = (flipped)2-T
+RxNewThreadScheduler-2 | value = (flipped)3-P
+</code></pre></div></div>
+
+<p>subscribeOn()과 observeOn()둘다 호출해줘서 <strong>데이터 흐름이 발생하는 스레드와 처리된 결과를 구독자에게 발행하는 스레드를 분리했</strong>다. (subscribeOn(Schedulers.newThread()를 해줬기때문에 main스레드가 아니라 새로운 스레드에서 돌아가는것도 볼 수 있다</p>
+
+<p>observeOn을 주석처리해보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span><span class="o">[]</span> <span class="n">objs</span> <span class="o">=</span> <span class="o">{</span><span class="s">"1-S"</span><span class="o">,</span> <span class="s">"2-T"</span><span class="o">,</span> <span class="s">"3-P"</span><span class="o">};</span>
+        <span class="n">Observable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">source</span> <span class="o">=</span> <span class="n">Observable</span><span class="o">.</span><span class="na">fromArray</span><span class="o">(</span><span class="n">objs</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">doOnNext</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">Log</span><span class="o">.</span><span class="na">v</span><span class="o">(</span><span class="s">"Original data = "</span><span class="o">+</span><span class="n">data</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">newThread</span><span class="o">())</span>
+<span class="c1">//                .observeOn(Schedulers.newThread())</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">Shape:</span><span class="o">:</span><span class="n">flip</span><span class="o">);</span>
+        <span class="n">source</span><span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">i</span><span class="o">);</span>
+        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">500</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RxNewThreadScheduler-1 | Original data = 1-S
+RxNewThreadScheduler-1 | value = (flipped)1-S
+RxNewThreadScheduler-1 | Original data = 2-T
+RxNewThreadScheduler-1 | value = (flipped)2-T
+RxNewThreadScheduler-1 | Original data = 3-P
+RxNewThreadScheduler-1 | value = (flipped)3-P
+</code></pre></div></div>
+
+<p>subscribeOn()만 호출했기때문에 새로 만들어진 하나의 스레드에서 모든 작업이 이루어진다.</p>
+
+<p>그러면 이번엔 subscribeOn()을 주석처리해보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span><span class="o">[]</span> <span class="n">objs</span> <span class="o">=</span> <span class="o">{</span><span class="s">"1-S"</span><span class="o">,</span> <span class="s">"2-T"</span><span class="o">,</span> <span class="s">"3-P"</span><span class="o">};</span>
+        <span class="n">Observable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">source</span> <span class="o">=</span> <span class="n">Observable</span><span class="o">.</span><span class="na">fromArray</span><span class="o">(</span><span class="n">objs</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">doOnNext</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">Log</span><span class="o">.</span><span class="na">v</span><span class="o">(</span><span class="s">"Original data = "</span><span class="o">+</span><span class="n">data</span><span class="o">))</span>
+<span class="c1">//                .subscribeOn(Schedulers.newThread())</span>
+                <span class="o">.</span><span class="na">observeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">newThread</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">Shape:</span><span class="o">:</span><span class="n">flip</span><span class="o">);</span>
+        <span class="n">source</span><span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">i</span><span class="o">);</span>
+        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">500</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main | Original data = 1-S
+main | Original data = 2-T
+main | Original data = 3-P
+RxNewThreadScheduler-1 | value = (flipped)1-S
+RxNewThreadScheduler-1 | value = (flipped)2-T
+RxNewThreadScheduler-1 | value = (flipped)3-P
+</code></pre></div></div>
+
+<p>observeOn()은 호출 이후의 작업을 ()안의 스레드에서 실행하기때문에, 이전에서는 main스레드로 작업이 이루어지고(subscribeOn(Schedulers.newThread()를 하지 않았으니까! 원래 main스케줄러에서 동작), 이후로는 observeOn(Schedulers.newThread())로 만들어준 새로운 스레드에서 작업이 이루어지는걸 볼 수 있다.</p>
+
+<p>그리고 새로운 스레드에서 작업을 하기 때문에 새로운 스레드 작업이 전부 끝날때까지  CommonUtils.sleep()으로 메인 스레드를 기다리게 해야한다.</p>
+
+<blockquote>
+  <p>정리</p>
+
+  <ul>
+    <li><strong>subscribeOn() 함수와 observeOn()함수를 모두 지정</strong>하면 Observable에서 <strong>데이터 흐름이 발생하는 스레드와 처리된 결과를 구독자에게 발행하는 스레드를 분리</strong>할 수 있다.</li>
+    <li>subscribeOn()만 호출하면 Observable의 모든 흐름이 동일한 스레드에서 실행된다.</li>
+    <li>스케줄러를 별도로 지정하지 않으면 현재(main)스레드에서 동작을 실행한다.
+      <h3 id="스케줄러의-종류">스케줄러의 종류</h3>
+    </li>
+  </ul>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>스케줄러</th>
+      <th>RxJava 2.x</th>
+      <th>RxJava 1.x</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>뉴 스레드 스케줄러</td>
+      <td>newThread()</td>
+      <td>newThread()</td>
+    </tr>
+    <tr>
+      <td>싱글 스레드 스케줄러</td>
+      <td>single()</td>
+      <td>지원 안 함</td>
+    </tr>
+    <tr>
+      <td>계산 스케줄러</td>
+      <td>computation()</td>
+      <td>computation()</td>
+    </tr>
+    <tr>
+      <td>IO 스케줄러</td>
+      <td>io()</td>
+      <td>io()</td>
+    </tr>
+    <tr>
+      <td>트램펄린 스케줄러</td>
+      <td>trampoline()</td>
+      <td>trampoline()</td>
+    </tr>
+    <tr>
+      <td>메인 스레드 스케줄러</td>
+      <td>지원 안 함</td>
+      <td>immediate()</td>
+    </tr>
+    <tr>
+      <td>테스트 스케줄러</td>
+      <td>지원 안 함</td>
+      <td>test()</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="뉴-스레드-스케줄러">뉴 스레드 스케줄러</h3>
+
+<p>: 새로운 스레드를 만들어 어떤 동작을 실행하고 싶을 때 Schedulers.newThread()를 인자로 넣어주면, 요청을 받을 때마다 새로운 스래드를 생성한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span><span class="o">[]</span> <span class="n">orgs</span> <span class="o">=</span> <span class="o">{</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"3"</span><span class="o">,</span> <span class="s">"5"</span><span class="o">};</span>
+        <span class="n">Observable</span><span class="o">.</span><span class="na">fromArray</span><span class="o">(</span><span class="n">orgs</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">doOnNext</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">Log</span><span class="o">.</span><span class="na">v</span><span class="o">(</span><span class="s">"Original data: "</span><span class="o">+</span> <span class="n">data</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="s">"&lt;&lt;"</span> <span class="o">+</span> <span class="n">data</span> <span class="o">+</span> <span class="s">"&gt;&gt;"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">newThread</span><span class="o">())</span> <span class="c1">//첫 번째 new Thread </span>
+                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">i</span><span class="o">);</span>
+<span class="o">~~~~</span>        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">500</span><span class="o">);</span>
+        <span class="n">Observable</span><span class="o">.</span><span class="na">fromArray</span><span class="o">(</span><span class="n">orgs</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">doOnNext</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">Log</span><span class="o">.</span><span class="na">v</span><span class="o">(</span><span class="s">"Original data: "</span><span class="o">+</span> <span class="n">data</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="s">"##"</span> <span class="o">+</span> <span class="n">data</span> <span class="o">+</span> <span class="s">"##"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">newThread</span><span class="o">())</span><span class="c1">//두 번째 new Thread</span>
+                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">i</span><span class="o">);</span>
+        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">500</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RxNewThreadScheduler-1 | Original data: 1
+RxNewThreadScheduler-1 | value = &lt;&lt;1&gt;&gt;
+RxNewThreadScheduler-1 | Original data: 3
+RxNewThreadScheduler-1 | value = &lt;&lt;3&gt;&gt;
+RxNewThreadScheduler-1 | Original data: 5
+RxNewThreadScheduler-1 | value = &lt;&lt;5&gt;&gt;
+RxNewThreadScheduler-2 | Original data: 1
+RxNewThreadScheduler-2 | value = ##1##
+RxNewThreadScheduler-2 | Original data: 3
+RxNewThreadScheduler-2 | value = ##3##
+RxNewThreadScheduler-2 | Original data: 5
+RxNewThreadScheduler-2 | value = ##5##
+</code></pre></div></div>
+
+<p>아까 subscribeOn()만 호출하면 Observable의 모든 흐름이 동일한 스레드에서 실행된다고 했다. 그래서 첫번째 Observable에서 subscribeOn(Schedulers.newThread())를 호출했기 때문에, 모두 새로운 스레드인 RxNewThreadScheduler-1에서 실행됐고, 두 번째 Observable에서 subscribeOn(Schedulers.newThread())을 또 호출했기 때문에 모두 새로운 스레드인 RxNewThreadScheduler-2에서 실행됐다.</p>
+
+<h3 id="계산스케줄러">계산스케줄러</h3>
+
+<p>: CPU에 대응하는 계산용 스케줄러, ‘계산’ 작업을 할 때는 대기 시간 없이 빠르게 결과를 도출하는 것이 중요하다. → 입출력(I/O) 작업을 하지 않는 스케줄러</p>
+
+<p><strong>내부적으로 스레드 풀을 생성하며 스레드 개수는 기본적으로 프로세서 개수와 동일하다.</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span><span class="o">[]</span> <span class="n">orgs</span> <span class="o">=</span> <span class="o">{</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"3"</span><span class="o">,</span> <span class="s">"5"</span><span class="o">};</span>
+        <span class="n">Observable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">source</span> <span class="o">=</span> <span class="n">Observable</span><span class="o">.</span><span class="na">fromArray</span><span class="o">(</span><span class="n">orgs</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">zipWith</span><span class="o">(</span><span class="n">Observable</span><span class="o">.</span><span class="na">interval</span><span class="o">(</span><span class="mi">100L</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">MILLISECONDS</span><span class="o">),</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">a</span><span class="o">);</span> <span class="c1">//시간과 합성, 1 3 5가 100ms마다 발행 </span>
+				<span class="c1">//첫 번째 구독</span>
+        <span class="n">source</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">item</span> <span class="o">-&gt;</span> <span class="s">"&lt;&lt;"</span> <span class="o">+</span> <span class="n">item</span> <span class="o">+</span> <span class="s">"&gt;&gt;"</span><span class="o">)</span>
+                <span class="c1">//.subscribeOn(Schedulers.computation())</span>
+                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">i</span><span class="o">);</span>
+				<span class="c1">//두 번째 구독</span>
+        <span class="n">source</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">item</span> <span class="o">-&gt;</span> <span class="s">"##"</span> <span class="o">+</span> <span class="n">item</span> <span class="o">+</span> <span class="s">"##"</span><span class="o">)</span>
+                <span class="c1">//.subscribeOn(Schedulers.computation())</span>
+                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">i</span><span class="o">);</span>
+        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RxComputationThreadPool-1 | value = &lt;&lt;1&gt;&gt;
+RxComputationThreadPool-2 | value = ##1##
+RxComputationThreadPool-1 | value = &lt;&lt;3&gt;&gt;
+RxComputationThreadPool-2 | value = ##3##
+RxComputationThreadPool-1 | value = &lt;&lt;5&gt;&gt;
+RxComputationThreadPool-2 | value = ##5##
+</code></pre></div></div>
+
+<p>(a, b) → a 로 인해 시간은 그대로 두고 1 3 5가 100ms마다 발행되며 subscribeOn(Schedulers.computation())으로 <strong>각각 새로운 스케줄러를 만들어 동시에 출력</strong>한다.</p>
+
+<p>(여기서는 subscribeOn(Schedulers.computation())으로 계산스케줄러를 명시해줬지만 interval()함수가 기본적으로 계산 스케줄러를 사용하기 때문에 제거하고 실행해도 똑같은 결과가 나온다.)</p>
+
+<p>여러번 실행하다보면 «»와 #### 데이터가 뒤섞일때가 있는데, 이는 첫 번째 구독과 두 번째 구독이 거의 동시에 이루어지기 때문에 RxJava 내부에서 동일한 스레드에 작업을 할당했기 때문이라고 한다.</p>
+
+<h3 id="io-스케줄러">IO 스케줄러</h3>
+
+<p>: 계산 스케줄러와는 다르게 네트워크상의 요청을 처리하거나 각종 입출력 작업을 실행하기 위한 스케줄러로 기본으로 생성되는 스레드 개수가 다르다.</p>
+
+<p>즉, <strong>계산 스케줄러는 CPU개수만큼 스레드를 생성</strong>하지만, <strong>IO스케줄러는 필요할 때마다 스레드를 계속 생성</strong>한다.</p>
+
+<p>(입출력 작업은 비동기로 실행되지만 결과를 얻기까지 대기 시간이 길다.)</p>
+
+<ul>
+  <li><code class="highlighter-rouge">계산 스케줄러</code> : 일반적인 계산 작업</li>
+  <li><code class="highlighter-rouge">IO 스케줄러</code>: 네트워크상의 요청, 파일 입출력, DB 쿼리 등</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">root</span> <span class="o">=</span> <span class="s">"/Users/jihoKevin/Desktop/navigation"</span><span class="o">;</span>
+        <span class="n">File</span><span class="o">[]</span> <span class="n">files</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">root</span><span class="o">).</span><span class="na">listFiles</span><span class="o">();</span>
+        <span class="n">Observable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">source</span> <span class="o">=</span> <span class="n">Observable</span><span class="o">.</span><span class="na">fromArray</span><span class="o">(</span><span class="n">files</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">f</span> <span class="o">-&gt;</span> <span class="o">!</span><span class="n">f</span><span class="o">.</span><span class="na">isDirectory</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">f</span> <span class="o">-&gt;</span> <span class="n">f</span><span class="o">.</span><span class="na">getAbsolutePath</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">io</span><span class="o">());</span>
+        <span class="n">source</span><span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">i</span><span class="o">);</span>
+        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">500</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RxCachedThreadScheduler-1 | value = /Users/ijieun/Desktop/navigation/expand_more_24px.svg
+</code></pre></div></div>
+
+<p>Desktop/navigation폴더에 있는 파일 리스트들을 가져와 잘 출력해준다.</p>
+
+<h3 id="트램펄린-스케줄러">트램펄린 스케줄러</h3>
+
+<p>: 새로운 스레드를 생성하지 않고 <strong>현재 스레드에 무한한 크기의 대기 행렬을 생성하는 스케줄러</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span><span class="o">[]</span> <span class="n">orgs</span> <span class="o">=</span> <span class="o">{</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"3"</span><span class="o">,</span> <span class="s">"5"</span><span class="o">};</span>
+        <span class="n">Observable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">source</span> <span class="o">=</span> <span class="n">Observable</span><span class="o">.</span><span class="na">fromArray</span><span class="o">(</span><span class="n">orgs</span><span class="o">);</span>
+        <span class="n">source</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">item</span> <span class="o">-&gt;</span> <span class="s">"&lt;&lt;"</span> <span class="o">+</span> <span class="n">item</span> <span class="o">+</span> <span class="s">"&gt;&gt;"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">trampoline</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">i</span><span class="o">);</span>
+        <span class="n">source</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">item</span> <span class="o">-&gt;</span> <span class="s">"##"</span> <span class="o">+</span> <span class="n">item</span> <span class="o">+</span> <span class="s">"##"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">trampoline</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">i</span><span class="o">);</span>
+        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">500</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main | value = &lt;&lt;1&gt;&gt;
+main | value = &lt;&lt;3&gt;&gt;
+main | value = &lt;&lt;5&gt;&gt;
+main | value = ##1##
+main | value = ##3##
+main | value = ##5##
+</code></pre></div></div>
+
+<p>처음에 지정한 스레드로 구독자에게 데이터를 발행한다.</p>
+
+<p>새로운 스레드를 생성하지 않고 <strong>main 스레드에서 모든 작업을 실행</strong>한다. 큐에 작업을 넣은 후 <strong>1개씩 꺼내서 동작하므로 첫 번째 구독과 두 번째 구독 순서대로 값이 출력</strong>된다.</p>
+
+<h3 id="싱글-스레드-스케줄러">싱글 스레드 스케줄러</h3>
+
+<p>: RxJava 내부에서 단일 스레드를 별도로 생성하여 구독 작업을 처리한다. (생성된 스레드는 여러 번 구독 요청이 와도 공통으로 사용한다.)</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Observable</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">Observable</span><span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">5</span><span class="o">);</span>
+        <span class="n">Observable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">chars</span> <span class="o">=</span> <span class="n">Observable</span><span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">5</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">CommonUtils:</span><span class="o">:</span><span class="n">numberToAlphabet</span><span class="o">);</span>
+        <span class="n">numbers</span><span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">single</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">i</span><span class="o">);</span>
+        <span class="n">chars</span><span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">single</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">i</span><span class="o">);</span>
+        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">500</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RxSingleScheduler-1 | value = 100
+RxSingleScheduler-1 | value = 101
+RxSingleScheduler-1 | value = 102
+RxSingleScheduler-1 | value = 103
+RxSingleScheduler-1 | value = 104
+RxSingleScheduler-1 | value = A
+RxSingleScheduler-1 | value = B
+RxSingleScheduler-1 | value = C
+RxSingleScheduler-1 | value = D
+RxSingleScheduler-1 | value = E
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>numberToAlphabet()</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">ALPHABET</span> <span class="o">=</span> <span class="s">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span><span class="o">;</span>
+    
+      <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">numberToAlphabet</span><span class="o">(</span><span class="kt">long</span> <span class="n">x</span><span class="o">){</span>
+          <span class="k">return</span> <span class="n">Character</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">ALPHABET</span><span class="o">.</span><span class="na">charAt</span><span class="o">((</span><span class="kt">int</span><span class="o">)</span> <span class="n">x</span> <span class="o">%</span> <span class="n">ALPHABET</span><span class="o">.</span><span class="na">length</span><span class="o">()));</span>
+      <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>싱글 스레드 스케줄러에서 실행하면 비록 여러 개 Observable이 있어도 별도로 마련해놓은 <strong>단일 스레드에서 차례로 실행하므로, RxSingleScheduler-1에서 100~104, 0~4가 차례대로 map 되어 나온다</strong>.</p>
+
+<h3 id="executor-변환-스케줄러">Executor 변환 스케줄러</h3>
+
+<p>Executor를 변환하여 스케줄러를 생성할 수 있다. 하지만 Executor 클래스와 스케줄러의 동작 방식과 다르므로 추천방식이 아니라고 하니, 그냥 이런 방법도 있구나~ 참고만 하면 좋을거같다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>동시에 다수의 요청을 처리해야할 때, 여러개의 스레드를 계속해서 생성할 시 
+
+- 쓰레드 생성 및 종료에 따른 오버헤드 발생
+- 생성되는 스레드의 개수에 제한을 해주지 않으면 OutOfMemoryError발생 가능
+- 많은 수의 스레드 실행 → 스레드 스케줄링에 대해 오버헤드 발생
+
+등 여러가지의 문제점이 발생한다. 
+
+이를 방지하기 위해 동시에 실행될 수 있는 쓰레드의 개수를 제한해야하는데, 이를 위해 Executor인터페이스라는게 생겨났고 쓰레드 풀, 큐 등 다양한 Executor 구현체를 제공하고 있다고 한다.
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="kt">int</span> <span class="n">THREAD_NUM</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+        <span class="n">String</span><span class="o">[]</span> <span class="n">data</span> <span class="o">=</span> <span class="o">{</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"3"</span><span class="o">,</span> <span class="s">"5"</span><span class="o">};</span>
+        <span class="n">Observable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">source</span> <span class="o">=</span> <span class="n">Observable</span><span class="o">.</span><span class="na">fromArray</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+        <span class="n">Executor</span> <span class="n">executor</span> <span class="o">=</span> <span class="n">Executors</span><span class="o">.</span><span class="na">newFixedThreadPool</span><span class="o">(</span><span class="n">THREAD_NUM</span><span class="o">);</span>
+        <span class="n">source</span><span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">executor</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">i</span><span class="o">);</span>
+        <span class="n">source</span><span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">executor</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">i</span><span class="o">);</span>
+        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">500</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pool-1-thread-1 | value = 1
+pool-1-thread-2 | value = 1
+pool-1-thread-1 | value = 3
+pool-1-thread-2 | value = 3
+pool-1-thread-1 | value = 5
+pool-1-thread-2 | value = 5
+</code></pre></div></div>
+
+<p>THREAD_NUM을 10개로 지정해서 10개의 고정 스레드 풀을 생성한다. 첫 번째 Observable과 두 번째 Observable에서 subscribeOn()을 호출하여 Executor 변환 스케줄러를 지정했기 때문에 각각 다른 스레드 풀에서 동작한다.</p>
+
+<p>방금예제에서는 Executors.newFixedThreadPool(스래드갯수)를 사용해서 각각 다른 스레드에서 동작했지만, Executors.newSingleThreadExecutor()로 실행하면 스레드 하나로 동작한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="kt">int</span> <span class="n">THREAD_NUM</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+        <span class="n">String</span><span class="o">[]</span> <span class="n">data</span> <span class="o">=</span> <span class="o">{</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"3"</span><span class="o">,</span> <span class="s">"5"</span><span class="o">};</span>
+        <span class="n">Observable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">source</span> <span class="o">=</span> <span class="n">Observable</span><span class="o">.</span><span class="na">fromArray</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+        <span class="n">Executor</span> <span class="n">executor</span> <span class="o">=</span> <span class="n">Executors</span><span class="o">.</span><span class="na">newFixedThreadPool</span><span class="o">(</span><span class="n">THREAD_NUM</span><span class="o">);</span>
+        <span class="n">source</span><span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">executor</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">i</span><span class="o">);</span>
+        <span class="n">source</span><span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">executor</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">i</span><span class="o">);</span>
+        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">500</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pool-1-thread-1 | value = 1
+pool-1-thread-1 | value = 3
+pool-1-thread-1 | value = 5
+pool-1-thread-1 | value = 1
+pool-1-thread-1 | value = 3
+pool-1-thread-1 | value = 5
+</code></pre></div></div>
+
+<h3 id="스케줄러를-활용하여-콜백-지옥-벗어나기">스케줄러를 활용하여 콜백 지옥 벗어나기</h3>
+
+<ul>
+  <li>
+    <p>콜백지옥이란?</p>
+
+    <p>우리가 비동기 작업을 하다보면 콜백 함수를 사용해서 서버통신을 할때가 있는데, 콜백 함수를 사용한다면 리턴된 결과에 따라 계속 들여쓰기를 하며 타고타고 들어가는 코드를 작성하게 된다. 이는 콜백 지옥이라고 불릴만큼 가독성도 매우 떨어지고 좋지않은 방법이다. 😈  하지만 Rxjava의 체이닝을 사용하면 콜백지옥으로부터 벗어날 수 있다!</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">GITHUB_ROOT</span> <span class="o">=</span> <span class="s">"Some Base Url"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">FIRST_URL</span> <span class="o">=</span> <span class="s">"https://api.github.com/zen"</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">SECOND_URL</span> <span class="o">=</span> <span class="n">GITHUB_ROOT</span> <span class="o">+</span> <span class="s">"/samples/callback_hell"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="n">FIRST_URL</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+        <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">enqueue</span><span class="o">(</span><span class="k">new</span> <span class="n">Callback</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onFailure</span><span class="o">(</span><span class="n">Call</span> <span class="n">call</span><span class="o">,</span> <span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onResponse</span><span class="o">(</span><span class="n">Call</span> <span class="n">call</span><span class="o">,</span> <span class="n">Response</span> <span class="n">response</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span> <span class="c1">//성공했을때만 </span>
+                <span class="n">Log</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="s">"1번째"</span><span class="o">+</span><span class="n">response</span><span class="o">.</span><span class="na">body</span><span class="o">().</span><span class="na">string</span><span class="o">());</span>
+                <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="n">SECOND_URL</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+                <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">enqueue</span><span class="o">(</span><span class="k">new</span> <span class="n">Callback</span><span class="o">()</span> <span class="o">{</span> <span class="c1">//또 다시 콜백 추가 </span>
+                    <span class="nd">@Override</span>
+                    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onFailure</span><span class="o">(</span><span class="n">Call</span> <span class="n">call</span><span class="o">,</span> <span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                    <span class="o">}</span>
+                    <span class="nd">@Override</span>
+                    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onResponse</span><span class="o">(</span><span class="n">Call</span> <span class="n">call</span><span class="o">,</span> <span class="n">Response</span> <span class="n">response</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+                        <span class="n">Log</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="s">"2번째"</span><span class="o">+</span> <span class="n">response</span><span class="o">.</span><span class="na">body</span><span class="o">().</span><span class="na">string</span><span class="o">());</span>
+                    <span class="o">}</span>
+                <span class="o">});</span> 
+            <span class="o">}</span>
+        <span class="o">});</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">JavaExample</span> <span class="n">example</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JavaExample</span><span class="o">();</span>
+        <span class="n">example</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OkHttp https://api.github.com/... | value = 1번째Speak like a human.
+OkHttp https://raw.githubuserc... | value = 2번째Welcome to Callback Hell!!
+</code></pre></div></div>
+
+<p>맨 처음 서버통신을 했을때 사용했던 방법이였다. 첫 번째 호출의 성공과 실패를 고려하고, 다시 그것을 기준으로 두 번째 호출의 성공과 실패를 고려하여 코드를 작성했다. 딱 봐도 한눈에 보기 어렵고 정상적인 로직과 예외 처리가 혼재되어있는걸 볼 수 있다. (프로젝트 규모가 커지고 API를 호출할때마다 콜백을 사용한다면..? ㅎㅎ)</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">GITHUB_ROOT</span> <span class="o">=</span> <span class="s">"Some Base Url"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">FIRST_URL</span> <span class="o">=</span> <span class="s">"https://api.github.com/zen"</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">SECOND_URL</span> <span class="o">=</span> <span class="n">GITHUB_ROOT</span> <span class="o">+</span> <span class="s">"/samples/callback_hell"</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">exampleStart</span><span class="o">();</span>
+        <span class="n">Observable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">source</span> <span class="o">=</span> <span class="n">Observable</span><span class="o">.</span><span class="na">just</span><span class="o">(</span><span class="n">FIRST_URL</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">io</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">OkHttpHelper:</span><span class="o">:</span><span class="n">get</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">concatWith</span><span class="o">(</span><span class="n">Observable</span><span class="o">.</span><span class="na">just</span><span class="o">(</span><span class="n">SECOND_URL</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">OkHttpHelper:</span><span class="o">:</span><span class="n">get</span><span class="o">));</span>
+        <span class="n">source</span><span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">it</span><span class="o">);</span>
+        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">5000</span><span class="o">);</span>
+        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">exampleComplete</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RxCachedThreadScheduler-1 | 1048 | value = Mind your words, they are important.
+RxCachedThreadScheduler-1 | 1707 | value = Welcome to Callback Hell!!
+</code></pre></div></div>
+
+<p>Rxjava를 사용하지 않은 위의 예제와는 눈에 띄게 간결해지고 명확해졌다.</p>
+
+<p>subscribeOn(Schedulers.io())를 호출해서 io스케줄러에서 작업을 실행하고, 위의 예제에서는 OkHttpClient의 enqueue()메서드를 호출해서 콜백을 전달받았지만, 이 예제에서는 OkhttpHelper.get()을 통해 execute()를 호출한다. (concat()은 첫 번째 Observable과 두 번째 Observable을 함께 인자로 넣어야하지만 concatWith()은 현재의 Observable에 새로운 Observable을 결합할 수 있다는 차이가 있다.) 첫 번째 호출이 끝나면, 두 번째 호출이 이뤄지게 되고 아까와 똑같은 결과가 나타난다.</p>
+
+<p>하지만 concatWith()은 첫 번째 Observable이 끝날때까지 기다려야하기때문에 zip()을 사용해서 첫 번째 URL과 두 번째 URL요청을 동시에 수행하고 결과만 결합하는게 더 효율적이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">GITHUB_ROOT</span> <span class="o">=</span> <span class="s">"Some Base Url"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">FIRST_URL</span> <span class="o">=</span> <span class="s">"https://api.github.com/zen"</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">SECOND_URL</span> <span class="o">=</span> <span class="n">GITHUB_ROOT</span> <span class="o">+</span> <span class="s">"/samples/callback_hell"</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">exampleStart</span><span class="o">();</span>
+        <span class="n">Observable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">first</span> <span class="o">=</span> <span class="n">Observable</span><span class="o">.</span><span class="na">just</span><span class="o">(</span><span class="n">FIRST_URL</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">io</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">OkHttpHelper:</span><span class="o">:</span><span class="n">get</span><span class="o">);</span>
+        <span class="n">Observable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">second</span> <span class="o">=</span> <span class="n">Observable</span><span class="o">.</span><span class="na">just</span><span class="o">(</span><span class="n">SECOND_URL</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">io</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">OkHttpHelper:</span><span class="o">:</span><span class="n">get</span><span class="o">);</span>
+        <span class="n">Observable</span><span class="o">.</span><span class="na">zip</span><span class="o">(</span><span class="n">first</span><span class="o">,</span> <span class="n">second</span><span class="o">,</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="s">"\n&gt;&gt; "</span><span class="o">+</span> <span class="n">a</span><span class="o">+</span> <span class="s">"\n&gt;&gt; "</span> <span class="o">+</span> <span class="n">b</span><span class="o">)).</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">it</span><span class="o">);</span>
+        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">5000</span><span class="o">);</span>
+        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">exampleComplete</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RxCachedThreadScheduler-2 | 855 | value = 
+&gt;&gt; Favor focus over features.
+&gt;&gt; Welcome to Callback Hell!!
+</code></pre></div></div>
+
+<p>위의 concatWith()예제에서는 두 가지의 URL을 호출하는 시간이 1707ms 가 걸렸다면, zip()을 사용한 예제는 855ms로 응답을 받기까지의 대기 시간이 줄어든걸 볼 수 있다.</p>
+
+<blockquote>
+  <p>RxJava로 비동기 코드 작성했을때의 장점</p>
+
+  <ol>
+    <li><strong>선언적 동시성</strong></li>
+  </ol>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>: 순수한 비즈니스 로직과 비동기 동작을 위한 스레드 부분을 구별
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <dl>
+      <dt><strong>가독성</strong></dt>
+      <dd>
+        <p>정상적인 로직과 향후 예외 처리 부분을 분리</p>
+      </dd>
+    </dl>
+  </li>
+</ol>
+
+<h3 id="observeon-함수의-활용">observeOn() 함수의 활용</h3>
+
+<p>앞에서</p>
+
+<ul>
+  <li><strong>subscribeOn()</strong> : Observable에서 구독자가 subscribe() 함수를 호출했을 때 데이터 흐름 발행 스레드를 지정하는 함수</li>
+  <li><strong>observeOn()</strong> : 처리된 결과를 구독자에게 전달하는 스레드를 지정하는 함수</li>
+</ul>
+
+<p>라는 것을 배웠다. 하지만 <strong>subscribeOn()함수는 처음 지정한 스레드를 고정</strong>시키므로 다시 subscribeOn()함수를 호출해도 무시한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span><span class="o">[]</span> <span class="n">objs</span> <span class="o">=</span> <span class="o">{</span><span class="s">"1-S"</span><span class="o">,</span> <span class="s">"2-T"</span><span class="o">,</span> <span class="s">"3-P"</span><span class="o">};</span>
+        <span class="n">Observable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">source</span> <span class="o">=</span> <span class="n">Observable</span><span class="o">.</span><span class="na">fromArray</span><span class="o">(</span><span class="n">objs</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">doOnNext</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">Log</span><span class="o">.</span><span class="na">v</span><span class="o">(</span><span class="s">"Original data = "</span><span class="o">+</span><span class="n">data</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">newThread</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">trampoline</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">io</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">Shape:</span><span class="o">:</span><span class="n">flip</span><span class="o">);</span>
+        <span class="n">source</span><span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">i</span><span class="o">);</span>
+        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">500</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RxNewThreadScheduler-1 | Original data = 1-S
+RxNewThreadScheduler-1 | value = (flipped)1-S
+RxNewThreadScheduler-1 | Original data = 2-T
+RxNewThreadScheduler-1 | value = (flipped)2-T
+RxNewThreadScheduler-1 | Original data = 3-P
+RxNewThreadScheduler-1 | value = (flipped)3-P
+</code></pre></div></div>
+
+<p>맨 처음 newThread()로 설정하고 trampoline, io로 다시 subscribeOn()함수를 호출했지만 RxNewThreadScheduler로 고정되어 출력된다.</p>
+
+<p>하지만 밑의 사진처럼 subcribeOn과 다르게 observeOn()함수는 스레드가 고정되지않고 계속 변한다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/53978090/146148441-d8370271-fae1-42c3-8b78-f82e380ae68b.png" alt="image" /></p>
+
+<p>처음에는 파란색 스레드에서 실행되다가, observeOn(주황색)을 호출하면 주황색 스레드에서 계속 호출되고, subscribeOn()을 만나도 변경되지 않다가 또 다른 observeOn(분홍색)을 호출했을때 그제서야 스레드가 변경된다. 이를 통해</p>
+
+<ol>
+  <li><strong>subscribe() 함수는 한 번 호출했을 때 결정한 스레드를 고정하여 이후에는 다시 호출해도 스레드가 바뀌지 않는다.</strong></li>
+  <li><strong>observeOn() 함수는 여러 번 호출할 수 있으며 호출되면 그 다음부터 동작하는 스레드를 바꿀 수 있다.</strong></li>
+</ol>
+
+<p>라는 중요한 사실을 알 수 있다.</p>
+
+<h3 id="openweathermap-연동">OpenWeatherMap 연동</h3>
+
+<p><a href="[https://openweathermap.org/api](https://openweathermap.org/api)">OpenWeatherMap API</a>를 사용해서 특정 도시의 현재 날씨를 얻어오는 예제를 만들어보자.</p>
+
+<p>블로그 메인 화면에 있는 WearWeather 프로젝트에 사용했었던 API 이기도 하다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaExample</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">API_KEY</span> <span class="o">=</span> <span class="s">"발급받은키"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">URL</span> <span class="o">=</span> <span class="s">"https://api.openweathermap.org/data/2.5/weather?q=Seoul&amp;appid="</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(){</span>
+        <span class="n">Observable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">source</span> <span class="o">=</span> <span class="n">Observable</span><span class="o">.</span><span class="na">just</span><span class="o">(</span><span class="n">URL</span> <span class="o">+</span> <span class="n">API_KEY</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">OkHttpHelper:</span><span class="o">:</span><span class="n">get</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">io</span><span class="o">());</span>
+        <span class="n">Observable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">temperature</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="k">this</span><span class="o">::</span><span class="n">parseTemperature</span><span class="o">);</span>
+        <span class="n">Observable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">city</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="k">this</span><span class="o">::</span><span class="n">parseCityName</span><span class="o">);</span>
+        <span class="n">Observable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">country</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="k">this</span><span class="o">::</span><span class="n">parseCountry</span><span class="o">);</span>
+        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">exampleStart</span><span class="o">();</span>
+        <span class="n">Observable</span><span class="o">.</span><span class="na">concat</span><span class="o">(</span><span class="n">temperature</span><span class="o">,</span> <span class="n">city</span><span class="o">,</span> <span class="n">country</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">observeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">newThread</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">it</span><span class="o">);</span>
+        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">3000</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="nf">parseTemperature</span><span class="o">(</span><span class="n">String</span> <span class="n">json</span><span class="o">){</span>
+        <span class="k">return</span> <span class="nf">parse</span><span class="o">(</span><span class="n">json</span><span class="o">,</span> <span class="s">"\"temp\":[0-9]*.[0-9]*"</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="nf">parseCityName</span><span class="o">(</span><span class="n">String</span> <span class="n">json</span><span class="o">){</span>
+        <span class="k">return</span> <span class="nf">parse</span><span class="o">(</span><span class="n">json</span><span class="o">,</span> <span class="s">"\"name\":\"[a-zA-Z]*\""</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="nf">parseCountry</span><span class="o">(</span><span class="n">String</span> <span class="n">json</span><span class="o">){</span>
+        <span class="k">return</span> <span class="nf">parse</span><span class="o">(</span><span class="n">json</span><span class="o">,</span> <span class="s">"\"country\":\"[a-zA-Z]*\""</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="nf">parse</span><span class="o">(</span><span class="n">String</span> <span class="n">json</span><span class="o">,</span> <span class="n">String</span> <span class="n">regex</span><span class="o">){</span>
+        <span class="n">Pattern</span> <span class="n">pattern</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="n">regex</span><span class="o">);</span>
+        <span class="n">Matcher</span> <span class="n">matcher</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="na">matcher</span><span class="o">(</span><span class="n">json</span><span class="o">);</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">matcher</span><span class="o">.</span><span class="na">find</span><span class="o">()){</span>
+            <span class="k">return</span> <span class="n">matcher</span><span class="o">.</span><span class="na">group</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="s">"N/A"</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">JavaExample</span> <span class="n">exam</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JavaExample</span><span class="o">();</span>
+        <span class="n">exam</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RxNewThreadScheduler-1 | 990 | value = "temp":278.21
+RxNewThreadScheduler-1 | 1106 | value = "name":"Seoul"
+RxNewThreadScheduler-1 | 1207 | value = "country":"KR"
+</code></pre></div></div>
+
+<p>위의 예제에서는 temperature, name, country 정보를 얻기 위해 subscribe()를 호출하고, subscribe()할때마다 API가 호출되고 있기 때문에 총 3번의 API를 호출을 한다.</p>
+
+<p>얻어와야할 정보가 많다면, subscribe()를 할때마다 API를 각각 호출하는 방법은 비효율적이다. API를 한 번만 호출해서 정보를 얻을 수는 없을까??</p>
+
+<p>→ 정답은 앞에서 배웠던 ConnectableObservable 클래스를 사용하는 것이다.</p>
+
+<ul>
+  <li>
+    <dl>
+      <dt><code class="highlighter-rouge">ConnectableObservable</code></dt>
+      <dd>
+        <p>차가운 Observable을 뜨거운 Observable로 변환해서 Observable을 여러 구독자에게 공유할 수 있으므로 원 데이터 하나를 여러 구독자에게 동시에 전달할 때 사용한다.</p>
+      </dd>
+    </dl>
+
+    <ul>
+      <li>
+        <dl>
+          <dt><strong>publish()</strong></dt>
+          <dd>
+            <p>Observable → ConnectableObservable로 변환해주는 함수</p>
+          </dd>
+        </dl>
+      </li>
+      <li>
+        <dl>
+          <dt><strong>connect()</strong></dt>
+          <dd>
+            <p>subscribe()를 호출해도 데이터가 발행되지 않고, 이걸 호출해야만 구독자들에게 데이터가 발행된다.(conect() 이후에 구독을 하면 구독 이후 발행된 데이터만 받고 앞에 발행된 데이터는 받을 수 없다.)</p>
+          </dd>
+        </dl>
+      </li>
+      <li>
+        <dl>
+          <dt><strong>refCount()</strong></dt>
+          <dd>
+            <p>몇명의 구독자가 있는지 알려주는 함수, ConnectableObservable이 일반 Observable처럼 동작하게 한다(더이상 구독하는 Observer가 없을 때 자동으로 자신을 해지하고, 다시 새로운 Observer가 오면 처음부터 다시 발행한다는 뜻!!)→ Subscription count를 계속 세고 있다가 Subscription 개수가 0→1이 되는 시점에 connect()호출하고, refCount()이후에는 subscribe()를 하면 바로 발행이 시작된다. (Subscription 개수가 0이되면 disconnect()수행)</p>
+          </dd>
+        </dl>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>ConnectableObservable클래스의 publish()와 refCount()를 통해 한 번의 API호출로 여러 구독자가 공유할 수 있다. ( = share())</p>
+
+<p><img src="https://user-images.githubusercontent.com/53978090/146148477-ac37b96e-4928-48ce-960a-d4c2d6f37426.png" alt="image" /></p>
+
+<ul>
+  <li>share()의 원형</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@CheckReturnValue</span>
+<span class="nd">@SchedulerSupport</span><span class="o">(</span><span class="n">SchedulerSupport</span><span class="o">.</span><span class="na">NONE</span><span class="o">)</span>
+<span class="nd">@NonNull</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="n">Observable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">share</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="nf">publish</span><span class="o">().</span><span class="na">refCount</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaExample</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">API_KEY</span> <span class="o">=</span> <span class="s">"발급받은키"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">URL</span> <span class="o">=</span> <span class="s">"https://api.openweathermap.org/data/2.5/weather?q=Seoul&amp;appid="</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(){</span>
+        <span class="n">Observable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">source</span> <span class="o">=</span> <span class="n">Observable</span><span class="o">.</span><span class="na">just</span><span class="o">(</span><span class="n">URL</span> <span class="o">+</span> <span class="n">API_KEY</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">OkHttpHelper:</span><span class="o">:</span><span class="n">get</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">io</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">share</span><span class="o">()</span> <span class="c1">// = publish().refCount()</span>
+                <span class="o">.</span><span class="na">observeOn</span><span class="o">(</span><span class="n">Schedulers</span><span class="o">.</span><span class="na">newThread</span><span class="o">());</span>
+        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">exampleStart</span><span class="o">();</span>
+        <span class="n">source</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="k">this</span><span class="o">::</span><span class="n">parseTemperature</span><span class="o">).</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">it</span><span class="o">);</span>
+        <span class="n">source</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="k">this</span><span class="o">::</span><span class="n">parseCityName</span><span class="o">).</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">it</span><span class="o">);</span>
+        <span class="n">source</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="k">this</span><span class="o">::</span><span class="n">parseCountry</span><span class="o">).</span><span class="na">subscribe</span><span class="o">(</span><span class="nl">Log:</span><span class="o">:</span><span class="n">it</span><span class="o">);</span>
+        <span class="n">CommonUtils</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">3000</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="cm">/*...*/</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RxNewThreadScheduler-2 | 940 | value = "name":"Seoul"
+RxNewThreadScheduler-3 | 940 | value = "country":"KR"
+RxNewThreadScheduler-1 | 940 | value = "temp":278.52
+</code></pre></div></div>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+        repo="JihoKevin/blog-comments"
+        issue-term="pathname"
+        label="comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 신지호. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

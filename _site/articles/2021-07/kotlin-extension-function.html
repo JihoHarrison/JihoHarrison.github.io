@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="0️⃣ 프롤로그  인턴 생활을 하면서 느낀게 내가 원하는 확장 함수를 자유 자재로 만들어서 쓸 수 있어야 개발의 속도나 효율 측면에서 많은 효율이 생길 것이라고 느꼈다. 이 참에 그냥 개념부터 확실하게 정리 해 보고자 한다.1️⃣ 확장함수란?  Kotlin provides the ...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[Kotlin] 코틀린의 확장함수 (Extension Function) | JihoKevin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[Kotlin] 코틀린의 확장함수 (Extension Function) | JihoKevin">
+  <meta name="twitter:description" content="0️⃣ 프롤로그  인턴 생활을 하면서 느낀게 내가 원하는 확장 함수를 자유 자재로 만들어서 쓸 수 있어야 개발의 속도나 효율 측면에서 많은 효율이 생길 것이라고 느꼈다. 이 참에 그냥 개념부터 확실하게 정리 해 보고자 한다.1️⃣ 확장함수란?  Kotlin provides the ...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2021-07/kotlin-extension-function">
+  <meta property="og:title" content="[Kotlin] 코틀린의 확장함수 (Extension Function) | JihoKevin">
+  <meta property="og:description" content="0️⃣ 프롤로그  인턴 생활을 하면서 느낀게 내가 원하는 확장 함수를 자유 자재로 만들어서 쓸 수 있어야 개발의 속도나 효율 측면에서 많은 효율이 생길 것이라고 느꼈다. 이 참에 그냥 개념부터 확실하게 정리 해 보고자 한다.1️⃣ 확장함수란?  Kotlin provides the ...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[Kotlin] 코틀린의 확장함수 (Extension Function) | JihoKevin</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2021-07/kotlin-extension-function">
+  <link rel="alternate" type="application/rss+xml" title="JihoKevin" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">신지호</a>
+  <span class="author_job">안드로이드 개발자가 되고싶은 소년</span>
+  <span class="author_bio mbm">방문해주셔서 감사합니다!🙇🏻‍♂️</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('jhshin9250@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/jiho_925" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/JihoKevin" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[Kotlin] 코틀린의 확장함수 (Extension Function)">[Kotlin] 코틀린의 확장함수 (Extension Function)</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        13 JUL 2021
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    2 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="0️⃣-프롤로그">0️⃣ 프롤로그</h2>
+<ul>
+  <li>인턴 생활을 하면서 느낀게 내가 원하는 확장 함수를 자유 자재로 만들어서 쓸 수 있어야 개발의 속도나 효율 측면에서 많은 효율이 생길 것이라고 느꼈다. 이 참에 그냥 개념부터 확실하게 정리 해 보고자 한다.</li>
+</ul>
+
+<h2 id="1️⃣-확장함수란">1️⃣ 확장함수란?</h2>
+<blockquote>
+  <p>Kotlin provides the ability to extend a class with new functionality without having to inherit from the class or use design patterns such as Decorator. This is done via special declarations called extensions. <br />
+For example, you can write new functions for a class from a third-party library that you can’t modify. Such functions can be called in the usual way, as if they were methods of the original class. This mechanism is called an extension function. There are also extension properties that let you define new properties for existing classes.</p>
+</blockquote>
+
+<ul>
+  <li>
+    <p>라고 코틀린 공식 문서에서 말한다. 말 그대로 코틀린은 클래스에서 상속 받거나, Decorator와 같은 특수한 디자인 패턴 등을 사용 할 필요 없이 새로운 기능으로 클래스를 확장할 수 있는 기능을 제공한다. <strong>Extension</strong>이라는 특별한 선언을 통해서 사용이 가능하다. 이는 수정할 수 없는 타사 라이브러리와 같은 기능들을 새로운 함수로 작성하여 원래 내가 구현하고 있던 클래스의 메소드인 것 처럼 일반적인 방법으로 호출 할 수 있다. 이 메커니즘을 확장함수라고 부른다.</p>
+  </li>
+  <li>확장함수의 형식은 아래와 같다.
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">MutableList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;.</span><span class="n">swap</span><span class="p">(</span><span class="n">index1</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">index2</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">tmp</span> <span class="p">=</span> <span class="k">this</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span>
+  <span class="k">this</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span> <span class="p">=</span> <span class="k">this</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span>
+  <span class="k">this</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span> <span class="p">=</span> <span class="n">tmp</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <p>이렇게 첫 번째 prefix로 어떤 자료형 타입 클래스 또는, 여러가지 타 사 라이브러리 클래스들과 같이 어떤 클래스에서 추가적으로 기능을 구현하고 싶은지를 지정한다.
+this 키워드가 나오는 것을 확인할 수 있는데 이는 확장함수 내에서는 prefix 타입과 일치한다. 어떻게 생각해보면 java의 this 키워드와 동일한 역할을 한다고 할 수 있다. (어차이 JVM으로 돌아가니까..?)</p>
+  </li>
+  <li>위와 같이 확장 함수를 만들어 줬다면 다음과 같이 해당 MutableList<Int> 자료형을 사용 할 때 어디서든 swap이라는 함수를 불러와 사용할 수 있다.</Int></li>
+</ul>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">list</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
+<span class="n">list</span><span class="p">.</span><span class="n">swap</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>하지만 MutableList 타입 안에 Int 자료형이 들어가있는 것으로 보아 다른 타입의 MutableList 클래스 에서는 해당 확장함수를 호출하지 못하는 것을 확인할 수 있을 것이다. 이런 점을 해결하기 위해 MutableList을 제네릭 <strong>T</strong>타입으로 선언 해 주는 것으로 해결이 가능하다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="err">&lt;</span><span class="nf">T</span><span class="p">&gt;</span> <span class="n">MutableList</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;.</span><span class="n">swap</span><span class="p">(</span><span class="n">index1</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">index2</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">tmp</span> <span class="p">=</span> <span class="k">this</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span>
+    <span class="k">this</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span> <span class="p">=</span> <span class="k">this</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span>
+    <span class="k">this</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span> <span class="p">=</span> <span class="n">tmp</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>여기서도 똑같이 this 키워드는 prefix로 지정된 타입을 말하는 것을 알 수 있고 제네릭 함수 타입으로 똑같이 확장함수를 만들어 준 것이다.</p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+        repo="JihoKevin/blog-comments"
+        issue-term="pathname"
+        label="comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2021 신지호. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

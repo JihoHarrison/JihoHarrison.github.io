@@ -155,7 +155,7 @@
       <span class="read-time" title="Estimated read time">
   
   
-    1 min read
+    4 mins read
   
 </span>
 
@@ -210,13 +210,114 @@
 
 <h2 id="2️⃣-android에서의-mvvm">2️⃣ Android에서의 MVVM</h2>
 <ul>
-  <li>Model에 데이터가 존재하면 ViewModel이 가져와서 가공하고, View는 그 ViewModel을 바라보고 있다가 데이터 변경이 발생하면 UI를 변경 시켜주는 형태이다.
- <code class="highlighter-rouge">Model</code> : 어플리케이션에서 사용되는 데이터와 그 데이터를 처리하는 부분 -&gt; Repository라고 보면 되겠다.
- <code class="highlighter-rouge">View</code> : 
- <code class="highlighter-rouge">ViewModel</code></li>
+  <li><strong>Model</strong> 에 데이터가 존재하면 <strong>ViewModel</strong> 이 가져와서 가공하고, View는 그 <strong>ViewModel</strong> 을 바라보고 있다가 데이터 변경이 발생하면 UI를 변경 시켜주는 형태이다.</li>
 </ul>
 
-<p>[마지막 수정 : 2021-10-15, 추후 업데이트 예정]</p>
+<p><code class="highlighter-rouge">Model</code> : 어플리케이션에서 사용되는 데이터와 그 데이터를 처리하는 부분 -&gt; <strong>Repository라고 보면 되겠다.</strong></p>
+
+<p><code class="highlighter-rouge">View</code> : 말 그대로 <strong>View.</strong> 사용자에 의한 이벤트가 발생할 수 있는 화면 단을 의미한다.</p>
+
+<p><code class="highlighter-rouge">ViewModel</code> : 개인적인 개발 과정에서의 경험으로는 <strong>Model과 View를 연결시켜주는 다리</strong> 가 되기도 하고, <strong>Model</strong> 에서 끌고 올라온 데이터를 <strong>View</strong> 에 알맞게 표현하기 위해 가공시켜주는 역할도 한다. 주로 AAC의 ViewModel 클래스를 사용한다. Coroutine을 사용하면 <strong>LiveData</strong> 를 통해 <strong>View</strong> 와 소통되며, <strong>RxKotlin</strong> 을 사용 할 경우 나의 경우는 <strong>Processor, Subject</strong> 를 통하여 <strong>Flowable, Observable, Single</strong> 등의로 적절한 return 타입을 잡아주면서 개발에 참여했다.</p>
+
+<blockquote>
+  <h3 id="view">View</h3>
+</blockquote>
+
+<ol>
+  <li>
+    <p>Activity나 Fragment가 View의 역할을 한다.</p>
+  </li>
+  <li>
+    <p>사용자의 이벤트를 받는 부분이다.</p>
+  </li>
+  <li>
+    <p><strong>ViewModel</strong> 의 데이터를 관찰하며 상태 변화가 생길 시 UI를 즉각 갱신한다.</p>
+  </li>
+</ol>
+
+<blockquote>
+  <h3 id="viewmodel">ViewModel</h3>
+</blockquote>
+
+<ol>
+  <li>
+    <p><strong>View</strong> 에서 발생한 이벤트로부터 전달된 <strong>데이터를 Model로 요청하는 중간 다리 역할.</strong></p>
+  </li>
+  <li>
+    <p><strong>Model</strong> 로 부터 요청한 데이터를 받아오는 중간 다리 역할.</p>
+  </li>
+</ol>
+
+<blockquote>
+  <h3 id="model">Model</h3>
+</blockquote>
+
+<ol>
+  <li>
+    <p><strong>ViewModel</strong> 이 요청한 데이터를 넘겨준다.</p>
+  </li>
+  <li>
+    <p>주로 <strong>Repository</strong> 라는 부분을 포함하면서 불리우며, <strong>Web Service에서 데이터를 요청하는 부분</strong> 까지 일컫는 부분이다.</p>
+  </li>
+  <li>
+    <p><strong>Room, Realm, Retrofit</strong> 등의 <strong>DB 사용</strong> 이나 <strong>백엔드 API 호출</strong> 등의 작업을 담당한다. (데이터의 창고같은 역할)</p>
+  </li>
+</ol>
+
+<ul>
+  <li>
+    <p>결국 <strong>View</strong> 가 필요로 하는 데이터는 <strong>ViewModel</strong> 이 쥐고 있고, <strong>View</strong> 는 그것을 필요로 하기 때문에 <strong>ViewModel</strong> 이 쥐고 있는 데이터를 관찰 <strong>(Observing)</strong> 한다. 때문에 <strong>MVC</strong> 패턴과 다르게, <strong>View</strong> 가 DB 에 직접 접근하는 것이 아닌 <strong>UI 업데이트에만 집중한다.</strong></p>
+  </li>
+  <li>
+    <p>또한 관찰하고 있는 만큼 데이터 변화에 더욱 능동적으로 움직이게 된다.</p>
+  </li>
+</ul>
+
+<h2 id="3️⃣-mvvm-패턴은-다음과-같은-장점을-가진다">3️⃣ MVVM 패턴은 다음과 같은 장점을 가진다.</h2>
+
+<ol>
+  <li>
+    <p><strong>View</strong> 가 <strong>ViewModel</strong> 의 <strong>Data</strong> 를 관찰하고 있으므로 <strong>UI 업데이트가 간편</strong></p>
+  </li>
+  <li>
+    <p><strong>ViewModel</strong> 이 데이터를 Hold(?)하고 있으므로 잘못 사용하지 않는 이상 <strong>Memory Leak 발생 가능성 이 낮다.</strong> (View 가 직접 Model 에 접근하지 않아 가져온 데이터는 <strong>Activity</strong> 나 <strong>Fragment</strong> 생명주기에 의존하지 않기 때문이다.)</p>
+  </li>
+  <li>
+    <p>기능별 모듈화가 잘 되어 유지 보수에 용이 (View와 ViewModel은 1:N의 관계를 가질 수 있기 때문에 <strong>한 번 만들어 놓은 viewModel은 다른 View에서도 재사용이 매우 용이</strong> 하다.)</p>
+  </li>
+</ol>
+
+<h2 id="4️⃣-aac-android-architecture-component">4️⃣ AAC (Android Architecture Component)</h2>
+
+<p><img src="https://user-images.githubusercontent.com/27722059/146218480-45cb7ae8-89ae-49af-81fe-c2fe0c3de353.png" alt="AAC" /></p>
+<ul>
+  <li>
+    <h3 id="viewmodel-1">ViewModel</h3>
+    <ul>
+      <li>화면 변화 시에도 변하거나 소멸되지 않는 데이터를 가지고 있다.</li>
+    </ul>
+  </li>
+  <li>
+    <h3 id="livedata">LiveData</h3>
+    <ul>
+      <li><strong>View</strong> 가 <strong>ViewModel</strong> 을 관찰할 때, 그 관찰 대상이 되는 데이터 타입이다. <strong>LiveData</strong> 는 <strong>Activity</strong> 및 <strong>Fragment</strong> 의 <strong>LifeCycle</strong> 을 인지하지 못하므로, 화면이 활성화 되어 있을 때만 동작하여 메모리 릭을 줄여준다.</li>
+    </ul>
+  </li>
+  <li>
+    <h3 id="repository">Repository</h3>
+    <ul>
+      <li><strong>ViewModel</strong> 과 데이터를 주고받기 위해, 데이터 <strong>API</strong> 를 포함하는 클래스다. 사용자 동작에 따라 필요한 데이터나 외부 백엔드 서버 등에서 데이터를 가져오게 된다. <strong>Repository</strong> 의 존재 덕분에 <strong>ViewModel</strong> 이 데이터를 관리할 필요가 없게 된다.</li>
+    </ul>
+  </li>
+  <li>
+    <h3 id="roomdatabase">RoomDatabase</h3>
+    <ul>
+      <li><strong>Room</strong> 은 <strong>SQLite</strong> 를 사용함에 있어 별도의 <strong>Query문</strong> 작성없이 간편하게 <strong>Insert, Delete</strong> 등의 동작을 할 수 있게끔 도와주는 <strong>ORM 라이브러리</strong> 이다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><em>[마지막 수정 : 2021-12-16, 추후 업데이트 예정]</em></p>
 
   </article>
 
