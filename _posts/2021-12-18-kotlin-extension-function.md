@@ -43,3 +43,20 @@ fun <T> MutableList<T>.swap(index1: Int, index2: Int) {
 ```
 
 여기서도 똑같이 this 키워드는 prefix로 지정된 타입을 말하는 것을 알 수 있고 제네릭 함수 타입으로 똑같이 확장함수를 만들어 준 것이다.
+
+
+```kotlin
+open class Shape
+class Rectangle: Shape()
+
+fun Shape.getName() = "Shape"
+fun Rectangle.getName() = "Rectangle"
+
+fun printClassName(s: Shape) {
+    println(s.getName())
+}
+
+printClassName(Rectangle())
+```
+
+또한 Static 즉, 정적인 형태의 성격을 띄기 때문에 상속을 받는 클래스 내에 구현된 함수가 아인 상속을 해 주는 쪽의 클래스에 정의된 확장 함수를 호출하게 된다.
