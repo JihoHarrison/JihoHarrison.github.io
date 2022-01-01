@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[알고리즘] 프로그래머스 더맵게 & HEAP 🏡"
+title: "[알고리즘] 프로그래머스 더맵게 & HEAP 🎇"
 date: 2022-01-01 21:51:01 +0700
 categories: [Algorithm]
 ---
