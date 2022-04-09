@@ -6,7 +6,7 @@
 remote_theme : renyuanz/leonids
 title: JihoKevin
 email: jhshin925@gmail.com
-description: 안드로이드 개발자를 목표로 달려나가는 Kevin의 블로그입니다!
+description: 성장에 미쳐있는 안드로이드 개발자, 신지호 입니다💪
 url: https://JihoKevin.github.io/
 baseurl : ""
 keywords: ["blog", "jekyll"]
@@ -40,7 +40,7 @@ kramdown:
 owner:
   name: 신지호
   avatar: avatar.png
-  job: "안드로이드 개발자가 되고싶은 소년"
+  job: "주니어 안드로이드 개발자"
   bio: "방문해주셔서 감사합니다!🙇🏻‍♂️"
   email: jhshin9250@gmail.com
   disqus-shortname:

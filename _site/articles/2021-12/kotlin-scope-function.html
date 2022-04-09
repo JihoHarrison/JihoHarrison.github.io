@@ -8,35 +8,35 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="안드로이드 개발자를 목표로 달려나가는 Kevin의 블로그입니다!">
+  <meta name="description" content="0️⃣ 프롤로그  코틀린에는 다양한 Scope Function들이 존재한다. 람다 형식으로 사용할 수 있으며 각각의 함수마다 사용 방법 및 특징이 있으니 이참에 한 번 살펴보자.1️⃣ 일반적인 사용 방법  일반적으로 객체를 사용하려면 다음과 같은 방법을 사용해야 한다.```kotl...">
   <meta name="keywords" content="blog and jekyll">
-  <meta name="author" content="Tags | JihoKevin">
+  <meta name="author" content="[Kotlin] Scope Function | JihoKevin">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f5f5f5">
 
   <!-- Twitter Tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Tags | JihoKevin">
-  <meta name="twitter:description" content="안드로이드 개발자를 목표로 달려나가는 Kevin의 블로그입니다!">
+  <meta name="twitter:title" content="[Kotlin] Scope Function | JihoKevin">
+  <meta name="twitter:description" content="0️⃣ 프롤로그  코틀린에는 다양한 Scope Function들이 존재한다. 람다 형식으로 사용할 수 있으며 각각의 함수마다 사용 방법 및 특징이 있으니 이참에 한 번 살펴보자.1️⃣ 일반적인 사용 방법  일반적으로 객체를 사용하려면 다음과 같은 방법을 사용해야 한다.```kotl...">
   
     <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
   
 
   <!-- Open Graph Tags -->
   <meta property="og:type" content="blog">
-  <meta property="og:url" content="http://localhost:4000/tags/">
-  <meta property="og:title" content="Tags | JihoKevin">
-  <meta property="og:description" content="안드로이드 개발자를 목표로 달려나가는 Kevin의 블로그입니다!">
+  <meta property="og:url" content="http://localhost:4000/articles/2021-12/kotlin-scope-function">
+  <meta property="og:title" content="[Kotlin] Scope Function | JihoKevin">
+  <meta property="og:description" content="0️⃣ 프롤로그  코틀린에는 다양한 Scope Function들이 존재한다. 람다 형식으로 사용할 수 있으며 각각의 함수마다 사용 방법 및 특징이 있으니 이참에 한 번 살펴보자.1️⃣ 일반적인 사용 방법  일반적으로 객체를 사용하려면 다음과 같은 방법을 사용해야 한다.```kotl...">
   
     <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
   
-  <title>Tags | JihoKevin</title>
+  <title>[Kotlin] Scope Function | JihoKevin</title>
 
   <!-- CSS files -->
   <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
   <link rel="stylesheet" href="http://localhost:4000/css/main.css">
 
-  <link rel="canonical" href="http://localhost:4000/tags/">
+  <link rel="canonical" href="http://localhost:4000/articles/2021-12/kotlin-scope-function">
   <link rel="alternate" type="application/rss+xml" title="JihoKevin" href="http://localhost:4000/feed.xml" />
 
   <!-- Icons -->
@@ -138,27 +138,71 @@
     </div>
     <div class="col s12 m9">
       <div class="post-listing">
-          <div id="page">
-    <header class="page-header">
-      <h2>Tags</h2>
-    </header>
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
 
-    <article class="page-content">
-      <h5>Tag cloud <i class="fa fa-cloud info-text-color"></i></h5>
-<ul class="tag-cloud">
 
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[Kotlin] Scope Function">[Kotlin] Scope Function</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        23 DEC 2021
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    1 min read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="0️⃣-프롤로그">0️⃣ 프롤로그</h2>
+<ul>
+  <li>코틀린에는 다양한 Scope Function들이 존재한다. 람다 형식으로 사용할 수 있으며 각각의 함수마다 사용 방법 및 특징이 있으니 이참에 한 번 살펴보자.</li>
 </ul>
 
-<div class="tag-list">
+<h2 id="1️⃣-일반적인-사용-방법">1️⃣ 일반적인 사용 방법</h2>
+<ul>
+  <li>일반적으로 객체를 사용하려면 다음과 같은 방법을 사용해야 한다.
+```kotlin
+data class Person(var name: String, var age: Int)</li>
+</ul>
 
+<p>val person = Person(“”, 0)
+person.name = “James”
+person.age = 56
+println(“$person”)</p>
+
+<p>```</p>
+<blockquote>
+  <p>Person(name=James, age=56)</p>
+</blockquote>
+
+<p>이렇게 data class를 생성하여 하나의 object를 만들고 instance화 한 다음 이를 이용하여 각각 초기화 해 주는 것을 볼 수 있다.</p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+        repo="JihoKevin/blog-comments"
+        issue-term="pathname"
+        label="comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </div>
 </div>
 
-    </article>
-
-  </div><!-- end page content -->
-
-
-  
+<!--  -->
 
         <footer>
   &copy; 2022 신지호. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>

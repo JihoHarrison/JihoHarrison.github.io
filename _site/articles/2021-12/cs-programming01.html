@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="0️⃣ 프롤로그  항상 그랬듯.. CS는 생각보다 엄청나게 중요하다. 아니 걍 기본인데 중요하지 않을리가.. 여튼 여러군데 면접도 보면서 CS 관련 지식을 정리 해본다.1️⃣ OOP란?  OOP는 현실 세계를 프로그래밍 세계관으로 옮겨와 현실 세계의 사물들을 하나의 객체(objec...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[CS] 프로그래밍 및 객체 지향에 관한 정리 | JihoKevin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[CS] 프로그래밍 및 객체 지향에 관한 정리 | JihoKevin">
+  <meta name="twitter:description" content="0️⃣ 프롤로그  항상 그랬듯.. CS는 생각보다 엄청나게 중요하다. 아니 걍 기본인데 중요하지 않을리가.. 여튼 여러군데 면접도 보면서 CS 관련 지식을 정리 해본다.1️⃣ OOP란?  OOP는 현실 세계를 프로그래밍 세계관으로 옮겨와 현실 세계의 사물들을 하나의 객체(objec...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2021-12/cs-programming01">
+  <meta property="og:title" content="[CS] 프로그래밍 및 객체 지향에 관한 정리 | JihoKevin">
+  <meta property="og:description" content="0️⃣ 프롤로그  항상 그랬듯.. CS는 생각보다 엄청나게 중요하다. 아니 걍 기본인데 중요하지 않을리가.. 여튼 여러군데 면접도 보면서 CS 관련 지식을 정리 해본다.1️⃣ OOP란?  OOP는 현실 세계를 프로그래밍 세계관으로 옮겨와 현실 세계의 사물들을 하나의 객체(objec...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[CS] 프로그래밍 및 객체 지향에 관한 정리 | JihoKevin</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2021-12/cs-programming01">
+  <link rel="alternate" type="application/rss+xml" title="JihoKevin" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">신지호</a>
+  <span class="author_job">안드로이드 개발자가 되고싶은 소년</span>
+  <span class="author_bio mbm">방문해주셔서 감사합니다!🙇🏻‍♂️</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('jhshin9250@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/jiho_925" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/JihoKevin" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[CS] 프로그래밍 및 객체 지향에 관한 정리">[CS] 프로그래밍 및 객체 지향에 관한 정리</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        29 DEC 2021
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    3 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="0️⃣-프롤로그">0️⃣ 프롤로그</h2>
+<ul>
+  <li>항상 그랬듯.. CS는 생각보다 엄청나게 중요하다. 아니 걍 기본인데 중요하지 않을리가.. 여튼 여러군데 면접도 보면서 CS 관련 지식을 정리 해본다.</li>
+</ul>
+
+<h2 id="1️⃣-oop란">1️⃣ OOP란?</h2>
+<ul>
+  <li><strong>OOP</strong>는 현실 세계를 프로그래밍 세계관으로 옮겨와 현실 세계의 사물들을 하나의 <strong>객체(object)</strong>로 보고, 그 객체로 부터 개발하고자 하는 특징과 기능을 가져와 프로그래밍 하는 기법이다. 재사용성과 여러 다형성 등의 특징을 가지고 있다.</li>
+</ul>
+
+<h2 id="2️⃣-oop-설계의-5가지-원칙">2️⃣ OOP 설계의 5가지 원칙</h2>
+<ol>
+  <li><strong>SRP(단일 책임 원칙)</strong> : 클래스는 단 하나의 목적을 가지고 설계되어야 하며, 클래스를 변경하는 이유는 단 하나의 이유여야 한다.</li>
+  <li><strong>OCP(개방 폐쇄 원칙)</strong> : 클래스는 확장에는 열려있고, 변경에는 닫혀있다.</li>
+  <li><strong>LSP(리스코프 치환 원칙)</strong> : 상위 타입의 객체를 하위 타입으로 바꾸어도 프로그램은 일관되게 동작해야 한다.</li>
+  <li><strong>ISP(인터페이스 분리 원칙)</strong> : 클라이언트는 이용하지 않는 메소드에 의존하지 않도록 인터페이스를 분리해야 한다.</li>
+  <li><strong>DIP(의존 역전 법칙)</strong> : 클라이언트는 추상화(인터페이스)에 의존해야 하며, 구체화(구현된 클래스)에 의존해서는 안된다.</li>
+</ol>
+
+<h2 id="3️⃣-restful-api">3️⃣ RESTful API</h2>
+<ul>
+  <li><strong>Restful API</strong>는 HTTP 통신에서 어떤 차원에 대한 CRUD 요청을 <strong>Resource</strong>와 <strong>Method</strong>로 표현하여 특정한 형태로 전달하는 방식이다. Restful API는 다음과같은 것들로 구성된다.
+    <ul>
+      <li>Resource(Uri)</li>
+      <li>Method(GET, POST, UPDATE, DELETE, PATCH 등)</li>
+      <li>Representation of Resource(자원의 형태, JSON XML 등)</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="4️⃣-함수형-프로그래밍">4️⃣ 함수형 프로그래밍</h2>
+<ul>
+  <li>함수형 프로그래밍의 가장 큰 특징은 불변의 데이터와 일급시민으로서의 함수하는 점이다. 함수형 프로그래밍은 부수효과가 없는 순수 함수를 이용하여 프로그램을 구성하는 것이다. 부수효과가 없는 순수 함수란 데이터의 값을 변경시키지 않으며 객체의 필드를 설정하는 등의 작업을 하지 않는 함수를 의미한다.</li>
+</ul>
+
+<h2 id="5️⃣-메모리의-구조">5️⃣ 메모리의 구조</h2>
+<p><img src="https://user-images.githubusercontent.com/27722059/147760469-b963a8db-b7a7-4999-8e44-9d9b6ba65441.png" alt="image" /></p>
+
+<ol>
+  <li>
+    <p><strong>코드영역</strong> : 실행할 프로그램의 코드가 저장되는 영역으로 텍스트 영역이라고도 불린다. 사용자가 프로그램 실행 명령을 내리면 OS가 HDD에서 메모리로 실행 코드를 올리게 되고, CPU는 코드 영역에 저장된 명령어를 하나씩 처리하게 된다.</p>
+  </li>
+  <li>
+    <p><strong>데이터 영역</strong> : 프로그램의 전역변수와 static 변수가 저장되는 영역이다. 데이터 영역은 프로그램의 시작과 함께 할당되며, 프로그램이 종료되면 소멸된다.</p>
+  </li>
+  <li>
+    <p><strong>힙 영역</strong> : 프로그래머가 직접 관리할 수 있는 메모리 영역으로 이 공간에 메모리를 할당하는 것을 동적 할당이라고 한다. 자바에서는 GC가 자동적으로 메모리 관리를 해 주게 된다. 힙 영역은 스택 영역과 다르게 낮은 주소에서 높은 주소로 메모리가 할당된다.</p>
+  </li>
+  <li>
+    <p><strong>스택 영역</strong> : 함수의 호출과 함께 할당되며 지역 변수와 매개 변수가 저장되는 영역이다. 스택 영역에 저장되는 함수의 호출 정보를 스택 프레임이라고 부른다. 스택 영역은 함수의 호출이 완료되면 소멸된다. 스택 영역은 높은 주소에서 낮은 주소로 메모리가 할당된다.</p>
+  </li>
+</ol>
+
+<h2 id="6️⃣-tdd-ddd">6️⃣ TDD? DDD?</h2>
+<ul>
+  <li>
+    <p><strong>TDD</strong> : Test Driven Development의 약자이며 아주 짧은 개발 사이클 반복에 의존하는 개발 방식을 말한다. 개발자는 우선 요구되는 기능에 대한 테스트 케이스를 작성하고 그에 맞는 코드를 작성하여 테스트를 통과 한 후에 상황에 맞게 리팩토링하는 테스트 주도 개발 방식을 의미한다.</p>
+  </li>
+  <li>
+    <p><strong>DDD</strong> : Domain Driven Design의 약자이며 실세계에서 사건이 발생하는 집합인 도메인을 중심으로 설계하는 방식이다. 쇼핑몰을 예를 들면, 손님들이 주문하는 도메인, 점주들이 관리하는 도메인 등이 존재한다. 이러한 도메인들을 서로 상호작용 시켜 설계하는 방식이 바로 DDD이다. 각각의 도메인은 분리되어있는데, 이러한 관점에서 MSA를 적용시키면 효율성이 극대화 될 수 있다고 생각한다. DDD에서는 같은 오브젝트들이 존재할 수 있는데, 예를들어 옷 구매자의 입장에서는 name, price등의 오브젝트 정보를 담지만, 판매자의 입장에서는 madeIn, size등의 필드들이 추가적으로 존재할 수 있다. 문맥에 따라 오브젝트의 역할이 변경될 수 있는 방식이 DDD 방식이다.</p>
+  </li>
+</ul>
+
+<h2 id="7️⃣-msa">7️⃣ MSA?</h2>
+<ul>
+  <li><strong>Micro Service Architecture</strong>의 약자로, 모든 시스템의 구성 요소가 한 프로젝트에 통합되어 있을 때의 한계점을 극복하고자 만들어진 시스템이다. 1개의 시스템을 독립적으로 배포 가능한 각각의 서비스로 분할한다. 각각의 서비스는 RestApi 통신을 통해 데이터를 주고받을 수 있으며 하나의 큰 서비스를 구성하게 된다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/27722059/147762319-08b82675-cb49-4c52-92c4-b229da93d350.png" alt="image" /></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- MSA의 장점
+    * 일부 서비스에 장애가 발생해도 전체 서비스에는 문제가 없다.
+    * 각각의 서비스들은 서로 다른 언어와 프레임워크를 사용할 수 있다.
+    * 서비스의 확장성의 측면에서 굉장한 어드벤티지를 가진다.
+
+- MSA의 단점
+    * 서비스가 분리되어 있어, 테스팅이나 트랜잭션 처리 등이 있다.
+    * 서비스 간에 RestApi로 통신이 가능하기 때문에 그에 대한 비용적인 문제가 발생할 수 있다.
+    * 서비스간에 호출이 연속적이기 때문에 디버깅의 난이도가 높을 수 밖에 없다.
+</code></pre></div></div>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+        repo="JihoKevin/blog-comments"
+        issue-term="pathname"
+        label="comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2022 신지호. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

@@ -24,7 +24,7 @@
 
   <!-- Open Graph Tags -->
   <meta property="og:type" content="blog">
-  <meta property="og:url" content="http://localhost:4000/articles/2021-07/kotlin-extension-function">
+  <meta property="og:url" content="http://localhost:4000/articles/2021-12/kotlin-extension-function">
   <meta property="og:title" content="[Kotlin] 코틀린의 확장함수 (Extension Function) | JihoKevin">
   <meta property="og:description" content="0️⃣ 프롤로그  인턴 생활을 하면서 느낀게 내가 원하는 확장 함수를 자유 자재로 만들어서 쓸 수 있어야 개발의 속도나 효율 측면에서 많은 효율이 생길 것이라고 느꼈다. 이 참에 그냥 개념부터 확실하게 정리 해 보고자 한다.1️⃣ 확장함수란?  Kotlin provides the ...">
   
@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
   <link rel="stylesheet" href="http://localhost:4000/css/main.css">
 
-  <link rel="canonical" href="http://localhost:4000/articles/2021-07/kotlin-extension-function">
+  <link rel="canonical" href="http://localhost:4000/articles/2021-12/kotlin-extension-function">
   <link rel="alternate" type="application/rss+xml" title="JihoKevin" href="http://localhost:4000/feed.xml" />
 
   <!-- Icons -->
@@ -149,13 +149,13 @@
     <h1 title="[Kotlin] 코틀린의 확장함수 (Extension Function)">[Kotlin] 코틀린의 확장함수 (Extension Function)</h1>
     <span class="post-meta">
       <span class="post-date">
-        13 JUL 2021
+        18 DEC 2021
       </span>
       •
       <span class="read-time" title="Estimated read time">
   
   
-    2 mins read
+    3 mins read
   
 </span>
 
@@ -207,6 +207,21 @@ this 키워드가 나오는 것을 확인할 수 있는데 이는 확장함수 �
 
 <p>여기서도 똑같이 this 키워드는 prefix로 지정된 타입을 말하는 것을 알 수 있고 제네릭 함수 타입으로 똑같이 확장함수를 만들어 준 것이다.</p>
 
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">open</span> <span class="kd">class</span> <span class="nc">Shape</span>
+<span class="kd">class</span> <span class="nc">Rectangle</span><span class="p">:</span> <span class="n">Shape</span><span class="p">()</span>
+
+<span class="k">fun</span> <span class="nf">Shape</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span> <span class="p">=</span> <span class="s">"Shape"</span>
+<span class="k">fun</span> <span class="nf">Rectangle</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span> <span class="p">=</span> <span class="s">"Rectangle"</span>
+
+<span class="k">fun</span> <span class="nf">printClassName</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="n">Shape</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">getName</span><span class="p">())</span>
+<span class="p">}</span>
+
+<span class="n">printClassName</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>또한 Static 즉, 정적인 형태의 성격을 띄기 때문에 상속을 받는 클래스 내에 구현된 함수가 아인 상속을 해 주는 쪽의 클래스에 정의된 확장 함수를 호출하게 된다.</p>
+
   </article>
 
   <div id="comment">
@@ -224,7 +239,7 @@ this 키워드가 나오는 것을 확인할 수 있는데 이는 확장함수 �
 <!--  -->
 
         <footer>
-  &copy; 2021 신지호. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+  &copy; 2022 신지호. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
 </footer>
 
       </div>

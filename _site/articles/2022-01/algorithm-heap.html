@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="0️⃣ 프롤로그  2022년이다! 알고리즘 문제를 본격적으로 풀기 시작한지 약 2개월이 흘렀지만 아직도 상당수의 문제들이 어렵게 느꺼진다. 항상 겸손한 마음가짐으로 CS 공부에 매진하는 내가 되겠다고 다짐하면서 만난 문제가 바로 더 맵게라는 문제다. 트리의 구조 중에 Heap이라는...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[알고리즘] 프로그래머스 더맵게 &amp; HEAP 🎇 | JihoKevin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[알고리즘] 프로그래머스 더맵게 &amp; HEAP 🎇 | JihoKevin">
+  <meta name="twitter:description" content="0️⃣ 프롤로그  2022년이다! 알고리즘 문제를 본격적으로 풀기 시작한지 약 2개월이 흘렀지만 아직도 상당수의 문제들이 어렵게 느꺼진다. 항상 겸손한 마음가짐으로 CS 공부에 매진하는 내가 되겠다고 다짐하면서 만난 문제가 바로 더 맵게라는 문제다. 트리의 구조 중에 Heap이라는...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2022-01/algorithm-heap">
+  <meta property="og:title" content="[알고리즘] 프로그래머스 더맵게 &amp; HEAP 🎇 | JihoKevin">
+  <meta property="og:description" content="0️⃣ 프롤로그  2022년이다! 알고리즘 문제를 본격적으로 풀기 시작한지 약 2개월이 흘렀지만 아직도 상당수의 문제들이 어렵게 느꺼진다. 항상 겸손한 마음가짐으로 CS 공부에 매진하는 내가 되겠다고 다짐하면서 만난 문제가 바로 더 맵게라는 문제다. 트리의 구조 중에 Heap이라는...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[알고리즘] 프로그래머스 더맵게 & HEAP 🎇 | JihoKevin</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2022-01/algorithm-heap">
+  <link rel="alternate" type="application/rss+xml" title="JihoKevin" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">신지호</a>
+  <span class="author_job">안드로이드 개발자가 되고싶은 소년</span>
+  <span class="author_bio mbm">방문해주셔서 감사합니다!🙇🏻‍♂️</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('jhshin9250@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/jiho_925" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/JihoKevin" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[알고리즘] 프로그래머스 더맵게 &amp; HEAP 🎇">[알고리즘] 프로그래머스 더맵게 & HEAP 🎇</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        1 JAN 2022
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    2 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="0️⃣-프롤로그">0️⃣ 프롤로그</h2>
+<ul>
+  <li>2022년이다! 알고리즘 문제를 본격적으로 풀기 시작한지 약 2개월이 흘렀지만 아직도 상당수의 문제들이 어렵게 느꺼진다. 항상 겸손한 마음가짐으로 CS 공부에 매진하는 내가 되겠다고 다짐하면서 만난 문제가 바로 <strong>더 맵게</strong>라는 문제다. 트리의 구조 중에 <strong>Heap</strong>이라는 형태를 이용한 우선순위 큐를 이용하는 문제였고, 처음에 <strong>isEmpty()</strong>에만 매달렸다가 헤맸던 문제다. 문제를 풀면서 우선순위 큐에 대해서도 공부하는 시간을 가지게 되었다.</li>
+</ul>
+
+<h2 id="1️⃣-우선순쉬-큐">1️⃣ 우선순쉬 큐</h2>
+<ul>
+  <li>일반적인 큐(Queue)의 형태는 먼저 들어간 데이터가 먼저 나오게 되는 스택과 반대되는 형태이다. <strong>(FIFO)</strong> 이러한 큐의 특성과 달리 우선순위 큐는 들어간 순서에 구애받지 않고 규칙에 따라 우선순위 라는 것을 부여받게 되고, 우선순위가 가장 높은 데이터가 가장 먼저 나오게 된다.</li>
+</ul>
+
+<h2 id="2️⃣-사용할-수-있는-내장함수들">2️⃣ 사용할 수 있는 내장함수들</h2>
+<ol>
+  <li><strong>E peek()</strong> : 큐의 맨 처음 원소를 삭제하지 않고 가져온다. 비어있으면 null을 반환한다.</li>
+  <li><strong>Boolean offer(E a)</strong> : 원소를 추가할 때 큐의 용량을 넘어서면 false를 반환한다. offer 키워드 대신 add로도 사용할 수 있다.</li>
+  <li><strong>E poll()</strong> : 큐의 맨 처음에 있는 원소를 “꺼내어” 가져온다. 한 번 사용하고 나면 큐에 남아있지 않는다. 또한 큐에 원소가 없으면 null을 반환한다.</li>
+  <li><strong>E remove()</strong> : 큐의 처음에 있는 원소를 제거한다. 큐에 원소가 없으면 예외를 발생시킨다.</li>
+  <li><strong>Boolean isEmpty()</strong> : 큐가 비어있으면 true, 그렇지 않다면 false를 반환한다.</li>
+</ol>
+
+<h2 id="3️⃣-우선순위-큐를-이용한-더-맵게-문제풀이">3️⃣ 우선순위 큐를 이용한 “더 맵게” 문제풀이</h2>
+<p><a href="https://programmers.co.kr/learn/courses/30/lessons/42626#">프로그래머스_더맵게</a></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Programmers_</span><span class="err">더맵게</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">heap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PriorityQueue</span><span class="o">&lt;&gt;();</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">scoville</span> <span class="o">=</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">12</span><span class="o">};</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">solution</span><span class="o">(</span><span class="n">scoville</span><span class="o">,</span> <span class="mi">7</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">scoville</span><span class="o">,</span> <span class="kt">int</span> <span class="n">K</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">answer</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">scoville</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">heap</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">scoville</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">answer</span> <span class="o">=</span> <span class="n">calcScoville</span><span class="o">(</span><span class="n">heap</span><span class="o">,</span> <span class="n">K</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">calcScoville</span><span class="o">(</span><span class="n">Queue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">heap</span><span class="o">,</span> <span class="kt">int</span> <span class="n">K</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">scoville</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">heap</span><span class="o">.</span><span class="na">peek</span><span class="o">()</span> <span class="o">&lt;=</span> <span class="n">K</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">heap</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="o">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">first</span> <span class="o">=</span> <span class="n">heap</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+            <span class="kt">int</span> <span class="n">second</span> <span class="o">=</span> <span class="n">heap</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+            <span class="n">scoville</span> <span class="o">=</span> <span class="n">first</span><span class="o">+</span> <span class="o">(</span><span class="n">second</span> <span class="o">*</span> <span class="mi">2</span><span class="o">);</span>
+            <span class="n">count</span><span class="o">++;</span>
+            <span class="n">heap</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">scoville</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">count</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>출력결과 : 2</p>
+</blockquote>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+        repo="JihoKevin/blog-comments"
+        issue-term="pathname"
+        label="comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2022 신지호. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>
