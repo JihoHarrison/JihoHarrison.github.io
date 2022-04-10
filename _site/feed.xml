@@ -2,19 +2,115 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>JihoKevin</title>
-    <description>안드로이드 개발자를 목표로 달려나가는 Kevin의 블로그입니다!</description>
+    <description>성장에 미쳐있는 안드로이드 개발자, 신지호 입니다💪</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2022-04-09</pubDate>
-    <lastBuildDate>Sat, 09 Apr 2022 08:53:16 +0200</lastBuildDate>
+    <pubDate>2022-04-10</pubDate>
+    <lastBuildDate>Sun, 10 Apr 2022 13:27:25 +0200</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
+    
+      <item>
+        <title>[Kotlin] 공변성, 반공변성, 무변성🦎</title>
+        <description>&lt;h2 id=&quot;0️⃣-프롤로그&quot;&gt;0️⃣ 프롤로그&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;이펙티브 코틀린을 읽다가 그냥 가볍게 알고 있었던 키워드들에 대한 깊은 학습이 필요하다고 느껴서 여러가지 키워드들을 검색해가며 공부하던 중에 covariance, contravariance, invariance 즉 &lt;strong&gt;변성&lt;/strong&gt;에 대한 설명들이 많길래 한 번 정리해보는게 좋을 것 같아서 적어본다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;1️⃣-변성variance&quot;&gt;1️⃣ 변성(variance)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;프로그래밍 언어에서의 변성이란 제네릭 형식 매개변수가 클래스 계층에 어떤 영향을 미치는지를 말한다.  &lt;br /&gt;
+ 쉽게 예를들어 &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;String&amp;gt;&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;Any&amp;gt;&lt;/code&gt;처럼 기저 타입은 같지만 제네릭 타입의 인자가 다른 여러 타입이 서로 어떤 관계가 있는지 설명하는 개념이라고 생각하면 된다.&lt;/p&gt;
+
+    &lt;h3 id=&quot;하위-타입에-대한-관계&quot;&gt;하위 타입에 대한 관계&lt;/h3&gt;
+    &lt;p&gt;String 타입은 Any 타입의 하위 타입이다.  &lt;br /&gt;
+그렇다고 해서 &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;String&amp;gt;&lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;Any&amp;gt;&lt;/code&gt;의 하위 타입은 아니다. 코틀린은 &lt;strong&gt;무공변성&lt;/strong&gt;을 디폴트로 하기 때문에 아래와 같은 코드를 실행한다면 컴파일 오류를 발생 시키게 된다.&lt;/p&gt;
+    &lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+ &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;lists&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;listOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;3&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+     &lt;span class=&quot;n&quot;&gt;printList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lists&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// compile error
+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;String&amp;gt;&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;Any&amp;gt;&lt;/code&gt;는 아무런 관계가 없기 때문이다. &lt;br /&gt;
+ 이 두 타입의 관계를 정의해주고, printList() 함수의 활용성을 확장할 수 있도록 해 주는 개념이 바로 &lt;strong&gt;변성&lt;/strong&gt;이다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;2️⃣-무변성invariance&quot;&gt;2️⃣ 무변성(invariance)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;제네릭 클래스를 인스턴스화 할 때 서로 다른 자료형을 사용하기 위해서는 자료형 사이의 상, 하위 관계를 잘 따져야 한다.&lt;code class=&quot;highlighter-rouge&quot;&gt;형식 매개변수&lt;/code&gt; 를 선언할 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;Out&lt;/code&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;In&lt;/code&gt; 키워드 없이 그냥 선언한다면 기본 변성인 &lt;strong&gt;무변성&lt;/strong&gt;으로 클래스가 선언된다. 아무리 상하관계가 명확한 자료형이라도 클래스가 무변성으로 선언되면 자료형 불일치 오류를 발생시킨다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;anys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 자료형 불일치 오류
+&lt;/span&gt;        &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;nothings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nothing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 자료형 불일치 오류
+&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;3️⃣-공변성covariance과-반공변성contravariance&quot;&gt;3️⃣ 공변성(covariance)과 반공변성(contravariance)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;형식 매개변수&lt;/code&gt; 의 상, 하위 관계가 성립하고, 그 관계가 &lt;strong&gt;그대로 인스턴스 자료형으로 이어지는 경우&lt;/strong&gt; 이를 &lt;code class=&quot;highlighter-rouge&quot;&gt;공변성&lt;/code&gt; 이라고 한다.
+    &lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Out&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;anys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 상, 하위 관계 자료형 일치
+&lt;/span&gt;     &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;nothings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Nothing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Nothing은 Int의 하위 타입이므로 불일치 오류
+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Out&lt;/code&gt; 키워드를 사용해서 공변성으로 클래스를 선언했다. Any의 경우 Int의 상위 클래스이므로 Int형으로 생성한 객체도 Any에 포함할 수 있다. &lt;br /&gt;
+ 하지만 &lt;strong&gt;Nothing의 경우 Int의 하위 클래스&lt;/strong&gt;이므로 Int형으로 생성한 객체를 포함할 수 없다.&lt;/p&gt;
+
+    &lt;h3 id=&quot;공변성-반공변성에서-자료형-제한하기&quot;&gt;공변성, 반공변성에서 자료형 제한하기!&lt;/h3&gt;
+    &lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;k&quot;&gt;open&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Animal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;feed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Feeding&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+ &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Cat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;jump&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Animal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Dog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;weight&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Animal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+ &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Animal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;element&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;c1&quot;&gt;// Out 키워드를 사용해서 공변성으로 선언
+&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// In 키워드를 사용하면 반공변성으로 선언된다.
+&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// 따라서 하위 자료형이 상위 자료형으로 변환하는 것은 괜찮다.
+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+ &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	
+ &lt;span class=&quot;c1&quot;&gt;// 객체 생성
+&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;c1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Cat&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Cat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;c2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dog&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	
+ &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;a1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Animal&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c1&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 하위 자료형이 상위 자료형으로의 변환은 가능.
+&lt;/span&gt;	
+ &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;c3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Cat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Animal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 상위 자료형이 하위 자료형으로의 변환은 불가능
+&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;c4&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Cat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(!&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 자료형을 Animal로 제한했으므로 Animal, Cat, Dog를 제외한 다른 자료형은 사용불가.
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;[마지막 수정 : 2022.04.10]&lt;/p&gt;
+</description>
+        <pubDate>2022-04-10</pubDate>
+        <link>http://localhost:4000/articles/2022-04/kotlin-variant</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2022-04/kotlin-variant</guid>
+        
+        
+        <category>kotlin</category>
+        
+      </item>
     
       <item>
         <title>[안드로이드] 신입 개발자 온보딩 프로젝트 회고 📝</title>
         <description>&lt;h2 id=&quot;0️⃣-프롤로그&quot;&gt;0️⃣ 프롤로그&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;2022년 3월 14일. 안드로이드 개발자가 되고싶었던 내가 드디어 주니어 개발자로 첫 회사에 입사하게 되었다. &lt;br /&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;2022년 3월 14일&lt;/code&gt; 안드로이드 개발자가 되기위해 취업을 준비하던 내가 드디어 주니어 개발자로 첫 회사에 입사하게 되었다. &lt;br /&gt;
  그동안 혼자 개발하면서 가졌던 나쁜 습관들을 버릴 수 있는 좋은 기회이기도 하고, 주니어 개발자로 성장하기에 정말 좋은 회사이다. &lt;br /&gt;
  나인투원이라는 스타트업인데 면접과 코딩테스트 경험도 정말 좋은 경험이였다. &lt;strong&gt;얼마 전에 쏘카에 인수가 되어 곧 쏘카 개발팀에 합류할 것 같은 느낌&lt;/strong&gt;이 아주 강하게 들지만, 이 또한 좋은 기회로 여기고 감사하게 배우면서 개발해야겠다💪&lt;/p&gt;
   &lt;/li&gt;
@@ -71,7 +167,8 @@
     &lt;ul&gt;
       &lt;li&gt;이제 그토록 염원하던 주니어 안드로이드 개발자가 되는것이다. 회사 맥북을 받고, 코드리뷰를 받으며, 동료들과 함께 협업하는.. &lt;br /&gt;
 말로만 듣던 내용들을 실제 회사에서 접하려니 굉장히 가슴이 두근거렸다.. 여튼 이렇게 나의 취업 준비 기간이 끝나게 됐고, &lt;br /&gt;
-곧 &lt;strong&gt;쏘카 슈퍼앱 프로젝트에 합류하게 될 예정&lt;/strong&gt;이고, 일레클 서비스를 개발하는 안드로이드 개발자로 내 개발 커리어를 시작하게 되었다.&lt;/li&gt;
+곧 &lt;strong&gt;쏘카 슈퍼앱 프로젝트에 합류하게 될 예정&lt;/strong&gt;이다. &lt;br /&gt;
+일레클 서비스를 개발하는 안드로이드 개발자로 내 개발 커리어를 시작하게 되었다.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -101,7 +198,7 @@ PR 형식도 내 마음대로였고, 커밋 메세지, 브랜치 또한 내 입�
     &lt;h3 id=&quot;재사용-가능한-코드-작성&quot;&gt;“재사용” 가능한 코드 작성&lt;/h3&gt;
     &lt;ul&gt;
       &lt;li&gt;재사용 가능한 깔끔한 코드란 OOP의 개념을 최대한 살려 낸 코드라고 생각한다. &lt;br /&gt;
-이번 OJT 프로젝트를 거치는 동안 일레클 서비스 코드를 참고 할 일이 정말 많았는데, 특히 블루투스 연동을 할 때 여러 기기게 Ble에 관련된 기능을 재사용 가능토록 작성한 코드들을 보면서 감탄을 한 기억도 있다. &lt;br /&gt;
+이번 OJT 프로젝트를 거치는 동안 일레클 서비스 코드를 참고 할 일이 정말 많았는데, 특히 블루투스 연동을 할 때 여러 기기에 Ble에 관련된 기능을 재사용 가능하도록 작성한 코드들을 보면서 감탄을 한 기억도 있다. &lt;br /&gt;
 지금까지 내가 작성했던 코드들은 단지 기능을 구현하기에만 급급한 코드였고, 코딩테스트와 같이 &lt;strong&gt;빠르게&lt;/strong&gt; 구현하는데만 길들여져 있던 나는 그 동안의 내 개발 습관을 되돌아보게 되었다. &lt;br /&gt;
 블루투스에 관련된 기능 하나를 만들더라도 나중에 추가 될 기기까지 고려하여 코드를 작성하는 모습들을 보면서 참.. 느끼는게 많았던 과정이였다.&lt;/li&gt;
     &lt;/ul&gt;
@@ -138,9 +235,8 @@ IOS 개발 팀원 분이 나의 코틀린 코드를 리뷰 해 주시면서 주�
 &lt;/ul&gt;
 
 &lt;p&gt;[2022.04.09 나인투원 안드로이드 온보딩 프로젝트 회고]&lt;/p&gt;
-
 </description>
-        <pubDate>2022-04-09</pubDate>
+        <pubDate>2022-04-10</pubDate>
         <link>http://localhost:4000/articles/2022-04/onboarding-retrospect</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2022-04/onboarding-retrospect</guid>
         
@@ -213,7 +309,7 @@ IOS 개발 팀원 분이 나의 코틀린 코드를 리뷰 해 주시면서 주�
   &lt;p&gt;출력결과 : 2&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
-        <pubDate>2022-04-09</pubDate>
+        <pubDate>2022-04-10</pubDate>
         <link>http://localhost:4000/articles/2022-01/algorithm-heap</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2022-01/algorithm-heap</guid>
         
@@ -305,7 +401,7 @@ IOS 개발 팀원 분이 나의 코틀린 코드를 리뷰 해 주시면서 주�
     * 서비스간에 호출이 연속적이기 때문에 디버깅의 난이도가 높을 수 밖에 없다.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>2022-04-09</pubDate>
+        <pubDate>2022-04-10</pubDate>
         <link>http://localhost:4000/articles/2021-12/cs-programming01</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-12/cs-programming01</guid>
         
@@ -340,7 +436,7 @@ println(“$person”)&lt;/p&gt;
 
 &lt;p&gt;이렇게 data class를 생성하여 하나의 object를 만들고 instance화 한 다음 이를 이용하여 각각 초기화 해 주는 것을 볼 수 있다.&lt;/p&gt;
 </description>
-        <pubDate>2022-04-09</pubDate>
+        <pubDate>2022-04-10</pubDate>
         <link>http://localhost:4000/articles/2021-12/kotlin-scope-function</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-12/kotlin-scope-function</guid>
         
@@ -409,7 +505,7 @@ this 키워드가 나오는 것을 확인할 수 있는데 이는 확장함수 �
 
 &lt;p&gt;또한 Static 즉, 정적인 형태의 성격을 띄기 때문에 상속을 받는 클래스 내에 구현된 함수가 아인 상속을 해 주는 쪽의 클래스에 정의된 확장 함수를 호출하게 된다.&lt;/p&gt;
 </description>
-        <pubDate>2022-04-09</pubDate>
+        <pubDate>2022-04-10</pubDate>
         <link>http://localhost:4000/articles/2021-12/kotlin-extension-function</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-12/kotlin-extension-function</guid>
         
@@ -1150,7 +1246,7 @@ RxNewThreadScheduler-3 | 940 | value = &quot;country&quot;:&quot;KR&quot;
 RxNewThreadScheduler-1 | 940 | value = &quot;temp&quot;:278.52
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>2022-04-09</pubDate>
+        <pubDate>2022-04-10</pubDate>
         <link>http://localhost:4000/articles/2021-12/rx-java-scheduler</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-12/rx-java-scheduler</guid>
         
@@ -1380,7 +1476,7 @@ CoroutineScope(Dispatchers.Main).launch {
 
 &lt;p&gt;&lt;em&gt;2021.12.16 최종 수정. 지속 업데이트 예정&lt;/em&gt;&lt;/p&gt;
 </description>
-        <pubDate>2022-04-09</pubDate>
+        <pubDate>2022-04-10</pubDate>
         <link>http://localhost:4000/articles/2021-12/android-coroutine-control</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-12/android-coroutine-control</guid>
         
@@ -1543,7 +1639,7 @@ CoroutineScope(Dispatchers.Main).launch {
 
 &lt;p&gt;&lt;em&gt;마지막 수정 2021.12.16(지속 업데이트 예정)&lt;/em&gt;&lt;/p&gt;
 </description>
-        <pubDate>2022-04-09</pubDate>
+        <pubDate>2022-04-10</pubDate>
         <link>http://localhost:4000/articles/2021-12/android-coroutine</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-12/android-coroutine</guid>
         
@@ -1624,88 +1720,12 @@ Arrays.sort로 마무리.&lt;/li&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>2022-04-09</pubDate>
+        <pubDate>2022-04-10</pubDate>
         <link>http://localhost:4000/articles/2021-12/algorithm-bok-2667</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-12/algorithm-bok-2667</guid>
         
         
         <category>Algorithm</category>
-        
-      </item>
-    
-      <item>
-        <title>[안드로이드] Context가 뭐죠? 📑</title>
-        <description>&lt;h2 id=&quot;0️⃣-프롤로그&quot;&gt;0️⃣ 프롤로그&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;안드로이드 개발을 하면서 &lt;strong&gt;context&lt;/strong&gt; 타입을 정말 많이 사용한다. 이 형식을 잘못 사용하면 ANR이 발생하거나 &lt;strong&gt;메모리 Leak&lt;/strong&gt; 이 발생하기도 한다. 안드로이드의 핵심이라고도 할 수 있는 이 &lt;strong&gt;context&lt;/strong&gt; 에 대해서 자세하게 공부 해 보았다.
-    &lt;blockquote&gt;
-      &lt;p&gt;&lt;a href=&quot;developer.android.com/reference/android/content/Context&quot;&gt;Android developers context&lt;/a&gt;&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;1️⃣-공식-문서에서-설명하는-context는&quot;&gt;1️⃣ 공식 문서에서 설명하는 Context는?&lt;/h2&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;Interface to global information about an application environment. This is an abstract class whose implementation is provided by the Android system. It allows access to application-specific resources and classes, as well as up-calls for application-level operations such as launching activities, broadcasting and receiving intents, etc.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Context&lt;/strong&gt; 는 어플리케이션 환경에 대한 글로벌 정보를 갖는 인터페이스이다. Context는 Android 시스템에서 구현체를 제공하는 추상 클래스로, 애플리케이션 별 리소스 및 클래스 접근에 사용되며, 액티비티 실행, 브로드캐스트, 인탠트 수신 등과 같은 애플리케이션 수준 작업에 사용된다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Context&lt;/strong&gt; 는 영어의 뜻 그대로 현재 상태의 맥락이라는 의미를 가진다. 새로 생긴 객체가 지금 어떤 상태인지 알 수 있도록 해준다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Activity&lt;/strong&gt; 와 &lt;strong&gt;Application&lt;/strong&gt; 의 정보를 얻기 위해 사용할 수 있다. 또한 &lt;strong&gt;Resource, DB, Shared Preference&lt;/strong&gt; 등에 접근하기 위해 사용된다. 내가 이해하기로는 현재 상태 즉, 각각의 생명 주기에 따라서 생성되고 소멸되는 시점을 명확히 하고 이를 활용하여 메모리 누수를 방지한다는 것이다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;2️⃣-context의-종류&quot;&gt;2️⃣ Context의 종류&lt;/h2&gt;
-&lt;h3 id=&quot;application-context&quot;&gt;Application Context&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;가장 최상위 층의 context라고 생각하면 된다. &lt;strong&gt;getApplicationContext()&lt;/strong&gt; 를 통해서 접근할 수 있고 이 컨택스트는 안드로이드 최상위 계층인 application 클래스의 라이프사이클에 묶여있으며, 현재 context가 종료 된 이후에도 context가 필요한 작업이나 하나의 액티비티 스코프를 벗어난 context가 픽요한 작업에 맞는 context이다. 싱글턴 인스턴스로 구성되어있다는 점이 특징이다.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;h3 id=&quot;application-context는-어디에-사용하지&quot;&gt;Application Context는 어디에 사용하지?&lt;/h3&gt;
-    &lt;p&gt;예를 들어, 최상위 어플리케이션 클래스에 싱글턴으로 생성된 &lt;strong&gt;object&lt;/strong&gt; 가 있다고 가정해보자. context가 필요한 작업이면 당연히 해당 생명주기에 맞는 &lt;strong&gt;application context&lt;/strong&gt; 를 전달하는 것이 맞다. 만약 &lt;strong&gt;Activity Context&lt;/strong&gt; 를 전달한다면 해당 &lt;strong&gt;object&lt;/strong&gt; 가 항상 액티비티에 붙어있으므로 액티비티가 화면에 표시되지 않는 순간까지 GC가 진행되지 않아서 메모리 누수가 발생하게 된다. 다음 공식문서에서 나온 것 처럼 하나의 전역적이고 &lt;strong&gt;Single 형태의 object&lt;/strong&gt; 를 반환한다.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/27722059/143963200-ebeaf089-130d-4235-beac-b5c87901bbfe.png&quot; alt=&quot;getApplicationContext&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;activity-context&quot;&gt;Activity Context&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Activity Context는 activity 내에서 유효한 컨택스트이다. 이 컨택스트는 액티비티 라이프사이클과 연결되어 있습니다. 액티비티 컨택스트는 액티비티와 함께 소멸해야 하는 경우에 사용하게 된다. 보통 &lt;strong&gt;getContext&lt;/strong&gt; 나 &lt;strong&gt;this&lt;/strong&gt; 키워드를 사용하여 가져올 수 있다. 예를 들어, 액티비티와 라이프사이클이 같은 &lt;strong&gt;object&lt;/strong&gt; 를 생성해야 할 때 액티비티 컨택스트를 사용할 수 있습니다. 공식문서에서도 다음과 같이 말하고 있다.
- &lt;img src=&quot;https://user-images.githubusercontent.com/27722059/145498734-b49b0b9f-f4ea-4f52-af20-290185c3ab3d.png&quot; alt=&quot;image&quot; /&gt; &lt;br /&gt;
- 요점만 보면, 최상위 &lt;strong&gt;object&lt;/strong&gt; 인 application 컨텍스트를 아무때나 사용한다면 심각한 메모리 누수를 초래한다는 말이다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;결국 정리해보면 다음과 같은 말이다.&lt;/p&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Application Context는 Application, Activity 모두에서 사용할 수 있다.&lt;/li&gt;
-      &lt;li&gt;MainActivity의 Context는 MainActivity에서만 사용할 수 있다.&lt;/li&gt;
-      &lt;li&gt;하지만 최상위 &lt;strong&gt;object&lt;/strong&gt; 라고 막 갖다 쓰면 메모리 누수가 일어난다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;3️⃣-언제-어떤-context를-사용해야-할까&quot;&gt;3️⃣ 언제, 어떤 Context를 사용해야 할까?&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Applications&lt;/strong&gt; 클래스 하나와 일반 싱글턴 클래스 하나가 있다고 가정 해 보자. 이 일반 싱글턴 클래스가 context가 필요한 상황이라면 &lt;strong&gt;application 클래스&lt;/strong&gt; 를 쓰는게 맞다. &lt;strong&gt;Activity Context&lt;/strong&gt; 를 전달 했다면 액티비티가 사용되지 않는 동안에도 더 이상의 생명주기가 없는 싱글턴 클래스가 해당 액티비티를 계속 참조하고 있기 때문에 싱글턴 클래스는 항상 &lt;strong&gt;application의 context&lt;/strong&gt; 를 전달하는게 맞다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Acticity Context를 사용 할 조건은 말 그대로 Activity를 사용할 때 이다. Toast Message, Dialog 등의 UI 작업을 필요로 하는 시점에는 Activity Context를 사용하는 것이 맞다.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;4️⃣-getapplicationcontext만-써도-안되는-이유&quot;&gt;4️⃣ getApplicationContext()만 써도 안되는 이유..&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;아무리 최상위 &lt;strong&gt;Application Context&lt;/strong&gt; 라고 &lt;strong&gt;Activity Context&lt;/strong&gt; 가 제공하는 모든 기능을 제공하지는 않는다. 이 작업은 특히 UI 관련 &lt;strong&gt;context&lt;/strong&gt; 를 조작 할 때 좋지 않는 방법이라고 할 수 있다.&lt;/li&gt;
-  &lt;li&gt;또한, &lt;strong&gt;Activity Context&lt;/strong&gt; 는 자기 자신만의 생명주기의 연속으로, &lt;strong&gt;GC&lt;/strong&gt; 가 동작하지만 &lt;strong&gt;Application object&lt;/strong&gt; 는 프로세스가 살아있는 동안 계속 남아있다는 특징을 가지고 있다.&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>2022-04-09</pubDate>
-        <link>http://localhost:4000/articles/2021-11/android-context</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-11/android-context</guid>
-        
-        
-        <category>안드로이드</category>
         
       </item>
     
