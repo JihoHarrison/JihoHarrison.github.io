@@ -7,8 +7,8 @@ remote_theme : renyuanz/leonids
 title: JihoKevin
 email: jhshin925@gmail.com
 description: 성장에 미쳐있는 안드로이드 개발자, 신지호 입니다💪
-url: https://JihoKevin.github.io/
-baseurl : "https://JihoKevin.github.io/"
+url: https://jihokevin.github.io/
+baseurl : "https://jihokevin.github.io/"
 keywords: ["blog", "jekyll"]
 
 
