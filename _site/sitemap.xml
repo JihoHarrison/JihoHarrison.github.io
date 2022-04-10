@@ -1,514 +1,548 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
-    
     <url>
       <loc>http://localhost:4000/articles/2022-04/kotlin-variant</loc>
       
         <lastmod>2022-04-10T10:22:01+02:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2022-04/onboarding-retrospect</loc>
       
         <lastmod>2022-04-08T19:30:01+02:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2022-01/algorithm-heap</loc>
       
         <lastmod>2022-01-01T15:51:01+01:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-12/cs-programming01</loc>
       
         <lastmod>2021-12-29T17:43:03+01:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-12/kotlin-scope-function</loc>
       
         <lastmod>2021-12-23T09:43:10+01:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-12/kotlin-extension-function</loc>
       
         <lastmod>2021-12-18T08:11:11+01:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-12/rx-java-scheduler</loc>
       
         <lastmod>2021-12-17T12:03:10+01:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-12/android-coroutine-control</loc>
       
         <lastmod>2021-12-13T17:45:01+01:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-12/android-coroutine</loc>
       
         <lastmod>2021-12-13T16:11:01+01:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-12/algorithm-bok-2667</loc>
       
         <lastmod>2021-12-10T04:53:01+01:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-11/android-context</loc>
       
         <lastmod>2021-11-29T09:34:10+01:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-11/algorithm-bok-2210</loc>
       
         <lastmod>2021-11-28T19:06:01+01:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-11/cs-factory-method</loc>
       
         <lastmod>2021-11-16T04:34:10+01:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-11/cs-design-pattern</loc>
       
         <lastmod>2021-11-16T03:34:10+01:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-11/android-webview-shouldoverrideurlloading</loc>
       
         <lastmod>2021-11-07T09:34:10+01:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-11/algotithm-take-picture-dfs</loc>
       
         <lastmod>2021-11-05T12:34:10+01:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-11/algorithm-coloring-book</loc>
       
         <lastmod>2021-11-01T12:34:10+01:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-10/algorithm-covid19</loc>
       
         <lastmod>2021-10-24T13:34:10+02:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-10/android-rxkotlin-mvvm</loc>
       
         <lastmod>2021-10-15T13:34:10+02:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-10/algorithm-hash-map</loc>
       
         <lastmod>2021-10-14T13:34:10+02:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-10/algorithm-string-press</loc>
       
         <lastmod>2021-10-11T13:34:10+02:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-10/rx-kotlin-flatmap-dividing</loc>
       
         <lastmod>2021-10-06T13:34:10+02:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-09/flowable-observable</loc>
       
         <lastmod>2021-09-15T13:34:10+02:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-09/behavior-processor</loc>
       
         <lastmod>2021-09-14T11:34:10+02:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-09/hot-cold-observable</loc>
       
         <lastmod>2021-09-14T10:34:10+02:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-09/bubble-sort</loc>
       
         <lastmod>2021-09-13T13:34:10+02:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-09/rx-kotlin-02</loc>
       
         <lastmod>2021-09-13T11:34:10+02:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-09/rx-kotlin-01</loc>
       
         <lastmod>2021-09-13T10:34:10+02:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-08/android-project-structure</loc>
       
         <lastmod>2021-08-05T13:34:10+02:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-07/kotlin-object-keyword</loc>
       
         <lastmod>2021-07-13T11:34:10+02:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-07/android-studio-keyboard-shortcut</loc>
       
         <lastmod>2021-07-05T00:00:00+02:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-03/android</loc>
       
         <lastmod>2021-03-18T00:00:00+01:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2021-03/android-version</loc>
       
         <lastmod>2021-03-18T00:00:00+01:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
-    
     <url>
       <loc>http://localhost:4000/articles/2020-05/algorithm-greedy</loc>
       
         <lastmod>2020-05-11T11:34:10+02:00</lastmod>
       
+
       
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
       
+
       
-        <priority>0.5</priority>
+          <priority>0.5</priority>
       
+
     </url>
-    
   
 </urlset>
