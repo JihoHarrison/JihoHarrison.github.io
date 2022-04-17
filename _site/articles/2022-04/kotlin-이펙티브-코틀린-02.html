@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="  프로퍼티보다는 지역변수를 사용하는 것이 좋다.  최대한 좁은 스코프를 갖게 변수를 사용해야 한다. 예를들어 반복문 내부에서만 변수가 사용된다면, 변수를 반복문 내부에 작성하는 것이 좋다.0️⃣ 변수의 스코프는 항상 최소화  변수의 스코프 지정     val a = 1 fun h...">
+  <meta name="description" content="1. 프로퍼티보다는 지역변수를 사용하는 것이 좋다.2. 최대한 좁은 스코프를 갖게 변수를 사용해야 한다. 예를들어 반복문 내부에서만 변수가 사용된다면, 변수를 반복문 내부에 작성하는 것이 좋다.0️⃣ 변수의 스코프는 항상 최소화변수의 스코프 지정 val a = 1 fun hello...">
   <meta name="keywords" content="blog and jekyll">
   <meta name="author" content="[이펙티브 코틀린] 변수의 스코프를 최소화하라 📚 | JihoKevin">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@
   <!-- Twitter Tags -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="[이펙티브 코틀린] 변수의 스코프를 최소화하라 📚 | JihoKevin">
-  <meta name="twitter:description" content="  프로퍼티보다는 지역변수를 사용하는 것이 좋다.  최대한 좁은 스코프를 갖게 변수를 사용해야 한다. 예를들어 반복문 내부에서만 변수가 사용된다면, 변수를 반복문 내부에 작성하는 것이 좋다.0️⃣ 변수의 스코프는 항상 최소화  변수의 스코프 지정     val a = 1 fun h...">
+  <meta name="twitter:description" content="1. 프로퍼티보다는 지역변수를 사용하는 것이 좋다.2. 최대한 좁은 스코프를 갖게 변수를 사용해야 한다. 예를들어 반복문 내부에서만 변수가 사용된다면, 변수를 반복문 내부에 작성하는 것이 좋다.0️⃣ 변수의 스코프는 항상 최소화변수의 스코프 지정 val a = 1 fun hello...">
   
     <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
   
@@ -26,7 +26,7 @@
   <meta property="og:type" content="blog">
   <meta property="og:url" content="http://localhost:4000/articles/2022-04/kotlin-%EC%9D%B4%ED%8E%99%ED%8B%B0%EB%B8%8C-%EC%BD%94%ED%8B%80%EB%A6%B0-02">
   <meta property="og:title" content="[이펙티브 코틀린] 변수의 스코프를 최소화하라 📚 | JihoKevin">
-  <meta property="og:description" content="  프로퍼티보다는 지역변수를 사용하는 것이 좋다.  최대한 좁은 스코프를 갖게 변수를 사용해야 한다. 예를들어 반복문 내부에서만 변수가 사용된다면, 변수를 반복문 내부에 작성하는 것이 좋다.0️⃣ 변수의 스코프는 항상 최소화  변수의 스코프 지정     val a = 1 fun h...">
+  <meta property="og:description" content="1. 프로퍼티보다는 지역변수를 사용하는 것이 좋다.2. 최대한 좁은 스코프를 갖게 변수를 사용해야 한다. 예를들어 반복문 내부에서만 변수가 사용된다면, 변수를 반복문 내부에 작성하는 것이 좋다.0️⃣ 변수의 스코프는 항상 최소화변수의 스코프 지정 val a = 1 fun hello...">
   
     <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
   
@@ -160,25 +160,25 @@
   </header>
 
   <article class="post-content">
-    <ol>
-  <li><strong>프로퍼티보다는 지역변수를 사용하는 것이 좋다.</strong></li>
-  <li><strong>최대한 좁은 스코프를 갖게 변수를 사용해야 한다. 예를들어 반복문 내부에서만 변수가 사용된다면, 변수를 반복문 내부에 작성하는 것이 좋다.</strong></li>
-</ol>
-
+    <hr />
+<h3 id="1-프로퍼티보다는-지역변수를-사용하는-것이-좋다">1. 프로퍼티보다는 지역변수를 사용하는 것이 좋다.</h3>
+<h3 id="2-최대한-좁은-스코프를-갖게-변수를-사용해야-한다-예를들어-반복문-내부에서만-변수가-사용된다면-변수를-반복문-내부에-작성하는-것이-좋다">2. 최대한 좁은 스코프를 갖게 변수를 사용해야 한다. 예를들어 반복문 내부에서만 변수가 사용된다면, 변수를 반복문 내부에 작성하는 것이 좋다.</h3>
+<hr />
 <h2 id="0️⃣-변수의-스코프는-항상-최소화">0️⃣ 변수의 스코프는 항상 최소화</h2>
-<ul>
-  <li>변수의 스코프 지정
-    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">val</span> <span class="py">a</span> <span class="p">=</span> <span class="m">1</span>
+
+<h4 id="변수의-스코프-지정">변수의 스코프 지정</h4>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">val</span> <span class="py">a</span> <span class="p">=</span> <span class="m">1</span>
  <span class="k">fun</span> <span class="nf">hello</span><span class="p">()</span> <span class="p">{</span>
-  <span class="kd">val</span> <span class="py">b</span> <span class="p">=</span> <span class="m">2</span>
-  <span class="n">print</span><span class="p">(</span><span class="n">a</span> <span class="p">+</span> <span class="n">b</span><span class="p">)</span>
+     <span class="kd">val</span> <span class="py">b</span> <span class="p">=</span> <span class="m">2</span>
+     <span class="n">print</span><span class="p">(</span><span class="n">a</span> <span class="p">+</span> <span class="n">b</span><span class="p">)</span>
  <span class="p">}</span>
  <span class="kd">val</span> <span class="py">world</span> <span class="p">=</span> <span class="p">{</span>
-  <span class="kd">val</span> <span class="py">c</span> <span class="p">=</span> <span class="m">3</span>
-  <span class="n">print</span><span class="p">(</span><span class="n">a</span> <span class="p">+</span> <span class="n">c</span><span class="p">)</span>
+     <span class="kd">val</span> <span class="py">c</span> <span class="p">=</span> <span class="m">3</span>
+     <span class="n">print</span><span class="p">(</span><span class="n">a</span> <span class="p">+</span> <span class="n">c</span><span class="p">)</span>
  <span class="p">}</span>
-</code></pre></div>    </div>
-  </li>
+</code></pre></div></div>
+<ul>
   <li>hello와 world 함수는 스코프에서는 외부 스코프에 있는 변수에 접근할 수 있다.</li>
   <li>외부 스코프에서는 내부 스코프에 정의된 변수에 접근할 수 없다.</li>
 </ul>
@@ -227,24 +227,25 @@
 </ul>
 
 <h2 id="1️⃣-캡처링">1️⃣ 캡처링</h2>
-<ul>
-  <li>
-    <p>소수를 구하는 알고리즘인 에라토스테네스의 체를 Collection과 Sequence를 활용하여 예시로 구현 해 볼 수 있겠다.</p>
 
-    <h3 id="iterator-방식을-통해-에라토스테네스의-체-구현">Iterator 방식을 통해 에라토스테네스의 체 구현</h3>
-    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">var</span> <span class="py">numbers</span> <span class="p">=</span> <span class="p">(</span><span class="m">2</span><span class="o">..</span><span class="m">100</span><span class="p">).</span><span class="n">toList</span><span class="p">()</span>
+<h3 id="소수를-구하는-알고리즘인-에라토스테네스의-체를-collection과-sequence를-활용하여-예시로-구현-해-볼-수-있겠다">소수를 구하는 알고리즘인 에라토스테네스의 체를 Collection과 Sequence를 활용하여 예시로 구현 해 볼 수 있겠다.</h3>
+
+<h4 id="iterator-방식을-통해-에라토스테네스의-체-구현">Iterator 방식을 통해 에라토스테네스의 체 구현</h4>
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">var</span> <span class="py">numbers</span> <span class="p">=</span> <span class="p">(</span><span class="m">2</span><span class="o">..</span><span class="m">100</span><span class="p">).</span><span class="n">toList</span><span class="p">()</span>
  <span class="kd">val</span> <span class="py">primes</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;()</span>
  <span class="k">while</span><span class="p">(</span><span class="n">numbers</span><span class="p">.</span><span class="n">isNotEmpty</span><span class="p">())</span> <span class="p">{</span>
-  <span class="kd">val</span> <span class="py">prime</span> <span class="p">=</span> <span class="n">numbers</span><span class="p">.</span><span class="n">first</span><span class="p">()</span>
-  <span class="n">primes</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">prime</span><span class="p">)</span>
-  <span class="n">numbers</span> <span class="p">=</span> <span class="n">numbers</span><span class="p">.</span><span class="n">filter</span><span class="p">{</span> <span class="n">it</span> <span class="p">%</span> <span class="n">prime</span> <span class="p">!=</span> <span class="m">0</span> <span class="p">}</span>
+     <span class="kd">val</span> <span class="py">prime</span> <span class="p">=</span> <span class="n">numbers</span><span class="p">.</span><span class="n">first</span><span class="p">()</span>
+     <span class="n">primes</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">prime</span><span class="p">)</span>
+     <span class="n">numbers</span> <span class="p">=</span> <span class="n">numbers</span><span class="p">.</span><span class="n">filter</span><span class="p">{</span> <span class="n">it</span> <span class="p">%</span> <span class="n">prime</span> <span class="p">!=</span> <span class="m">0</span> <span class="p">}</span>
  <span class="p">}</span>
  <span class="n">print</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span>
  <span class="c1">// 출력 결과 : [2, 3, 5, 7, 11, 13, 17, 19 ... 83, 89, 97]
-</span></code></pre></div>    </div>
+</span></code></pre></div></div>
 
-    <h3 id="sequence를-이용해-에라토스테네스의-체-구현">Sequence를 이용해 에라토스테네스의 체 구현</h3>
-    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">val</span> <span class="py">primes</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">sequence</span> <span class="p">{</span>
+<h3 id="sequence를-이용해-에라토스테네스의-체-구현">Sequence를 이용해 에라토스테네스의 체 구현</h3>
+
+<h4 id="정상적으로-작동하는-코드">정상적으로 작동하는 코드</h4>
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">val</span> <span class="py">primes</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">sequence</span> <span class="p">{</span>
      <span class="kd">val</span> <span class="py">numbers</span> <span class="p">=</span> <span class="n">generateSequence</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">{</span> <span class="n">it</span> <span class="p">+</span> <span class="m">1</span> <span class="p">}</span>
 
      <span class="k">while</span><span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="p">{</span>
@@ -257,14 +258,11 @@
 
  <span class="n">print</span><span class="p">(</span><span class="n">primes</span><span class="p">.</span><span class="n">take</span><span class="p">(</span><span class="m">10</span><span class="p">).</span><span class="n">toList</span><span class="p">())</span>
  <span class="c1">// 출력 결과 : [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
-</span></code></pre></div>    </div>
-  </li>
-  <li>
-    <p>여기서 최적화를 고민해 볼 때 다음과 같은 코드로 작성할 수 있다.(작동하지 않는 코드)</p>
+</span></code></pre></div></div>
 
-    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">val</span> <span class="py">primes</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">sequence</span> <span class="p">{</span>
-     <span class="kd">val</span> <span class="py">numbers</span> <span class="p">=</span> <span class="n">generateSequence</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">{</span> <span class="n">it</span> <span class="p">+</span> <span class="m">1</span> <span class="p">}</span>
-
+<h4 id="여기서-최적화를-고민해-볼-때-다음과-같은-코드로-작성할-수-있다작동하지-않는-코드">여기서 최적화를 고민해 볼 때 다음과 같은 코드로 작성할 수 있다.(작동하지 않는 코드)</h4>
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">val</span> <span class="py">primes</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">sequence</span> <span class="p">{</span>
+     <span class="kd">val</span> <span class="py">numbers</span> <span class="p">=</span> <span class="n">generateSequence</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">{</span> <span class="n">it</span> <span class="p">+</span> <span class="m">1</span> <span class="p">}</span> 
      <span class="kd">val</span> <span class="py">prime</span><span class="p">:</span> <span class="n">Int</span> <span class="c1">// prime을 반복문 스코프 바깥으로 빼냄
 </span>     <span class="k">while</span><span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="p">{</span>
          <span class="n">prime</span> <span class="p">=</span> <span class="n">numbers</span><span class="p">.</span><span class="n">first</span><span class="p">()</span>
@@ -274,20 +272,23 @@
      <span class="p">}</span>
  <span class="p">}</span>
 
- <span class="n">print</span><span class="p">(</span><span class="n">primes</span><span class="p">.</span><span class="n">take</span><span class="p">(</span><span class="m">10</span><span class="p">).</span><span class="n">toList</span><span class="p">())</span>
- <span class="c1">// 출력 결과 : [2, 3, 5, 6, 7, 8, 9, 10, 11, 12]
-</span></code></pre></div>    </div>
+    <span class="n">print</span><span class="p">(</span><span class="n">primes</span><span class="p">.</span><span class="n">take</span><span class="p">(</span><span class="m">10</span><span class="p">).</span><span class="n">toList</span><span class="p">())</span>
+    <span class="c1">// 출력 결과 : [2, 3, 5, 6, 7, 8, 9, 10, 11, 12]
+</span></code></pre></div></div>
+
+<p>출력 결과를 보면 실행 결과가 이상하게 나오는 것을 볼 수 있다. 왜?</p>
+
+<h3 id="prime이라는-변수의-reference에-해당하는-filter-연산">prime이라는 변수의 reference에 해당하는 filter 연산</h3>
+<ul>
+  <li>
+    <p>sequence 내부에서 filter 함수는 Iterable 연산과는 다르게 요소 하나하나씩 순서대로 연산을 진행한다. <br />
+ 기존 Iterable에서는 하나의 list가 통째로 filter 함수에 들어가서 연산을 진행하고, 그 결과를 담은 새로운 list를 생성하여 다음 연산에 넘겨주는 형태의 연산 방법을 가지고 있었다.</p>
   </li>
   <li>
-    <p>출력 결과를 보면 실행 결과가 이상하게 나오는 것을 볼 수 있다. 왜?</p>
-
-    <h3 id="prime이라는-변수의-reference에-해당하는-filter-연산">prime이라는 변수의 reference에 해당하는 filter 연산</h3>
-    <p>sequence 내부에서 filter 함수는 Iterable 연산과는 다르게 요소 하나하나씩 순서대로 연산을 진행한다. <br />
- 기존 Iterable에서는 하나의 list가 통째로 filter 함수에 들어가서 연산을 진행하고, 그 결과를 담은 새로운 list를 생성하여 다음 연산에 넘겨주는 형태의 연산 방법을 가지고 있었다. <br />
- 하지만 sequence에서는 모든 요소를 차례차례 연산하다가 조건에 맞지 않는 값이 들어오면, 해당 변수의 reference에 해당하는 연산 자체를 종료해버린다. <br />
- 정상적으로 작동하는 코드에서는 반복문을 돌 때 마다 새로운 reference를 생성하여 해당 prime 값에 해당하는 filter 연산을 진행 해 주었고, 정상적인 연산을 수행했다. <br />
- 반대로 제대로 작동하지 않는 코드에서는 반복문 바깥에 있는 prime 변수를 캡쳐하고, 해당 reference의 값이 4일 때 filter 연산이 종료되어 버렸으므로 <br />
- 그 뒤 부터는 연속된 숫자들이 출력되게 되는 것이다.</p>
+    <p>하지만 sequence에서는 모든 요소를 차례차례 연산하다가 조건에 맞지 않는 값이 들어오면, 해당 변수의 reference에 해당하는 연산 자체를 종료해버린다. 정상적으로 작동하는 코드에서는 반복문을 돌 때 마다 새로운 reference를 생성하여 해당 prime 값에 해당하는 filter 연산을 진행 해 주었고, 정상적인 연산을 수행했다.</p>
+  </li>
+  <li>
+    <p>반대로 제대로 작동하지 않는 코드에서는 반복문 바깥에 있는 prime 변수를 캡쳐하고, 해당 reference의 값이 4일 때 filter 연산이 종료되어 버렸으므로 그 뒤 부터는 filter 연산이 작동하지 않고 drop() 함수만 동작하기 때문에 연속된 숫자들이 출력되게 되는 것이다.</p>
   </li>
 </ul>
 
