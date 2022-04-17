@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="  프로퍼티보다는 지역변수를 사용하는 것이 좋다.      최대한 좁은 스코프를 갖게 변수를 사용해야 한다. 예를들어 반복문 내부에서만 변수가 사용된다면, 변수를 반복문 내부에 작성하는 것이 좋다.  0️⃣ 변수의 스코프는 항상 최소화  변수의 스코프 지정     val a = 1...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[이펙티브 코틀린] 변수의 스코프를 최소화하라 📚 | JihoKevin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[이펙티브 코틀린] 변수의 스코프를 최소화하라 📚 | JihoKevin">
+  <meta name="twitter:description" content="  프로퍼티보다는 지역변수를 사용하는 것이 좋다.      최대한 좁은 스코프를 갖게 변수를 사용해야 한다. 예를들어 반복문 내부에서만 변수가 사용된다면, 변수를 반복문 내부에 작성하는 것이 좋다.  0️⃣ 변수의 스코프는 항상 최소화  변수의 스코프 지정     val a = 1...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2022-04/kotlin-%EC%9D%B4%ED%8E%99%ED%8B%B0%EB%B8%8C-%EC%BD%94%ED%8B%80%EB%A6%B0-02">
+  <meta property="og:title" content="[이펙티브 코틀린] 변수의 스코프를 최소화하라 📚 | JihoKevin">
+  <meta property="og:description" content="  프로퍼티보다는 지역변수를 사용하는 것이 좋다.      최대한 좁은 스코프를 갖게 변수를 사용해야 한다. 예를들어 반복문 내부에서만 변수가 사용된다면, 변수를 반복문 내부에 작성하는 것이 좋다.  0️⃣ 변수의 스코프는 항상 최소화  변수의 스코프 지정     val a = 1...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[이펙티브 코틀린] 변수의 스코프를 최소화하라 📚 | JihoKevin</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2022-04/kotlin-%EC%9D%B4%ED%8E%99%ED%8B%B0%EB%B8%8C-%EC%BD%94%ED%8B%80%EB%A6%B0-02">
+  <link rel="alternate" type="application/rss+xml" title="JihoKevin" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">신지호</a>
+  <span class="author_job">주니어 안드로이드 개발자</span>
+  <span class="author_bio mbm">방문해주셔서 감사합니다!🙇🏻‍♂️</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+              
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('jhshin9250@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/jiho_925" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/JihoKevin" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[이펙티브 코틀린] 변수의 스코프를 최소화하라 📚">[이펙티브 코틀린] 변수의 스코프를 최소화하라 📚</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        16 APR 2022
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    5 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <hr />
+<ol>
+  <li><strong>프로퍼티보다는 지역변수를 사용하는 것이 좋다.</strong></li>
+  <li>
+    <h2 id="최대한-좁은-스코프를-갖게-변수를-사용해야-한다-예를들어-반복문-내부에서만-변수가-사용된다면-변수를-반복문-내부에-작성하는-것이-좋다"><strong>최대한 좁은 스코프를 갖게 변수를 사용해야 한다. 예를들어 반복문 내부에서만 변수가 사용된다면, 변수를 반복문 내부에 작성하는 것이 좋다.</strong></h2>
+  </li>
+</ol>
+
+<h2 id="0️⃣-변수의-스코프는-항상-최소화">0️⃣ 변수의 스코프는 항상 최소화</h2>
+<ul>
+  <li>변수의 스코프 지정
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">val</span> <span class="py">a</span> <span class="p">=</span> <span class="m">1</span>
+ <span class="k">fun</span> <span class="nf">hello</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">b</span> <span class="p">=</span> <span class="m">2</span>
+  <span class="n">print</span><span class="p">(</span><span class="n">a</span> <span class="p">+</span> <span class="n">b</span><span class="p">)</span>
+ <span class="p">}</span>
+ <span class="kd">val</span> <span class="py">world</span> <span class="p">=</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">c</span> <span class="p">=</span> <span class="m">3</span>
+  <span class="n">print</span><span class="p">(</span><span class="n">a</span> <span class="p">+</span> <span class="n">c</span><span class="p">)</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>hello와 world 함수는 스코프에서는 외부 스코프에 있는 변수에 접근할 수 있다.</li>
+  <li>외부 스코프에서는 내부 스코프에 정의된 변수에 접근할 수 없다.</li>
+</ul>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// 나쁜 예시
+</span> <span class="kd">var</span> <span class="py">user</span><span class="p">:</span> <span class="n">User</span>
+ <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="n">users</span><span class="p">.</span><span class="n">indices</span><span class="p">)</span> <span class="p">{</span>
+     <span class="n">user</span> <span class="p">=</span> <span class="n">users</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+     <span class="n">print</span><span class="p">(</span><span class="s">"User at $i is $user"</span><span class="p">)</span>
+ <span class="p">}</span>
+ 
+ <span class="c1">// 조금 더 좋은 예시
+</span> <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="n">users</span><span class="p">.</span><span class="n">indices</span><span class="p">)</span> <span class="p">{</span>
+     <span class="kd">val</span> <span class="py">user</span> <span class="p">=</span> <span class="n">users</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+     <span class="n">print</span><span class="p">(</span><span class="s">"User at $i is $user"</span><span class="p">)</span>
+ <span class="p">}</span>
+
+ <span class="c1">// 제일 좋은 예시
+</span> <span class="k">for</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span> <span class="k">in</span> <span class="n">users</span><span class="p">.</span><span class="n">withIndex</span><span class="p">())</span> <span class="p">{</span>
+     <span class="n">print</span><span class="p">(</span><span class="s">"User at $i is $user"</span><span class="p">)</span>
+ <span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>위 코드의 첫 번째 예시에서 변수 user는 for문 스코프 내부뿐만 아니라 외부에서도 사용할 수 있다.</li>
+  <li>반면에 두 번째와 세 번째 예시는 변수 user의 스코프를 for문 내부로 제한한다.</li>
+</ul>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// 나쁜 예시
+</span> <span class="kd">val</span> <span class="py">user</span><span class="p">:</span> <span class="n">User</span>
+ <span class="k">if</span><span class="p">(</span><span class="n">hasValue</span><span class="p">)</span> <span class="p">{</span>
+     <span class="n">user</span> <span class="p">=</span> <span class="n">getValue</span><span class="p">()</span>
+ <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+     <span class="n">user</span> <span class="p">=</span> <span class="n">User</span><span class="p">()</span>
+ <span class="p">}</span>
+ 
+ <span class="c1">// 조금 더 좋은 예시
+</span> <span class="kd">val</span> <span class="py">user</span><span class="p">:</span> <span class="n">User</span> <span class="p">=</span> <span class="k">if</span><span class="p">(</span><span class="n">hasVaule</span><span class="p">)</span> <span class="p">{</span>
+     <span class="n">getValue</span><span class="p">()</span>
+ <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+     <span class="n">User</span><span class="p">()</span>
+ <span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>위와 같이 변수는 읽기 전용 또는 읽고 쓰기 전용 여부와 상관없이, 변수를 정의할 때 초기화 되는 것이 좋다.</li>
+  <li>변수를 초기화 할 때 if, try-catch, when, Elvis 표현식 등을 함께 활용한다면, 최대한 변수를 정의할 때 초기화 할 수 있다.</li>
+</ul>
+
+<h2 id="1️⃣-캡처링">1️⃣ 캡처링</h2>
+<ul>
+  <li>소수를 구하는 알고리즘인 에라토스테네스의 체를 Collection과 Sequence를 활용하여 예시로 구현 해 볼 수 있겠다.</li>
+</ul>
+
+<p>### Iterator 방식을 통해 에라토스테네스의 체 구현</p>
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">var</span> <span class="py">numbers</span> <span class="p">=</span> <span class="p">(</span><span class="m">2</span><span class="o">..</span><span class="m">100</span><span class="p">).</span><span class="n">toList</span><span class="p">()</span>
+ <span class="kd">val</span> <span class="py">primes</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;()</span>
+ <span class="k">while</span><span class="p">(</span><span class="n">numbers</span><span class="p">.</span><span class="n">isNotEmpty</span><span class="p">())</span> <span class="p">{</span>
+     <span class="kd">val</span> <span class="py">prime</span> <span class="p">=</span> <span class="n">numbers</span><span class="p">.</span><span class="n">first</span><span class="p">()</span>
+     <span class="n">primes</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">prime</span><span class="p">)</span>
+     <span class="n">numbers</span> <span class="p">=</span> <span class="n">numbers</span><span class="p">.</span><span class="n">filter</span><span class="p">{</span> <span class="n">it</span> <span class="p">%</span> <span class="n">prime</span> <span class="p">!=</span> <span class="m">0</span> <span class="p">}</span>
+ <span class="p">}</span>
+ <span class="n">print</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span>
+ <span class="c1">// 출력 결과 : [2, 3, 5, 7, 11, 13, 17, 19 ... 83, 89, 97]
+</span></code></pre></div></div>
+
+<p>### Sequence를 이용해 에라토스테네스의 체 구현</p>
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">val</span> <span class="py">primes</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">sequence</span> <span class="p">{</span>
+     <span class="kd">val</span> <span class="py">numbers</span> <span class="p">=</span> <span class="n">generateSequence</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">{</span> <span class="n">it</span> <span class="p">+</span> <span class="m">1</span> <span class="p">}</span>
+
+     <span class="k">while</span><span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">val</span> <span class="py">prime</span> <span class="p">=</span> <span class="n">numbers</span><span class="p">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="k">yield</span><span class="p">(</span><span class="n">prime</span><span class="p">)</span>
+        <span class="n">numbers</span> <span class="p">=</span> <span class="n">numbers</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+            <span class="p">.</span><span class="n">filter</span> <span class="p">{</span> <span class="n">it</span> <span class="p">%</span> <span class="n">prime</span> <span class="p">!=</span> <span class="m">0</span> <span class="p">}</span>
+     <span class="p">}</span>
+ <span class="p">}</span>
+
+ <span class="n">print</span><span class="p">(</span><span class="n">primes</span><span class="p">.</span><span class="n">take</span><span class="p">(</span><span class="m">10</span><span class="p">).</span><span class="n">toList</span><span class="p">())</span>
+ <span class="c1">// 출력 결과 : [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+</span></code></pre></div></div>
+<ul>
+  <li>여기서 최적화를 고민해 볼 때 다음과 같은 코드로 작성할 수 있다.(작동하지 않는 코드)</li>
+</ul>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">val</span> <span class="py">primes</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">sequence</span> <span class="p">{</span>
+     <span class="kd">val</span> <span class="py">numbers</span> <span class="p">=</span> <span class="n">generateSequence</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">{</span> <span class="n">it</span> <span class="p">+</span> <span class="m">1</span> <span class="p">}</span>
+
+     <span class="kd">val</span> <span class="py">prime</span><span class="p">:</span> <span class="n">Int</span> <span class="c1">// prime을 반복문 스코프 바깥으로 빼냄
+</span>     <span class="k">while</span><span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">prime</span> <span class="p">=</span> <span class="n">numbers</span><span class="p">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="k">yield</span><span class="p">(</span><span class="n">prime</span><span class="p">)</span>
+        <span class="n">numbers</span> <span class="p">=</span> <span class="n">numbers</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+            <span class="p">.</span><span class="n">filter</span> <span class="p">{</span> <span class="n">it</span> <span class="p">%</span> <span class="n">prime</span> <span class="p">!=</span> <span class="m">0</span> <span class="p">}</span>
+     <span class="p">}</span>
+ <span class="p">}</span>
+
+ <span class="n">print</span><span class="p">(</span><span class="n">primes</span><span class="p">.</span><span class="n">take</span><span class="p">(</span><span class="m">10</span><span class="p">).</span><span class="n">toList</span><span class="p">())</span>
+ <span class="c1">// 출력 결과 : [2, 3, 5, 6, 7, 8, 9, 10, 11, 12]
+</span></code></pre></div></div>
+<ul>
+  <li>출력 결과를 보면 실행 결과가 이상하게 나오는 것을 볼 수 있다. 왜?</li>
+</ul>
+
+<p>### prime이라는 변수의 reference에 해당하는 filter 연산
+ sequence 내부에서 filter 함수는 Iterable 연산과는 다르게 요소 하나하나씩 순서대로 연산을 진행한다.
+ 기존 Iterable에서는 하나의 list가 통째로 filter 함수에 들어가서 연산을 진행하고, 그 결과를 담은 새로운 list를 생성하여 다음 연산에 넘겨주는 형태의 연산 방법을 가지고 있었다.
+ 하지만 sequence에서는 모든 요소를 차례차례 연산하다가 조건에 맞지 않는 값이 들어오면, 해당 변수의 reference에 해당하는 연산 자체를 종료해버린다.
+ 정상적으로 작동하는 코드에서는 반복문을 돌 때 마다 새로운 reference를 생성하여 해당 prime 값에 해당하는 filter 연산을 진행 해 주었고, 정상적인 연산을 수행했다.
+ 반대로 제대로 작동하지 않는 코드에서는 반복문 바깥에 있는 prime 변수를 캡쳐하고, 해당 reference의 값이 4일 때 filter 연산이 종료되어 버렸으므로
+ 그 뒤 부터는 연속된 숫자들이 출력되게 되는 것이다.</p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+        repo="JihoKevin/blog-comments"
+        issue-term="pathname"
+        label="comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2022 신지호. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

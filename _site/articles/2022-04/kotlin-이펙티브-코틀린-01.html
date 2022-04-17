@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="가변성을 제한하라      if(name != null) 등의 조건문을 사용해서 null인지 검사해주면 조건문 본문 내부에서는 name이 null이 아니라는 것인지 확인이 되었기 때문에 String?을 String 타입으로 스마트 캐스팅 해준다.    null 확인 이외에도 여러 ...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="[이펙티브 코틀린] 가변성을 제한하라 📚 | JihoKevin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[이펙티브 코틀린] 가변성을 제한하라 📚 | JihoKevin">
+  <meta name="twitter:description" content="가변성을 제한하라      if(name != null) 등의 조건문을 사용해서 null인지 검사해주면 조건문 본문 내부에서는 name이 null이 아니라는 것인지 확인이 되었기 때문에 String?을 String 타입으로 스마트 캐스팅 해준다.    null 확인 이외에도 여러 ...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2022-04/kotlin-%EC%9D%B4%ED%8E%99%ED%8B%B0%EB%B8%8C-%EC%BD%94%ED%8B%80%EB%A6%B0-01">
+  <meta property="og:title" content="[이펙티브 코틀린] 가변성을 제한하라 📚 | JihoKevin">
+  <meta property="og:description" content="가변성을 제한하라      if(name != null) 등의 조건문을 사용해서 null인지 검사해주면 조건문 본문 내부에서는 name이 null이 아니라는 것인지 확인이 되었기 때문에 String?을 String 타입으로 스마트 캐스팅 해준다.    null 확인 이외에도 여러 ...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>[이펙티브 코틀린] 가변성을 제한하라 📚 | JihoKevin</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2022-04/kotlin-%EC%9D%B4%ED%8E%99%ED%8B%B0%EB%B8%8C-%EC%BD%94%ED%8B%80%EB%A6%B0-01">
+  <link rel="alternate" type="application/rss+xml" title="JihoKevin" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">신지호</a>
+  <span class="author_job">주니어 안드로이드 개발자</span>
+  <span class="author_bio mbm">방문해주셔서 감사합니다!🙇🏻‍♂️</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+              
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('jhshin9250@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://instagram.com/jiho_925" class="social-link-item" target="_blank"><i class="fa fa-fw fa-instagram"></i></a></li>
+    
+    <li><a href="http://github.com/JihoKevin" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="[이펙티브 코틀린] 가변성을 제한하라 📚">[이펙티브 코틀린] 가변성을 제한하라 📚</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        16 APR 2022
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    1 min read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="가변성을-제한하라">가변성을 제한하라</h2>
+<ul>
+  <li>
+    <p>if(name != null) 등의 조건문을 사용해서 null인지 검사해주면 조건문 본문 내부에서는 name이 null이 아니라는 것인지 확인이 되었기 때문에 String?을 String 타입으로 스마트 캐스팅 해준다.
+    null 확인 이외에도 여러 타입 비교에도 활용 가능하다.</p>
+  </li>
+  <li>
+    <p>읽기 전용으로(val) 선언했을 경우 사용자 정의 getter를 가지고 있다면 스마트 캐스팅이 불가능 하다. getter를 사용하는 시점의 getter를 받는 부분의 프로퍼티나 변수의 값에 따라서 다른 결과가 나올 수 있기 때문이다.</p>
+  </li>
+  <li>코틀린에서 읽기 전용 컬렉션을 mutable하게 다운 캐스팅을 하면 안된다.</li>
+  <li>
+    <p>읽기 전용에서 mutable로 다운캐스팅 해야한다면 toMutableList와 같은 copy를 사용해야 한다.</p>
+
+    <p>### Ex) 절대 사용하지 말아야 할 코드 예시</p>
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">val</span> <span class="py">list</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
+     <span class="k">if</span><span class="p">(</span><span class="n">list</span> <span class="k">is</span> <span class="n">MutableList</span><span class="p">)</span> <span class="p">{</span>
+     <span class="n">list</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="m">4</span><span class="p">)</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">val</span> <span class="py">list</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
+ <span class="kd">val</span> <span class="py">mutableList</span> <span class="p">=</span> <span class="n">list</span><span class="p">.</span><span class="n">toMutableList</span><span class="p">()</span>
+ <span class="n">mutableList</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="m">4</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="요렇게-사용해야-한다">요렇게 사용해야 한다!</h3>
+
+<ol>
+  <li>한 번 정의된 상태가 유지되므로 코드를 이해하기 쉬워진다.</li>
+  <li>Immutable 객체는 공유했을 때 충돌이 발생하지 않으므로 병렬 처리를 안전하게 진행할 수 있다.</li>
+  <li>Immutable 객체에 대한 참조는 변경되지 않으므로 쉽게 캐시 가능하다.</li>
+  <li>
+    <p>Immutable 객체는 방어적 복사본을 만들 필요가 없다. -&gt; 깊은 복사를 따로 수행 해 줄 필요가 없다.</p>
+
+    <h3 id="ex-최악의-코드-예시">Ex) 최악의 코드 예시</h3>
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">var</span> <span class="py">list3</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;()</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>이렇게 코드를 작성하면, 변경될 수 있는 두 지점 모두에 대한 동기화를 구현해야 한다. 또한 모호성이 발생하여 += 연산자를 사용할 수 없게 된다.</p>
+
+<p>중간 요약 : 상태를 변경할 수 있는 불필요한 방법은 만들지 않아야 한다. 상태를 변경하는 모든 방법은 코드를 이해하고 유지해야 하므로 비용이 발생하게 되고, 이를 막기 위해 가변성을 최대한 제한하는 것이 좋다.</p>
+
+  </article>
+
+  <div id="comment">
+    <script src="https://utteranc.es/client.js"
+        repo="JihoKevin/blog-comments"
+        issue-term="pathname"
+        label="comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </div>
+</div>
+
+<!--  -->
+
+        <footer>
+  &copy; 2022 신지호. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>
