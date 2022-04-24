@@ -5,8 +5,8 @@
     <description>성장에 미쳐있는 안드로이드 개발자, 신지호 입니다💪</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2022-04-17</pubDate>
-    <lastBuildDate>Sun, 17 Apr 2022 11:39:40 +0200</lastBuildDate>
+    <pubDate>2022-04-24</pubDate>
+    <lastBuildDate>Sun, 24 Apr 2022 13:32:30 +0200</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
@@ -143,7 +143,7 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2022-04-17</pubDate>
+        <pubDate>2022-04-24</pubDate>
         <link>http://localhost:4000/articles/2022-04/kotlin-%EC%9D%B4%ED%8E%99%ED%8B%B0%EB%B8%8C-%EC%BD%94%ED%8B%80%EB%A6%B0-02</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2022-04/kotlin-%EC%9D%B4%ED%8E%99%ED%8B%B0%EB%B8%8C-%EC%BD%94%ED%8B%80%EB%A6%B0-02</guid>
         
@@ -166,7 +166,7 @@
   &lt;li&gt;
     &lt;p&gt;읽기 전용에서 mutable로 다운캐스팅 해야한다면 toMutableList와 같은 copy를 사용해야 한다.&lt;/p&gt;
 
-    &lt;p&gt;### Ex) 절대 사용하지 말아야 할 코드 예시&lt;/p&gt;
+    &lt;h3 id=&quot;ex-절대-사용하지-말아야-할-코드-예시&quot;&gt;Ex) 절대 사용하지 말아야 할 코드 예시&lt;/h3&gt;
     &lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;listOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MutableList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
      &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -181,25 +181,22 @@
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;요렇게-사용해야-한다&quot;&gt;요렇게 사용해야 한다!&lt;/h3&gt;
-
 &lt;ol&gt;
   &lt;li&gt;한 번 정의된 상태가 유지되므로 코드를 이해하기 쉬워진다.&lt;/li&gt;
   &lt;li&gt;Immutable 객체는 공유했을 때 충돌이 발생하지 않으므로 병렬 처리를 안전하게 진행할 수 있다.&lt;/li&gt;
   &lt;li&gt;Immutable 객체에 대한 참조는 변경되지 않으므로 쉽게 캐시 가능하다.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Immutable 객체는 방어적 복사본을 만들 필요가 없다. -&amp;gt; 깊은 복사를 따로 수행 해 줄 필요가 없다.&lt;/p&gt;
-
-    &lt;h3 id=&quot;ex-최악의-코드-예시&quot;&gt;Ex) 최악의 코드 예시&lt;/h3&gt;
-    &lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;list3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mutableListOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
+  &lt;li&gt;Immutable 객체는 방어적 복사본을 만들 필요가 없다. -&amp;gt; 깊은 복사를 따로 수행 해 줄 필요가 없다.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;이렇게 코드를 작성하면, 변경될 수 있는 두 지점 모두에 대한 동기화를 구현해야 한다. 또한 모호성이 발생하여 += 연산자를 사용할 수 없게 된다.&lt;/p&gt;
+&lt;h3 id=&quot;최악의-코드-예시&quot;&gt;최악의 코드 예시&lt;/h3&gt;
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;list3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mutableListOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이렇게 코드를 작성하면, 변경될 수 있는 두 지점 모두에 대한 동기화를 구현해야 한다. 또한 모호성이 발생하여 &lt;strong&gt;+=&lt;/strong&gt; 연산자를 사용할 수 없게 된다.&lt;/p&gt;
 
 &lt;p&gt;중간 요약 : 상태를 변경할 수 있는 불필요한 방법은 만들지 않아야 한다. 상태를 변경하는 모든 방법은 코드를 이해하고 유지해야 하므로 비용이 발생하게 되고, 이를 막기 위해 가변성을 최대한 제한하는 것이 좋다.&lt;/p&gt;
 </description>
-        <pubDate>2022-04-17</pubDate>
+        <pubDate>2022-04-24</pubDate>
         <link>http://localhost:4000/articles/2022-04/kotlin-%EC%9D%B4%ED%8E%99%ED%8B%B0%EB%B8%8C-%EC%BD%94%ED%8B%80%EB%A6%B0-01</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2022-04/kotlin-%EC%9D%B4%ED%8E%99%ED%8B%B0%EB%B8%8C-%EC%BD%94%ED%8B%80%EB%A6%B0-01</guid>
         
@@ -295,7 +292,7 @@
 
 &lt;p&gt;[마지막 수정 : 2022.04.10]&lt;/p&gt;
 </description>
-        <pubDate>2022-04-17</pubDate>
+        <pubDate>2022-04-24</pubDate>
         <link>http://localhost:4000/articles/2022-04/kotlin-variant</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2022-04/kotlin-variant</guid>
         
@@ -435,7 +432,7 @@ IOS 개발 팀원 분이 나의 코틀린 코드를 리뷰 해 주시면서 주�
 
 &lt;p&gt;[2022.04.09 나인투원 안드로이드 온보딩 프로젝트 회고]&lt;/p&gt;
 </description>
-        <pubDate>2022-04-17</pubDate>
+        <pubDate>2022-04-24</pubDate>
         <link>http://localhost:4000/articles/2022-04/onboarding-retrospect</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2022-04/onboarding-retrospect</guid>
         
@@ -508,7 +505,7 @@ IOS 개발 팀원 분이 나의 코틀린 코드를 리뷰 해 주시면서 주�
   &lt;p&gt;출력결과 : 2&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
-        <pubDate>2022-04-17</pubDate>
+        <pubDate>2022-04-24</pubDate>
         <link>http://localhost:4000/articles/2022-01/algorithm-heap</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2022-01/algorithm-heap</guid>
         
@@ -600,7 +597,7 @@ IOS 개발 팀원 분이 나의 코틀린 코드를 리뷰 해 주시면서 주�
     * 서비스간에 호출이 연속적이기 때문에 디버깅의 난이도가 높을 수 밖에 없다.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>2022-04-17</pubDate>
+        <pubDate>2022-04-24</pubDate>
         <link>http://localhost:4000/articles/2021-12/cs-programming01</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-12/cs-programming01</guid>
         
@@ -635,7 +632,7 @@ println(“$person”)&lt;/p&gt;
 
 &lt;p&gt;이렇게 data class를 생성하여 하나의 object를 만들고 instance화 한 다음 이를 이용하여 각각 초기화 해 주는 것을 볼 수 있다.&lt;/p&gt;
 </description>
-        <pubDate>2022-04-17</pubDate>
+        <pubDate>2022-04-24</pubDate>
         <link>http://localhost:4000/articles/2021-12/kotlin-scope-function</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-12/kotlin-scope-function</guid>
         
@@ -704,7 +701,7 @@ this 키워드가 나오는 것을 확인할 수 있는데 이는 확장함수 �
 
 &lt;p&gt;또한 Static 즉, 정적인 형태의 성격을 띄기 때문에 상속을 받는 클래스 내에 구현된 함수가 아인 상속을 해 주는 쪽의 클래스에 정의된 확장 함수를 호출하게 된다.&lt;/p&gt;
 </description>
-        <pubDate>2022-04-17</pubDate>
+        <pubDate>2022-04-24</pubDate>
         <link>http://localhost:4000/articles/2021-12/kotlin-extension-function</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-12/kotlin-extension-function</guid>
         
@@ -1445,7 +1442,7 @@ RxNewThreadScheduler-3 | 940 | value = &quot;country&quot;:&quot;KR&quot;
 RxNewThreadScheduler-1 | 940 | value = &quot;temp&quot;:278.52
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>2022-04-17</pubDate>
+        <pubDate>2022-04-24</pubDate>
         <link>http://localhost:4000/articles/2021-12/rx-java-scheduler</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-12/rx-java-scheduler</guid>
         
@@ -1675,7 +1672,7 @@ CoroutineScope(Dispatchers.Main).launch {
 
 &lt;p&gt;&lt;em&gt;2021.12.16 최종 수정. 지속 업데이트 예정&lt;/em&gt;&lt;/p&gt;
 </description>
-        <pubDate>2022-04-17</pubDate>
+        <pubDate>2022-04-24</pubDate>
         <link>http://localhost:4000/articles/2021-12/android-coroutine-control</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-12/android-coroutine-control</guid>
         
