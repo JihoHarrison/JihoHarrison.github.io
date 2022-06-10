@@ -4,10 +4,10 @@
 ####################################
 #
 remote_theme : renyuanz/leonids
-title: JihoKevin
+title: JihoHarrison
 email: jhshin925@gmail.com
 description: 성장에 미쳐있는 안드로이드 개발자, 신지호 입니다💪
-url: https://jihokevin.github.io/
+url: https://jihoharrison.github.io/
 baseurl : ""
 keywords: ["blog", "jekyll"]
 
@@ -53,7 +53,7 @@ owner:
     ad-client:
     ad-slot:
   bing-verify:
-  github: JihoKevin
+  github: JihoHarrison
   gitlab: #username
   stackoverflow: #123456/username   from a "http://stackoverflow.com/users/123456/username" link
   linkedin: #username
