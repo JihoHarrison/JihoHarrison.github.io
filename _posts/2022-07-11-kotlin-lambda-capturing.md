@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[Kotlin] 람다 캡쳐링(Lambda Capturing)📷"
-date: 2022-07-11 22:38:01 +0700
+date: 2022-07-11 20:38:01 +0700
 categories: [kotlin]
 ---
 
