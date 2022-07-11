@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[안드로이드] 네비게이션 메뉴에 적용한 BehaviorProcessor의 Flowable 🔀"
+title:  "[안드로이드] 네비게이션 메뉴에 적용한 BehaviorProcessor, Flowable 🔀"
 date: 2021-09-14 16:34:10 +0700
 categories: [안드로이드]
 ---
