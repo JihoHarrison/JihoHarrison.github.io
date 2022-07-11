@@ -1,19 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>JihoKevin</title>
+    <title>JihoHarrison</title>
     <description>성장에 미쳐있는 안드로이드 개발자, 신지호 입니다💪</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2022-04-24</pubDate>
-    <lastBuildDate>Sun, 24 Apr 2022 13:32:30 +0200</lastBuildDate>
+    <pubDate>2022-07-11</pubDate>
+    <lastBuildDate>Mon, 11 Jul 2022 17:22:04 +0200</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
+    
+      <item>
+        <title>[Kotlin] 람다 캡쳐링(Lambda Capturing)📷</title>
+        <description>&lt;h2 id=&quot;0️⃣-프롤로그&quot;&gt;0️⃣ 프롤로그&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;이펙티브 코틀린을 읽던 중에 람다 캡쳐링이라는 현상을 알게되었다. 람다식 내부에서 식 외부에 존재하는 지역변수를 사용할 때 발생하는 문제점을 이야기하며 소개되었다. 회사에서 동료들과 이야기 하면서도 다시 생각하게 되는 개념이라 정리해본다.
+(Kotlin 카테고리지만 근본이되는 자바의 개념으로 정리)
+    &lt;h2 id=&quot;1️⃣-람다-캡쳐링&quot;&gt;1️⃣ 람다 캡쳐링&lt;/h2&gt;
+  &lt;/li&gt;
+  &lt;li&gt;람다식은 기본적으로 &lt;strong&gt;(파라미터) -&amp;gt; 바디&lt;/strong&gt;의 구조를 가지고있고, 바디에서는 파라미터로 넘겨진 변수를 활용하여 작업을 수행한다. 이 때 람다 캡쳐링이라는 개념이 등장하는데 파라미터로 넘겨받은 데이터가 아닌 람다식 외부에서 정의된 변수를 참조하는 데이터나 변수를 람다식 내부에 저장하고 사용하는 동작을 의미한다. 코틀린의 람다를 살펴보기 전에 자바의 람다 형식부터 살펴보았다.
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;lambda&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; 
+ &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;captureValue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; 
+ &lt;span class=&quot;n&quot;&gt;Runnable&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;captureValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;captureValue&lt;/code&gt;라는 이름의 지역변수를 람다에 캡쳐하고 해당 람다식을 &lt;code class=&quot;highlighter-rouge&quot;&gt;r&lt;/code&gt;이라는 변수에 할당하는 코드이다.
+위 코드에서 지역변수 &lt;code class=&quot;highlighter-rouge&quot;&gt;captureValue&lt;/code&gt;와 람다식 내부에서 사용되는 자유변수인 &lt;code class=&quot;highlighter-rouge&quot;&gt;captureValue&lt;/code&gt;는 별개의 데이터라는 점이다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;2️⃣-람다-캡쳐링의-제약조건&quot;&gt;2️⃣ 람다 캡쳐링의 제약조건&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;람다식 내부에서 클래스의 static 필드나 인스턴스 등을 참조하는데에는 아무런 문제가 없다. 그치만 일반 지역변수를 람다식 내부에서 재할당하는 동작을 구현한다면 다음과 같은 제약사항에 걸리게 된다.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;local variables referenced from a lambda expression must be final or effectively final&lt;/code&gt; &lt;br /&gt;
+-&amp;gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;람다식 내부에서는 값이 단 한 번만 할당되는(final) 지역변수만 캡쳐할 수 있다&lt;/code&gt;
+        &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;lambdaCapturing_localVarMustBeFinal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; 
+ &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;captureValue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; 
+ &lt;span class=&quot;n&quot;&gt;Runnable&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;captureValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;captureValue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;33&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 컴파일 에러 발생&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+        &lt;p&gt;위 처럼 람다에서 사용된 지역변수를 재할당 시도해도 컴파일 에러를 발생시킨다.&lt;/p&gt;
+        &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;lambdaCapturing_localVarMustBeFinal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; 
+ &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;captureValue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; 
+ &lt;span class=&quot;n&quot;&gt;Runnable&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;captureValue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;33&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 컴파일 에러 발생&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+        &lt;p&gt;또한 이렇게 람다 내부에서 외부 지역변수를 재할당해줘도 동일하게 컴파일 에러가 발생한다.&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;3️⃣-자유변수와-jvm-메모리-구조&quot;&gt;3️⃣ 자유변수와 JVM 메모리 구조&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;자유변수(free variable)&lt;/code&gt;란 이처럼 람다식 외부에서 정의된 지역변수를 람다식 내부에서 참조하는 변수를 의미한다. 그럼 자유변수를 사용하는것이 왜 문제가 될까..? JVM의 메모리 구조에 답이있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/27722059/178284883-bb8e305a-3dc8-4d20-b754-a409d7fe6c49.png&quot; alt=&quot;image&quot; /&gt;
+JVM의 구조를 보면 &lt;code class=&quot;highlighter-rouge&quot;&gt;RunTime Data Area&lt;/code&gt;가 JVM의 메모리 영역으로 자바 애플리케이션을 실행할 때 사용되는 데이터들을 적재하는 영역이다.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Method area (메소드 영역)&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;클래스 멤버 변수의 이름, 데이터 타입, 접근 제어자 정보같은 필드 정보와 메소드의 이름, 리턴 타입, 파라미터, 접근 제어자 정보같은 메소드 정보, Type정보(Interface인지 class인지), Constant Pool(상수 풀 : 문자 상수, 타입, 필드, 객체 참조가 저장됨), static 변수, final class 변수등이 생성되는 영역이다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Heap area (힙 영역)&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;new&lt;/code&gt; 키워드로 생성된 객체와 배열이 생성되는 영역이다. 메소드 영역에 로드된 클래스만 생성이 가능하고 &lt;code class=&quot;highlighter-rouge&quot;&gt;Garbage Collector&lt;/code&gt;가 참조되지 않는 메모리를 확인하고 제거하는 영역이다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Stack area (스택 영역)&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;지역 변수, 파라미터, 리턴 값, 연산에 사용되는 임시 값등이 생성되는 영역이다.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;int a = 10;&lt;/code&gt; 이라는 소스를 작성했다면 정수값이 할당될 수 있는 메모리공간을 a라고 잡아두고 그 메모리 영역에 값이 10이 들어간다. 
+즉, 스택에 메모리에 이름이 a라고 붙여주고 값이 10인 메모리 공간을 만든다.
+클래스 &lt;code class=&quot;highlighter-rouge&quot;&gt;Person p = new Person();&lt;/code&gt; 이라는 소스를 작성했다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;Person p&lt;/code&gt;는 스택 영역에 생성되고 
+new로 생성된 Person 클래스의 인스턴스는 힙 영역에 생성된다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;PC Register (PC 레지스터)&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Thread(쓰레드)가 생성될 때마다 생성되는 영역으로 현재 쓰레드가 실행되는 부분의 주소와 명령을 저장하고 있는 영역이다. 이 영역을 이용해서 쓰레드를 돌아가면서 수행할 수 있게 한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;여기서 중요한 부분은 Heap영역과 Stack 영역이다.
+스레드가 생성되었을 때를 기준으로 메소드 영역과 힙 영역은 모든 쓰레드가 공유하게된다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;* 지역변수는 스택 영역에 올라가게되고, 어떠한 메서드의 실행이 종료되었을 때 해당 메서드에서 선언되고
+사용되고있던 모든 지역변수의 할당은 해제된다. 하지만 힙 영역에 올라간 static 필드나 인스턴스 클래스는 남아있게 된다.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;4️⃣-느낀점&quot;&gt;4️⃣ 느낀점!&lt;/h2&gt;
+&lt;p&gt;정리하자면 람다식은 파라미터만이 아니라 람다식 외부의 선언된 변수를 활용할 수 있으며, 이러한 동작을 람다 캡처링이라고 부른다. 이때 컴파일러는 캡처하려는 지역 변수에 대해 불변성을 강제하는데, 이는 딱히 문제라고 보기 어렵다. 불변 데이터가 지니는 다양한 이점도 있겠지만, 외부 변수의 값을 변화시키는 일반적인 절차형/명령형 프로그래밍 패턴을 문법 차원에서 예방한다는 이점도 크다고 볼 수 있다. 다만, 스택 영역에 저장되지 않는 각종 인스턴스 필드와 static 변수의 경우 이러한 제약이 존재하지 않기 때문에 side effect가 발생하지 않도록 주의해야 할 것이다.&lt;/p&gt;
+
+</description>
+        <pubDate>2022-07-11</pubDate>
+        <link>http://localhost:4000/articles/2022-07/kotlin-lambda-capturing</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2022-07/kotlin-lambda-capturing</guid>
+        
+        
+        <category>kotlin</category>
+        
+      </item>
     
       <item>
         <title>[이펙티브 코틀린] 변수의 스코프를 최소화하라 📚</title>
         <description>&lt;hr /&gt;
 &lt;h3 id=&quot;1-프로퍼티보다는-지역변수를-사용하는-것이-좋다&quot;&gt;1. 프로퍼티보다는 지역변수를 사용하는 것이 좋다.&lt;/h3&gt;
 &lt;h3 id=&quot;2-최대한-좁은-스코프를-갖게-변수를-사용해야-한다-예를들어-반복문-내부에서만-변수가-사용된다면-변수를-반복문-내부에-작성하는-것이-좋다&quot;&gt;2. 최대한 좁은 스코프를 갖게 변수를 사용해야 한다. 예를들어 반복문 내부에서만 변수가 사용된다면, 변수를 반복문 내부에 작성하는 것이 좋다.&lt;/h3&gt;
+
 &lt;hr /&gt;
 &lt;h2 id=&quot;0️⃣-변수의-스코프는-항상-최소화&quot;&gt;0️⃣ 변수의 스코프는 항상 최소화&lt;/h2&gt;
 
@@ -143,7 +241,7 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2022-04-24</pubDate>
+        <pubDate>2022-07-11</pubDate>
         <link>http://localhost:4000/articles/2022-04/kotlin-%EC%9D%B4%ED%8E%99%ED%8B%B0%EB%B8%8C-%EC%BD%94%ED%8B%80%EB%A6%B0-02</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2022-04/kotlin-%EC%9D%B4%ED%8E%99%ED%8B%B0%EB%B8%8C-%EC%BD%94%ED%8B%80%EB%A6%B0-02</guid>
         
@@ -196,7 +294,7 @@
 
 &lt;p&gt;중간 요약 : 상태를 변경할 수 있는 불필요한 방법은 만들지 않아야 한다. 상태를 변경하는 모든 방법은 코드를 이해하고 유지해야 하므로 비용이 발생하게 되고, 이를 막기 위해 가변성을 최대한 제한하는 것이 좋다.&lt;/p&gt;
 </description>
-        <pubDate>2022-04-24</pubDate>
+        <pubDate>2022-07-11</pubDate>
         <link>http://localhost:4000/articles/2022-04/kotlin-%EC%9D%B4%ED%8E%99%ED%8B%B0%EB%B8%8C-%EC%BD%94%ED%8B%80%EB%A6%B0-01</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2022-04/kotlin-%EC%9D%B4%ED%8E%99%ED%8B%B0%EB%B8%8C-%EC%BD%94%ED%8B%80%EB%A6%B0-01</guid>
         
@@ -292,7 +390,7 @@
 
 &lt;p&gt;[마지막 수정 : 2022.04.10]&lt;/p&gt;
 </description>
-        <pubDate>2022-04-24</pubDate>
+        <pubDate>2022-07-11</pubDate>
         <link>http://localhost:4000/articles/2022-04/kotlin-variant</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2022-04/kotlin-variant</guid>
         
@@ -308,7 +406,7 @@
   &lt;li&gt;
     &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;2022년 3월 14일&lt;/code&gt; 안드로이드 개발자가 되기위해 취업을 준비하던 내가 드디어 주니어 개발자로 첫 회사에 입사하게 되었다. &lt;br /&gt;
  그동안 혼자 개발하면서 가졌던 나쁜 습관들을 버릴 수 있는 좋은 기회이기도 하고, 주니어 개발자로 성장하기에 정말 좋은 회사이다. &lt;br /&gt;
- 나인투원이라는 스타트업인데 면접과 코딩테스트 경험도 정말 좋은 경험이였다. &lt;strong&gt;얼마 전에 쏘카에 인수가 되어 곧 쏘카 개발팀에 합류할 것 같은 느낌&lt;/strong&gt;이 아주 강하게 들지만, 이 또한 좋은 기회로 여기고 감사하게 배우면서 개발해야겠다💪&lt;/p&gt;
+ 나인투원이라는 스타트업인데 면접과 코딩테스트 경험도 정말 좋은 경험이였다. &lt;strong&gt;얼마 전에 쏘카에 인수가 되어 곧 쏘카 개발팀에 합류할 것 같은 느낌&lt;/strong&gt;이 아주 강하게 들지만(개발 일정 밀림ㅠㅠ), 이 또한 좋은 기회로 여기고 감사하게 배우면서 개발해야겠다💪&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;최종 면접 후에 처우 제안 메일을 받았을 때의 기분이란.. 잊을 수 없는 기억이 될 것 같다. 취업을 뭔가 우당탕 준비한 것 같기도 하고.. &lt;br /&gt;
@@ -432,7 +530,7 @@ IOS 개발 팀원 분이 나의 코틀린 코드를 리뷰 해 주시면서 주�
 
 &lt;p&gt;[2022.04.09 나인투원 안드로이드 온보딩 프로젝트 회고]&lt;/p&gt;
 </description>
-        <pubDate>2022-04-24</pubDate>
+        <pubDate>2022-07-11</pubDate>
         <link>http://localhost:4000/articles/2022-04/onboarding-retrospect</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2022-04/onboarding-retrospect</guid>
         
@@ -505,7 +603,7 @@ IOS 개발 팀원 분이 나의 코틀린 코드를 리뷰 해 주시면서 주�
   &lt;p&gt;출력결과 : 2&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
-        <pubDate>2022-04-24</pubDate>
+        <pubDate>2022-07-11</pubDate>
         <link>http://localhost:4000/articles/2022-01/algorithm-heap</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2022-01/algorithm-heap</guid>
         
@@ -597,7 +695,7 @@ IOS 개발 팀원 분이 나의 코틀린 코드를 리뷰 해 주시면서 주�
     * 서비스간에 호출이 연속적이기 때문에 디버깅의 난이도가 높을 수 밖에 없다.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>2022-04-24</pubDate>
+        <pubDate>2022-07-11</pubDate>
         <link>http://localhost:4000/articles/2021-12/cs-programming01</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-12/cs-programming01</guid>
         
@@ -632,7 +730,7 @@ println(“$person”)&lt;/p&gt;
 
 &lt;p&gt;이렇게 data class를 생성하여 하나의 object를 만들고 instance화 한 다음 이를 이용하여 각각 초기화 해 주는 것을 볼 수 있다.&lt;/p&gt;
 </description>
-        <pubDate>2022-04-24</pubDate>
+        <pubDate>2022-07-11</pubDate>
         <link>http://localhost:4000/articles/2021-12/kotlin-scope-function</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-12/kotlin-scope-function</guid>
         
@@ -701,7 +799,7 @@ this 키워드가 나오는 것을 확인할 수 있는데 이는 확장함수 �
 
 &lt;p&gt;또한 Static 즉, 정적인 형태의 성격을 띄기 때문에 상속을 받는 클래스 내에 구현된 함수가 아인 상속을 해 주는 쪽의 클래스에 정의된 확장 함수를 호출하게 된다.&lt;/p&gt;
 </description>
-        <pubDate>2022-04-24</pubDate>
+        <pubDate>2022-07-11</pubDate>
         <link>http://localhost:4000/articles/2021-12/kotlin-extension-function</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-12/kotlin-extension-function</guid>
         
@@ -1442,242 +1540,12 @@ RxNewThreadScheduler-3 | 940 | value = &quot;country&quot;:&quot;KR&quot;
 RxNewThreadScheduler-1 | 940 | value = &quot;temp&quot;:278.52
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>2022-04-24</pubDate>
+        <pubDate>2022-07-11</pubDate>
         <link>http://localhost:4000/articles/2021-12/rx-java-scheduler</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2021-12/rx-java-scheduler</guid>
         
         
         <category>RxKotlin</category>
-        
-      </item>
-    
-      <item>
-        <title>[안드로이드] 코루틴 제어 (With. Job, Deferred) 🎛</title>
-        <description>&lt;h2 id=&quot;0️⃣-프롤로그&quot;&gt;0️⃣ 프롤로그&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;코루틴을 공부하면서 Coroutine에는 어떠한 주요 키워드 들이 있고, 제어를 하기 위해서는 어떻게 해야하는지, 코루틴 블록을 어떻게 생성하는지 등을 학습해왔다. 저번에 배웠던 개념에서 Job 객체, Deferred, runBlocking 등이 있었는데 더 자세히 짚고 넘어가기 위해 이렇게 정리를 진행하게 되었다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;1️⃣-launch---job&quot;&gt;1️⃣ Launch() -&amp;gt; Job&lt;/h2&gt;
-
-&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;job&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Job&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;launch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-     &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;launch 함수로 생성된 코루틴 블록은 결국 Job 객체라는 것을 반환한다. 이렇게 반환받은 Job 객체로 코루틴 블록을 취소하거나 다음 작업의 수행 전 코루틴 블록이 완료되기 까지 기다리는 등의 동작이 가능하다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;job&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;launch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;++&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
- &lt;span class=&quot;n&quot;&gt;job&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 완료 대기
-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;job&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cancel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 취소
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;위 코드에서는 join()이라는 함수로 기존에 실행되고 있던 launch 즉, 코루틴을 완료가 될 때 까지 기다려주는 작업을 해 주고 있다.&lt;/li&gt;
-  &lt;li&gt;하지만 launch로 여러개의 코루틴 블록을 실행 할 때가 있을텐데, 이 때는 각각의 job 객체에 대해  join() 함수를 걸어줘도 괜찮지만 &lt;em&gt;joinAll(job1, job2)&lt;/em&gt; 이런 식으로 한꺼번에 코루틴 블록을 종료시킬 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;job1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;launch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-     &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;++&lt;/span&gt;
-     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
- 
- &lt;span class=&quot;c1&quot;&gt;// 위 블록 과 같은 job1 객체를 사용
-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;launch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;job1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;++&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
- 
- &lt;span class=&quot;c1&quot;&gt;// 같은 job 객체를 사용하게 되면
-&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// joinAll(job1, job2) 와 같다
-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;job1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;여기서 launch 함수로 코루틴 블록을 생성했을 때, 코루틴 블록은 그 즉시 실행되며, 반환받은 Job 객체로 해당 블록을 제어한다. 말 그대로 제어만 할 수 있지 블록이 수행 된 결과를 반환받는 것은 아니다. 그렇다면 수행 된 결과를 반환받기 위해서는 어떻게 해야는지 알아보았다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;async---deferred&quot;&gt;Async() -&amp;gt; Deferred&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;바로 async()라는 함수를 launch 대신 사용하면 된다. 이렇게 async() 함수로 시작된 코루틴 블록은 Deferred 객체를 반환한다.
-    &lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;deferred&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Deferred&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 결과값
-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;이 Deferred라는 객체는 launch() 함수를 이용하여 코루틴 블록을 만들어서 Job객체로 해당 코루틴 블록을 제어했던 것 처럼 async() 함수로 만들어진 코루틴 블록을 제어한다. 또한 제어가 가능한 것 뿐만 아니라 Job 객체와는 다르게 코루틴 블록 내에서 계산된 결과값을 반환받을 수 있다.
-    &lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;deferred&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Deferred&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-         &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;
-         &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-             &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-             &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;++&lt;/span&gt;
-         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-         &lt;span class=&quot;s&quot;&gt;&quot;result&quot;&lt;/span&gt;
-     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-        
-     &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;msg&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;deferred&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;await&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-     &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// result 출력
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;await() 함수를 통해서 async() 함수로 실행됐었던 코루틴 블록이 끝날 때 까지 기다려지고, 끝 마치는 순간 결과값이 반환되어 출력되는 형식이다.&lt;/li&gt;
-  &lt;li&gt;launch() 함수를 실행했을 때 joinAll() 함수를 통해서 모든 코루틴 블록을 한꺼번에 대기 시키는 부분을 보았을 것이다. Deferred 객체도 마찬가지로 awaitAll() 함수를 이용하여 모든 async 코루틴 블록이 완료될 때 까지 기다릴 수 있다.&lt;/li&gt;
-  &lt;li&gt;또한 다음과 같이 첫번째 async 코루틴 블록에서 반환받은 Deferred 객체를 두번째 async() 함수의 인자로 사용하면, 동일한 Deferred 객체로 두개의 코루틴 블록을 모두 제어 할수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;deferred&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;++&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;s&quot;&gt;&quot;result1&quot;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 같은 Deferred 객체 사용
-&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;async&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;deferred&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;++&lt;/span&gt;
-      
-    &lt;span class=&quot;s&quot;&gt;&quot;result2&quot;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;msg&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;deferred&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;await&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 첫번째 블록 결과인 result1 출력
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;하지만 여기서 주의해야 할 점은 바로 여러개의 async 코루틴 블록에 같은 Deferred 객체를 사용할경우 await() 함수 호출시 전달되는 최종적인 결과값은 첫번째 async 코루틴 블록의 결과값 만을 전달한다는 것이다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;2️⃣-지연-실행lazy&quot;&gt;2️⃣ 지연 실행(LAZY)&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;이 지연실행이라는 개념은 launch와 async 코루틴 블록 둘 다 모두에게 적용된다. 코루틴 블록의 처리 시점을 미룰 수 있다는 점이다. 각 코루틴 블록 함수의 start 인자에 CoroutineStart.LAZY 라는 값을 넣어주면 그 코루틴 블록은 지연되어 실행된다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;job&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;launch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CoroutineStart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LAZY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;OR&lt;/p&gt;
-
-&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;deferred&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CoroutineStart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LAZY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;이렇게 각각의 코루틴 블록들을 지연 실행시켜 준다면 Deferred 클래스는 해당 코루틴 블록을 실행시키려면 deferred.start() 함수나 deferred.await() 함수를 호출하는 시점에 코루틴 블록이 실행된다.&lt;/li&gt;
-  &lt;li&gt;반대로 launch() 함수로 만들어진, Job 객체를 반환하는 코루틴 블록에 대해서는 job.start() 함수나 job.join() 함수를 호출하는 시점에 launch 코루틴 블록이 실행된다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;지연된-async-코루틴-블록의-경우-start-함수는-async-코루틴-블록을-실행-시키지만-블록의-수행-결과를-반환하지-않는다-또한-await-함수와-다르게-코루틴-블록이-완료되는-시점을-기다리지-않는다&quot;&gt;지연된 async 코루틴 블록의 경우 start() 함수는 async 코루틴 블록을 실행 시키지만 블록의 수행 결과를 반환하지 않는다. 또한, await() 함수와 다르게 코루틴 블록이 완료되는 시점을 기다리지 않는다.&lt;/h3&gt;
-
-&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 
-&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;start&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
- &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;deferred&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;async&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CoroutineStart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LAZY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-     &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;lazy async $i&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;++&lt;/span&gt;
-     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
- &lt;span class=&quot;n&quot;&gt;deferred&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;await&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-
- &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;end&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;ul&gt;
-  &lt;li&gt;위 코드의 실행 결과로는 await() 함수를 적용하였기 때문에 다음과 같은 실행 결과를 얻을 수 있다.
-    &lt;blockquote&gt;
-      &lt;p&gt;start &lt;br /&gt;
-lazy async 0 &lt;br /&gt;
-lazy async 1 &lt;br /&gt;
-lazy async 2 &lt;br /&gt;
-lazy async 3 &lt;br /&gt;
-lazy async 4 &lt;br /&gt;
-end&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-  &lt;li&gt;하지만 deferred.start() 로 바꾸면 출력 결과는 다음과 같다. end 는 start 가 출력 되자 마자 출력되고, 코루틴 블록이 수행된다.
-    &lt;blockquote&gt;
-      &lt;p&gt;start &lt;br /&gt;
-end &lt;br /&gt;
-lazy async 0 &lt;br /&gt;
-lazy async 1 &lt;br /&gt;
-lazy async 2 &lt;br /&gt;
-lazy async 3 &lt;br /&gt;
-lazy async 4&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;3️⃣-동기-처리는-handler로-해결-할-수-있지-않을까&quot;&gt;3️⃣ 동기 처리는 Handler로 해결 할 수 있지 않을까?&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;안드로이드를 개발하는 사람이면 Handler와 Looper에 관해서 많은 학습을 해 보았을 것이고, 나도 이번 인턴십에서 RxBus 형식을 이용한 로그아웃 기능을 구현 할 때 Hander와 Looper를 사용 해 봤던 기억이 난다. 여튼 이런 Hander로 delay 값을 지정하여 임의로 몇 초 늦췄다가 명령어를 실행하도록 하는 방법을 생각 해 봤다.
- ```kotlin
- loadDB() // 내부 DB를 조회하여 결과를 가져오는 함수&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;val handler = Handler() // Handler Object
-handler.postDelayed({ // postDelayed 함수로 임의 10초 Delay 지정
-    fetchRecycler() // RecyclerView를 새로 고침
-}, 1000)&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
- 어떤 점이 문제인지 확연히 보인다.
-
- 1. 항상 똑같은 시간만큼 기다려야 하고, 처리해야 하는 데이터의 양이 적으면 해당 작업이 끝나는대로 새로고침을 진행 할 수 있는데도 불구하고 지정해둔 시간만큼 기다렸다가 다음 명령어를 실행해야 한다는 것이다.
-
- 2. 데이터의 처리량이 많아지는 것도 문제가 된다. 당연히 처리 시간이 임의의 시간보다 커지면 DB를 조회하기도 전에 다음 명령어가 실행이 될 것이고, 무척이나 NULL 처리에 민감한 코틀린과 안드로이드의 조합에서는 정말 치명적인 오류를 불러오게 된다.
-
-* 이러한 문제점들을 토대로 봤을 때 Handler는 결코 좋은 해결책이 될 수가 없다. 이 때, 우리는 코루틴을 사용하면 된다. 아래의 글에서 안드로이드에서 사용되는 코루틴의 개념들을 정리 해 놓았다. 간략하게 예시를 만들어 보자면
-
-```kotlin
-CoroutineScope(Dispatchers.Main).launch {
-    val temp = CoroutineScope(Dispatchers.Default).async {
-        loadDB()
-    }.await()
- 
-    fetchRecycler()
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;다음과 같이 최종적으로 View를 업데이트 해 주어야 하기 때문에 Dispatchers.Main의 코루틴 블록으로 감싸주고, 해당 코루틴 블록 안에서 DB 작업 코루틴 블록을 따로 생성 해 준다(Dispatchers.Default). 이 내부 코루틴 블록은 await() 함수로 해당 작업이 끝날 때 까지 기다리고, 처리가 완료되는대로 다시 Dispatchers.Main 블록으로 빠져나와 RecyclerView에 대한 처리를 해 준다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://jihokevin.github.io//articles/2021-12/android-coroutine&quot;&gt;[안드로이드] 안드로이드와 코루틴 🌀&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;2021.12.16 최종 수정. 지속 업데이트 예정&lt;/em&gt;&lt;/p&gt;
-</description>
-        <pubDate>2022-04-24</pubDate>
-        <link>http://localhost:4000/articles/2021-12/android-coroutine-control</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2021-12/android-coroutine-control</guid>
-        
-        
-        <category>안드로이드</category>
         
       </item>
     
